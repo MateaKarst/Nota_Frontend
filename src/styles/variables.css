@@ -1,0 +1,74 @@
+:root {
+    --font-family-primary: "Montserrat", serif;
+
+    /* Color Palette */
+    --color-black: #000000;
+    --color-transparent: #ffffff00;
+    --color-white: #fff;
+    --color-cloudy: #f5f5f5;
+    --color-brown-light: #f4e8dd;
+    --color-grey-light: #ddd;
+    --color-grey: #666;
+    --color-grey-dark: #474545;
+    --color-blue: #0688c1;
+    --color-blue-dark: #103f7d;
+    --color-green: rgb(129, 224, 105);
+    --color-red: #f15f5a;
+
+    /* Font Sizes */
+    --font-size-6: 6px;
+    --font-size-8: 8px;
+    --font-size-10: 10px;
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+    --font-size-16: 16px;
+    --font-size-18: 18px;
+    --font-size-20: 20px;
+    --font-size-22: 22px;
+    --font-size-24: 24px;
+    --font-size-32: 32px;
+    --font-size-42: 42px;
+
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+
+    /* Spacing */
+    --spacing-4: 4px;
+    --spacing-6: 6px;
+    --spacing-8: 8px;
+    --spacing-10: 10px;
+    --spacing-12: 12px;
+    --spacing-16: 16px;
+    --spacing-24: 24px;
+    --spacing-32: 32px;
+    --spacing-40: 40px;
+    --spacing-48: 48px;
+
+    /* Border Radius */
+    --border-radius-2: 2px;
+    --border-radius-4: 4px;
+    --border-radius-6: 6px;
+    --border-radius-8: 8px;
+    --border-radius-12: 12px;
+    --border-radius-16: 16px;
+    --border-radius-20: 20px;
+    --border-radius-24: 24px;
+
+    /* Border Width */
+    --border-width-1: 1px;
+    --border-width-2: 2px;
+    --border-width-3: 3px;
+    --border-width-4: 4px;
+    --border-width-5: 5px;
+    --border-width-6: 6px;
+    --border-width-7: 7px;
+    --border-width-8: 8px;
+
+    /* Box Shadows */
+    --box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+    --box-shadow-pc: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

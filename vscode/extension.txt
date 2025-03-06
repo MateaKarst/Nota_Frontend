@@ -1,0 +1,24 @@
+// Please Read What They Are Used For Befor Installing Them
+
+// Important Ones
+Live Server - Ritwick Dey
+Live Share - Microsoft
+Live Sass Compiler - Glenn Marks
+VS Code ES7+ React/Redux/React-Native/JS snippets - dsznajder
+SQLTools - Matheus Teixeira
+SQLTools SQLLite - Matheus Teixeira
+
+// Kinda Important
+SQLLite - alexcvzz
+SQLLite Viewer - Florian Klampfer
+SQLLite Editor - yy0931
+
+// Nice To Have
+Code Runner - Jun Han
+CodeSnap - adpyke
+CSS Peek - Pranay Prakash
+Image preview - Kiss Tamas
+
+// Xtras
+indent-rainbow - oderwat
+Material Icon Theme - Philipp Kief
