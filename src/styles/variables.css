@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+:root {
+    --font-family-primary: "Karla", serif;
+
+    /* __Color Palette__ */
+    --color-black: #343331;
+    --color-white: #FFFFFF;
+    --color-orange: #FFAF00;
+    --color-yellow: #F9E400;
+    --color-pink: #F5004F;
+    --color-purple: #7C00FE;
+    /* transparency */
+    --color-black-trans-90: color-mix(in srgb, var(--black) 90%, transparent);
+    --color-white-trans-50: color-mix(in srgb, var(--white) 50%, transparent);
+    --color-white-trans-surface-25: color-mix(in srgb, var(--white) 25%, transparent);
+    --color-white-trans-surface-45: color-mix(in srgb, var(--white) 45%, transparent);
+    --color-orange-trans-55: color-mix(in srgb, var(--orange) 55%, transparent);
+    --color-yellow-trans-55: color-mix(in srgb, var(--yellow) 55%, transparent);
+    --color-yellow-trans-surface-55: color-mix(in srgb, var(--yellow) 55%, transparent);
+    --color-pink-trans-55: color-mix(in srgb, var(--pink) 55%, transparent);
+    --color-pink-trans-surface-75: color-mix(in srgb, var(--pink) 75%, transparent);
+    --color-purple-trans-surface-55: color-mix(in srgb, var(--purple) 55%, transparent);
+
+    /* __Font Sizes__ */
+    --font-size-10: 10px;
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+    --font-size-16: 16px;
+    --font-size-18: 18px;
+    --font-size-20: 20px;
+    --font-size-22: 22px;
+    --font-size-24: 24px;
+    --font-size-28: 28px;
+    --font-size-32: 32px;
+    --font-size-34: 34px;
+    --font-size-36: 36px;
+    --font-size-40: 40px;
+    --font-size-48: 48px;
+
+    /* __Font Weights__ */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+
+    /* __Font Line Height__ */
+    --font-line-height-10: 10px;
+    --font-line-height-12: 12px;
+    --font-line-height-14: 14px;
+    --font-line-height-16: 16px;
+    --font-line-height-18: 18px;
+    --font-line-height-24: 24px;
+    --font-line-height-32: 32px;
+    --font-line-height-38: 38px;
+    --font-line-height-42: 42px;
+
+    /* __Spacing__ */
+    --spacing-0: 0px;
+    --spacing-2: 2px;
+    --spacing-4: 4px;
+    --spacing-6: 6px;
+    --spacing-8: 8px;
+    --spacing-10: 10px;
+    --spacing-12: 12px;
+    --spacing-14: 14px;
+    --spacing-16: 16px;
+    --spacing-18: 18px;
+    --spacing-20: 20px;
+    --spacing-22: 22px;
+    --spacing-24: 24px;
+    --spacing-32: 32px;
+    --spacing-40: 40px;
+    --spacing-48: 48px;
+    --spacing-64: 64px;
+    --spacing-72: 72px;
+    /* specials */
+    --spacing-200: 200px;
+    --spacing-228: 228px;
+    --spacing-185: 185px;
+    --spacing-175: 175px;
+    --spacing-85: 85px;
+    --spacing-208: 208px;
+
+    /* __Border Radius__ */
+    --border-radius-4: 4px;
+    --border-radius-8: 8px;
+    --border-radius-10: 10px;
+    --border-radius-16: 16px;
+    --border-radius-20: 20px;
+    --border-radius-24: 24px;
+    --border-radius-28: 28px;
+    --border-radius-56: 56px;
+
+    /* __Border Width__ */
+    --border-width-1: 1px;
+    --border-width-2: 2px;
+    --border-width-3: 3px;
+    --border-width-4: 4px;
+    --border-width-5: 5px;
+    --border-width-6: 6px;
+    --border-width-7: 7px;
+    --border-width-8: 8px;
+
+    /* __Box Shadows__ */
+    /* none for now */
+}
