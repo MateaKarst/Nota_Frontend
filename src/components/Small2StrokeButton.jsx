@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ReactComponent as ClipIcon } from '../icons/clip.svg'; // Imports SVG file as React component
 
