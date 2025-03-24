@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import NotaLogo from './components/LogoNota';
+import HeaderMain from './components/header-main';
+import HeaderProfile from './components/header-profile';
 
 function App() {
   return (
@@ -10,9 +12,11 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <NotaLogo colorIndex={3} /> {/* Помаранчеве лого */}
-      <NotaLogo colorIndex={1} /> {/* Фіолетове лого */}
-      <NotaLogo colorIndex={1} /> {/* Фіолетовий логотип */}
+        <NotaLogo colorIndex={3} />
+      <NotaLogo colorIndex={1} />
+      <NotaLogo colorIndex={1} /> 
+      <HeaderMain /> 
+      <HeaderProfile />
         <a
           className="App-link"
           href="https://reactjs.org"
