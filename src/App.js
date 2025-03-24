@@ -10,8 +10,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <NotaLogo colorIndex={0} /> {/* Помаранчеве лого */}
+        <NotaLogo colorIndex={3} /> {/* Помаранчеве лого */}
       <NotaLogo colorIndex={1} /> {/* Фіолетове лого */}
+      <NotaLogo colorIndex={1} /> {/* Фіолетовий логотип */}
         <a
           className="App-link"
           href="https://reactjs.org"
