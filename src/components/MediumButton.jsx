@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import "../styles/variables.css";
 
 function MediumButton({ text }) {
 
@@ -11,11 +11,12 @@ function MediumButton({ text }) {
         style={{
           width: "140px",
           height: "28px",
-          backgroundColor: "#F9E400",
-          color: "#343331",
-          borderRadius: "20px",
+          backgroundColor: "var(--color-yellow)",
+          color: "var(--color-black)",
+          borderRadius: "var(--border-radius-20)",
           border: "none",
-          fontSize: "16px",
+          fontSize: "var(--font-size-16)",
+          fontFamily: "var(--font-family-primary)",
         }}
         onClick={handleClick}  /*makes it clickable */
       >

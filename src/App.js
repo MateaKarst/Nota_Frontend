@@ -1,5 +1,6 @@
 import './App.css';
 import NotaLogo from './components/LogoNota';
+import MainButton from './components/MainButton';
 
 
 
@@ -22,10 +23,11 @@ function App() {
         >
           Learn React
         </a>
+        <div>
+        <MainButton /> 
+      </div>
       </header>
     </div>
   );
 }
-
-
-export default App;
+  export default App ;

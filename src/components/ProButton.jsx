@@ -1,8 +1,8 @@
 import React from 'react';
 import { ReactComponent as SparkleIcon } from '../icons/sparkle.svg';
+import "../styles/variables.css";
 
 function ProButton() {
-
   const handleClick = () => {};
 
   return (
@@ -14,11 +14,12 @@ function ProButton() {
           width: "73px",
           height: "28px",
           background: "linear-gradient(0deg, #F5004F, #7C00FE)",
-          color: "#FFFFFF",
-          borderRadius: "20px",
+          color: "var(--color-white)",
+          borderRadius: "var(--border-radius-20)",
           border: "none",
-          fontSize: "18px",
+          fontSize: "var(--font-size-18)",
           position: "relative",
+          fontFamily: "var(--font-family-primary)",
         }}
         onClick={handleClick} 
       >
@@ -33,13 +34,14 @@ function ProButton() {
           right: "0px", 
           width: "40px",
           height: "12px",
-          backgroundColor: "#7C00FE",
-          color: "#FFFFFF", 
-          borderRadius: "20px",
+          backgroundColor: "var(--color-purple)",
+          color: "var(--color-white)", 
+          borderRadius: "var(--border-radius-20)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: "10px",
+          fontSize: "var(--font-size-10)",
+          fontFamily: "var(--font-family-primary)",
         }}
       >
          <SparkleIcon style={{ width: "6px", height: "8px" }} /> 

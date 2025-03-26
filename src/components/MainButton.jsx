@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import "../styles/variables.css";
 
 function MainButton({ text }) {
 
@@ -11,11 +11,12 @@ function MainButton({ text }) {
         style={{
           width: "302px",
           height: "40px",
-          backgroundColor: "#7C00FE",
-          color: "#FFFFFF",
-          borderRadius: "20px",
+          backgroundColor: "var(--color-purple)",
+          color: "var(--color-white)",
+          borderRadius: "var(--border-radius-20)",
           border: "none",
-          fontSize:"24px",
+          fontSize: "var(--font-size-24)",
+          fontFamily: "var(--font-family-primary)",
         }}
         onClick={handleClick}  /*makes it clickable */
       >

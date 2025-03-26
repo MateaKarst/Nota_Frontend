@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import "../styles/variables.css";
 
-// Add your logo import here
 import { ReactComponent as LogoIcon } from '../icons/yellowlogo.svg';
 
 function ConnectionButton() {
@@ -21,15 +21,16 @@ function ConnectionButton() {
       style={{
         width: isClicked ? "50px" : "140px",
         height: "28px",
-        backgroundColor: isConnected ? "rgba(249, 228, 0, 0.55)" : (isClicked ? "transparent" : "#F9E400"), 
-        color: isConnected ? "#FFFFFF" : (isClicked ? "#F9E400" : "#343331"), // Change text color to white when connected
-        borderRadius: "20px",
-        border: "none",
+        backgroundColor: isConnected ? "rgba(249, 228, 0, 0.55)" : (isClicked ? "transparent" : "var(--color-yellow)"), 
+        color: isConnected ? "var(--color-white)" : (isClicked ? "var(--color-yellow)" : "var(--color-black)"), // Change text color to white when connected
+        borderRadius: "var(--border-radius-20)",
+        border: "var(--border-radius-20)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         transition: "width 1s ease, background-color 1s ease",
         position: "relative",
+        fontFamily: "var(--font-family-primary)",
       }}
     >
       {/* Show only logo when button shrinks */}
