@@ -1,5 +1,6 @@
 
 import React, { useState }  from 'react';
+import "../styles/variables.css";
 
 
 function PurpleTagsButton({ text }) {
@@ -15,11 +16,12 @@ function PurpleTagsButton({ text }) {
         style={{
           width: "106px",
           height: "23px",
-          backgroundColor: clicked ? "transparent" : "#7C00FE",
-        color: clicked ? "#7C00FE" : "#FFFFFF", 
-          borderRadius: "20px",
-          borderColor: "#7C00FE",
-          fontSize: "13px",
+          backgroundColor: clicked ? "transparent" : "var(--color-purple)",
+        color: clicked ? "var(--color-purple)" : "var(--color-white)", 
+          borderRadius: "var(--border-radius-20)",
+          borderColor: "var(--color-purple)",
+          fontSize: "var(--font-size-13)",
+          fontFamily: "var(--font-family-primary)",
         }}
         onClick={handleClick}  
       >
