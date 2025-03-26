@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent as ClipIcon } from '../icons/clip.svg'; // Imports SVG file as React component
+import "../styles/variables.css";
 
 function MarginsButton({ text }) {
 
@@ -10,14 +11,15 @@ function MarginsButton({ text }) {
       style={{
         width: "103px",
         height: "28px",
-        backgroundColor: "#F9E400",
-        color: "#343331",
-        borderRadius: "20px",
+        backgroundColor: "var(--color-yellow)",
+        color: "var(--color-black)",
+        borderRadius: "var(--border-radius-20)",
         border: "none",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontSize: "18px",
+        fontSize: "var(--font-size-18)",
+        fontFamily: "var(--font-family-primary)",
       }}
       onClick={handleClick}
     >
