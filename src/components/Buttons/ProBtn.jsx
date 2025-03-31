@@ -1,13 +1,13 @@
 import React from 'react';
-import { ReactComponent as SparkleIcon } from '../icons/sparkle.svg';
-import "../styles/variables.css";
+import { ReactComponent as SparkleIcon } from '../../icons/sparkle.svg';
+import "../../styles/variables.css";
 
-function ProButton() {
-  const handleClick = () => {};
+function ProBtn() {
+  const handleClick = () => { };
 
   return (
-    <div style={{ position: "relative", display: "inline-block"}}> {/* Positioning container */}
-      
+    <div style={{ position: "relative", display: "inline-block" }}> {/* Positioning container */}
+
       {/* button */}
       <button
         style={{
@@ -21,7 +21,7 @@ function ProButton() {
           position: "relative",
           fontFamily: "var(--font-family-primary)",
         }}
-        onClick={handleClick} 
+        onClick={handleClick}
       >
         Log In
       </button>
@@ -30,12 +30,12 @@ function ProButton() {
       <div
         style={{
           position: "absolute",
-          top: "-8px", 
-          right: "0px", 
+          top: "-8px",
+          right: "0px",
           width: "40px",
           height: "12px",
           backgroundColor: "var(--color-purple)",
-          color: "var(--color-white)", 
+          color: "var(--color-white)",
           borderRadius: "var(--border-radius-20)",
           display: "flex",
           alignItems: "center",
@@ -44,7 +44,7 @@ function ProButton() {
           fontFamily: "var(--font-family-primary)",
         }}
       >
-         <SparkleIcon style={{ width: "6px", height: "8px" }} /> 
+        <SparkleIcon style={{ width: "6px", height: "8px" }} />
         Pro
       </div>
 
@@ -52,4 +52,4 @@ function ProButton() {
   );
 }
 
-export default ProButton;
+export default ProBtn;

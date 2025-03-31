@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import "../styles/variables.css";
+import "../../styles/variables.css";
 
-import { ReactComponent as LogoIcon } from '../icons/yellowlogo.svg';
+import { ReactComponent as LogoIcon } from '../../icons/yellowlogo.svg';
 
-function ConnectionButton() {
+function ConnectBtn() {
   const [isClicked, setIsClicked] = useState(false);
   const [isConnected, setIsConnected] = useState(false); // State to track if it's connected
 
@@ -43,5 +43,5 @@ function ConnectionButton() {
   );
 }
 
-export default ConnectionButton;
+export default ConnectBtn;
 

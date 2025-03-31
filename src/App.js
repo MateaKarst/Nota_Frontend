@@ -1,20 +1,23 @@
 import './App.css';
-import NotaLogo from './components/LogoNota';
-import MainButton from './components/MainButton';
-
-
+import NotaLogo from './components/Logos/LogoNota';
+import Buttons from './components/Buttons/BasicBtn';
+import { ReactComponent as Logo } from "./logo.svg";
+import AttachFileBtn from './components/Buttons/AttachFileBtn'
+import ProBtn from './components/Buttons/ProBtn'
+import ConnectBtn from './components/Buttons/ConnectBtn';
+import PurpleTagsButton from './components/Tags/PurpleTag';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <NotaLogo colorIndex={3} /> {/* Помаранчеве лого */}
-      <NotaLogo colorIndex={1} /> {/* Фіолетове лого */}
-      <NotaLogo colorIndex={1} /> {/* Фіолетовий логотип */}
+        <NotaLogo colorIndex={3} />
+        <NotaLogo colorIndex={2} />
+        <NotaLogo colorIndex={1} />
+        <NotaLogo colorIndex={0} />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -23,11 +26,40 @@ function App() {
         >
           Learn React
         </a>
+
+        {/* // Basic Buttons */}
         <div>
-        <MainButton /> 
-      </div>
+          <Buttons type="viewAll" text="View All" />
+        </div>
+        <div>
+          <Buttons type="tiny" text="Tiny Btn" />
+        </div>
+        <div>
+          <Buttons type="small" text="Small Btn" />
+        </div>
+        <div>
+          <Buttons type="medium" text="Medium Btn" />
+        </div>
+        <div>
+          <Buttons type="default" text="Default Btn" />
+        </div>
+        <div>
+          <Buttons type="main" text="Main Btn" />
+        </div>
+
+        {/* // Attach File Buttons */}
+        <AttachFileBtn variant={1} />
+        <AttachFileBtn variant={0} />
+
+        {/* // Other Buttons */}
+        <ProBtn />
+        <ConnectBtn />
+
+        {/* //Tags */}
+        <PurpleTagsButton text={"hewwo"}/>
+
       </header>
     </div>
   );
 }
-  export default App ;
+export default App;
