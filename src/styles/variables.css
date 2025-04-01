@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
+@font-face {
+    font-family: "Morsan";
+    src: url(./fonts/Morsan.ttf);
+}
+
 :root {
     --font-family-primary: "Karla", serif;
+    --font-family-secondary:"Morsan", serif;
 
     /* __Color Palette__ */
     --color-black: #343331;

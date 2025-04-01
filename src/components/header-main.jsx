@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/components/header.css';
-import '../components/LogoNota';
-import NotaLogo from '../components/LogoNota'
+import '../components/Logos/LogoNota';
+import NotaLogo from '../components/Logos/LogoNota'
 import { ReactComponent as BellIcon } from '../assets/bell-icon.svg';
 import { ReactComponent as MessageIcon } from '../assets/message-icon.svg';
 import '../styles/variables.css'

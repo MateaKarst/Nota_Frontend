@@ -12,6 +12,7 @@
     border-bottom-right-radius: var(--border-radius-24);
     border-bottom-left-radius: var(--border-radius-24);
     justify-content: space-between;
+    font-family: var(--font-family-secondary);
   }
 
 .header .nav {
@@ -74,4 +75,7 @@ background: none;
 .user-avatar {
   width: 63px;
   height: 63px
+}
+.user-header .header-text {
+  font-family: var(--font-family-primary);
 }

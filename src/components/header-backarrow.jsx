@@ -30,7 +30,7 @@ const headers = [
     visibility: 1,
     backgroundColor: "var(--color-black)",
     title: "Echoes of Tomorrow",
-    fontWeight: "bold",
+    
   },
   {
     mode: "default",
@@ -43,6 +43,7 @@ const headers = [
     backgroundColor: "var(--color-black)",
     userImage: "./assets/profile.jpg",
     title: "Guitarist101",
+    fontFamily: "var(--font-family-primary)"
   },
 ];
 
