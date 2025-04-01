@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/variables.css";
 
-const MusicTag = ({ text, colorIndex = 0 }) => {
+const MusicTag = ({ text, colorIndex = 0, onClick, isSelected}) => {
   // Define color variables for background, text, and outline colors
   const textColors = [
     "var(--color-white)",
@@ -40,20 +40,25 @@ const MusicTag = ({ text, colorIndex = 0 }) => {
     "var(--font-size-10)",
   ];
 
+
+  const finalColorIndex = isSelected 
+  ? (colorIndex === 0 ? 1 : 3) //if it's an instrument, switch (0 → 1), if it's a genre, switch (2 → 3)
+  : colorIndex; 
+  
   // Styles for the tag
   const tagStyles = {
-    backgroundColor: bgColors[colorIndex], 
-    color: textColors[colorIndex],
+    backgroundColor: bgColors[finalColorIndex], 
+    color: textColors[finalColorIndex],
     borderRadius: "var(--border-radius-56)",
     padding: "8px 12px",
     border: `1px solid ${outlineColors[colorIndex]}`,
-    fontSize: fontSizes[colorIndex],
+    fontSize: fontSizes[finalColorIndex],
     display: "inline-block",
     fontFamily: "var(--font-family-primary)",
   };
 
   return (
-    <button className="tag-button" style={tagStyles}>
+    <button className="tag-button" style={tagStyles} onClick={onClick}>
       #{text}
     </button>
   );

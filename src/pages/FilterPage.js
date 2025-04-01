@@ -1,89 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MusicTag from '../components/MusicTag';
 import SmallButton from '../components/SmallButton';
 import Small2 from '../components/Small2';
-
+import '../styles/pages/filterpage.css';
 
 const FilterPage = () => {
-    const styles = {
-        page: {
-            backgroundColor: 'var(--color-black)', 
-            overflowX: 'hidden', 
-        },
+    const [selectedTags, setSelectedTags] = useState([]);
 
-        container: {
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '0 20px',
-        },
+    const handleTagClick = (tag) => {
+        setSelectedTags((prevTags) => 
+            prevTags.includes(tag)
+            ? prevTags.filter((selectedTag) => selectedTag !== tag)
+            : [...prevTags, tag]
+        );
+    };
 
-        heading: {
-          fontFamily: 'var(--font-family-primary)', 
-          fontSize: 'var(--font-size-34)',
-          color: 'var(--color-white)',         
-          fontWeight: 'var(--font-weight-regular)',  
-          lineHeight: 'var(--font-line-height-38)',  
-          textAlign: 'left',
-          marginLeft:'0', 
-          padding: '0 20px',
-        },
+    const instrumentTags = [
+        'Vocal', 'Accordion', 'Ukulele', 'Flute', 'Guitar', 'Piano', 'Drums', 'Saxophone', 'Violin', 'Trombone', 'Double Bass'
+    ];
 
-        tagsContainer: {
-            padding: '0px 20px', 
-            justifyContent: 'center',
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '12px',
-        },
-
-        buttonsSection: {
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '32px',
-            marginTop: '70px',
-            padding: '20px',
-        }
-      };
-
-const instrumentTags = [
-    'Vocal' , 'Accordion', 'Ukulele', 'Flute', 'Guitar', 'Piano','Drums', 'Saxophone', 'Violin', 'Trombone', 'Double Bass'
-];
-
-const genreTags = [
-    'Pop' , 'Rock', 'Hip-Hop', 'Rap', 'Jazz', 'Classical','Country', 'Metal', 'Funky', 'Indie', 'Electronic', 'Folk', 'Blues'
-];
+    const genreTags = [
+        'Pop', 'Rock', 'Hip-Hop', 'Rap', 'Jazz', 'Classical', 'Country', 'Metal', 'Funky', 'Indie', 'Electronic', 'Folk', 'Blues'
+    ];
 
     return (
-        <div className="filter-page" style={styles.page}>
-             <div style={styles.container}>
-            <p style={styles.heading}>Instruments</p>
-            <div style={styles.tagsContainer}>
-                {instrumentTags.map((tag, index) => (
-                    <MusicTag key={index} text={tag} colorIndex={0} />
-                ))}
-            </div>
-        </div>
-
-         {/* Genres */}
-         <div style={styles.container}>
-                <p style={styles.heading}>Genres</p>
-                <div style={styles.tagsContainer}>
-                    {genreTags.map((tag, index) => (
-                        <MusicTag key={index} text={tag} colorIndex={2} />
+        <div className="filter-page">
+            <div className="container">
+                <p className="heading">Instruments</p>
+                <div className="tags-container">
+                    {instrumentTags.map((tag, index) => (
+                        <MusicTag
+                            key={index}
+                            text={tag}
+                            colorIndex={0}
+                            isSelected={selectedTags.includes(tag)}
+                            onClick={() => handleTagClick(tag)}
+                        />
                     ))}
                 </div>
             </div>
-            
+
+            {/* Genres */}
+            <div className="container">
+                <p className="heading">Genres</p>
+                <div className="tags-container">
+                    {genreTags.map((tag, index) => (
+                        <MusicTag
+                            key={index}
+                            text={tag}
+                            colorIndex={2}
+                            isSelected={selectedTags.includes(tag)}
+                            onClick={() => handleTagClick(tag)} // Add the onClick handler here too
+                        />
+                    ))}
+                </div>
+            </div>
 
             {/* Buttons Section */}
-            <div className="buttons-section" style={styles.buttonsSection}>
-                <Small2 text="Cancel"   />
-                <SmallButton text="Apply"  />
+            <div className="buttons-section">
+                <Small2 text="Cancel" />
+                <SmallButton text="Apply" />
             </div>
         </div>
-    
-
-     
     );
 };
 
