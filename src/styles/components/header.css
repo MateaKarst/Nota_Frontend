@@ -2,7 +2,7 @@
 
 .header {
     height: 83px;
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     margin-left: var(--spacing-24);
@@ -20,16 +20,58 @@
   gap: var(--spacing-12);
 }
   
-  .header-buttons .button-container button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .header-buttons .button-container button:hover {
-    background-color: #0056b3;
-  }
-  
+.tab-button {
+  flex:1;
+  align-items: center;
+  color: var(--color-white);
+text-align: center;
+font-family: var(--font-family-primary);
+font-size: var(--font-size-16);
+font-weight:  var(--font-weight-regular);
+line-height: var(--font-line-height-18);
+background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: all 0.3s ease;
+}
+.back-btn{
+  background: none;
+  border: none;
+}
+.icon-style{
+  background: none;
+  border: none;
+  align-items: center;
+}
+.tab-button.active {
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+  opacity: 1;
+}
+.header-text {
+  font-weight: var(--font-weight-regular);
+  line-height: var(   --font-line-height-32); 
+  font-size: var(--font-size-28);
+}
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.center-section {
+  flex: 1; 
+  text-align: center;
+  gap: 14px;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+.user-avatar {
+  width: 63px;
+  height: 63px
+}
