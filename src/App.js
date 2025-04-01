@@ -13,6 +13,7 @@ import AttachFileBtn from './components/Buttons/AttachFileBtn'
 import ProBtn from './components/Buttons/ProBtn'
 import ConnectBtn from './components/Buttons/ConnectBtn';
 import PurpleTagsButton from './components/Tags/PurpleTag';
+import TimeLine from './components/timeline-grid';
 
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
         <NotaLogo colorIndex={2} />
         <NotaLogo colorIndex={1} />
         <NotaLogo colorIndex={0} />
+
+        <TimeLine />
 
         <a
           className="App-link"
