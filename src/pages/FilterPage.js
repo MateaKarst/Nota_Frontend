@@ -3,6 +3,7 @@ import MusicTag from '../components/MusicTag';
 import SmallButton from '../components/SmallButton';
 import Small2 from '../components/Small2';
 import '../styles/pages/filterpage.css';
+import HeaderVariants from '../components/header-backarrow';
 
 const FilterPage = () => {
     const [selectedTags, setSelectedTags] = useState([]);
@@ -25,6 +26,7 @@ const FilterPage = () => {
 
     return (
         <div className="filter-page">
+            <HeaderVariants mode={"default"} />
             <div className="container">
                 <p className="heading">Instruments</p>
                 <div className="tags-container">
