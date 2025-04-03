@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "../styles/variables.css";
 import NotaLogo from "../components/Logos/LogoNota";
 import "../styles/pages/onboarding.css";
+
 import funImage from "../assets/fun-image.jpg";
 import communityImage from "../assets/band-image.jpg";
 import recognitionImage from "../assets/recognition-image.jpg";
@@ -52,9 +53,9 @@ function Onboarding() {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <NotaLogo colorIndex={slide.logo} />
-            <div className="Text-container">
-              <h1 className="Title">{slide.title}</h1>
-              <p className="Text">{slide.text}</p>
+            <div className="text-container">
+              <h1 className="title">{slide.title}</h1>
+              <p className="text">{slide.text}</p>
             </div>
           </div>
         </SwiperSlide>

@@ -19,7 +19,7 @@
     opacity: 1;
 }
 
-.Title {
+.title {
     font-family: var(--font-family-secondary);
     font-size: var(--font-size-48);
     color: var(--color-white-trans-surface-45); 
@@ -27,9 +27,12 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    padding: none;
+    margin: 0; 
+    padding: 0; 
 }
 
-.Text {
+.text {
     color: var(--color-white);
     font-family: var(--font-family-primary);
     display: flex;
@@ -39,3 +42,8 @@
     text-align: center;
     margin: 0 auto; 
 }
+
+.text-container {
+    padding-top: 300px;
+}
+
