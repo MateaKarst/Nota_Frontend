@@ -14,7 +14,7 @@ import ProBtn from './components/Buttons/ProBtn'
 import ConnectBtn from './components/Buttons/ConnectBtn';
 import PurpleTagsButton from './components/Tags/PurpleTag';
 import TimeLine from './components/timeline-grid';
-
+import TabsMixer from './components/tabs-mixer';
 
 function App() {
   return (
@@ -42,6 +42,7 @@ function App() {
         <NotaLogo colorIndex={0} />
 
         <TimeLine />
+        <TabsMixer />
 
         <a
           className="App-link"
