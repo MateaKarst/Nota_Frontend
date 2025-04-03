@@ -1,0 +1,41 @@
+.onboarding{
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.onboarding-swiper {
+    width: 100%;
+    height: 100vh; 
+}
+
+.swiper-pagination-bullet-active {
+    background: white !important;
+    opacity: 1;
+}
+
+.Title {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-48);
+    color: var(--color-white-trans-surface-45); 
+    letter-spacing: 2.5px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Text {
+    color: var(--color-white);
+    font-family: var(--font-family-primary);
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto; 
+}

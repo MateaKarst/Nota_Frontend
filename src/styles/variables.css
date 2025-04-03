@@ -16,18 +16,19 @@
     --color-yellow: #F9E400;
     --color-pink: #F5004F;
     --color-purple: #7C00FE;
+
     /* transparency */
-    --color-black-trans-90: color-mix(in srgb, var(--black) 90%, transparent);
-    --color-black-trans-25: color-mix(in srgb, var(--black) 25%, transparent);
-    --color-white-trans-50: color-mix(in srgb, var(--white) 50%, transparent);
-    --color-white-trans-surface-25: color-mix(in srgb, var(--white) 25%, transparent);
-    --color-white-trans-surface-45: color-mix(in srgb, var(--white) 45%, transparent);
-    --color-orange-trans-55: color-mix(in srgb, var(--orange) 55%, transparent);
-    --color-yellow-trans-55: color-mix(in srgb, var(--yellow) 55%, transparent);
-    --color-yellow-trans-surface-55: color-mix(in srgb, var(--yellow) 55%, transparent);
-    --color-pink-trans-55: color-mix(in srgb, var(--pink) 55%, transparent);
-    --color-pink-trans-surface-75: color-mix(in srgb, var(--pink) 75%, transparent);
-    --color-purple-trans-surface-55: color-mix(in srgb, var(--purple) 55%, transparent);
+    --color-black-trans-90: rgba(0, 0, 0, 0.9); /* Black with 90% opacity */
+    --color-black-trans-25: rgba(0, 0, 0, 0.25); /* Black with 25% opacity */
+    --color-white-trans-50: rgba(255, 255, 255, 0.5); /* White with 50% opacity */
+    --color-white-trans-surface-25: rgba(255, 255, 255, 0.25); /* White with 25% opacity */
+    --color-white-trans-surface-45: rgba(255, 255, 255, 0.45); /* White with 45% opacity */
+    --color-orange-trans-55: rgba(255, 165, 0, 0.55); /* Orange with 55% opacity */
+    --color-yellow-trans-55: rgba(255, 255, 0, 0.55); /* Yellow with 55% opacity */
+    --color-yellow-trans-surface-55: rgba(255, 255, 0, 0.55); /* Yellow with 55% opacity */
+    --color-pink-trans-55: rgba(255, 192, 203, 0.55); /* Pink with 55% opacity */
+    --color-pink-trans-surface-75: rgba(255, 192, 203, 0.75); /* Pink with 75% opacity */
+    --color-purple-trans-surface-55: rgba(128, 0, 128, 0.55); /* Purple with 55% opacity */
 
     /* __Font Sizes__ */
     --font-size-10: 10px;
