@@ -1,9 +1,10 @@
 import './App.css';
-import Onboarding from './pages/Onboarding';
 
 function App() {
-  return (
-    <Onboarding />
-  );
+    <div className="App">
+      <header className="App-header">
+
+      </header>
+    </div>
 }
 export default App;
