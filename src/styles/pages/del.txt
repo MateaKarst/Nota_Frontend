@@ -1,7 +1,0 @@
-// Page stylings
-
-// import variable styles with 
-// @import url('../variables.css');
-
-// to use scss - need extension called "Live Sass Compiler" by GlennMarks
-
