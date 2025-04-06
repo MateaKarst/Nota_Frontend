@@ -1,0 +1,86 @@
+.timeline-container {
+    width: 100%;
+    overflow-x: scroll;
+    background: var(--color-black);
+    color: white;
+    font-family: var(--font-family-primary);
+    padding: 10px;
+    position: relative;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .timeline-wrapper {
+    position: relative;
+  }
+  
+  .time-ruler {
+    display: grid;
+    grid-template-columns: repeat(120, 50px); /* Adjust column size for your layout */
+    height: 15px;
+    align-items: center;
+    border-bottom: 1px solid white;
+    border-top: 0.1px solid white;
+    padding-left: 100px; 
+    box-sizing: border-box;
+    width: 100%;
+    min-width: max-content;
+  }
+  
+  .time-marker {
+    text-align: center;
+    font-size: 8px;
+    color: white;
+    width: 10px;
+  }
+  
+  .tracks {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+  }
+  
+  .track-row {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    width: fit-content;
+  }
+  
+  .track-name {
+    width: 90px;
+    padding: 5px;
+    background: #ffcc00;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  
+  .track-grid {
+    display: grid;
+    grid-template-columns: repeat(120, 50px); /* Ensure alignment with .time-ruler */
+    flex: 1;
+    border-left: 2px solid white;
+    position: relative;
+  }
+  
+  .grid-cell {
+    height: 90px;
+    border-right: 1px solid gray;
+  }
+  
+  .playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: white;
+    z-index: 10;
+  }
+
+  
