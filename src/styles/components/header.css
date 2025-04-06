@@ -47,11 +47,11 @@ background: none;
 }
 .tab-button.active {
   font-weight: var(--font-weight-bold);
-  text-decoration: none;
   opacity: 1;
   border-bottom: 2px solid white;
   box-sizing: border-box;
   min-width: max-content;
+  text-decoration: underline;
 }
 .header-text {
   font-weight: var(--font-weight-regular);
