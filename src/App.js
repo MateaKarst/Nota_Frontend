@@ -1,37 +1,21 @@
 import './App.css';
-import NotaLogo from './components/LogoNota';
-import MainButton from './components/MainButton';
-
-
+import NotaLogo from './components/Logos/LogoNota';
+import Buttons from './components/Buttons/BasicBtn';
+import { ReactComponent as Logo } from "./logo.svg";
+import AttachFileBtn from './components/Buttons/AttachFileBtn'
+import ProBtn from './components/Buttons/ProBtn'
+import ConnectBtn from './components/Buttons/ConnectBtn';
+import PurpleTagsButton from './components/Tags/PurpleTag';
 
 
 
 function App() {
   return (
     <div className="App">
-     <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <NotaLogo colorIndex={3} /> {/* Помаранчеве лого */}
-      <NotaLogo colorIndex={1} /> {/* Фіолетове лого */}
-      <NotaLogo colorIndex={1} /> {/* Фіолетовий логотип */}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <div>
-        <MainButton /> 
-      </div>
-      </header>
+      <header className="App-header">
 
-      
+      </header>
     </div>
   );
 }
-  export default App ;
+export default App;
