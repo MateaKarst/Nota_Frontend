@@ -5,7 +5,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Timer variation={2} />
       </header>
     </div>
   )
