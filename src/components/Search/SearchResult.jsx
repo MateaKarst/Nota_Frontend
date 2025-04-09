@@ -1,12 +1,19 @@
 "use client";
 
 export const SearchResult = ({ result }) => {
+    const handleClick = (e) => {
+        if (!result.ref) {
+            e.preventDefault();
+            alert(`No route specified for ${result.name}`);
+        }
+    };
+
     return (
-        <div
-            className="search-result"
-            onClick={() => alert(`You selected ${result.name} (${result.type})`)}
-        >
-            {result.name} <span className="result-type">[{result.type}]</span>
+        <div className="search-result">
+            {/* If result.ref exists, wrap the result name in an anchor tag */}
+            <a href={result.ref || "#"} onClick={handleClick}>
+                {result.name}
+            </a>
         </div>
     );
 };

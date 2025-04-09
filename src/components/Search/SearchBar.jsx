@@ -1,36 +1,79 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { SearchResultsList } from "./SearchResultList";
 import "../../styles/components/search-bar.css";
 
-const dummyData = [
-    { id: 1, name: "Sabaton", type: "Rock" },
-    { id: 2, name: "Chemical Warefare", type: "Metal" },
-    { id: 3, name: "Toxic Gas", type: "Pop" },
-    { id: 4, name: "No Mans Land", type: "Rock" },
-    { id: 5, name: "Ominous Nightmare", type: "Metal" },
-    { id: 6, name: "Deadly Mist", type: "Pop" },
+const pages = [
+    { id: 1, name: "Home", ref: "/" },
+    { id: 2, name: "Library", ref: "/" },
+    { id: 3, name: "Search", ref: "/" },
+    { id: 4, name: "Now Playing", ref: "/" },
+    { id: 5, name: "Settings", ref: "/" },
+];
+
+const albums = [
+    { id: 1, name: "The Dark Side of the Moon", synonyms: "Pink Floyd, Progressive Rock", ref: "/album/1" },
+    { id: 2, name: "Abbey Road", synonyms: "The Beatles, Rock", ref: "/album/2" },
+    { id: 3, name: "Thriller", synonyms: "Michael Jackson, Pop", ref: "/album/3" },
+    { id: 4, name: "Back in Black", synonyms: "AC/DC, Rock", ref: "/album/4" },
+];
+
+const genres = [
+    { id: 1, title: "All Music", url: "/music" },
+    { id: 2, title: "Rock", url: "/genre/rock" },
+    { id: 3, title: "Pop", url: "/genre/pop" },
+    { id: 4, title: "Jazz", url: "/genre/jazz" },
+    { id: 5, title: "Classical", url: "/genre/classical" },
+    { id: 6, title: "Hip-Hop", url: "/genre/hip-hop" },
+];
+
+const allSearchData = [
+    ...pages.map((p) => ({
+        id: `page-${p.id}`,
+        name: p.name,
+        type: "Page",
+        ref: p.ref,
+    })),
+    ...albums.map((a) => ({
+        id: `album-${a.id}`,
+        name: a.name,
+        type: "Album",
+        ref: a.ref,
+        synonyms: a.synonyms,
+    })),
+    ...genres.map((gen) => ({
+        id: `genre-${gen.id}`,
+        name: gen.title,
+        type: "Genre",
+        ref: gen.url,
+    })),
 ];
 
 const SearchBar = () => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
+    const inputRef = useRef(null);
 
     const handleInputChange = (e) => {
         const value = e.target.value;
         setQuery(value);
+        filterResults(value);
+    };
 
+    const filterResults = (value) => {
         if (!value.trim()) {
             setResults([]);
             return;
         }
 
-        const filtered = dummyData.filter((item) =>
+        const filtered = allSearchData.filter((item) =>
             item.name.toLowerCase().includes(value.toLowerCase())
         );
+
         setResults(filtered);
     };
+
 
     return (
         <div className="search-container">
@@ -43,6 +86,7 @@ const SearchBar = () => {
                 </svg>
             </div>
             <input
+                ref={inputRef}
                 type="text"
                 className="search-input"
                 placeholder="Search..."
@@ -50,7 +94,7 @@ const SearchBar = () => {
                 onChange={handleInputChange}
             />
 
-            <SearchResultsList results={results} />
+            {results.length > 0 && <SearchResultsList results={results} />}
         </div>
     );
 };
