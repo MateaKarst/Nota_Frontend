@@ -1,50 +1,53 @@
 @import '../variables.css';
 
 .header {
-    height: 83px;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    margin-left: var(--spacing-24);
-    margin-right:  var(--spacing-24);
-    padding-left:  var(--spacing-24);
-    padding-right:  var(--spacing-24);
-    border-bottom-right-radius: var(--border-radius-24);
-    border-bottom-left-radius: var(--border-radius-24);
-    justify-content: space-between;
-    font-family: var(--font-family-secondary);
-  }
+  height: 83px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin-left: var(--spacing-24);
+  margin-right: var(--spacing-24);
+  padding-left: var(--spacing-24);
+  padding-right: var(--spacing-24);
+  border-bottom-right-radius: var(--border-radius-24);
+  border-bottom-left-radius: var(--border-radius-24);
+  justify-content: space-between;
+  font-family: var(--font-family-secondary);
+}
 
 .header .nav {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
 }
-  
+
 .tab-button {
-  flex:1;
+  flex: 1;
   align-items: center;
   color: var(--color-white);
-text-align: center;
-font-family: var(--font-family-primary);
-font-size: var(--font-size-16);
-font-weight:  var(--font-weight-regular);
-line-height: var(--font-line-height-18);
-background: none;
+  text-align: center;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-18);
+  background: none;
   border: none;
   cursor: pointer;
   opacity: 0.75;
   transition: all 0.3s ease;
 }
-.back-btn{
+
+.back-btn {
   background: none;
   border: none;
 }
-.icon-style{
+
+.icon-style {
   background: none;
   border: none;
   align-items: center;
 }
+
 .tab-button.active {
   font-weight: var(--font-weight-bold);
   opacity: 1;
@@ -53,32 +56,36 @@ background: none;
   min-width: max-content;
   text-decoration: underline;
 }
+
 .header-text {
   font-weight: var(--font-weight-regular);
-  line-height: var(   --font-line-height-32); 
+  line-height: var(--font-line-height-32);
   font-size: var(--font-size-28);
 }
+
 .left-section {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--spacing-24);
 }
 
 .center-section {
-  flex: 1; 
+  flex: 1;
   text-align: center;
-  gap: 14px;
+  gap: var(--spacing-14);
 }
 
 .right-section {
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: var(--spacing-8)
 }
+
 .user-avatar {
   width: 63px;
   height: 63px
 }
+
 .user-header .header-text {
   font-family: var(--font-family-primary);
 }

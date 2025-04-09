@@ -1,0 +1,18 @@
+.timer-style-1 {
+    color: var(--surface-surface-primary-trans, rgba(255, 255, 255, 0.25));
+    font-family: var(--Fonts-Body-font, Karla);
+    font-size: var(--Size-head-text-h7, 40px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--Line-Height-headings-1, 32px);
+}
+
+.timer-style-2 {
+    color: var(--Fonts-font-color-text-primary, #FFF);
+    text-align: center;
+    font-family: var(--Fonts-Body-font, Karla);
+    font-size: var(--Size-body-text-body-text-md, 16px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Line-Height-body-m, 18px);
+}
