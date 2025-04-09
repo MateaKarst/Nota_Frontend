@@ -1,5 +1,5 @@
 import { useState } from "react";
-import '../styles/components/tabs-mixer.css';
+import '../../styles/components/tabs-mixer.css';
 
 const TabsMixer = () => {
   const [activeTab, setActiveTab] = useState("my-songs");
