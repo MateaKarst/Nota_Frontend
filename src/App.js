@@ -1,5 +1,4 @@
 import './App.css'
-import Timer from './components/Editor/Timer';
 
 function App() {
   return (
