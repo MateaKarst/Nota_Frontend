@@ -1,6 +1,6 @@
 import './App.css';
 
-
+import React, { useState } from 'react';
 import HeaderMain from './components/header-main';
 import HeaderProfile from './components/header-profile';
 import HeaderMySongs from './components/header-mysongs';
@@ -13,10 +13,12 @@ import AttachFileBtn from './components/Buttons/AttachFileBtn'
 import ProBtn from './components/Buttons/ProBtn'
 import ConnectBtn from './components/Buttons/ConnectBtn';
 import PurpleTagsButton from './components/Tags/PurpleTag';
-import TimeLine from './components/timeline-grid';
-import TabsMixer from './components/tabs-mixer';
+import EditorPage from './pages/editor';
+
+import Popup from './components/pop-ups';
 
 function App() {
+  const [popupType, setPopupType] = useState(null);
   return (
     <div className="App">
       <header className="App-header">
@@ -37,12 +39,27 @@ function App() {
       <HeaderVariants mode={"default"} />
       <HeaderVariants mode={"user"} />
 
+      <EditorPage></EditorPage>
+
         <NotaLogo colorIndex={2} />
         <NotaLogo colorIndex={1} />
         <NotaLogo colorIndex={0} />
 
-        <TimeLine />
-        <TabsMixer />
+        <div>
+      <button onClick={() => setPopupType('upload-track')}>Show Upload Track Popup</button>
+      <button onClick={() => setPopupType('report')}>Show Report Form</button>
+      <button onClick={() => setPopupType('upload-picture')}>Upload Image</button>
+      <button onClick={() => setPopupType('upload-to-editor')}>upload-to-editor</button>
+
+      {popupType && (
+        <Popup
+          type={popupType}
+          onClose={() => setPopupType(null)}
+          data={{ title: 'Moonshine', name: 'MoonshineTry521.mp3', size: '4.1 MB', length: '4:24' }}
+        />
+      )}
+    </div>
+      
 
         <a
           className="App-link"
