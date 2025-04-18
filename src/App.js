@@ -1,10 +1,11 @@
 import './App.css'
+import Waveform from '../src/components/Soundwaves';
+import Personalization1 from './pages/Personalization1';
 
 function App() {
-    <div className="App">
-      <header className="App-header">
-
-      </header>
-    </div>
+  return (
+    
+  <Personalization1 />
+  )
 }
 export default App;
