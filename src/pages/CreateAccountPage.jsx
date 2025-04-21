@@ -1,8 +1,9 @@
 import React from "react";
-import "../styles/variables.css";
 import NotaLogo from "../components/LogoNota";
-import "../styles/pages/CreateAccountPage.css";
 import DefaultButton from '../components/DefaultButton';
+
+import "../styles/variables.css";
+import "../styles/pages/CreateAccountPage.css";
 
 const CreateAccountPage = () => {
     return (
@@ -16,7 +17,6 @@ const CreateAccountPage = () => {
                 <p>or</p>
                 <DefaultButton text='Login' />
                 <p>By clicking Create Account, you agree to our <a href="/">Terms and Conditions.</a></p>
-
             </div>
         </div>
 

@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import MusicTag from '../components/MusicTag';
 import SmallButton from '../components/SmallButton';
 import Small2 from '../components/Small2';
-import '../styles/pages/filterpage.css';
 import HeaderVariants from '../components/header-backarrow';
+
+import '../styles/pages/filterpage.css';
 
 const FilterPage = () => {
     const [selectedTags, setSelectedTags] = useState([]);

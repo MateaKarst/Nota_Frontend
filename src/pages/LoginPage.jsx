@@ -1,8 +1,9 @@
 import React from "react";
-import "../styles/variables.css";
 import NotaLogo from "../components/LogoNota";
-import "../styles/pages/LoginPage.css";
 import DefaultButton from '../components/DefaultButton';
+
+import "../styles/variables.css";
+import "../styles/pages/LoginPage.css";
 
 const LoginPage = () => {
     return (
@@ -13,13 +14,11 @@ const LoginPage = () => {
                 <input type="email" name="Email" className="input-field" placeholder="Email" />
                 <input type="password" name="Password" className="input-field" placeholder="Password" />
                 <DefaultButton text='Login' />
-                <a href="#" className="forgot-password">Forgot your password?</a>
+                <a href="/" className="forgot-password">Forgot your password?</a>
                 <p>or</p>
                 <DefaultButton text='Create an account' />
-
             </div>
         </div>
-
     )
 }
 
