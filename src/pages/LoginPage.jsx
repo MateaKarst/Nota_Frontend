@@ -3,7 +3,7 @@ import NotaLogo from "../components/LogoNota";
 import DefaultButton from '../components/DefaultButton';
 
 import "../styles/variables.css";
-import "../styles/pages/LoginPage.css";
+import "../styles/pages/login-page.css";
 
 const LoginPage = () => {
     return (

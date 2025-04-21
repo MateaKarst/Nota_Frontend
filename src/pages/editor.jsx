@@ -3,8 +3,8 @@ import HeaderVariants from '../components/header-backarrow'
 
 import '../styles/components/header.css';
 
-const EditorPage = () => {
+const Editor = () => {
   <HeaderVariants mode={"black text"}> </HeaderVariants>
 };
 
-export default EditorPage;
+export default Editor;

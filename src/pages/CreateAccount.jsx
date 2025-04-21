@@ -3,9 +3,9 @@ import NotaLogo from "../components/LogoNota";
 import DefaultButton from '../components/DefaultButton';
 
 import "../styles/variables.css";
-import "../styles/pages/CreateAccountPage.css";
+import "../styles/pages/create-account.css";
 
-const CreateAccountPage = () => {
+const CreateAccount = () => {
     return (
         <div className="createaccount-page">
             <div className="createaccount-page-container">
@@ -23,4 +23,4 @@ const CreateAccountPage = () => {
     )
 }
 
-export default CreateAccountPage;
+export default CreateAccount;

@@ -6,7 +6,7 @@ import SmallButton from '../components/SmallButton';
 import Small2 from '../components/Small2';
 import HeaderVariants from '../components/header-backarrow';
 
-import '../styles/pages/filterpage.css';
+import '../styles/pages/filter-page.css';
 
 const FilterPage = () => {
     const [selectedTags, setSelectedTags] = useState([]);

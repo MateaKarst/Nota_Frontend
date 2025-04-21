@@ -4,7 +4,7 @@ import Buttons from "../components/Buttons/BasicBtn"
 import HeaderVariants from "../components/header-backarrow";
 
 import "../styles/variables.css";
-import "../styles/pages/Personalization.css"
+import "../styles/pages/personalization-1.css"
 
 const genres = [
     "Pop",
