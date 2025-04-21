@@ -1,6 +1,7 @@
 import React from "react";
-import "../styles/variables.css";
-import "../styles/components/friend.css";
+
+import "../../styles/variables.css";
+import "../../styles/components/friend.css";
 
 const Friend = ({ name, ProfilePicture, hasNewPosts, newPostsCount }) => {
   return (
@@ -20,4 +21,3 @@ const Friend = ({ name, ProfilePicture, hasNewPosts, newPostsCount }) => {
 };
 
 export default Friend;
-

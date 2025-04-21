@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import '../../styles/components/editor/timer.css';
 
 const Timer = ({ variation = 1 }) => {

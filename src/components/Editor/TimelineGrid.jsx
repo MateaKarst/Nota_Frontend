@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../styles/components/timeline-grid.css";
+
+import "../../styles/components/editor/timeline-grid.css";
 
 const TimelineGrid = () => {
   const [timeMarkers] = useState(Array.from({ length: 120 }, (_, i) => i * 0.5)); // Time in seconds

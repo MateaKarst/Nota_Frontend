@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/variables.css";
-import "../styles/components/editorinstrument.css";
+
+import "../../styles/components/editor/editor-instrument.css";
 
 const EditorInstrument = ({ icon: Icon, label, }) => {
   const colorMap = {
@@ -11,20 +11,18 @@ const EditorInstrument = ({ icon: Icon, label, }) => {
 
   //get random color square
   const getRandomColor = () => {
-    const colors = Object.values(colorMap); 
-    const randomIndex = Math.floor(Math.random() * colors.length); 
-    return colors[randomIndex]; 
+    const colors = Object.values(colorMap);
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
   };
 
   const bgColor = getRandomColor();
-
- 
 
   return (
     <div className="editor-instrument" style={{ backgroundColor: bgColor }}>
       {Icon && <Icon className="icon" />}
       {label && <span className="label">#{label}</span>}
-      
+
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/variables.css";
+
+import "../../styles/variables.css";
 
 const MusicTag = ({ text, colorIndex = 0, onClick, isSelected}) => {
   // Define color variables for background, text, and outline colors

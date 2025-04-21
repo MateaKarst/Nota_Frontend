@@ -1,6 +1,8 @@
 import React from 'react';
-import { ReactComponent as ClipIcon } from '../../icons/clip.svg'; // Imports SVG file as React component
+
 import "../../styles/variables.css";
+
+import { ReactComponent as ClipIcon } from '../../icons/clip.svg'; // Imports SVG file as React component
 
 function AttachFileBtn({ text, variant = 0 }) {
     const styles = [

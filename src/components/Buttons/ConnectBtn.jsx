@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import "../../styles/variables.css";
 
 import { ReactComponent as LogoIcon } from '../../assets/logo/pinklogo.svg';
@@ -21,7 +22,7 @@ function ConnectBtn() {
       style={{
         width: isClicked ? "50px" : "140px",
         height: "28px",
-        backgroundColor: isConnected ? "rgba(249, 228, 0, 0.55)" : (isClicked ? "transparent" : "var(--color-yellow)"), 
+        backgroundColor: isConnected ? "rgba(249, 228, 0, 0.55)" : (isClicked ? "transparent" : "var(--color-yellow)"),
         color: isConnected ? "var(--color-white)" : (isClicked ? "var(--color-yellow)" : "var(--color-black)"), // Change text color to white when connected
         borderRadius: "var(--border-radius-20)",
         border: "var(--border-radius-20)",
@@ -37,11 +38,10 @@ function ConnectBtn() {
       {isClicked ? (
         <LogoIcon style={{ width: "28px", height: "28px" }} />
       ) : (
-        isConnected ? "Connected" : "Connect" 
+        isConnected ? "Connected" : "Connect"
       )}
     </button>
   );
 }
 
 export default ConnectBtn;
-

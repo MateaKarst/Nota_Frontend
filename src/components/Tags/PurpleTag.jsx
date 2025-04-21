@@ -1,7 +1,6 @@
-
 import React, { useState }  from 'react';
-import "../../styles/variables.css";
 
+import "../../styles/variables.css";
 
 function PurpleTag({ text }) {
   const [clicked, setClicked] = useState(false);

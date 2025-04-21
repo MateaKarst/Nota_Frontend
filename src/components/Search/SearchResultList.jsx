@@ -1,9 +1,10 @@
 "use client";
 
 import { SearchResult } from "./SearchResult";
+
 import "../../styles/components/search/search-result-list.css";
 
-export const SearchResultsList = ({ results }) => {
+const SearchResultsList = ({ results }) => {
     if (results.length === 0) return null;
 
     return (
@@ -14,3 +15,5 @@ export const SearchResultsList = ({ results }) => {
         </div>
     );
 };
+
+export default SearchResultsList;

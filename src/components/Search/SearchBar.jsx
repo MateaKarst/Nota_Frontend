@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { SearchResultsList } from "./SearchResultList";
+
 import "../../styles/components/search-bar.css";
 
 const pages = [
