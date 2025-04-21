@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AttachFileBtn from './Buttons/AttachFileBtn';
 import BasicBtn from './Buttons/BasicBtn';
 import ProBtn from './Buttons/ProBtn';
-import { ReactComponent as ReportIcon } from '../assets/report-icon.svg';
+import { ReactComponent as ReportIcon } from '../assets/icons/report-icon.svg';
 
 const PopupContent = ({ type, data, onClose }) => {
   const [selected, setSelected] = useState('');

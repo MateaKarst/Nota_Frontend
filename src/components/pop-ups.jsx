@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupContent from './pop-up-content';
 import '../styles/components/pop-ups.css';
-import { ReactComponent as PlusIcon } from '../assets/plus-icon.svg';
+import { ReactComponent as PlusIcon } from '../assets/icons/plus-icon.svg';
 
 const Popup = ({ type, onClose, data }) => {
   return (

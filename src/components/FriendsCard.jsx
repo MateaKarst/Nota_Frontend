@@ -1,10 +1,10 @@
 import React from "react";
 import Friend from "./Friend";
 import '../styles/components/friend.css';
-import { ReactComponent as Violeta } from "../assets/violeta.svg";
-import { ReactComponent as Sofiia } from "../assets/sofiia.svg";
-import { ReactComponent as Petra } from "../assets/petra.svg";
-import { ReactComponent as Matea } from "../assets/matea.svg";
+import { ReactComponent as Violeta } from "../assets/avatars/violeta.svg";
+import { ReactComponent as Sofiia } from "../assets/avatars/sofiia.svg";
+import { ReactComponent as Petra } from "../assets/avatars/petra.svg";
+import { ReactComponent as Matea } from "../assets/avatars/matea.svg";
 
 
 const friendsData = [

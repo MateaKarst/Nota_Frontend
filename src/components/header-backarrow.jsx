@@ -1,8 +1,8 @@
 import React from "react";
 import '../styles/components/header.css';
-import { ReactComponent as PencilIcon } from '../assets/pencil-icon.svg';
-import { ReactComponent as MenuIcon } from '../assets/menu-icon.svg';
-import { ReactComponent as BackArrow } from '../assets/backarrow-icon.svg';
+import { ReactComponent as PencilIcon } from '../assets/icons/pencil-icon.svg';
+import { ReactComponent as MenuIcon } from '../assets/icons/menu-icon.svg';
+import { ReactComponent as BackArrow } from '../assets/icons/backarrow-icon.svg';
 
 
 const headers = [
@@ -41,7 +41,7 @@ const headers = [
     mode: "user",
     visibility: 1,
     backgroundColor: "var(--color-black)",
-    userImage: "./assets/profile.jpg",
+    userImage: "../assets/avatars/profile.jpg",
     title: "Guitarist101",
     fontFamily: "var(--font-family-primary)"
   },

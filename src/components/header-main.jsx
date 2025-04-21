@@ -2,8 +2,8 @@ import React from 'react';
 import '../styles/components/header.css';
 import '../components/Logos/LogoNota';
 import NotaLogo from '../components/Logos/LogoNota'
-import { ReactComponent as BellIcon } from '../assets/bell-icon.svg';
-import { ReactComponent as MessageIcon } from '../assets/message-icon.svg';
+import { ReactComponent as BellIcon } from '../assets/icons/bell-icon.svg';
+import { ReactComponent as MessageIcon } from '../assets/icons/message-icon.svg';
 import '../styles/variables.css'
 
 const HeaderMain = ({ }) => (

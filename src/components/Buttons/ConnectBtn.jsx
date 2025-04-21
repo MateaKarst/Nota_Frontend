@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../../styles/variables.css";
 
-import { ReactComponent as LogoIcon } from '../../icons/yellowlogo.svg';
+import { ReactComponent as LogoIcon } from '../../assets/logo/pinklogo.svg';
 
 function ConnectBtn() {
   const [isClicked, setIsClicked] = useState(false);

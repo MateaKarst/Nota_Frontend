@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/components/header.css';
-import { ReactComponent as PinkLogo } from '../assets/pinklogo.svg';
-import { ReactComponent as SettingsIcon } from '../assets/settings-icon.svg';
-import { ReactComponent as PencilIcon } from '../assets/pencil-icon.svg';
+import { ReactComponent as PinkLogo } from '../assets/logo/pinklogo.svg';
+import { ReactComponent as SettingsIcon } from '../assets/icons/settings-icon.svg';
+import { ReactComponent as PencilIcon } from '../assets/icons/pencil-icon.svg';
 import '../styles/variables.css'
 
 const HeaderProfile = ({ }) => (
