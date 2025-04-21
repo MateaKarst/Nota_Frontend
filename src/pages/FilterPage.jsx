@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import MusicTag from '../components/MusicTag';
 import SmallButton from '../components/SmallButton';

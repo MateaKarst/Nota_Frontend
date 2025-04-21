@@ -15,7 +15,7 @@ const CreateAccountPage = () => {
                 <DefaultButton text='Create account' />
                 <p>or</p>
                 <DefaultButton text='Login' />
-                <p>By clicking Create Account, you agree to our <a href="#">Terms and Conditions.</a></p>
+                <p>By clicking Create Account, you agree to our <a href="/">Terms and Conditions.</a></p>
 
             </div>
         </div>
