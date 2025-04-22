@@ -3,7 +3,7 @@ import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid"; // icon library
 import ringtone from "../../assets/iphone-ringtone.mp3"; // testing
 import "../../styles/variables.css";
 
-const PlayerBtn = ({ showProgress = true, bordered = false }) => {
+const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = true }) => {
   const audioRef = useRef(null);
   const progressRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -63,10 +63,12 @@ const PlayerBtn = ({ showProgress = true, bordered = false }) => {
         <audio ref={audioRef} src={ringtone} />  {/*probaly has to be changed to an api  */}
         <div className="player-ui">
           <div className="player-controls">
-            {/* Skip backward button */}
+            {/* skip backward button */}
+            {showSkipButtons && (
             <button onClick={skipBackward} className="skip-btn">
-              &#8634; {/* Left arrow symbol for backward */}
+              &#8634; {/* left arrow symbol for backward */}
             </button>
+            )}
 
             <button
               onClick={togglePlay}
@@ -79,10 +81,12 @@ const PlayerBtn = ({ showProgress = true, bordered = false }) => {
               )}
             </button>
 
-            {/* Skip forward button */}
+            {/* skip forward button */}
+            {showSkipButtons && (
             <button onClick={skipForward} className="skip-btn">
-              &#8634; {/* Left arrow symbol for backward, mirrored in CSS */}
+              &#8634; {/* left arrow symbol for backwards (mirrored in CSS) */}
             </button>
+            )}
           </div>
           
           {showProgress && (
