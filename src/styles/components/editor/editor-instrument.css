@@ -1,0 +1,23 @@
+@import '../variables.css';
+
+.editor-instrument {
+    width: 100px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-primary);
+    gap:var(--spacing-8);
+    color: var(--color-white);
+  }
+  
+  .editor-instrument .icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .editor-instrument .label {
+    font-size: var(--font-size-14);
+    text-align: center;
+  }

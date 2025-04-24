@@ -3,23 +3,24 @@ import NotaLogo from "../components/LogoNota";
 import DefaultButton from '../components/DefaultButton';
 
 import "../styles/variables.css";
-import "../styles/pages/login-page.css";
+import "../styles/pages/create-account.css";
 
-const LoginPage = () => {
+const CreateAccount = () => {
     return (
-        <div className="login-page">
-            <div className="login-page-container">
+        <div className="createaccount-page">
+            <div className="createaccount-page-container">
                 <NotaLogo />
-                <h1 className="title">Welcome</h1>
+                <h1 className="title">Create an account</h1>
                 <input type="email" name="Email" className="input-field" placeholder="Email" />
                 <input type="password" name="Password" className="input-field" placeholder="Password" />
-                <DefaultButton text='Login' />
-                <a href="/" className="forgot-password">Forgot your password?</a>
+                <DefaultButton text='Create account' />
                 <p>or</p>
-                <DefaultButton text='Create an account' />
+                <DefaultButton text='Login' />
+                <p>By clicking Create Account, you agree to our <a href="/">Terms and Conditions.</a></p>
             </div>
         </div>
+
     )
 }
 
-export default LoginPage;
+export default CreateAccount;

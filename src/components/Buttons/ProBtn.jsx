@@ -1,8 +1,10 @@
 import React from 'react';
-import { ReactComponent as SparkleIcon } from '../../icons/sparkle.svg';
+
 import "../../styles/variables.css";
 
-function ProBtn() {
+import { ReactComponent as SparkleIcon } from '../../icons/sparkle.svg';
+
+function ProBtn({ text }) {
   const handleClick = () => { };
 
   return (
@@ -11,7 +13,7 @@ function ProBtn() {
       {/* button */}
       <button
         style={{
-          width: "73px",
+          width: 'fit-content',
           height: "28px",
           background: "linear-gradient(0deg, #F5004F, #7C00FE)",
           color: "var(--color-white)",
@@ -20,17 +22,19 @@ function ProBtn() {
           fontSize: "var(--font-size-18)",
           position: "relative",
           fontFamily: "var(--font-family-primary)",
+          padding: "var(--Spacing-xxs, 4px) var(--Spacing-sm, 12px)",
+          bottom: "2px"
         }}
         onClick={handleClick}
       >
-        Log In
+        {text}
       </button>
 
       {/* Pro label  */}
       <div
         style={{
           position: "absolute",
-          top: "-8px",
+          top: "-6px",
           right: "0px",
           width: "40px",
           height: "12px",
@@ -41,7 +45,7 @@ function ProBtn() {
           alignItems: "center",
           justifyContent: "center",
           fontSize: "var(--font-size-10)",
-          fontFamily: "var(--font-family-primary)",
+          fontFamily: "var(--font-family-secondary)",
         }}
       >
         <SparkleIcon style={{ width: "6px", height: "8px" }} />
