@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchResult } from "./SearchResult";
+import  SearchResult  from "./SearchResult";
 
 import "../../styles/components/search/search-result-list.css";
 

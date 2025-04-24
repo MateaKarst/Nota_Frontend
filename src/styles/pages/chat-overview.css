@@ -1,0 +1,36 @@
+body{
+    background-color: var(--color-black);
+  }
+
+.header-text {
+    color: var(--color-white);
+  }
+
+
+  .searchbar {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding-left: var(--spacing-24);
+        padding-right: var(--spacing-24);
+        width: 90%;
+        margin-left: var(--spacing-24);
+        margin-right: var(--spacing-24);
+        margin-top: 20px;
+        margin-bottom:20px;
+      }
+      
+
+  .icon-button {
+    width: 34px;
+    height: 32px;
+    cursor: pointer;
+    fill: white; /* or any color you like */
+  }
+
+  .overview{
+    margin-left: var(--spacing-24);
+    margin-right: var(--spacing-24);
+    padding-left:20px;
+  }
+  
