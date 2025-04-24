@@ -1,7 +1,4 @@
 import './App.css';
-import PlayerBtn from './components/Buttons/PlayBtn';
-import './App.css'
-
 
 function App() {
   return (
