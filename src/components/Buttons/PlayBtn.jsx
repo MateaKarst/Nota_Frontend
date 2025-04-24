@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid"; // icon library
-import ringtone from "../../assets/iphone-ringtone.mp3"; // testing
+import ringtone from "../../assets/editor/iphone-ringtone.mp3"; // testing ringtone
 import "../../styles/variables.css";
 
 const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = true }) => {
