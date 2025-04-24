@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import "../../styles/variables.css";
 
 const buttonStyles = {
@@ -14,12 +15,25 @@ const buttonStyles = {
         fontFamily: "var(--font-family-primary)",
     },
     tiny: {
-        width: "103px",
+        width: "fit-content",
         height: "28px",
         backgroundColor: "var(--color-yellow)",
         color: "var(--color-black)",
         borderRadius: "var(--border-radius-20)",
         border: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "var(--font-size-18)",
+        fontFamily: "var(--font-family-primary)",
+    },
+    tinyOutline: {
+        width: "103px",
+        height: "28px",
+        backgroundColor: "transparent",
+        color: "var(--color-yellow)",
+        borderRadius: "var(--border-radius-20)",
+        borderColor: "var(--color-yellow)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
