@@ -3,7 +3,14 @@ import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid"; // icon library
 import ringtone from "../../assets/editor/iphone-ringtone.mp3"; // testing ringtone
 import "../../styles/variables.css";
 
-const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = true }) => {
+const PlayBtn = ({
+  showProgress = true,
+  bordered = false,
+  showSkipButtons = true,
+  circleColor = "var(--color-black)",
+  iconColor = "white",
+  size = 80,
+}) => {
   const audioRef = useRef(null);
   const progressRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -60,35 +67,56 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
   return (
     <>
       <div className="player-container">
-        <audio ref={audioRef} src={ringtone} />  {/*probaly has to be changed to an api  */}
+        <audio ref={audioRef} src={ringtone} />{" "}
+        {/*probaly has to be changed to an api  */}
         <div className="player-ui">
           <div className="player-controls">
             {/* skip backward button */}
             {showSkipButtons && (
-            <button onClick={skipBackward} className="skip-btn">
-              &#8634; {/* left arrow symbol for backward */}
-            </button>
+              <button onClick={skipBackward} className="skip-btn">
+                &#8634; {/* left arrow symbol for backward */}
+              </button>
             )}
 
             <button
               onClick={togglePlay}
               className={`play-btn ${bordered ? "play-btn-bordered" : ""}`}
+              style={{
+                backgroundColor: circleColor,
+                width: size,
+                height: size,
+              }}
             >
               {isPlaying ? (
-                <PauseIcon className="icon" />
+                <PauseIcon
+                  className="icon"
+                  style={{
+                    color: iconColor,
+                    width: size / 2.2,
+                    height: size / 2.2,
+                  }}
+                />
               ) : (
-                <PlayIcon className="icon" />
+                <PlayIcon
+                  className="icon"
+                  style={{
+                    color: iconColor,
+                    width: size / 2.2,
+                    height: size / 2.2,
+                  }}
+                />
               )}
             </button>
 
             {/* skip forward button */}
             {showSkipButtons && (
-            <button onClick={skipForward} className="skip-btn">
-              &#8634; {/* left arrow symbol for backwards (mirrored in CSS) */}
-            </button>
+              <button onClick={skipForward} className="skip-btn">
+                &#8634;{" "}
+                {/* left arrow symbol for backwards (mirrored in CSS) */}
+              </button>
             )}
           </div>
-          
+
           {showProgress && (
             <div
               className="progress-bar"
@@ -106,15 +134,6 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
 
       <style>
         {`
-          .player-container {
-            background-color: black;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
           .player-ui {
             display: flex;
             flex-direction: column;
@@ -140,7 +159,7 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease
           }
 
           .play-btn:hover {
@@ -155,6 +174,7 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             width: 36px;
             height: 36px;
             color: white;
+            color: var(--color-pink);
           }
 
           .progress-bar {
@@ -172,7 +192,6 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             transition: width 0.1s linear;
           }
 
-      
           .skip-btn {
             background-color: var(--color-black);
             color: white;
@@ -186,6 +205,7 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             justify-content: center;
             cursor: pointer;
             transition: background-color 0.2s ease;
+            shadow: '0 20px 0px rgba(0, 0, 0, 0.1)',
           }
 
           .skip-btn:hover {
@@ -202,7 +222,7 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
   );
 };
 
-export default PlayerBtn;
+export default PlayBtn;
 
 /* calling the PlayerBtn example
 
