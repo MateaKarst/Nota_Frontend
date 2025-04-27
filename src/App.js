@@ -1,11 +1,15 @@
 import './App.css'
-import SearchBar from './components/Search/SearchBar';
+import SearchPage from '../src/pages/SearchPage'
+import GenreCard from './components/Search/GenreCard';
+import HeaderVariants from './components/header-backarrow';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <SearchBar />
+      <HeaderVariants mode='default' />
+      <SearchPage />
+      <GenreCard mode='metal' />
       </header>
     </div>
   );
