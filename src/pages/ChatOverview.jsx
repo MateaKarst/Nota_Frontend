@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import SearchBar from '../components/Search/SearchBar';
 import Message from '../components/Message';
@@ -9,35 +8,44 @@ import { ReactComponent as ProfilePic2 } from "../assets/chat/johnny.svg";
 import { ReactComponent as ProfilePic3 } from "../assets/chat/girl.svg"; 
 import { ReactComponent as ProfilePic4 } from "../assets/chat/dog.svg"; 
 
+import { db } from '../firebase'; 
+import { collection, getDocs } from 'firebase/firestore';
 
 import "../styles/variables.css";
 import "../styles/pages/chat-overview.css";
 
 function ChatOverview() {
-    const chats = [
-      {
-        name: "Guitarist1001",
-        lastMessage: "I'd love to hear it! Let me know when it's best for you",
-        profileImage:  <ProfilePic1 />
-      },
-      {
-        name: "JohnnySings",
-        lastMessage: "I love your songs! Keep creating!",
-        profileImage: <ProfilePic2 />
-      },
-      {
-        name: "Guitarist1001",
-        lastMessage: "Really nice twist you added to my track",
-        profileImage: <ProfilePic3 />
-      },
-      {
-        name: "user123445",
-        lastMessage: "Let's work together on a song!",
-        profileImage: <ProfilePic4 />
-      }
-    ];
+  const [chats, setChats] = useState([]); //state to store chats
 
+    useEffect(() => {
+      const fetchChats = async () => {
+        const querySnapshot = await getDocs(collection(db, "messages"));
+        const chatsArray = [];
+        querySnapshot.forEach((doc) => {
+          chatsArray.push(doc.data()); 
+        });
+        setChats(chatsArray); 
+      };
+  
+      fetchChats();
+    }, []); 
 
+// Function to assign profile image based on the user's name
+const getProfileImage = (name) => {
+  switch (name) {
+    case "Guitarist1001":
+      return <ProfilePic1 />;
+    case "JohnnySings":
+      return <ProfilePic2 />;
+    case "user123445":
+      return <ProfilePic3 />;
+    case "Guitarist1002":
+      return <ProfilePic4 />;
+    default:
+      return <ProfilePic1 />; // Default image for unknown users
+  }
+};
+    
   return (
     <div className="chat">
       <HeaderVariants mode="text" title="Messages"/>
@@ -52,8 +60,8 @@ function ChatOverview() {
           <Message
             key={index}
             name={chat.name}
-            lastMessage={chat.lastMessage}
-            profileImage={chat.profileImage}
+            lastMessage={chat.message}
+            profileImage={getProfileImage(chat.name)}
           />
         ))}
       </div>
