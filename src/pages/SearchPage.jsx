@@ -1,12 +1,27 @@
 import React from "react";
 import HeaderVariants from "../components/header-backarrow";
 import SearchBar from "../components/Search/SearchBar";
+import GenreCard from "../components/Search/GenreCard"
+import FilterIcon from "../assets/filter-icon.svg"
+import "../styles/variables.css"
+
+import "../styles/pages/SearchPage.scss"
 
 
 const SearchPage = () => {
     return (
         <div className="container">
-                        <SearchBar />
+            <HeaderVariants className="genre-card" mode="default" />
+            <SearchBar />
+            <img src={FilterIcon} alt="filter" />
+            <div className="genre-box">
+                <GenreCard />
+                <GenreCard mode="country" />
+                <GenreCard mode="metal" />
+                <GenreCard mode="rock" />
+                <GenreCard mode="pop" />
+                <GenreCard mode="indie" />
+            </div>
         </div>
     )
 }
