@@ -1,7 +1,7 @@
 import React from "react";
-import PurpleTag from "../components/Tags/PurpleTag"
-import Buttons from "../components/Buttons/BasicBtn"
-import HeaderVariants from "../components/header-backarrow";
+import PurpleTag from "../../components/Tags/PurpleTag"
+import Buttons from "../../components/Buttons/BasicBtn"
+import HeaderVariants from "../../components/Headers/HeaderVariants";
 
 import "../styles/variables.css";
 import "../styles/pages/personalization-1.css"

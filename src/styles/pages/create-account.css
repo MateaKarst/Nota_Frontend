@@ -1,3 +1,5 @@
+@import '../variables.css';
+
 .createaccount-page {
     background-image: url(../../assets/backgrounds/createaccount-bg.jpg);
     display: flex;
