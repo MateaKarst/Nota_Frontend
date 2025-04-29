@@ -1,3 +1,5 @@
+@import '../variables.css';
+
 .filter-page {
     background-color: var(--color-black);
     overflow-x: hidden;
