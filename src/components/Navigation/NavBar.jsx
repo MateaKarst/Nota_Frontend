@@ -6,7 +6,7 @@ import NoteIcon from '../../components/Navigation/SVGcode/MySongsSvg';
 import ProfileIcon from '../../components/Navigation/SVGcode/ProfileSvg';
 
 const NavBar = () => {
-  const [activeTab, setActiveTab] = useState('home'); 
+  const [activeTab, setActiveTab] = useState('home'); // State to track the active tab
 
   const navItems = [
     { id: 'home', icon: <HomeIcon />, label: 'Home' },
