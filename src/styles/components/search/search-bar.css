@@ -120,3 +120,10 @@
 .filter-menu button:hover {
   background-color: #333;
 }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 12px 16px;
+}
