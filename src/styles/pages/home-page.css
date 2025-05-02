@@ -1,0 +1,51 @@
+.home-page {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 16px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+  }
+  
+  .logo {
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .icons {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  
+  .title {
+    margin-top: 12px;
+    font-size: 20px;
+  }
+  
+  .songs-scroll,
+  .horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    gap: 12px;
+  }
+  
+  .add-song {
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  

@@ -1,17 +1,14 @@
-import './App.css'
-import LikeButton from '../src/components/like-button.jsx'
-import CommentButton from '../src/components/comment-button.jsx'
-import ShareButton from '../src/components/share-button.jsx'
-import SongInteraction from '../src/components/song-interaction.jsx'
-import LoadingProgress from '../src/components/progressbar.jsx'
-
+import SmallCard from './components/MusicCard/SmallCard/SmallCard';
+import NavBar from './components/Navigation/NavBar';
+import '../src/App.css'
+import HomePage from './pages/home-page';
 function App() {
   return (
-    <div className="App" style={{backgroundColor:"#000000"}}>
+    <div className="App">
       
-      <SongInteraction/>
-      <LoadingProgress label="Importing file..." duration={4000} />
-
+      <NavBar />
+      <HomePage/>
+      <SmallCard />
     </div>
   );
 }
