@@ -1,0 +1,40 @@
+@import '../variables.css';
+
+.filter-page {
+    background-color: var(--color-black);
+    overflow-x: hidden;
+  }
+  
+  .filter-page .container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  
+  .filter-page .heading {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-34);
+    color: var(--color-white);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--font-line-height-38);
+    text-align: left;
+    margin-left: 0;
+    padding: 0 20px;
+    
+  }
+  
+  .filter-page .tags-container {
+    padding: 0px 20px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .filter-page .buttons-section {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 70px;
+    padding: 20px;
+  }

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import "../../styles/variables.css";
 import { Box, Slider, Stack } from '@mui/material';
 
+import "../../styles/variables.css";
 
 export default function VolumeSlider({ audioRef }) {
   const [value, setValue] = React.useState(30); // Default volume
@@ -18,8 +18,6 @@ export default function VolumeSlider({ audioRef }) {
       audioRef.current.volume = value / 100; 
     }
   }, [audioRef, value]);
-  
-
 
   return (
     <Box sx={{ width: 200 }}>
@@ -51,7 +49,6 @@ export default function VolumeSlider({ audioRef }) {
     </Box>
   );
 }
-
 
 // Example Use Case
 // function App() {

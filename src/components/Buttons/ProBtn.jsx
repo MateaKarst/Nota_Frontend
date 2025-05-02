@@ -1,6 +1,8 @@
 import React from 'react';
-import { ReactComponent as SparkleIcon } from '../../icons/sparkle.svg';
+
 import "../../styles/variables.css";
+
+import { ReactComponent as SparkleIcon } from '../../icons/sparkle.svg';
 
 function ProBtn({ text }) {
   const handleClick = () => { };
@@ -25,7 +27,7 @@ function ProBtn({ text }) {
         }}
         onClick={handleClick}
       >
-       {text}
+        {text}
       </button>
 
       {/* Pro label  */}
