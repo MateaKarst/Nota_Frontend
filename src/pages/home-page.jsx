@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/pages/home-page.css';
 import CaroselCard from '../components/MusicCard/CaroselCard/CaroselCard';
-import HeaderMain from '../components/Headers/HeaderProfile';
-import FriendsCard from '../components/FriendsCard';
-import BottomNavBar from '../components/BottomNavBar';
+import HeaderMain from '../components/Headers/HeaderMain';
+// import FriendsCard from '../components/FriendsCard';
+// import BottomNavBar from '../components/BottomNavBar';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard'
 
 const HomePage = () => {
@@ -29,13 +29,13 @@ const HomePage = () => {
         <MusicCard title="Memories" artist="Jamesvoice +4" />
       </div>
 
-      <SectionHeader title="Connections" />
-      <div className="horizontal-scroll">
+      {/* <SectionHeader title="Connections" /> */}
+      {/* <div className="horizontal-scroll">
         <FriendsCard name="Violeta" />
         <FriendsCard name="Sofiia" />
         <FriendsCard name="Petra" />
         <FriendsCard name="Mateas" />
-      </div>
+      </div> */}
 
       {/* <SectionHeader title="Trendy songs" /> */}
       <div className="horizontal-scroll">
