@@ -1,8 +1,12 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+<<<<<<< HEAD
 import SearchResultsList from "./SearchResultsList";
 import MusicTag from "../Tags/MusicTag";
+=======
+import  SearchResultsList  from "./SearchResultList";
+>>>>>>> messages
 
 import "../../styles/components/search/search-bar.css";
 
