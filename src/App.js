@@ -1,14 +1,14 @@
 import './App.css';
-//import HomeCarousel from '../src/components/Home/HomeCarousel';
-//import CaroselCard from '../src/components/MusicCard/CaroselCard/CaroselCard'
-import SectionHeadImage from './components/SongDescription/SectionHeadImage';
+import HomeCarousel from '../src/components/Home/HomeCarousel';
+import CaroselCard from '../src/components/MusicCard/CaroselCard/CaroselCard'
+
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <SectionHeadImage />
+      <HomeCarousel />
       </header>
     </div>
   );
