@@ -4,6 +4,8 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { EffectCoverflow } from 'swiper/modules'
 import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
+import PlusImage from '../../assets/plus-img.png';
+import "../../styles/pages/home-page.css"
 
 
 const HomeCarousel = () => {
@@ -40,7 +42,7 @@ const HomeCarousel = () => {
     ];
 
     return (
-        <div style={{ width: "100%", padding: "20px 0" }}>
+        <div  style={{ width: "100%", padding: "20px 0" }}>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
