@@ -1,13 +1,15 @@
-import SmallCard from './components/MusicCard/SmallCard/SmallCard';
-import NavBar from './components/Navigation/NavBar';
+//import TimelineGrid from './components/Editor/TimelineGrid';
+import Soundwaves from './components/Editor/Soundwaves';
+
 import '../src/App.css'
 function App() {
   return (
     <div className="App">
       
-      <NavBar />
+      {/* <TimelineGrid /> */}
       
-      <SmallCard />
+      <Soundwaves
+        audioUrl="../src/assets/editor/iphone-ringtone.mp3" />
     </div>
   );
 }
