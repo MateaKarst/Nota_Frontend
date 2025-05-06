@@ -1,0 +1,31 @@
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color:  rgba(245, 0, 79, 0.55);
+  border: none;
+  border-radius: 24px; 
+  padding: 6px 12px;
+  cursor: pointer;
+  color: white; 
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.1s ease;
+  width: 65px;
+  height: 32px;
+}
+
+.like-button.liked {
+  color: #F5004F;
+}
+
+.like-button span {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+.like-button svg {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease;
+}
