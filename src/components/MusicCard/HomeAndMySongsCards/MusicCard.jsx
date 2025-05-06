@@ -18,11 +18,11 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
         flexDirection: isRow ? "row" : "column",
         alignItems: "center",
         paddingBottom: "20px",
-        paddingTop: "10px"
+        paddingTop: "10px",
       }}
     >
       <div style={{ width: "150px", position: "relative" }}>
-        <CoverImg SVGImg={imageUrl} />
+        <CoverImg SVGImg={imageUrl} /> {/* Pass the image URL directly here */}
 
         {/* music btn */}
         <div
@@ -62,7 +62,6 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
             fontWeight: "600",
             margin: "0px",
             color: "var(--color-white)",
-          
           }}
         >
           {title}
@@ -81,6 +80,7 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
 };
 
 export default MusicCard;
+
 
 /* 
   calling example

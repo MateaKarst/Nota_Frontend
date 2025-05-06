@@ -24,7 +24,7 @@ const HomePage = () => {
 </div>
       <div className="horizontal-scroll">
         <MusicCard title="Paris 2012" creator="Emily Star" contributersNbr={2} imageUrl={"https://img.freepik.com/free-photo/red-flowers-hanging_23-2147836502.jpg?t=st=1746465875~exp=1746469475~hmac=2b50e96ae67c0fbace87a40bf625dbf65a1377e4ce5372a5d8efdaefff9010ab&w=1380"}/>
-        <MusicCard title="Jazzy night" creator="Lily Vermeer" contributersNbr={4} />
+        <MusicCard title="Jazzy night" creator="Lily Vermeer" contributersNbr={4} imageUrl={"https://static.vegsoc.org/app/uploads/2024/07/shutterstock_2315756181.jpg"}  />
         <MusicCard title="Rain of tears" creator="Jamy Lynn"  contributersNbr={3}/>
       </div>
       </div>
