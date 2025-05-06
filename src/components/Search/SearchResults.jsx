@@ -1,6 +1,6 @@
 "use client";
 
-const SearchResult = ({ result }) => {
+const SearchResults = ({ result }) => {
     const handleClick = (e) => {
         if (!result.ref) {
             e.preventDefault();
@@ -18,4 +18,4 @@ const SearchResult = ({ result }) => {
     );
 };
 
-export default SearchResult;
+export default SearchResults;

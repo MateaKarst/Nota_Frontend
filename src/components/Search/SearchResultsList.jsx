@@ -1,6 +1,10 @@
 "use client";
 
-import { SearchResult } from "./SearchResult";
+<<<<<<< HEAD:src/components/Search/SearchResultsList.jsx
+import SearchResults from "./SearchResults";
+=======
+import  SearchResult  from "./SearchResult";
+>>>>>>> messages:src/components/Search/SearchResultList.jsx
 
 import "../../styles/components/search/search-result-list.css";
 
@@ -10,7 +14,7 @@ const SearchResultsList = ({ results }) => {
     return (
         <div className="results-list">
             {results.map((result) => (
-                <SearchResult result={result} key={result.id} />
+                <SearchResults result={result} key={result.id} />
             ))}
         </div>
     );

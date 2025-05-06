@@ -1,0 +1,129 @@
+.search-n-filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  background-color: transparent;
+  /* or match your theme */
+}
+
+.search-container {
+  display: flex;
+  width: 335px;
+  padding: var(--Spacing-sm, 12px) var(--Spacing-md, 16px);
+  align-items: center;
+  gap: var(--Spacing-xs, 8px);
+  border-radius: var(--Radius-4xl, 56px);
+  background: var(--Surface-surface-secondary, #343331);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  flex: 1 0 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--Fonts-font-color-text-primary, #FFF);
+  font-family: var(--Fonts-Body-font, Karla);
+  font-size: var(--Size-body-text-body-text-md, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Line-Height-body-m, 18px);
+  /* 112.5% */
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  width: 100%;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-result {
+  padding: 8px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.search-result:last-child {
+  border-bottom: none;
+}
+
+
+.filter-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-button {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-button svg {
+  width: 100%;
+  height: 100%;
+  fill: white;
+}
+
+.filter-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 0.25rem 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-menu button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filter-menu button:hover {
+  background-color: #333;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 12px 16px;
+}
