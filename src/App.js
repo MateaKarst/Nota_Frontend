@@ -6,9 +6,15 @@ import SearchBar from './components/Search/SearchBar';
 function App() {
   return (
     <div className="App">
-      {/* <HeaderMySongs /> */}
-      <SearchBar />
-
+      <div>
+        <HeaderMySongs />
+      </div>
+      <div>
+        <SearchBar />
+      </div>
+      <div>
+        
+      </div>
     </div>
   );
 }
