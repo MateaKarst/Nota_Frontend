@@ -89,3 +89,7 @@ line-height: 15px;
   justify-content: space-between;
   padding-right: 12px;
 }
+.friends-section{
+  width: 100%;
+  overflow: hidden;
+}
