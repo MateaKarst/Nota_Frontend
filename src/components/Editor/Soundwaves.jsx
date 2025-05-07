@@ -11,6 +11,7 @@ const Waveform = ({ audioUrl, waveColor, progressColor, height, colorIndex = 0 }
   const colorVars = ["var(--color-orange)", "var(--color-purple)", "var(--color-pink)"];
 
   useEffect(() => {
+    
     if (waveformRef.current) {
       const rootStyles = getComputedStyle(document.documentElement);
 

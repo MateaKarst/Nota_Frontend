@@ -41,6 +41,7 @@
 .friends-row {
   display: flex;
   gap: var(--spacing-14);
+  overflow-x: auto;
   justify-content: flex-start;
   box-sizing: border-box;
   margin-left: var(--spacing-20);
