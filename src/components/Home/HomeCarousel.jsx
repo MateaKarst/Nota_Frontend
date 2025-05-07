@@ -69,7 +69,7 @@ const HomeCarousel = () => {
       margin: "0 auto",
       padding: '3px',
       borderRadius: 'var(--border-radius-56)',
-      background: 'linear-gradient(45deg, #ff00cc, #3333ff)', // gradient border
+      background: 'linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-orange), var(--color-yellow))', // gradient border
     }}
   >
     <div
