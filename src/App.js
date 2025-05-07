@@ -1,21 +1,20 @@
 import '../src/App.css'
  import HomePage from './pages/home-page';
+ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import ProfileCard from './components/profile-container';
 // import lilyImg from './assets/lily-profile.jpg'
+import NotificationsPage from './pages/NotificationsPage'
+import ChatOverview from './pages/ChatOverview'
 function App() {
   return (
     <div className="App">
-      <HomePage/>
-      
-      {/* <ProfileCard
-  image={lilyImg}
-  name="Lily Vermeer"
-  tagline="Aspiring vocal musician🌟Open to experiments"
-  connections={5}
-  btns={true}
-/> */}
-    
-
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/messages" element={<ChatOverview />} />
+      </Routes>
+    </Router>
     </div>
   );
 }
