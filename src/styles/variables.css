@@ -17,7 +17,7 @@
     --color-pink: #F5004F;
     --color-purple: #7C00FE;
 
-    /* transparency */
+    /* __Color Transparency__ */
     --color-black-trans-90: rgba(0, 0, 0, 0.9);
     --color-black-trans-25: rgba(0, 0, 0, 0.25);
     --color-white-trans-50: rgba(255, 255, 255, 0.5);

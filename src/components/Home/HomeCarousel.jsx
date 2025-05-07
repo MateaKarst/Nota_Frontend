@@ -11,14 +11,14 @@ const HomeCarousel = () => {
     const cards =[
         { 
             id: 1,
-            imageUrl:"https://img.freepik.com/premium-vector/beautiful-calm-night-mountain-with-moonlight_104785-1378.jpg",
+            imageUrl:"https://images.pexels.com/photos/3007347/pexels-photo-3007347.jpeg",
             title: "Track 1",
             creator: "Nutella",
             contributersNbr: 2,
         },
         { 
             id: 2,
-            imageUrl:"https://img.freepik.com/premium-vector/beautiful-calm-night-mountain-with-moonlight_104785-1378.jpg",
+            imageUrl:"https://images.pexels.com/photos/4200745/pexels-photo-4200745.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             title: "Track 2",
             creator: "Nutella",
             contributersNbr: 4,
