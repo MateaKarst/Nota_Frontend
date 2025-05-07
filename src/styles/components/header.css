@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   margin-right: var(--spacing-24);
-  margin-left: var(--spacing-12);
+  padding-left: var(--spacing-12);
   padding-right: var(--spacing-24);
   border-bottom-right-radius: var(--border-radius-24);
   border-bottom-left-radius: var(--border-radius-24);
