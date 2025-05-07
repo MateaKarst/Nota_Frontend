@@ -1,14 +1,10 @@
-import './App.css';
-import HomeCarousel from '../src/components/Home/HomeCarousel';
-import CaroselCard from '../src/components/MusicCard/CaroselCard/CaroselCard'
-
+import '../src/App.css'
+import Overlay from './pages/editor/Overlay';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      <HomeCarousel />
-      </header>
+      <Overlay />
     </div>
   );
 }
