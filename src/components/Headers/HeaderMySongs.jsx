@@ -16,7 +16,7 @@ const HeaderMySongs = () => {
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+          className={`tab-button ${activeTab === tab.id ? "active no-underline" : ""}`}
           onClick={() => setActiveTab(tab.id)}
         >
           {tab.label}

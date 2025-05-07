@@ -52,7 +52,7 @@ const allSearchData = [
     })),
 ];
 
-const SearchBar = () => {
+const SearchBar = ({ variant = 2 }) => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const inputRef = useRef(null);
@@ -89,10 +89,10 @@ const SearchBar = () => {
         setSelectedType(type);
         setShowFilter(false);
         filterResults(query);
-    
+
         // Check if the tag is already active
         const tagIndex = activeTags.findIndex(tag => tag.text === type);
-    
+
         if (tagIndex === -1) {
             // If the tag is not in the active tags, add it
             const colorIndex = Math.floor(Math.random() * 4); // 0-3
@@ -104,10 +104,10 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="search-bar-wrapper">
+        <div className={`search-bar-wrapper ${variant === 2 ? 'search-bar-variant-2' : ''}`}>
             <div className="searching">
                 <div className="search-n-filter-container">
-                    <div className="search-container">
+                    <div className={`search-container ${variant === 2 ? 'hide-search' : ''}`}>
                         <div className="search-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
                                 <path
@@ -128,7 +128,7 @@ const SearchBar = () => {
                         {results.length > 0 && <SearchResultsList results={results} />}
                     </div>
 
-                    <div className="filter-container">
+                    <div className={`filter-container ${variant === 1 ? 'hide-filter' : ''}`}>
                         <button className="filter-button" onClick={toggleFilterMenu} aria-label="Toggle Filter Menu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
                                 <g clipPath="url(#clip0_3099_32007)">
@@ -156,7 +156,8 @@ const SearchBar = () => {
                     </div>
                 </div>
             </div>
-            <div className="tags">
+            
+            <div className={`tags ${variant === 1 ? 'hide-filter' : ''}  ${variant === 2 ? 'tags-variant-2' : ''} `}>
                 {activeTags.map((tag, index) => (
                     <MusicTag key={index} text={tag.text} colorIndex={tag.colorIndex} />
                 ))}
