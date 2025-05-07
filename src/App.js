@@ -1,19 +1,8 @@
-import '../src/App.css'
-import HeaderMySongs from './components/Headers/HeaderMySongs'
-import SearchBar from './components/Search/SearchBar';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <HeaderMySongs />
-      </div>
-      <div>
-        <SearchBar />
-      </div>
-      <div>
-
-      </div>
     </div>
   );
 }
