@@ -4,6 +4,8 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { EffectCoverflow } from 'swiper/modules'
 import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
+import PlusImage from '../../assets/plus-img.png';
+import "../../styles/pages/home-page.css"
 
 
 const HomeCarousel = () => {
@@ -18,21 +20,21 @@ const HomeCarousel = () => {
         },
         { 
             id: 2,
-            imageUrl:"https://images.pexels.com/photos/4200745/pexels-photo-4200745.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            imageUrl:"https://c02.purpledshub.com/uploads/sites/40/2023/08/JI230816Cosmos220-6d9254f-edited-scaled.jpg?w=1029&webp=1",
             title: "Track 2",
             creator: "Nutella",
             contributersNbr: 4,
         },
         { 
             id: 3,
-            imageUrl:"https://img.freepik.com/premium-vector/beautiful-calm-night-mountain-with-moonlight_104785-1378.jpg",
+            imageUrl:"https://c02.purpledshub.com/uploads/sites/40/2023/08/JI230816Cosmos220-6d9254f-edited-scaled.jpg?w=1029&webp=1",
             title: "Track 3",
             creator: "Nutella",
             contributersNbr: 2,
         },
         { 
             id: 4,
-            imageUrl:"https://img.freepik.com/premium-vector/beautiful-calm-night-mountain-with-moonlight_104785-1378.jpg",
+            imageUrl:"https://www.marthastewart.com/thmb/yhgiLuSTcFaN1WbwUua_W9SMHws=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/prettiest-flowers-painted-tongue-flower-lead-getty-1123-00763085ad384a9b9bf1f5cc81bee390.jpg",
             title: "Track 4",
             creator: "Nutella",
             contributersNbr: 2,
@@ -40,7 +42,7 @@ const HomeCarousel = () => {
     ];
 
     return (
-        <div style={{ width: "100%", padding: "20px 0" }}>
+        <div  style={{ width: "100%", padding: "20px 0" }}>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

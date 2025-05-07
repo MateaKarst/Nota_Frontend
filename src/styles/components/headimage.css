@@ -1,0 +1,25 @@
+@import '../variables.css';
+
+.play-btn {
+    box-shadow: 0 2px 0 var(--color-pink);
+  }
+
+  .overlay {
+    margin-top:-50px;
+  }
+
+  .profile-img {
+    position: absolute;
+    left: 15px;
+  }
+  
+  .image-wrapper{
+    position: relative;
+    display: inline-block;
+  }
+
+  .song-img{
+    width:280px;
+    height:280px;
+  }
+  
