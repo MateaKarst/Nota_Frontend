@@ -1,10 +1,6 @@
-import { useState } from "react";
-
 import '../../styles/components/header.css';
 
-const HeaderMySongs = () => {
-  const [activeTab, setActiveTab] = useState("my-songs");
-
+const HeaderMySongs = ({ activeTab, onTabChange }) => {
   const tabs = [
     { id: "my-songs", label: "My songs" },
     { id: "collaborations", label: "Collaborations" },
@@ -17,7 +13,7 @@ const HeaderMySongs = () => {
         <button
           key={tab.id}
           className={`tab-button ${activeTab === tab.id ? "active no-underline" : ""}`}
-          onClick={() => setActiveTab(tab.id)}
+          onClick={() => onTabChange(tab.id)}
         >
           {tab.label}
         </button>
