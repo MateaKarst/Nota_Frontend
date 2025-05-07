@@ -7,11 +7,13 @@ import { ReactComponent as BellIcon } from '../../assets/icons/bell-icon.svg';
 import { ReactComponent as MessageIcon } from '../../assets/icons/message-icon.svg';
 
 const HeaderMain = () => (
-  <header className="header" style={{ backgroundColor: 'var(--color-pink)', paddingTop: "40px" }}>
+  <header className="header" style={{ backgroundColor: 'var(--color-pink)', paddingTop: "40px", height: 200, alignItems: "flex-start" }}>
+    <div className="content">
     <NotaLogo colorIndex={0} width="110px" height="83px" ></NotaLogo>
     <div className='nav'>
       <BellIcon className="icon-style" />
       <MessageIcon className="icon-style" />
+    </div>
     </div>
   </header>
 );

@@ -2,7 +2,7 @@
 
 .header {
   height: 83px;
-  width: 90%;
+  width: 100%;
   display: flex;
   align-items: center;
   margin-right: var(--spacing-24);
@@ -10,9 +10,19 @@
   padding-right: var(--spacing-24);
   border-bottom-right-radius: var(--border-radius-24);
   border-bottom-left-radius: var(--border-radius-24);
-  justify-content: space-between;
   font-family: var(--font-family-secondary);
 }
+
+.header .content {
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+
 
 .header .nav {
   display: flex;

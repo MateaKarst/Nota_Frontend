@@ -1,0 +1,39 @@
+@import '../variables.css';
+
+.loading-wrapper {
+    width: 80%;
+    padding: 16px 24px;
+    background: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 2px 8px rgba(245, 0, 79, 0.4);
+    border-radius: 16px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    max-width: 480px;
+  }
+  
+  .loading-label {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+    font-family: var(--font-family-primary);
+  }
+  
+  .loading-bar {
+    height: 8px;
+    width: 100%;
+    background-color: #555;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .loading-fill {
+    height: 100%;
+    background-color: #F5004F;
+    transition: width 0.2s ease-in-out;
+  }
+  
