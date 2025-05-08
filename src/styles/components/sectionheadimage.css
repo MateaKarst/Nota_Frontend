@@ -1,0 +1,30 @@
+@import '../variables.css';
+
+.song-title{
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-34);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-white);
+}
+
+.song-description{
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-16);
+    color: var(--color-white-trans-surface-45);
+    max-width: 350px;
+    margin-top:-5px;
+}
+
+
+.song-info .tag-button {
+    font-size: 13px !important;
+  }
+  
+  .like-comment {
+    display: flex;
+    gap: 24px;
+    align-items: center; 
+    margin-top:13px;
+    justify-content: center;
+  
+}
