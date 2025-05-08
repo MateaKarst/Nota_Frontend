@@ -1,5 +1,5 @@
 import '../src/App.css'
- import HomePage from './pages/home-page';
+ import HomePage from './pages/HomePage';
  import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import ProfileCard from './components/profile-container';
 // import lilyImg from './assets/lily-profile.jpg'
