@@ -5,6 +5,7 @@ import '../src/App.css'
 // import lilyImg from './assets/lily-profile.jpg'
 import NotificationsPage from './pages/NotificationsPage'
 import ChatOverview from './pages/ChatOverview'
+import MySongsPage from './pages/MySongsPage'
 function App() {
   return (
     <div className="App">
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/messages" element={<ChatOverview />} />
+        <Route path="/songs" element={<MySongsPage />} />
       </Routes>
     </Router>
     </div>
