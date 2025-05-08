@@ -84,7 +84,7 @@ const buttonStyles = {
     },
 };
 
-function Buttons({ type = "default", text, icon: Icon }) {
+function Buttons({ type = "default", text, icon: Icon, onClick }) {
     const [clicked, setClicked] = useState(false);
 
     const handleClick = () => {
@@ -92,12 +92,13 @@ function Buttons({ type = "default", text, icon: Icon }) {
     };
 
     return (
-        <button
-            style={buttonStyles[type]}
-            onClick={handleClick}
-        >
-            {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
-        </button>
+<button
+  style={buttonStyles[type]}
+  onClick={onClick}
+>
+  {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
+</button>
+
     );
 }
 
