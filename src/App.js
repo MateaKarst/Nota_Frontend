@@ -1,28 +1,21 @@
-import '../src/App.css';
-import HomePage from './pages/home-page';
-import MusicCard from './components/MusicCard/HomeAndMySongsCards/MusicCard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import Discover from './pages/Discover';
+import MySongs from './pages/MySongs';
 
+import NavBar from './components/NavBar'; // adjust path as needed
 
 function App() {
   return (
-    <div className="App">
-       <HomePage /> 
-      
-
- {/* <MusicCard
-    imageUrl={"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Bachelor%27s_button%2C_Basket_flower%2C_Boutonniere_flower%2C_Cornflower_-_3.jpg/960px-Bachelor%27s_button%2C_Basket_flower%2C_Boutonniere_flower%2C_Cornflower_-_3.jpg"}
-    title="Lofi Beats"
-    creator="DJ Chill"
-    layout="row" 
-  /> 
-
-  <MusicCard
-    imageUrl={"https://static.vegsoc.org/app/uploads/2024/07/shutterstock_2315756181.jpg"}
-    title="Lofi Beats"
-    creator="DJ Chill"
-    layout="row" 
-  />  */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/songs" element={<MySongs />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
+      </Routes>
+      <NavBar />
+    </Router>
   );
 }
 
