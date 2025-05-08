@@ -1,11 +1,13 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react"; 
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../styles/variables.css";
 import NotaLogo from "../components/Logos/NotaLogo";
 import "../styles/pages/onboarding.css";
+import BasicBtn from "../components/Buttons/BasicBtn"; 
+import { useNavigate } from "react-router-dom";
 
 import funImage from "../assets/backgrounds/onboarding/fun-image.jpg";
 import communityImage from "../assets/backgrounds/onboarding/community-image.jpg";
@@ -13,6 +15,9 @@ import recognitionImage from "../assets/backgrounds/onboarding/recognition-image
 import growthImage from "../assets/backgrounds/onboarding/growth-image.jpg";
 
 function Onboarding() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  //const navigate = useNavigate();
+
   const data = [
     {
       logo: 2,
@@ -34,7 +39,7 @@ function Onboarding() {
     },
     {
       logo: 0,
-      title: "Something New",
+      title: "Growth",
       text: "Discover new things and expand your horizons.",
       image: growthImage,
     },
@@ -43,8 +48,9 @@ function Onboarding() {
   return (
     <Swiper
       modules={[Pagination]}
-      pagination={{ clickable: true }} // enables dots at the bottom
+      pagination={{ clickable: true }}
       className="onboarding-swiper"
+      onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
     >
       {data.map((slide, index) => (
         <SwiperSlide key={index}>
@@ -52,10 +58,18 @@ function Onboarding() {
             className="onboarding"
             style={{ backgroundImage: `url(${slide.image})` }}
           >
-            <NotaLogo colorIndex={slide.logo} />
+            <NotaLogo className="logo" colorIndex={slide.logo} />
             <div className="text-container">
               <h1 className="title">{slide.title}</h1>
               <p className="text">{slide.text}</p>
+              {index === data.length - 1 && activeIndex === index && (
+                <div className="button-container">
+                  <BasicBtn type ="main" 
+                  text={"Get Started"}
+                  // onClick={() => navigate("/login")}
+                  ></BasicBtn>
+                </div>
+              )}
             </div>
           </div>
         </SwiperSlide>
