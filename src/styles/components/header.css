@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* margin-right: var(--spacing-24);
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-24); */
   border-bottom-right-radius: var(--border-radius-24);
   border-bottom-left-radius: var(--border-radius-24);
   font-family: var(--font-family-secondary);
@@ -42,6 +45,7 @@
   cursor: pointer;
   opacity: 0.75;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .back-btn {
@@ -62,6 +66,11 @@
   box-sizing: border-box;
   min-width: max-content;
   text-decoration: underline;
+}
+
+.tab-button.no-underline{
+  
+  text-decoration: none;
 }
 
 .header-text {

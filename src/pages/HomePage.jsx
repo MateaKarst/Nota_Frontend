@@ -39,8 +39,9 @@ const HomePage = () => {
       </div>
       </div>
 
-      
+      <div className='friends-section'>
       <FriendsCard/>
+      </div>
 
       <div> <div className='title-content'><h1 className='title'>Trendy songs</h1>
 <BasicBtn type="viewAll" text="View All"></BasicBtn>

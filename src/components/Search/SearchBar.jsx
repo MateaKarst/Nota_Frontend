@@ -6,53 +6,7 @@ import MusicTag from "../Tags/MusicTag";
 
 import "../../styles/components/search/search-bar.css";
 
-const pages = [
-    { id: 1, name: "Home", ref: "/" },
-    { id: 2, name: "Library", ref: "/" },
-    { id: 3, name: "Search", ref: "/" },
-    { id: 4, name: "Now Playing", ref: "/" },
-    { id: 5, name: "Settings", ref: "/" },
-];
-
-const albums = [
-    { id: 1, name: "The Dark Side of the Moon", synonyms: "Pink Floyd, Progressive Rock", ref: "/album/1" },
-    { id: 2, name: "Abbey Road", synonyms: "The Beatles, Rock", ref: "/album/2" },
-    { id: 3, name: "Thriller", synonyms: "Michael Jackson, Pop", ref: "/album/3" },
-    { id: 4, name: "Back in Black", synonyms: "AC/DC, Rock", ref: "/album/4" },
-];
-
-const genres = [
-    { id: 1, title: "All Music", url: "/music" },
-    { id: 2, title: "Rock", url: "/genre/rock" },
-    { id: 3, title: "Pop", url: "/genre/pop" },
-    { id: 4, title: "Jazz", url: "/genre/jazz" },
-    { id: 5, title: "Classical", url: "/genre/classical" },
-    { id: 6, title: "Hip-Hop", url: "/genre/hip-hop" },
-];
-
-const allSearchData = [
-    ...pages.map((p) => ({
-        id: `page-${p.id}`,
-        name: p.name,
-        type: "Page",
-        ref: p.ref,
-    })),
-    ...albums.map((a) => ({
-        id: `album-${a.id}`,
-        name: a.name,
-        type: "Album",
-        ref: a.ref,
-        synonyms: a.synonyms,
-    })),
-    ...genres.map((gen) => ({
-        id: `genre-${gen.id}`,
-        name: gen.title,
-        type: "Genre",
-        ref: gen.url,
-    })),
-];
-
-const SearchBar = () => {
+const SearchBar = ({ filterData, onFilterChange, variant = 2 }) => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const inputRef = useRef(null);
@@ -74,9 +28,9 @@ const SearchBar = () => {
             return;
         }
 
-        const filtered = allSearchData.filter((item) => {
-            const matchesQuery = item.name.toLowerCase().includes(value.toLowerCase());
-            const matchesType = selectedType === "All" || item.type === selectedType;
+        const filtered = filterData.filter((item) => {
+            const matchesQuery = item.title.toLowerCase().includes(value.toLowerCase());
+            const matchesType = selectedType === "All" || item.genre === selectedType;
             return matchesQuery && matchesType;
         });
 
@@ -89,25 +43,25 @@ const SearchBar = () => {
         setSelectedType(type);
         setShowFilter(false);
         filterResults(query);
-    
-        // Check if the tag is already active
+
+        // Notify parent component about the selected genre
+        onFilterChange(type);
+
         const tagIndex = activeTags.findIndex(tag => tag.text === type);
-    
+
         if (tagIndex === -1) {
-            // If the tag is not in the active tags, add it
-            const colorIndex = Math.floor(Math.random() * 4); // 0-3
+            const colorIndex = Math.floor(Math.random() * 4);
             setActiveTags(prev => [...prev, { text: type, colorIndex }]);
         } else {
-            // If the tag is already in the active tags, remove it
             setActiveTags(prev => prev.filter((tag, index) => index !== tagIndex));
         }
     };
 
     return (
-        <div className="search-bar-wrapper">
+        <div className={`search-bar-wrapper ${variant === 2 ? 'search-bar-variant-2' : ''}`}>
             <div className="searching">
                 <div className="search-n-filter-container">
-                    <div className="search-container">
+                    <div className={`search-container ${variant === 2 ? 'hide-search' : ''}`}>
                         <div className="search-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
                                 <path
@@ -125,10 +79,11 @@ const SearchBar = () => {
                             onChange={handleInputChange}
                         />
 
-                        {results.length > 0 && <SearchResultsList results={results} />}
-                    </div>
+{results.length > 0 && (
+                            <SearchResultsList results={results} />
+                        )}                    </div>
 
-                    <div className="filter-container">
+                    <div className={`filter-container ${variant === 1 ? 'hide-filter' : ''}`}>
                         <button className="filter-button" onClick={toggleFilterMenu} aria-label="Toggle Filter Menu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
                                 <g clipPath="url(#clip0_3099_32007)">
@@ -148,15 +103,16 @@ const SearchBar = () => {
                         {showFilter && (
                             <div className="filter-menu">
                                 <button onClick={() => handleFilterSelect("All")}>All</button>
-                                <button onClick={() => handleFilterSelect("Page")}>Pages</button>
-                                <button onClick={() => handleFilterSelect("Album")}>Albums</button>
-                                <button onClick={() => handleFilterSelect("Genre")}>Genres</button>
+                                <button onClick={() => handleFilterSelect("Pop")}>Pop</button>
+                                <button onClick={() => handleFilterSelect("Rock")}>Rock</button>
+                                <button onClick={() => handleFilterSelect("Progressive Rock")}>Progressive Rock</button>
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-            <div className="tags">
+            
+            <div className={`tags ${variant === 1 ? 'hide-filter' : ''}  ${variant === 2 ? 'tags-variant-2' : ''} `}>
                 {activeTags.map((tag, index) => (
                     <MusicTag key={index} text={tag.text} colorIndex={tag.colorIndex} />
                 ))}

@@ -12,8 +12,19 @@
     font-size: var(--font-size-16);
     color: var(--color-white-trans-surface-45);
     max-width: 350px;
+    margin-top:-5px;
 }
+
 
 .song-info .tag-button {
     font-size: 13px !important;
   }
+  
+  .like-comment {
+    display: flex;
+    gap: 24px;
+    align-items: center; 
+    margin-top:13px;
+    justify-content: center;
+  
+}
