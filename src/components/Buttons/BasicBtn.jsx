@@ -84,7 +84,7 @@ const buttonStyles = {
     },
 };
 
-function Buttons({ type = "default", text, icon: Icon, onClick }) {
+function BasicBtn({ type = "default", text, icon: Icon, onClick }) {
     const [clicked, setClicked] = useState(false);
 
     const handleClick = () => {
@@ -102,4 +102,4 @@ function Buttons({ type = "default", text, icon: Icon, onClick }) {
     );
 }
 
-export default Buttons;
+export default BasicBtn;

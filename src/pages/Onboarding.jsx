@@ -7,16 +7,19 @@ import "../styles/variables.css";
 import NotaLogo from "../components/Logos/NotaLogo";
 import "../styles/pages/onboarding.css";
 import BasicBtn from "../components/Buttons/BasicBtn"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'; 
 
+
+import { Route } from "react-router-dom";
 import funImage from "../assets/backgrounds/onboarding/fun-image.jpg";
 import communityImage from "../assets/backgrounds/onboarding/community-image.jpg";
 import recognitionImage from "../assets/backgrounds/onboarding/recognition-image.jpg";
 import growthImage from "../assets/backgrounds/onboarding/growth-image.jpg";
+import LoginPage from "./LoginPage";
 
 function Onboarding() {
   const [activeIndex, setActiveIndex] = useState(0);
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const data = [
     {
@@ -66,7 +69,7 @@ function Onboarding() {
                 <div className="button-container">
                   <BasicBtn type ="main" 
                   text={"Get Started"}
-                  // onClick={() => navigate("/login")}
+                  onClick={() => navigate("/login")}
                   ></BasicBtn>
                 </div>
               )}
