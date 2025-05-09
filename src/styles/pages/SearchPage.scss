@@ -2,7 +2,20 @@
 .genre-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-12);
+    gap: var(--spacing-32);
     align-items: center;
   }
   
+  .search-bar-container {
+    display:flex;
+    align-items: center;
+    gap: var(--spacing-10);
+    margin-top: var(--spacing-10);
+    margin-bottom: var(--spacing-32);
+  }
+
+  .container{
+    margin: 0;
+    padding: 0;
+    justify-content: flex-start;
+  }

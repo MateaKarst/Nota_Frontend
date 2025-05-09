@@ -12,8 +12,10 @@ const SearchPage = () => {
     return (
         <div className="container">
             <HeaderVariants className="genre-card" mode="default" />
+            <div className="search-bar-container">
             <SearchBar />
             <img src={FilterIcon} alt="filter" />
+            </div>
             <div className="genre-box">
                 <GenreCard />
                 <GenreCard mode="country" />

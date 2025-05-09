@@ -1,6 +1,6 @@
 .search-container {
     display: flex;
-    width: 335px;
+    width: 100%;
     padding: var(--Spacing-sm, 12px) var(--Spacing-md, 16px);
     align-items: center;
     gap: var(--Spacing-xs, 8px);

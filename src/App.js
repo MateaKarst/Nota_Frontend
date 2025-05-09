@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import SearchPage from '../src/pages/SearchPage'
 
 
@@ -6,8 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      
-      <SearchPage />
+    <SearchPage />
       </header>
     </div>
   );
