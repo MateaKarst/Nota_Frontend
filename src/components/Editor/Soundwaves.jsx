@@ -3,7 +3,7 @@ import WaveSurfer from 'wavesurfer.js';
 
 import '../../styles/variables.css';
 
-const Waveform = ({ audioUrl, waveColor, progressColor, height, colorIndex = 0 }) => {
+const Soundwave = ({ audioUrl, waveColor, progressColor, height, colorIndex = 0 }) => {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
 
@@ -39,4 +39,4 @@ const Waveform = ({ audioUrl, waveColor, progressColor, height, colorIndex = 0 }
   </div>
 };
 
-export default Waveform;
+export default Soudwave;
