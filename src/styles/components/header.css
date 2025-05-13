@@ -1,7 +1,7 @@
 @import '../variables.css';
 
 .header {
-  height: 83px;
+  height: 53px;
   width: 100%;
   display: flex;
   align-items: center;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "../../styles/variables.css";
+import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 const buttonStyles = {
     viewAll: {
@@ -98,7 +99,37 @@ const buttonStyles = {
         fontSize: "var(--font-size-24)",
         fontFamily: "var(--font-family-secondary)",
         letterSpacing: "2px",
+        
 
+    },
+    switcher1: {
+        width: "fit-content",
+        height: "23px",
+        backgroundColor: "var(--color-purple)",
+        color: "var(--color-white)",
+        borderRadius: "var(--border-radius-20)",
+        border: "none",
+        fontSize: "var(--font-size-14)",
+        fontFamily: "var(--font-family-primery)",
+        letterSpacing: "2px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+
+    },
+    switcher2: {
+        width: "fit-content",
+        height: "23px",
+        backgroundColor: "transparent",
+        color: "var(--color-white)",
+        borderRadius: "var(--border-radius-20)",
+        borderColor: "var(--color-purple)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "var(--font-size-14)",
+        fontFamily: "var(--font-family-primary)",
+        paddingLeft: "20px",
+        paddingRight: "20px",
     },
 };
 
