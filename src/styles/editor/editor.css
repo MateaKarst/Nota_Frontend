@@ -1,0 +1,86 @@
+/* MultitrackMixer.css */
+
+.multitrack-container {
+    color: #fff;
+    background-color: #1a1a1a;
+    padding: 2em;
+    font-family: sans-serif;
+    overflow-x: auto;
+    }
+    
+    #container {
+    background: #2d2d2d;
+    color: #fff;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: auto;
+    min-width: max-content;
+    border: 1px solid #444;
+    }
+    
+    /* Sticky timeline bar */
+    .multitrack-timeline {
+    position: sticky;
+    top: 0;
+    background: #1a1a1a;
+    z-index: 10;
+    border-bottom: 2px solid #666;
+    padding: 6px;
+    color: #fff;
+    }
+
+    .multitrack-label {
+        flex: 0 0 120px;
+        padding: 6px 10px;
+        color: #fff;
+        background-color: #1a1a1a;
+        font-weight: bold;
+        white-space: nowrap;
+        border-right: 1px solid #555;
+      }      
+    
+    /* Wrapper for all tracks */
+    .multitrack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    }
+    
+    /* Each track row */
+    .multitrack-track {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    min-width: max-content;
+    padding: 4px 0;
+    }
+    
+    /* Track label */
+    .multitrack-info {
+    flex: 0 0 120px;
+    color: #000;
+    background: #ffcc00;
+    padding: 6px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    border-right: 2px solid #666;
+    white-space: nowrap;
+    }
+    
+    /* Waveform container */
+    .multitrack-wave {
+    flex: 1;
+    min-width: 1000px;
+    }
+    
+    /* Optional button styling */
+    button {
+    margin: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #333;
+    color: #fff;
+    border: 1px solid #888;
+    cursor: pointer;
+    }

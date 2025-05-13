@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useWavesurfer } from "@wavesurfer/react";
 import ringtone1 from "../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3";
+import ringtone2 from '../../assets/editor/iphone-ringtone.mp3'
 import "../../styles/components/editor/timeline-grid.css";
 
 // Constant values
 const TRACKS = [
   { name: "Guitar", url: ringtone1, offset: 0 }, // The offset is where the track starts in the timeline (in seconds)
-  { name: "Vocal", url: ringtone1, offset: 1 }, // e.g., Vocal starts 1 second into the timeline
+  { name: "Vocal", url: ringtone2, offset: 1 }, // e.g., Vocal starts 1 second into the timeline
   { name: "Piano", url: ringtone1, offset: 2 }, // Piano starts at 2 seconds
   { name: "Flute", url: ringtone1, offset: 3 }, // Flute starts at 3 seconds
 ];
