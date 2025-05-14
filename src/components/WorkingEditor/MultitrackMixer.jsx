@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import ringtone1 from '../../assets/editor/iphone-ringtone.mp3'
 import ringtone2 from '../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3'
 import '../../styles/editor/editor.css'
+import '../../styles/variables.css'
 
 const MultitrackMixer = () => {
   const containerRef = useRef();
@@ -49,18 +50,18 @@ const MultitrackMixer = () => {
         {
           id: 1,
           draggable: true,
-          startPosition: 14,
+          startPosition: 4,
           url: ringtone1,
-          // envelope: [
-          //   { time: 2, volume: 0.5 },
-          //   { time: 10, volume: 0.8 },
-          //    { time: 22, volume: 0.8 },
+           envelope: [
+           { time: 2, volume: 0.5 },
+           { time: 10, volume: 0.5 },
+           { time: 22, volume: 0.5 },
           //   // { time: 264, volume: 0 },
-          // ],
+           ],
           volume: 0.95,
           options: {
-            waveColor: 'hsl(46, 87%, 49%)',
-            progressColor: 'hsl(46, 87%, 20%)',
+            waveColor: 'hsl(341, 100%, 48%, 1)',
+            progressColor: 'rgba(163, 19, 50, 1)',
           },
           // intro: {
           //   endTime: 16,
@@ -83,21 +84,33 @@ const MultitrackMixer = () => {
           //fadeInEnd: 8,
           //fadeOutStart: 14,
           //envelope: true,
+          envelope: [
+            { time: 2, volume: 0.5 },
+            { time: 20, volume: 0.5 },
+            { time: 40, volume: 0.5 },
+           //   // { time: 264, volume: 0 },
+            ],
           volume: 0.8,
           options: {
-            waveColor: 'hsl(161, 87%, 49%)',
-            progressColor: 'hsl(161, 87%, 20%)',
+            waveColor: 'hsl(41, 100%, 50%)',
+            progressColor: 'hsl(32, 96%, 37%)',
           },
           url: ringtone2
         },
         {
           id: 3,
           draggable: true,
-          startPosition: 290,
+          startPosition: 3,
+          envelope: [
+            { time: 2, volume: 0.5 },
+            { time: 10, volume: 0.5 },
+            { time: 22, volume: 0.5 },
+           //   // { time: 264, volume: 0 },
+            ],
           volume: 0.8,
           options: {
-            waveColor: 'hsl(161, 87%, 49%)',
-            progressColor: 'hsl(161, 87%, 20%)',
+            waveColor: 'hsl(269, 100%, 50%)',
+            progressColor: 'hsl(269, 96%, 36%)',
           },
           url: ringtone1,
           
@@ -106,21 +119,31 @@ const MultitrackMixer = () => {
       ],
       {
         container: containerRef.current,
-        minPxPerSec: 10,
+        minPxPerSec: 100,
         rightButtonDrag: false,
-        cursorWidth: 2,
-        cursorColor: '#D72F21',
-        trackBackground: '#2D2D2D',
-        trackBorderColor: '#7C7C7C',
+        cursorWidth: 1,
+        cursorColor: '#FFFFFF',
+        trackBackground: 'hsla(0, 0%, 100%, 0.1)',
+        trackBorderColor: 'hsla(0, 0%, 100%, 0.3)',
         dragBounds: true,
         envelopeOptions: {
-          lineColor: 'rgba(255, 0, 0, 0.7)',
-          lineWidth: 4,
-          dragPointSize: window.innerWidth < 600 ? 20 : 10,
-          dragPointFill: 'rgba(255, 255, 255, 0.8)',
-          dragPointStroke: 'rgba(255, 255, 255, 0.3)',
+          lineColor: 'rgba(255, 255, 255, 0.7)',
+          lineWidth: 1.5,
+          dragPointSize: window.innerWidth < 400 ? 20 : 10,
+          dragPointFill: 'rgba(255, 255, 255, 0.9)',
+          dragPointStroke: 'rgba(255, 255, 255, 0.8)',
         },
-      }
+      timegrid: {
+        show: true,
+        interval: 0.5,
+        primaryLabelInterval: 1,
+        color: '#343331',
+        lineWidth: 1,
+        font: '12px Karla',
+        textColor: '#fff'
+      },
+    },
+      
     );
 
     // Bind buttons and controls
@@ -198,7 +221,7 @@ const MultitrackMixer = () => {
       <div
         id="container"
         ref={containerRef}
-        style={{ background: '#2d2d2d', color: '#fff', height: '400px' }}
+        style={{ background: '#343331', color: '#fff', height: '400px' }}
       ></div>
     </div>
   );
