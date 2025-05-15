@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import ringtone1 from '../../assets/editor/iphone-ringtone.mp3'
 import ringtone2 from '../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3'
+import Drum from '../../assets/instrument-samples/01_DrumLoop.wav'
+import Guitar from '../../assets/instrument-samples/13_ElecGtr1.wav'
+import Bass from '../../assets/instrument-samples/11_Bass.wav'
 import '../../styles/editor/editor.css'
 import '../../styles/variables.css'
 
@@ -51,11 +54,11 @@ const MultitrackMixer = () => {
           id: 1,
           draggable: true,
           startPosition: 4,
-          url: ringtone1,
+          url: Drum,
            envelope: [
-           { time: 2, volume: 0.5 },
-           { time: 10, volume: 0.5 },
-           { time: 22, volume: 0.5 },
+           { time: 2, volume: 0.2 },
+           { time: 10, volume: 0.2 },
+           { time: 22, volume: 0.2 },
           //   // { time: 264, volume: 0 },
            ],
           volume: 0.95,
@@ -95,7 +98,7 @@ const MultitrackMixer = () => {
             waveColor: 'hsl(41, 100%, 50%)',
             progressColor: 'hsl(32, 96%, 37%)',
           },
-          url: ringtone2
+          url: Guitar
         },
         {
           id: 3,
@@ -112,7 +115,7 @@ const MultitrackMixer = () => {
             waveColor: 'hsl(269, 100%, 50%)',
             progressColor: 'hsl(269, 96%, 36%)',
           },
-          url: ringtone1,
+          url: Bass,
           
         },
         
