@@ -15,8 +15,8 @@ function App() {
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/messages" element={<ChatOverview />} />
         <Route path="/songs" element={<MySongsPage />} />
-        {/* <Route path="/profile" element={<ProfilePage />} /> */}
-        <Route path="/profile" element={<ProfileFriendPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profilefriend" element={<ProfileFriendPage />} />
       </Routes>
     </Router>
     </div>
