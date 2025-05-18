@@ -80,6 +80,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-24);
+  padding-left: 14px;
 }
 
 .center-section {
@@ -91,7 +92,8 @@
 .right-section {
   display: flex;
   align-items: center;
-  gap: var(--spacing-8)
+  gap: var(--spacing-8);
+  padding-right: 14px;
 }
 
 .user-avatar {
