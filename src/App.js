@@ -6,6 +6,7 @@ import ProfileFriendPage from './pages/ProfileFriendPage';
 import NotificationsPage from './pages/NotificationsPage'
 import ChatOverview from './pages/ChatOverview'
 import MySongsPage from './pages/MySongsPage'
+import ViewAllPage from './pages/ViewAllPage'; 
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
         <Route path="/songs" element={<MySongsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profilefriend" element={<ProfileFriendPage />} />
+        <Route path="/view-all" element={<ViewAllPage />} />
       </Routes>
     </Router>
     </div>
