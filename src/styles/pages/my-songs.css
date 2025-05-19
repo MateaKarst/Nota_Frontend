@@ -2,12 +2,14 @@
 
 .my-songs-wrapper {
     width: 100%;
-    min-height: 100vh; /* changed from height:auto to min-height */
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
     background-color: var(--color-black);
 }
 
 .music-cards-mapping {
-    height: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 80px; 
 }

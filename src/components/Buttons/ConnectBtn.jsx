@@ -36,7 +36,7 @@ function ConnectBtn() {
     >
       {/* Show only logo when button shrinks */}
       {isClicked ? (
-        <LogoIcon style={{ width: "28px", height: "28px" }} />
+        <LogoIcon style={{ width: "28px", height: "28px", color: "#F9E400" }}/>
       ) : (
         isConnected ? "Connected" : "Connect"
       )}

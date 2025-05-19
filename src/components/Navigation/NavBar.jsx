@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import HomeIcon from '../../components/Navigation/SVGcode/HomeSvg';
 import SearchIcon from '../../components/Navigation/SVGcode/SearchSvg';
@@ -6,13 +7,14 @@ import NoteIcon from '../../components/Navigation/SVGcode/MySongsSvg';
 import ProfileIcon from '../../components/Navigation/SVGcode/ProfileSvg';
 
 const NavBar = () => {
-  const [activeTab, setActiveTab] = useState('home'); // State to track the active tab
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const navItems = [
-    { id: 'home', icon: <HomeIcon />, label: 'Home' },
-    { id: 'discover', icon: <SearchIcon />, label: 'Discover' },
-    { id: 'songs', icon: <NoteIcon />, label: 'My Songs' },
-    { id: 'profile', icon: <ProfileIcon />, label: 'Profile' },
+    { id: 'home', icon: <HomeIcon />, label: 'Home', path: '/' },
+    { id: 'discover', icon: <SearchIcon />, label: 'Discover',  }, //path: '/discover'
+    { id: 'songs', icon: <NoteIcon />, label: 'My Songs', path: '/songs'}, 
+    { id: 'profile', icon: <ProfileIcon />, label: 'Profile', path: '/profile' }, //path: '/profile'
   ];
 
   const styles = {
@@ -20,12 +22,12 @@ const NavBar = () => {
       display: 'flex',
       justifyContent: 'space-around',
       alignItems: 'center',
-      backgroundColor: 'var(--color-pink)', 
+      backgroundColor: 'var(--color-pink)',
       padding: '10px 0',
       position: 'fixed',
       bottom: 0,
       width: '100%',
-      borderTopLeftRadius: 'var(--border-radius-24)', 
+      borderTopLeftRadius: 'var(--border-radius-24)',
       borderTopRightRadius: 'var(--border-radius-24)',
     },
     button: {
@@ -51,33 +53,29 @@ const NavBar = () => {
 
   return (
     <nav style={styles.navContainer}>
-      {navItems.map(({ id, icon, label }) => {
+      {navItems.map(({ id, icon, label, path }) => {
+        const isActive = currentPath === path;
         const clickedIcon = React.cloneElement(icon, {
           style: {
             ...styles.icon,
-            color: activeTab === id ? 'var(--color-yellow)' : 'var(--color-white)', 
+            color: isActive ? 'var(--color-yellow)' : 'var(--color-white)',
           },
         });
 
         return (
-          <a
-            href="#app" // placeholder link to App.jsx
-            key={id}
-            style={{ textDecoration: 'none' }} 
-            onClick={() => setActiveTab(id)} 
-          >
+          <Link to={path} key={id} style={{ textDecoration: 'none' }}>
             <button style={styles.button}>
               {clickedIcon}
               <span
                 style={{
                   ...styles.label,
-                  color: activeTab === id ? 'var(--color-yellow)' : 'var(--color-white)', 
+                  color: isActive ? 'var(--color-yellow)' : 'var(--color-white)',
                 }}
               >
                 {label}
               </span>
             </button>
-          </a>
+          </Link>
         );
       })}
     </nav>

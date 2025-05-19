@@ -10,12 +10,8 @@ body{
   .searchbar {
         display: flex;
         align-items: center;
-        gap: 22px;
-        padding-left: var(--spacing-24);
-        padding-right: var(--spacing-24);
-        width: 93%;
-        margin-left: var(--spacing-24);
-        margin-right: var(--spacing-24);
+        gap: 12px;
+        width: 100%;
         margin-top: 20px;
         margin-bottom:20px;
       }
@@ -29,8 +25,11 @@ body{
   }
 
   .overview{
-    margin-left: var(--spacing-24);
-    margin-right: var(--spacing-24);
-    padding-left:20px;
+    margin-left: var(--spacing-14);
+    margin-right: var(--spacing-14);
+    
   }
   
+  .search-container.hide-search {
+    display: flex !important;
+  }

@@ -8,10 +8,12 @@ import { ReactComponent as PencilIcon } from '../../assets/icons/pencil-icon.svg
 
 const HeaderProfile = () => (
   <header className="header" style={{ backgroundColor: 'var(--color-black)', paddingTop: "20px" }}>
+    <div className='content'>
     < PinkLogo colorIndex={0} width="55px" height="55px" ></PinkLogo>
     <div className='nav'>
       <SettingsIcon className="icon-style" />
       <PencilIcon className="icon-style" />
+    </div>
     </div>
   </header>
 );

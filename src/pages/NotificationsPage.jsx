@@ -63,7 +63,7 @@ const NotificationsPage = () => {
     
     const Section = ({ title, items }) => (
       <div className="">
-        <h2 style={{textAlign: "left", paddingLeft:"20px" }}>{title}</h2>
+        <h2 style={{textAlign: "left", paddingLeft:"20px", color: "white"}}>{title}</h2>
         {items.map((n) => (
           <NotificationItem key={n.id} {...n} />
         ))}

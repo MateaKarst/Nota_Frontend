@@ -1,11 +1,11 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom'; // Додаємо useNavigate
 
 import '../../styles/components/header.css';
 
 import { ReactComponent as PencilIcon } from '../../assets/icons/pencil-icon.svg';
 import { ReactComponent as MenuIcon } from '../../assets/icons/menu-icon.svg';
 import { ReactComponent as BackArrow } from '../../assets/icons/backarrow-icon.svg';
-
 
 const headers = [
   {
@@ -32,7 +32,6 @@ const headers = [
     visibility: 1,
     backgroundColor: "var(--color-black)",
     title: "Echoes of Tomorrow",
-
   },
   {
     mode: "default",
@@ -51,22 +50,25 @@ const headers = [
 
 const HeaderVariants = ({ mode, title }) => {
   const headerConfig = headers.find((h) => h.mode === mode);
+  const navigate = useNavigate(); 
 
   if (!headerConfig || !headerConfig.visibility) return null;
 
-  const headerTitle = title || headerConfig.title;  
-
+  const headerTitle = title || headerConfig.title;
   const isUserHeader = mode === "user";
   const isLeftAlignedHeader = mode === "text" || mode === "black text";
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
 
   return (
     <header
       className={`header ${isUserHeader ? "user-header" : ""}`}
       style={{ backgroundColor: headerConfig.backgroundColor, paddingTop: 40 }}
     >
-
       <div className="left-section">
-        <button className="back-btn">
+        <button className="back-btn" onClick={handleBackClick}>
           <BackArrow className="icon-style" />
         </button>
 
