@@ -1,26 +1,41 @@
-import '../src/App.css'
- import HomePage from './pages/HomePage';
- import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProfilePage from './pages/ProfilePage';
-import ProfileFriendPage from './pages/ProfileFriendPage';
-import NotificationsPage from './pages/NotificationsPage'
-import ChatOverview from './pages/ChatOverview'
-import MySongsPage from './pages/MySongsPage'
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MySongsPage from "./pages/MySongsPage";
+import Onboarding from "./pages/Onboarding";
+import LoginPage from "./pages/LoginPage";
+import CreateAccount from "./pages/CreateAccount";
+import NavBar from "./components/Navigation/NavBar";
+import "./App.css";
+
+function AppContent() {
+  const location = useLocation();
+
+  // Define paths where NavBar should appear
+  const showNavBarPaths = ["/home", "/songs" /* , "/discover", "/profile" */];
+  const showNavBar = showNavBarPaths.includes(location.pathname);
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Onboarding />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/songs" element={<MySongsPage />} />
+      </Routes>
+      {showNavBar && <NavBar />}
+    </>
+  );
+}
+
 function App() {
   return (
-    <div className="App">
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/notifications" element={<NotificationsPage />} />
-        <Route path="/messages" element={<ChatOverview />} />
-        <Route path="/songs" element={<MySongsPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/profilefriend" element={<ProfileFriendPage />} />
-      </Routes>
+      <AppContent />
     </Router>
-    </div>
   );
 }
 
 export default App;
+
