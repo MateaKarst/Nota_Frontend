@@ -67,9 +67,9 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="home-page">
-      <div className="hero-wrapper">
-        <HeaderProfile className="header" />
+    <div className="profile-page">
+      <div className="hero-wrapper2">
+        <HeaderProfile className="header2" />
         <div style={{ padding: 20 }}>
           <ProfileCard
             image={lilyImg}
@@ -83,7 +83,7 @@ const ProfilePage = () => {
 
       <div style={{ paddingRight: 20, paddingLeft: 20, paddingBottom: 20 }}>
         <div>
-          <div><h1 className='title'>Top Songs</h1></div>
+          <div><h1 className='title2'>Top Songs</h1></div>
           <div style={{ display: "flex", flexDirection: "column", alignContent: "left" }}>
             <SmallCard title="Paris 2012" creator="Emily Star" contributersNbr={2} imageUrl="https://img.freepik.com/free-photo/aesthetic-universe-nature-background-earth-mountain-remixed-media_53876-128642.jpg" />
             <SmallCard title="Jazzy night" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/aesthetic-dark-wallpaper-background-neon-light_53876-129243.jpg" />
@@ -92,7 +92,7 @@ const ProfilePage = () => {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", padding: 0, paddingBottom: 14 }}>
-          <h1 className='title'>Songs</h1>
+          <h1 className='title2'>Songs</h1>
           <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
             <button
               style={{

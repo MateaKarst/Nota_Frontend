@@ -1,6 +1,6 @@
 @import '../variables.css';
 
-.home-page {
+.profile-page {
   background-color: #343331;
   color: white;
   font-family: 'Segoe UI', sans-serif;
@@ -10,13 +10,13 @@
 }
 
 /* Обгортка для хедера і каруселі */
-.hero-wrapper {
+.hero-wrapper2 {
   position: relative;
   width: 100%;
   height: auto;
 }
 
-.home-carousel-overlay {
+.home-carousel-overlay2 {
   position: absolute;
   top: 90px;
   left: 0;
@@ -27,7 +27,7 @@
 }
 
 /* Хедер — під каруселлю */
-.header {
+.header2 {
   position: relative;
   z-index: 1;
   height: 83px;
@@ -72,7 +72,7 @@
   cursor: pointer;
 }
 
-.title {
+.title2 {
   color: var(--Colors-White, #FFF);
 font-family: var(--font-family-secondary);
 font-size: var(--Size-head-text-h5-h6, 34px);
@@ -82,14 +82,7 @@ text-align: left;
 line-height: 15px;
 padding: 0%;
 }
-.title-content{
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 20px;
 
-}
 .friends-section{
   width: 100%;
   overflow: hidden;

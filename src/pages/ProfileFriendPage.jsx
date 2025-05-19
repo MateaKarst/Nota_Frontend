@@ -69,8 +69,8 @@ const ProfileFriendPage = () => {
 
   return (
     <div className="home-page">
-      <div className="hero-wrapper">
-        <HeaderVariants mode="menu" className="header" />
+      <div className="hero-wrapper1">
+        <HeaderVariants mode="menu" className="header1" />
         <div style={{ paddingRight: 20, paddingLeft: 20 }}>
           <ProfileCard
             image={emilyImg}
@@ -84,7 +84,7 @@ const ProfileFriendPage = () => {
 
       <div style={{ paddingRight: 20, paddingLeft: 20, paddingBottom: 20 }}>
         <div>
-          <div><h1 className='title'>Top Songs</h1></div>
+          <div><h1 className='title1'>Top Songs</h1></div>
           <div style={{ display: "flex", flexDirection: "column", alignContent: "left" }}>
             <SmallCard title="My favourite game" creator="Emily StarShine" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/portrait-woman-posing-with-plastic-foil_23-2148864885.jpg?t=st=1747582494~exp=1747586094~hmac=00f6875f2997120fa41c044c603945afd43a48b9ef16e624344cccdaeffa938e&w=1380" />
             <SmallCard title="Mon dream" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-vector/hand-drawn-streetwear-illustration_52683-159204.jpg?t=st=1747583383~exp=1747586983~hmac=49226085c9de1c3bb0374ee1d92c9f81571edb43d4d37ffbef8b03fa27953e63&w=1380" />
@@ -93,7 +93,7 @@ const ProfileFriendPage = () => {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", padding: 0, paddingBottom: 14 }}>
-          <h1 className='title'>Songs</h1>
+          <h1 className='title1'>Songs</h1>
           <div style={{ display: "flex", flexDirection: "row", width: "auto", gap: "10px" }}>
           <button
               style={{

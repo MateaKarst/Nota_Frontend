@@ -1,9 +1,12 @@
+
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MySongsPage from "./pages/MySongsPage";
 import Onboarding from "./pages/Onboarding";
 import LoginPage from "./pages/LoginPage";
 import CreateAccount from "./pages/CreateAccount";
+import ProfilePage from './pages/ProfilePage';
+import ProfileFriendPage from './pages/ProfileFriendPage';
 import NavBar from "./components/Navigation/NavBar";
 import "./App.css";
 
@@ -23,6 +26,9 @@ function AppContent() {
 
         <Route path="/home" element={<HomePage />} />
         <Route path="/songs" element={<MySongsPage />} />
+
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profilefriend" element={<ProfileFriendPage />} />
       </Routes>
       {showNavBar && <NavBar />}
     </>
@@ -38,4 +44,3 @@ function App() {
 }
 
 export default App;
-

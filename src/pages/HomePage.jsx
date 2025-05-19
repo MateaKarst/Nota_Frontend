@@ -1,13 +1,20 @@
 import React from 'react';
-import '../styles/pages/home-page.css';
+import '../styles/pages/home-page.css'
 import HomeCarousel from '../components/Home/HomeCarousel';
 import HeaderMain from '../components/Headers/HeaderMain';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
 import NavBar from '../components/Navigation/NavBar'
+import { useNavigate } from 'react-router-dom';
+
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleViewAllClick = () => {
+    navigate('/view-all');
+  };
   return (
     <div className="home-page">
 
@@ -20,7 +27,8 @@ const HomePage = () => {
       </div>
 
       <div> <div className='title-content'><h1 className='title'>New songs</h1>
-<BasicBtn type="viewAll" text="View All"></BasicBtn>
+      <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all',  { state: { title: 'New songs' } })} />
+
 </div>
       <div className="horizontal-scroll">
         <MusicCard title="Paris 2012" creator="Emily Star" contributersNbr={2} imageUrl={"https://img.freepik.com/free-photo/aesthetic-universe-nature-background-earth-mountain-remixed-media_53876-128642.jpg?t=st=1746643209~exp=1746646809~hmac=d25d49f85f544f590b5928dc145e7a5af7e402a9e263f642dbc57f2973a32c72&w=1380"}/>
@@ -30,7 +38,8 @@ const HomePage = () => {
       </div>
 
       <div> <div className='title-content'><h1 className='title'>Collaborations</h1>
-<BasicBtn type="viewAll" text="View All"></BasicBtn>
+      <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all',  { state: { title: 'Collaborations' } })} />
+
 </div>
       <div className="horizontal-scroll">
         <MusicCard title="Dreamy" creator="Bestguitar123" contributersNbr={1} imageUrl={"https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg?t=st=1746643614~exp=1746647214~hmac=a7e5c96486e48adbc90516fa4a6cdf0cec31c7bdb7c167ad72b00b88966a15b0&w=740"}/>
@@ -44,7 +53,8 @@ const HomePage = () => {
       </div>
 
       <div> <div className='title-content'><h1 className='title'>Trendy songs</h1>
-<BasicBtn type="viewAll" text="View All"></BasicBtn>
+      <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all',  { state: { title: 'Trendy songs' } })} />
+
 </div>
       <div className="horizontal-scroll">
         <MusicCard title="LightNight" creator="MamaMia" contributersNbr={2} imageUrl={"https://img.freepik.com/free-photo/background-bokeh-red-hearts_23-2149440429.jpg?t=st=1746643483~exp=1746647083~hmac=7ad8fd2819dbeb83cd16ca3097c8d4d149d1fafdd7acd693860d073bb615ab44&w=740"}/>
