@@ -10,7 +10,7 @@ import Track from "../../assets/instrument-samples/Drum.mp3";
 const UserTrack = ({ isOwnTrack = false }) => {
     const waveformRef = useRef(null);
     const waveSurferRef = useRef(null);
-    const isReadyRef = useRef(false); // <- Track readiness
+    const isReadyRef = useRef(false); 
     const abortControllerRef = useRef(new AbortController());
     const rootStyles = getComputedStyle(document.documentElement);
 
