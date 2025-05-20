@@ -10,12 +10,16 @@ import ProfileFriendPage from './pages/ProfileFriendPage';
 import NavBar from "./components/Navigation/NavBar";
 import Not from "./pages/NotificationsPage"
 import SearchPage from "./pages/SearchPage"
+import FilterPage from "./pages/FilterPage";
 import "./App.css";
 
 function App() {
   return (
     <Router>
-      <SearchPage />
+      <Routes>
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/filter" element={<FilterPage />} />
+      </Routes>
     </Router>
   );
 }
