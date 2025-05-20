@@ -38,7 +38,7 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
             showSkipButtons={false}
             circleColor="var(--color-purple)"
             iconColor="white"
-            size={45}
+            size={40}
           />
         </div>
       </div>
