@@ -24,7 +24,7 @@
     top: 0;
     background-color: #343331;
     z-index: 10;
-    border: 1px solid #777777;
+    /* border: 1px solid #777777; */
     padding: 6px;
     color: #fff;
     }

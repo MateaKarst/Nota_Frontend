@@ -1,0 +1,13 @@
+@import '../variables.css';
+
+.my-songs-wrapper {
+    width: 100%;
+    min-height: 100vh; /* changed from height:auto to min-height */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-black);
+}
+
+.music-cards-mapping {
+    height: 100%;
+}

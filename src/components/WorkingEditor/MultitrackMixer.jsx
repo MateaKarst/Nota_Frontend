@@ -58,7 +58,7 @@ const MultitrackMixer = () => {
            envelope: [
            { time: 2, volume: 0.2 },
            { time: 10, volume: 0.2 },
-           { time: 22, volume: 0.2 },
+           { time: 20, volume: 0.2 },
           //   // { time: 264, volume: 0 },
            ],
           volume: 0.95,
@@ -90,7 +90,7 @@ const MultitrackMixer = () => {
           envelope: [
             { time: 2, volume: 0.5 },
             { time: 20, volume: 0.5 },
-            { time: 40, volume: 0.5 },
+            { time: 23, volume: 0.5 },
            //   // { time: 264, volume: 0 },
             ],
           volume: 0.8,
@@ -118,7 +118,24 @@ const MultitrackMixer = () => {
           url: Bass,
           
         },
-        
+        //         {
+        //   id: 4,
+        //   draggable: true,
+        //   startPosition: 3,
+        //   envelope: [
+        //     { time: 2, volume: 0.5 },
+        //     { time: 10, volume: 0.5 },
+        //     { time: 22, volume: 0.5 },
+        //    //   // { time: 264, volume: 0 },
+        //     ],
+        //   volume: 0.8,
+        //   options: {
+        //     waveColor: 'hsl(269, 100%, 50%)',
+        //     progressColor: 'hsl(269, 96%, 36%)',
+        //   },
+        //   url: Bass,
+          
+        // },
       ],
       {
         container: containerRef.current,

@@ -1,0 +1,55 @@
+@import '../variables.css';
+
+.share-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 500;
+    background-color:rgba(245, 0, 79, 0.55);
+    color: white;
+    transition: background 0.3s;
+  }
+  
+  .share-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .share-button svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+  }
+  
+  .share-button span {
+    font-size: 14px;
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-regular);
+  }
+  
+  /* Повідомлення */
+  .share-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-white);
+    color: var(--color-orange);
+    padding: 9px var(--Spacing-xxxl, 48px);
+    border-radius: 24px;
+    font-size: 18px;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out;
+    justify-content: center;
+  }
+  
+  @keyframes fadeInOut {
+    0%   { opacity: 0; transform: translate(-50%, -20px); }
+    10%  { opacity: 1; transform: translate(-50%, 0); }
+    90%  { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
+  }
+  

@@ -49,10 +49,12 @@ const headers = [
   },
 ];
 
-const HeaderVariants = ({ mode }) => {
+const HeaderVariants = ({ mode, title }) => {
   const headerConfig = headers.find((h) => h.mode === mode);
 
   if (!headerConfig || !headerConfig.visibility) return null;
+
+  const headerTitle = title || headerConfig.title;  
 
   const isUserHeader = mode === "user";
   const isLeftAlignedHeader = mode === "text" || mode === "black text";
@@ -68,9 +70,9 @@ const HeaderVariants = ({ mode }) => {
           <BackArrow className="icon-style" />
         </button>
 
-        {isLeftAlignedHeader && headerConfig.title && (
+        {isLeftAlignedHeader && headerTitle && (
           <span className="header-text" style={{ fontWeight: headerConfig.fontWeight }}>
-            {headerConfig.title}
+            {headerTitle}
           </span>
         )}
       </div>

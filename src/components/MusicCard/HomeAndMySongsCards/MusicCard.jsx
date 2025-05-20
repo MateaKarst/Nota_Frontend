@@ -18,11 +18,11 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
         flexDirection: isRow ? "row" : "column",
         alignItems: "center",
         paddingBottom: "20px",
-        paddingTop: "10px"
+        paddingTop: "10px",
       }}
     >
       <div style={{ width: "150px", position: "relative" }}>
-        <CoverImg SVGImg={imageUrl} />
+        <CoverImg SVGImg={imageUrl} /> {/* Pass the image URL directly here */}
 
         {/* music btn */}
         <div
@@ -62,7 +62,9 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
             fontWeight: "600",
             margin: "0px",
             color: "var(--color-white)",
-          
+            // whiteSpace: isRow ? "" : "nowrap",
+            // overflow: isRow ? "" : "hidden",
+            paddingLeft: "2px",
           }}
         >
           {title}
@@ -71,6 +73,9 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
           style={{
             fontSize: "12px",
             color: "var(--color-white-trans-50)",
+            // whiteSpace: isRow ? "" : "nowrap",
+            // overflow: isRow ? "" : "hidden",
+            paddingLeft: "2px",
           }}
         >
           {creator} + {contributersNbr}
@@ -82,14 +87,15 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
 
 export default MusicCard;
 
-/* 
+
+/*
   calling example
 
   <MusicCard
 imageUrl={"https://img.freepik.com/premium-vector/beautiful-calm-night-mountain-with-moonlight_104785-1378.jpg"}
 title="Lofi Beats"
 creator="DJ Chill"
-layout="row" 
-/> 
+layout="row"
+/>
 
 */

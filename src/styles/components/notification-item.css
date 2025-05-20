@@ -1,0 +1,30 @@
+
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.avatar {
+    width: 63px;
+    height: 63px;
+    border-radius: 999px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.time {
+    font-size: var(--font-size-12);
+    display: block;
+    text-align: left;
+}
+
+.text {
+    align-items: start;
+    font-size: var(--font-size-18);
+}
+
+p{
+    text-align: left;
+}
