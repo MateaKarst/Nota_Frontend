@@ -12,7 +12,7 @@ const UploadSong = () => {
       <div className="criteria-container">
         <div>
           <h3 className="your-track">Your track</h3>
-          <UserTrack />
+          <UserTrack isOwnTrack={false}/>
         </div>
 
         <div className="song-info" style={{ marginBottom: "20px" }}>
