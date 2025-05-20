@@ -78,3 +78,9 @@ const UserTrack = ({ isOwnTrack = false }) => {
 };
 
 export default UserTrack;
+
+
+//HOW TO USE
+//<UserTrack isOwnTrack={false}/> to use for other users track
+//or
+//<UserTrack isOwnTrack={true}/> to use the version for the users own track
