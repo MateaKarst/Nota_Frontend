@@ -8,6 +8,7 @@ import CreateAccount from "./pages/CreateAccount";
 import ProfilePage from './pages/ProfilePage';
 import ProfileFriendPage from './pages/ProfileFriendPage';
 import NavBar from "./components/Navigation/NavBar";
+import SectionHeadImage from "./components/SongDescription/SectionHeadImage";
 import "./App.css";
 
 function AppContent() {
@@ -29,6 +30,7 @@ function AppContent() {
 
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profilefriend" element={<ProfileFriendPage />} />
+        <Route path="/song" element={<SectionHeadImage />} />
       </Routes>
       {showNavBar && <NavBar />}
     </>

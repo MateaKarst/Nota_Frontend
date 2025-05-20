@@ -5,6 +5,7 @@
     font-size: var(--font-size-34);
     font-weight: var(--font-weight-regular);
     color: var(--color-white);
+    text-align: center;
 }
 
 .song-description{
@@ -19,6 +20,14 @@
 .song-info .tag-button {
     font-size: 13px !important;
   }
+
+  .song-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top:40px;
+}
   
   .like-comment {
     display: flex;
@@ -27,4 +36,8 @@
     margin-top:13px;
     justify-content: center;
   
+}
+
+body{
+    background-color: var(--color-black);
 }
