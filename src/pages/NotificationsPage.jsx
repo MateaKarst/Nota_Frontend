@@ -48,7 +48,7 @@ const notifications = {
 
 const NotificationsPage = () => {
     return (
-        <div>
+        <div style={{backgroundColor:"#343331", height: "100vh", color: "white"}}>
         <div className="header"> 
     <HeaderVariants mode="text" title="Notifications"/>
     </div>
