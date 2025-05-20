@@ -1,12 +1,18 @@
 @import "../variables.css";
 
 
+.container{
+    background-color: var(--color-black);
+    height: 100vh;
+    color: var(--color-white);
+}
 
 .genre-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-32);
     align-items: center;
+    margin-left: 10px;
   }
   
   .search-bar-container {
@@ -15,6 +21,7 @@
     gap: var(--spacing-10);
     margin-top: var(--spacing-10);
     margin-bottom: var(--spacing-32);
+    justify-content: center;
   }
 
   .container{

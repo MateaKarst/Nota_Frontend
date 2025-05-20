@@ -9,12 +9,13 @@ import ProfilePage from './pages/ProfilePage';
 import ProfileFriendPage from './pages/ProfileFriendPage';
 import NavBar from "./components/Navigation/NavBar";
 import Not from "./pages/NotificationsPage"
+import SearchPage from "./pages/SearchPage"
 import "./App.css";
 
 function App() {
   return (
     <Router>
-      <Not />
+      <SearchPage />
     </Router>
   );
 }
