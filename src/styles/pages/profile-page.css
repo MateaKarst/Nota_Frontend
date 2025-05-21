@@ -1,0 +1,89 @@
+@import '../variables.css';
+
+.profile-page {
+  background-color: #343331;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  height:auto;
+  padding-bottom: 15%;
+}
+
+/* Обгортка для хедера і каруселі */
+.hero-wrapper2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.home-carousel-overlay2 {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  z-index: 10;
+
+}
+
+/* Хедер — під каруселлю */
+.header2 {
+  position: relative;
+  z-index: 1;
+  height: 83px;
+  width: 100%;
+  background-color: var(--color-pink);
+  padding-top: var(--spacing-8); /* Відступ згори, щоб контент не "плавав" */
+  font-family: var(--font-family-secondary);
+  border-bottom-left-radius: var(--border-radius-24);
+  border-bottom-right-radius: var(--border-radius-24);
+
+  display: flex;
+  align-items: flex-start; /* Контент прикріплено до верху контейнера */
+  justify-content: space-between;
+}
+
+/* Іконки */
+.icon-style {
+  background: none;
+  border: none;
+  align-items: center;
+}
+
+/* Скрол зона для треків */
+.songs-scroll,
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  padding: 12px 24px;
+  gap: 12px;
+}
+
+/* Фейкова кнопка додати трек */
+.add-song {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.title2 {
+  color: var(--Colors-White, #FFF);
+font-family: var(--font-family-secondary);
+font-size: var(--Size-head-text-h5-h6, 34px);
+font-style: normal;
+font-weight: 400;
+text-align: left;
+line-height: 15px;
+padding: 0%;
+}
+
+.friends-section{
+  width: 100%;
+  overflow: hidden;
+}

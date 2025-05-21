@@ -22,7 +22,7 @@ const Overlay = () => {
                 volume: 1,
                 muted: false,
                 playing: false,
-                howlInstance: new Howl({ src: [filePath], volume: 1 }),
+                
             },
         ]);
     };

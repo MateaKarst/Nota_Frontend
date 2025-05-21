@@ -1,0 +1,80 @@
+@import '../variables.css';
+.profile-card {
+    display: flex;
+    background-color: #343331;
+    border-radius: 12px;
+    align-items: flex-start;
+    color: white;
+    max-width: 500px;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+  }
+  
+  .profile-img {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  
+  .profile-info {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  
+  .profile-name {
+    font-size:34px;
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    margin: 0;
+    line-height: 51px;
+  }
+  
+  .profile-tagline {
+    font-size: 14px;
+    margin: 0;
+    color: var(--color-white);
+    font-family: var(--font-family-primary);
+    font-weight: 200;
+    text-align: start;
+    width: 100%;
+  }
+  
+  .profile-connections {
+    font-size: 16px;
+    color: #ffffff40;
+    margin: 0.3rem 0;
+    font-weight: 400;
+  }
+  
+  .profile-buttons {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+  
+  .btn-connect {
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn-message {
+    background-color: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

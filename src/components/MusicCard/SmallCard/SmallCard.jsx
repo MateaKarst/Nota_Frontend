@@ -15,12 +15,12 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr }) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        paddingLeft: "20px",
+        // paddingLeft: "20px",
         paddingBottom: "3px",
         paddingTop: "5px",
       }}
     >
-      <div style={{ width: "100px", position: "relative" }}>
+      <div style={{ width: "80px", position: "relative" }}>
         <SmallCardSvg SVGImg={imageUrl} />
 
         {/* music btn */}
@@ -28,7 +28,7 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr }) => {
           style={{
             position: "absolute",
             bottom: "-1px",
-            right: "7px",
+            right: "-2px",
           }}
         >
           <PlayBtn
