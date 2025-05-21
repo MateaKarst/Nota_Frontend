@@ -1,7 +1,7 @@
 @import '../variables.css';
 
 .song-title{
-    font-family: var(--font-family-primary);
+    font-family: var(--font-family-secondary);
     font-size: var(--font-size-34);
     font-weight: var(--font-weight-regular);
     color: var(--color-white);
