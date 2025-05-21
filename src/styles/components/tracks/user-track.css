@@ -9,6 +9,7 @@
     background-color: var(--color-black);
     font-family: var(--font-family-primary);
     width: 95%;
+    border-radius: var(--border-radius-8);
 }
 
 .own-track {
@@ -23,7 +24,11 @@
     display: flex;
     align-items: flex-start;
     gap: var(--spacing-8);
+<<<<<<< HEAD
     align-self: center;
+=======
+    
+>>>>>>> petra
 }
 
 .avatar {
@@ -118,7 +123,11 @@
     left: 0;
     right: 0;
     bottom: 0;
+<<<<<<< HEAD
     background-color: var(--color-pink);
+=======
+    background-color: var(--color-white-trans-surface-25);
+>>>>>>> petra
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -136,7 +145,11 @@
 }
 
 input:checked + .slider {
+<<<<<<< HEAD
     background-color: var(--color-white-trans-surface-25);
+=======
+    background-color: var(--color-pink);
+>>>>>>> petra
 }
 
 
@@ -152,4 +165,16 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+<<<<<<< HEAD
 }
+=======
+}
+
+.voice-card.inactive .avatar,
+.voice-card.inactive .user-info-txt,
+.voice-card.inactive .waveform {
+    filter: grayscale(100%) brightness(60%);
+    opacity: 0.6;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+>>>>>>> petra

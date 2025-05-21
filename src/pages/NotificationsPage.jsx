@@ -5,13 +5,13 @@ import HeaderVariants from "../components/Headers/HeaderVariants";
 
 
 const NotificationsPage = () => {
-const [groupedNotifications, setGroupedNotifications] = useState({
+  const [groupedNotifications, setGroupedNotifications] = useState({
     recent: [],
     yesterday: [],
     older: [],
   });
 
- useEffect(() => {
+  useEffect(() => {
     const loadData = async () => {
       const data = await getNotifications();
 
@@ -25,23 +25,23 @@ const [groupedNotifications, setGroupedNotifications] = useState({
     loadData();
   }, []);
 
-    return (
-        <div>
-        <div style={{ backgroundColor: "#282828", height: "100vh"}}>
-        <div className="header"> 
-    <HeaderVariants mode="text" title="Notifications"/>
+  return (
+    <div>
+      <div style={{ backgroundColor: "#343331", height: "100vh", color: "white" }}>
+        <div className="header">
+          <HeaderVariants mode="text" title="Notifications" />
+        </div>
+        <div className="titles" style={{ marginTop: "60px" }}>
+          <Section title="Recent" items={groupedNotifications.recent} />
+          <Section title="Yesterday" items={groupedNotifications.yesterday} />
+          <Section title="Older" items={groupedNotifications.older} />
+        </div>
+      </div>
     </div>
-        <div className="titles" style={{ marginTop: "60px"}}>
-        <Section title="Recent" items={groupedNotifications.recent} />
-        <Section title="Yesterday" items={groupedNotifications.yesterday} />
-        <Section title="Older" items={groupedNotifications.older} />
-        </div>
-        </div>
-        </div>
-      );
-    };
+  );
+};
 
-    const Section = ({ title, items }) => (
+const Section = ({ title, items }) => (
   <div>
     <h2 style={{ textAlign: "left", paddingLeft: "20px", color: "white" }}>{title}</h2>
     {items.map(n => (
@@ -49,6 +49,6 @@ const [groupedNotifications, setGroupedNotifications] = useState({
     ))}
   </div>
 );
-    
-    
-    export default NotificationsPage;
+
+
+export default NotificationsPage;
