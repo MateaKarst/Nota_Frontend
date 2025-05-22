@@ -48,6 +48,8 @@ const TrackDropdown = () => {
             marginTop: "10px",
             cursor: "pointer",
             userSelect: "none",
+            // marginLeft: "20px",
+            // marginRight: "20px",
           }}
           onClick={toggleShowMore}
           role="button"

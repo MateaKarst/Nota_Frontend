@@ -12,12 +12,15 @@ import Not from "./pages/NotificationsPage"
 import SearchPage from "./pages/SearchPage"
 import FilterPage from "./pages/FilterPage";
 import Track from "./components/Tracks/UserTrack"
+import SongDescription from "./pages/SongDescription" 
+
 import "./App.css";
+import { Search } from "lucide-react";
 
 function App() {
   return (
     <Router>
-      <Track />
+      <SongDescription />
     </Router>
   );
 }
