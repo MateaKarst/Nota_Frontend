@@ -105,7 +105,7 @@ const buttonStyles = {
   
 };
 
-function Buttons({ type = "default", text, icon: Icon, onClick, isActive }) {
+function Buttons({ type = "default", text, icon: Icon, onClick}) {
     const [clicked, setClicked] = useState(false);
     
 
