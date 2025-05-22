@@ -7,6 +7,10 @@ import Bass from '../../assets/instrument-samples/11_Bass.wav'
 import Button from '../Buttons/BasicBtn' 
 import Instrument from '../Editor/EditorInstrument'
 
+import { ReactComponent as GuitarIcon} from '../../assets/instruments/guitar.svg'
+import { ReactComponent as DrumIcon} from '../../assets/instruments/drum.svg'
+import { ReactComponent as OtherInstrumentIcon } from '../../assets/instruments/your-track.svg'
+
 import PlayIcon from '../../assets/icons/play-icon.svg'
 import PauseIcon from '../../assets/icons/pause-icon.svg'
 import ForwardIcon from '../../assets/icons/5secondsForward-icon.svg'
@@ -226,9 +230,9 @@ const MultitrackMixer = () => {
 
     <div className='multitrack-main'>
     <div className='instruments-column'>
-      <Instrument label="Guitar" />
-      <Instrument label="Guitar" />
-      <Instrument label="Guitar" />
+      <Instrument label="Drum" icon={DrumIcon} />
+      <Instrument label="Guitar" icon={GuitarIcon}/>
+      <Instrument label="Bass" icon={OtherInstrumentIcon} />
     </div>
       <div
         id="container"
