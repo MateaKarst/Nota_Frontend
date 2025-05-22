@@ -14,11 +14,8 @@ const Editor = () => {
             <div className="header-block"><HeaderVariants mode="black text" /></div>
             {/*<div className="timer-block"><Timer variation={1} /></div>*/}
            <div className="mixer-block"> <MultiTrackMixer></MultiTrackMixer></div>
-           <div className="button-block">
-            <Button text="Cut" type="medium"></Button>
-           <Button text="Split" type="medium"></Button>
-           </div>
-    
+          
+            <Button text="Go to Preview" type="medium"></Button>
         </div>
     )
 };

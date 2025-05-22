@@ -1,9 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ringtone1 from '../../assets/editor/iphone-ringtone.mp3'
 import ringtone2 from '../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3'
 import Drum from '../../assets/instrument-samples/01_DrumLoop.wav'
 import Guitar from '../../assets/instrument-samples/13_ElecGtr1.wav'
 import Bass from '../../assets/instrument-samples/11_Bass.wav'
+import Button from '../Buttons/BasicBtn' 
+import Instrument from '../Editor/EditorInstrument'
+
+import PlayIcon from '../../assets/icons/play-icon.svg'
+import PauseIcon from '../../assets/icons/pause-icon.svg'
+import ForwardIcon from '../../assets/icons/5secondsForward-icon.svg'
+import BackwardIcon from '../../assets/icons/5secondsBack-icon.svg'
+
 import '../../styles/editor/editor.css'
 import '../../styles/variables.css'
 
@@ -15,6 +23,8 @@ const MultitrackMixer = () => {
   const backwardButtonRef = useRef();
   const zoomRef = useRef();
   const trackNames = ['Click', 'Main Melody', 'Background Music', 'Outro Layer'];
+
+  const [isPlaying, setIsPlaying] = useState(false);
 
   let multitrack;
 
@@ -155,8 +165,13 @@ const MultitrackMixer = () => {
       playButtonRef.current.disabled = false;
     
       playButtonRef.current.onclick = () => {
-        multitrack.isPlaying() ? multitrack.pause() : multitrack.play();
-        playButtonRef.current.textContent = multitrack.isPlaying() ? 'Pause' : 'Play';
+        if (multitrack.isPlaying()) {
+          multitrack.pause();
+          setIsPlaying(false); 
+        } else {
+          multitrack.play();
+          setIsPlaying(true); 
+        }
       };
     
       // 🔽 Inject CSS class names for layout
@@ -205,27 +220,38 @@ const MultitrackMixer = () => {
 
   return (
     <div className="multitrack-container">
-      <label>
+      <label className='zoom'>
         Zoom: <input type="range" min="10" max="100" defaultValue="10" ref={zoomRef} />
       </label>
 
-      <div style={{ margin: '2em 0' }}>
-        <button id="play" ref={playButtonRef}>
-          Play
-        </button>
-        <button id="forward" ref={forwardButtonRef}>
-          Forward 5s
-        </button>
-        <button id="backward" ref={backwardButtonRef}>
-          Back 5s
-        </button>
-      </div>
-
+    <div className='multitrack-main'>
+    <div className='instruments-column'>
+      <Instrument label="Guitar" />
+      <Instrument label="Guitar" />
+      <Instrument label="Guitar" />
+    </div>
       <div
         id="container"
         ref={containerRef}
-        style={{ background: '#343331', color: '#fff', height: '400px' }}
+        style={{ background: '#343331', color: '#fff'}}
       ></div>
+</div>
+     <div className="button-block">
+                <Button text="Cut" type="medium"></Button>
+               <Button text="Split" type="medium"></Button>
+      </div>
+
+      <div className='button-wrapper'>
+        <button id="backward" ref={backwardButtonRef}>
+          <img src={BackwardIcon} alt='Back 5s' />
+        </button>
+        <button id="play" ref={playButtonRef}>
+          <img src={isPlaying ? PauseIcon : PlayIcon} alt='Play/Pause' />
+        </button>
+        <button id="forward" ref={forwardButtonRef}>
+          <img src={ForwardIcon} alt='Forward 5s' />
+        </button>
+      </div>
     </div>
   );
 };
