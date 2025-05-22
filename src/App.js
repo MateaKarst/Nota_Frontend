@@ -39,14 +39,14 @@ function AppContent() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/songs" element={<MySongsPage />} />
         <Route path="/discover" element={<SearchPage />} />
-        <Route path="/prfile" element={<ProfilePage />} /> {/* fix styling*/}
+        <Route path="/profile" element={<ProfilePage />} /> {/* fix styling*/}
 
         {/* friend routes */}
         <Route path="/profilefriend" element={<ProfileFriendPage />} />
 
         {/* honme page routes */}
         <Route path="/notifications" element={<Not />} />
-        <Route path="/view-all" element={<ViewAllPage />} /> {/* fix navigation*/}
+        <Route path="/view-all" element={<ViewAllPage />} /> 
 
         {/* song routes */}
         <Route path="/song-description" element={<SongDescription />} />
@@ -66,8 +66,8 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
-   
+      <AppContent /> 
+    
     </Router>
   );
 }

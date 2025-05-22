@@ -63,19 +63,18 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
           marginTop: isRow ? "0" : "8px",
         }}
       >
-        <h2
-          style={{
-            fontSize: "18px",
-            fontWeight: "600",
-            margin: "0px",
-            color: "var(--color-white)",
-            // whiteSpace: isRow ? "" : "nowrap",
-            // overflow: isRow ? "" : "hidden",
-            paddingLeft: "2px",
-          }}
-        >
-          {title}
-        </h2>
+  <h2
+    style={{
+      fontSize: "18px",
+      fontWeight: "600",
+      margin: "0px 0 4px 0",
+      color: "var(--color-white)",
+      textAlign: "left",       
+      width: "100%",            
+    }}
+  >
+    {title}
+  </h2>
         <p
           style={{
             fontSize: "12px",

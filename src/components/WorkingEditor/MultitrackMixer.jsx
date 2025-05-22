@@ -176,27 +176,27 @@ const MultitrackMixer = () => {
         playButtonRef.current.textContent = multitrack.isPlaying() ? 'Pause' : 'Play';
       };
     
-      // 🔽 Inject CSS class names for layout
-      const trackEls = containerRef.current.querySelectorAll('.track');
-      trackEls.forEach((trackEl, index) => {
-        trackEl.classList.add('multitrack-track');
+      // // 🔽 Inject CSS class names for layout
+      // const trackEls = containerRef.current.querySelectorAll('.track');
+      // trackEls.forEach((trackEl, index) => {
+      //   trackEl.classList.add('multitrack-track');
       
-        // Inject a label div before waveform
-        const labelDiv = document.createElement('div');
-        labelDiv.className = 'multitrack-label';
-        labelDiv.textContent = trackNames[index] || `Track ${index}`;
-        trackEl.prepend(labelDiv);
+      //   // Inject a label div before waveform
+      //   const labelDiv = document.createElement('div');
+      //   labelDiv.className = 'multitrack-label';
+      //   labelDiv.textContent = trackNames[index] || `Track ${index}`;
+      //   trackEl.prepend(labelDiv);
       
-        const infoEl = trackEl.querySelector('.info');
-        if (infoEl) {
-          infoEl.classList.add('multitrack-info');
-        }
+      //   const infoEl = trackEl.querySelector('.info');
+      //   if (infoEl) {
+      //     infoEl.classList.add('multitrack-info');
+      //   }
       
-        const waveEl = trackEl.querySelector('.wave');
-        if (waveEl) {
-          waveEl.classList.add('multitrack-wave');
-        }
-      });
+      //   const waveEl = trackEl.querySelector('.wave');
+      //   if (waveEl) {
+      //     waveEl.classList.add('multitrack-wave');
+      //   }
+      // });
     });
     
 
