@@ -136,7 +136,7 @@ display: none;
 }
 
 .search-bar-variant-2{
-  display: flex;
+  display:flex;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: center;

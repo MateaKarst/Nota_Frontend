@@ -49,9 +49,9 @@ const buttonStyles = {
         borderRadius: "var(--border-radius-20)",
         borderColor: "var(--color-yellow)",
         borderWidth: "1px",
-        borderStyle: "solid", 
-        boxShadow: "none", 
-        outline: "none", 
+        borderStyle: "solid",
+        boxShadow: "none",
+        outline: "none",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -99,29 +99,26 @@ const buttonStyles = {
         fontSize: "var(--font-size-24)",
         fontFamily: "var(--font-family-secondary)",
         letterSpacing: "2px",
-        
-
     },
-  
 };
 
 function Buttons({ type = "default", text, icon: Icon, onClick}) {
     const [clicked, setClicked] = useState(false);
-    
+
 
     const handleClick = () => {
         setClicked(!clicked);
     };
 
     return (
-<button
-  style={buttonStyles[type]}
-  onClick={onClick}
->
-  {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
-</button>
+        <button
+            style={buttonStyles[type]}
+            onClick={onClick}
+        >
+            {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
+        </button>
 
     );
 }
 
-export default Buttons;
+export default BasicBtn;
