@@ -1,11 +1,17 @@
 import React from "react";
 import PlayerBtn from "../../Buttons/PlayBtn";
 import CaroselSvg from "./CaroselSvg";
-
+import { useNavigate } from "react-router-dom";
 
 const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
+    const navigate = useNavigate();
+  
+    const handleClick = () => {
+      navigate("/song-description");
+    };
+    
   return (
-    <div
+    <div onClick={handleClick}
       style={{
         width: "auto",
         height: "auto",

@@ -1,12 +1,19 @@
 import React from "react";
 import PlayBtn from "../../Buttons/PlayBtn";
 import CoverImg from "./CoverImg";
+import { useNavigate } from "react-router-dom";
 
 const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNbr }) => {
   const isRow = layout === "row";
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/song-description");
+  };
+
   return (
-    <div
+    <div onClick={handleClick}
       style={{
         width: isRow ? "auto" : "165px",
         height: isRow ? "auto" : "200px",

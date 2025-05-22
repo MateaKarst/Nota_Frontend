@@ -1,0 +1,29 @@
+@import '../variables.css';
+
+.top-part{
+padding-top:20px;
+}
+
+.dropdown{
+    margin: 10px;
+    padding-bottom: 150px;
+}
+
+.tracks{
+font-family: var(--font-family-primary);
+color: var(--color-white);
+font-size:  var( --font-size-28);
+}
+
+.navbar-bottom {
+  position: fixed;
+  z-index: 1000;
+}
+
+.collaborate {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;  
+  transform: translateX(-50%);
+  z-index: 1100; /* above other elements */
+}

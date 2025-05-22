@@ -1,10 +1,16 @@
 import React from "react";
 import PlayBtn from "../../Buttons/PlayBtn";
 import SmallCardSvg from "./SmallCardSvg";
+import { useNavigate } from "react-router-dom";
 
 const SmallCard = ({ imageUrl, title, creator, contributersNbr }) => {
+    const navigate = useNavigate();
+  
+    const handleClick = () => {
+      navigate("/song-description");
+    };
   return (
-    <div
+    <div onClick={handleClick}
       style={{
         width: "auto",
         height: "auto",

@@ -2,7 +2,7 @@
 
 .voice-card {
     display: flex;
-    padding: 5px var(--spacing-4);
+    padding: 6px var(--spacing-4);
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
@@ -23,8 +23,7 @@
 .user-info {
     display: flex;
     align-items: flex-start;
-    gap: var(--spacing-8);
-    
+    margin-left: 5px;
 }
 
 .avatar {
@@ -32,6 +31,7 @@
     height: 40px;
     border-radius: var(--border-radius-56);
     object-fit: cover;
+     margin-right: 12px; 
 }
 
 
@@ -119,7 +119,9 @@
     left: 0;
     right: 0;
     bottom: 0;
+
     background-color: var(--color-white-trans-surface-25);
+
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -137,7 +139,9 @@
 }
 
 input:checked + .slider {
+
     background-color: var(--color-pink);
+
 }
 
 
@@ -153,7 +157,9 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+
 }
+
 
 .voice-card.inactive .avatar,
 .voice-card.inactive .user-info-txt,
@@ -162,3 +168,4 @@ input:checked + .slider:before {
     opacity: 0.6;
     transition: filter 0.3s ease, opacity 0.3s ease;
 }
+
