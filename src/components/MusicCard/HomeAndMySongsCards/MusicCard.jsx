@@ -2,7 +2,7 @@ import React from "react";
 import PlayBtn from "../../Buttons/PlayBtn";
 import CoverImg from "./CoverImg";
 
-const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNbr }) => {
+const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNbr, onPlay, audio }) => {
   const isRow = layout === "row";
 
   return (
@@ -39,6 +39,12 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
             circleColor="var(--color-purple)"
             iconColor="white"
             size={40}
+            onClick={() => onPlay({
+  title,
+  artist: creator,
+  cover: imageUrl,
+  audio
+})}
           />
         </div>
       </div>

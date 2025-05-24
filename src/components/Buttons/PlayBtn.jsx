@@ -4,6 +4,7 @@ import ringtone from "../../assets/editor/iphone-ringtone.mp3"; // testing ringt
 import "../../styles/variables.css";
 
 const PlayBtn = ({
+  onClick,
   showProgress = true,
   bordered = false,
   showSkipButtons = true,
@@ -79,7 +80,7 @@ const PlayBtn = ({
             )}
 
             <button
-              onClick={togglePlay}
+              onClick={onClick}
               className={`play-btn ${bordered ? "play-btn-bordered" : ""}`}
               style={{
                 backgroundColor: circleColor,

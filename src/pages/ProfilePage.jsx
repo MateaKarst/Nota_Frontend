@@ -5,8 +5,11 @@ import HeaderProfile from '../components/Headers/HeaderProfile';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import NavBar from '../components/Navigation/NavBar';
 import lilyImg from '../assets/lily-profile.jpg';
+import MusicPlayer from '../components/MusicPlayer';
+
 
 const ProfilePage = () => {
+  const [currentSong, setCurrentSong]=useState(null);
   const [activeTab, setActiveTab] = useState("own"); // "own" або "collab"
 
   const ownSongs = [
@@ -14,19 +17,22 @@ const ProfilePage = () => {
       title: "Dreamy",
       creator: "Bestguitar123",
       contributersNbr: 1,
-      imageUrl: "https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     },
     {
       title: "Memories",
       creator: "Jamesvoice",
       contributersNbr: 3,
-      imageUrl: "https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     },
     {
       title: "HeartBit",
       creator: "Korin",
       contributersNbr: 4,
-      imageUrl: "https://img.freepik.com/free-photo/dreamy-arrangement-with-decorative-dried-flowers_23-2151363285.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/dreamy-arrangement-with-decorative-dried-flowers_23-2151363285.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     }
   ];
 
@@ -35,13 +41,15 @@ const ProfilePage = () => {
       title: "Neon Pulse",
       creator: "ElectroNina",
       contributersNbr: 2,
-      imageUrl: "https://img.freepik.com/free-photo/futuristic-city-with-neon-lights_23-2148898573.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/futuristic-city-with-neon-lights_23-2148898573.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     },
     {
       title: "Soul Echo",
       creator: "JazzDev",
       contributersNbr: 5,
-      imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     }
   ];
 
@@ -85,9 +93,9 @@ const ProfilePage = () => {
         <div>
           <div><h1 className='title2'>Top Songs</h1></div>
           <div style={{ display: "flex", flexDirection: "column", alignContent: "left" }}>
-            <SmallCard title="Paris 2012" creator="Emily Star" contributersNbr={2} imageUrl="https://img.freepik.com/free-photo/aesthetic-universe-nature-background-earth-mountain-remixed-media_53876-128642.jpg" />
-            <SmallCard title="Jazzy night" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/aesthetic-dark-wallpaper-background-neon-light_53876-129243.jpg" />
-            <SmallCard title="Rain of tears" creator="Jamy Lynn" contributersNbr={3} imageUrl="https://img.freepik.com/free-photo/closeup-view-beautiful-japanese-umbrellas_185193-162917.jpg" />
+            <SmallCard title="Paris 2012" creator="Emily Star" contributersNbr={2} imageUrl="https://img.freepik.com/free-photo/aesthetic-universe-nature-background-earth-mountain-remixed-media_53876-128642.jpg" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+            <SmallCard title="Jazzy night" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/aesthetic-dark-wallpaper-background-neon-light_53876-129243.jpg" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+            <SmallCard title="Rain of tears" creator="Jamy Lynn" contributersNbr={3} imageUrl="https://img.freepik.com/free-photo/closeup-view-beautiful-japanese-umbrellas_185193-162917.jpg" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
           </div>
         </div>
 
@@ -128,10 +136,22 @@ const ProfilePage = () => {
               creator={song.creator}
               contributersNbr={song.contributersNbr}
               imageUrl={song.imageUrl}
+             onPlay={() => setCurrentSong({
+              title: song.title,
+              artist: song.creator,    
+              cover: song.imageUrl,     //to match the format audio player expects
+              audio: song.audioUrl       
+            })}
             />
           ))}
         </div>
       </div>
+
+      {currentSong && (
+        <div className="music-player-container">
+          <MusicPlayer song={currentSong} />
+        </div>
+      )}
 
       <NavBar />
     </div>

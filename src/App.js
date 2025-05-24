@@ -11,13 +11,13 @@ import NavBar from "./components/Navigation/NavBar";
 import Not from "./pages/NotificationsPage"
 import SearchPage from "./pages/SearchPage"
 import FilterPage from "./pages/FilterPage";
-import Track from "./components/Tracks/UserTrack"
+//import Track from "./components/Tracks/UserTrack"
 import "./App.css";
 
 function App() {
   return (
     <Router>
-      <Track />
+      <HomePage />
     </Router>
   );
 }

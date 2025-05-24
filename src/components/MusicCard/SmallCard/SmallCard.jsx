@@ -2,7 +2,7 @@ import React from "react";
 import PlayBtn from "../../Buttons/PlayBtn";
 import SmallCardSvg from "./SmallCardSvg";
 
-const SmallCard = ({ imageUrl, title, creator, contributersNbr }) => {
+const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay, audio }) => {
   return (
     <div
       style={{
@@ -38,6 +38,12 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr }) => {
             circleColor="var(--color-purple)"
             iconColor="white"
             size={24}
+            onClick={() => onPlay({
+            title,
+            artist: creator,
+            cover: imageUrl,
+            audio
+        })}
           />
         </div>
       </div>

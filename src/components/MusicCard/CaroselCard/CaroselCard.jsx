@@ -3,9 +3,17 @@ import PlayerBtn from "../../Buttons/PlayBtn";
 import CaroselSvg from "./CaroselSvg";
 
 
-const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
+const CaroselCard = ({ imageUrl, title, creator, contributersNbr, audio, onPlay }) => {
+
+    const handlePlay = () => {
+    if (onPlay) {
+      onPlay({ imageUrl, title, creator, contributersNbr, audio });
+    }
+  };
+
   return (
     <div
+      onClick={handlePlay}
       style={{
         width: "auto",
         height: "auto",
@@ -65,6 +73,7 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
           style={{
             fontSize: "12px",
             color: "var(--color-white-trans-50)",
+            textAlign: "center",
           }}
         >
           {creator} + {contributersNbr}
