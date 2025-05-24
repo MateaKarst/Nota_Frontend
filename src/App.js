@@ -11,13 +11,16 @@ import NavBar from "./components/Navigation/NavBar";
 import Not from "./pages/NotificationsPage"
 import SearchPage from "./pages/SearchPage"
 import FilterPage from "./pages/FilterPage";
-//import Track from "./components/Tracks/UserTrack"
+import Track from "./components/Tracks/UserTrack"
+import SongDescription from "./pages/SongDescription" 
+
 import "./App.css";
+import { Search } from "lucide-react";
 
 function App() {
   return (
     <Router>
-      <HomePage />
+      <SongDescription />
     </Router>
   );
 }
