@@ -15,7 +15,8 @@ import Track from "./components/Tracks/UserTrack"
 import SongDescription from "./pages/SongDescription"
 import UploadSong from "./pages/UploadSong"
 import ViewAllPage from "./pages/ViewAllPage"
-
+import PersonalizationAccount from "./pages/personalisation/AccountPersonalisation";
+import Personalization1 from "./pages/personalisation/Personalization1";
 
 import "./App.css";
 import { Search } from "lucide-react";
@@ -34,6 +35,8 @@ function AppContent() {
         <Route path="/" element={<Onboarding />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/personalisation" element={<PersonalizationAccount />} />
+        <Route path="/personalisation1-filters" element={<Personalization1 />} />
 
         {/* nav bar routes */}
         <Route path="/home" element={<HomePage />} />
@@ -67,7 +70,6 @@ function App() {
   return (
     <Router>
       <AppContent /> 
-    
     </Router>
   );
 }
