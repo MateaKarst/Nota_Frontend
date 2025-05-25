@@ -11,7 +11,7 @@ import NavBar from "./components/Navigation/NavBar";
 import Not from "./pages/NotificationsPage"
 import SearchPage from "./pages/SearchPage"
 import FilterPage from "./pages/FilterPage";
-import Track from "./components/Tracks/UserTrack"
+// import Track from "./components/Tracks/UserTrack"
 import SongDescription from "./pages/SongDescription"
 import UploadSong from "./pages/UploadSong"
 import ViewAllPage from "./pages/ViewAllPage"
@@ -19,7 +19,7 @@ import PersonalizationAccount from "./pages/personalisation/AccountPersonalisati
 import Personalization1 from "./pages/personalisation/Personalization1";
 
 import "./App.css";
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 
 function AppContent() {
   const location = useLocation();

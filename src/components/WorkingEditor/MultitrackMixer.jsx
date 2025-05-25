@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import ringtone1 from '../../assets/editor/iphone-ringtone.mp3'
-import ringtone2 from '../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3'
+// import ringtone1 from '../../assets/editor/iphone-ringtone.mp3'
+// import ringtone2 from '../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3'
 import Drum from '../../assets/instrument-samples/01_DrumLoop.wav'
 import Guitar from '../../assets/instrument-samples/13_ElecGtr1.wav'
 import Bass from '../../assets/instrument-samples/11_Bass.wav'
