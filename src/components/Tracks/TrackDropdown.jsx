@@ -1,0 +1,66 @@
+import React, { useState } from "react";
+import UserTrack from "./UserTrack";
+
+const TrackDropdown = () => {
+  // Dummy data inside the component as requested
+  const tracks = [
+    { isOwnTrack: true },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+    { isOwnTrack: false },
+  ];
+
+  const [showMore, setShowMore] = useState(false);
+
+  const hasMoreThanFive = tracks.length > 5;
+
+  // If showMore is false, show first 5, else show all
+  const displayedTracks = hasMoreThanFive && !showMore ? tracks.slice(0, 5) : tracks;
+
+  const toggleShowMore = () => setShowMore((prev) => !prev);
+
+  return (
+    <div className="track-dropdown">
+      {displayedTracks.map((track, index) => (
+        <UserTrack key={index} {...track} />
+      ))}
+
+      {hasMoreThanFive && (
+        <div
+          style={{
+            color: "var(--Colors-White, #FFF)",
+            textAlign: "center",
+            fontFamily: "var(--Fonts-Body-font, Karla)",
+            fontSize: "var(--Size-body-text-body-text-md, 16px)",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "var(--Line-Height-body-m, 18px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            alignSelf: "stretch",
+            marginTop: "10px",
+            cursor: "pointer",
+            userSelect: "none",
+          }}
+          onClick={toggleShowMore}
+          role="button"
+          tabIndex={0}
+          onKeyPress={(e) => {
+            if (e.key === "Enter" || e.key === " ") toggleShowMore();
+          }}
+        >
+          {showMore ? "Show less" : `Show more (+${tracks.length - 5})`}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TrackDropdown;
