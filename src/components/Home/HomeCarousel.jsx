@@ -4,7 +4,7 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { EffectCoverflow } from 'swiper/modules'
 import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
-import PlusImage from '../../assets/plus-img.png';
+// import PlusImage from '../../assets/plus-img.png';
 import "../../styles/pages/home-page.css";
 import "../../styles/variables.css";
 
@@ -12,12 +12,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-<<<<<<< HEAD
-const HomeCarousel = ({ onPlay }) => {
-=======
+// const HomeCarousel = ({ onPlay }) => {
+
 const HomeCarousel = () => {
   const navigate = useNavigate();
->>>>>>> violeta
 
     const cards =[
         { 
