@@ -9,7 +9,7 @@ import '../../styles/variables.css'
 
 const MultitrackMixer = () => {
   const containerRef = useRef();
-  const initializedRef = useRef(false); 
+  const initializedRef = useRef(false);
   const playButtonRef = useRef();
   const forwardButtonRef = useRef();
   const backwardButtonRef = useRef();
@@ -55,12 +55,12 @@ const MultitrackMixer = () => {
           draggable: true,
           startPosition: 4,
           url: Drum,
-           envelope: [
-           { time: 2, volume: 0.2 },
-           { time: 10, volume: 0.2 },
-           { time: 20, volume: 0.2 },
-          //   // { time: 264, volume: 0 },
-           ],
+          envelope: [
+            { time: 2, volume: 0.2 },
+            { time: 10, volume: 0.2 },
+            { time: 22, volume: 0.2 },
+            //   // { time: 264, volume: 0 },
+          ],
           volume: 0.95,
           options: {
             waveColor: 'hsl(341, 100%, 48%, 1)',
@@ -90,9 +90,9 @@ const MultitrackMixer = () => {
           envelope: [
             { time: 2, volume: 0.5 },
             { time: 20, volume: 0.5 },
-            { time: 23, volume: 0.5 },
-           //   // { time: 264, volume: 0 },
-            ],
+            { time: 40, volume: 0.5 },
+            //   // { time: 264, volume: 0 },
+          ],
           volume: 0.8,
           options: {
             waveColor: 'hsl(41, 100%, 50%)',
@@ -108,15 +108,15 @@ const MultitrackMixer = () => {
             { time: 2, volume: 0.5 },
             { time: 10, volume: 0.5 },
             { time: 22, volume: 0.5 },
-           //   // { time: 264, volume: 0 },
-            ],
+            //   // { time: 264, volume: 0 },
+          ],
           volume: 0.8,
           options: {
             waveColor: 'hsl(269, 100%, 50%)',
             progressColor: 'hsl(269, 96%, 36%)',
           },
           url: Bass,
-          
+
         },
         //         {
         //   id: 4,
@@ -134,7 +134,7 @@ const MultitrackMixer = () => {
         //     progressColor: 'hsl(269, 96%, 36%)',
         //   },
         //   url: Bass,
-          
+
         // },
       ],
       {
@@ -153,52 +153,75 @@ const MultitrackMixer = () => {
           dragPointFill: 'rgba(255, 255, 255, 0.9)',
           dragPointStroke: 'rgba(255, 255, 255, 0.8)',
         },
-      timegrid: {
-        show: true,
-        interval: 0.5,
-        primaryLabelInterval: 1,
-        color: '#343331',
-        lineWidth: 1,
-        font: '12px Karla',
-        textColor: '#fff'
+        timegrid: {
+          show: true,
+          interval: 0.5,
+          primaryLabelInterval: 1,
+          color: '#343331',
+          lineWidth: 1,
+          font: '12px Karla',
+          textColor: '#fff'
+        },
       },
-    },
-      
+
     );
 
     // Bind buttons and controls
     playButtonRef.current.disabled = true;
     multitrack.once('canplay', () => {
       playButtonRef.current.disabled = false;
-    
+
       playButtonRef.current.onclick = () => {
         multitrack.isPlaying() ? multitrack.pause() : multitrack.play();
         playButtonRef.current.textContent = multitrack.isPlaying() ? 'Pause' : 'Play';
       };
-    
+
+
       // // 🔽 Inject CSS class names for layout
       // const trackEls = containerRef.current.querySelectorAll('.track');
       // trackEls.forEach((trackEl, index) => {
       //   trackEl.classList.add('multitrack-track');
-      
+
       //   // Inject a label div before waveform
       //   const labelDiv = document.createElement('div');
       //   labelDiv.className = 'multitrack-label';
       //   labelDiv.textContent = trackNames[index] || `Track ${index}`;
       //   trackEl.prepend(labelDiv);
-      
+
       //   const infoEl = trackEl.querySelector('.info');
       //   if (infoEl) {
       //     infoEl.classList.add('multitrack-info');
       //   }
-      
+
       //   const waveEl = trackEl.querySelector('.wave');
       //   if (waveEl) {
       //     waveEl.classList.add('multitrack-wave');
       //   }
       // });
+
+      // 🔽 Inject CSS class names for layout
+      const trackEls = containerRef.current.querySelectorAll('.track');
+      trackEls.forEach((trackEl, index) => {
+        trackEl.classList.add('multitrack-track');
+
+        // Inject a label div before waveform
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'multitrack-label';
+        labelDiv.textContent = trackNames[index] || `Track ${index}`;
+        trackEl.prepend(labelDiv);
+
+        const infoEl = trackEl.querySelector('.info');
+        if (infoEl) {
+          infoEl.classList.add('multitrack-info');
+        }
+
+        const waveEl = trackEl.querySelector('.wave');
+        if (waveEl) {
+          waveEl.classList.add('multitrack-wave');
+        }
+      });
     });
-    
+
 
     forwardButtonRef.current.onclick = () => {
       multitrack.setTime(multitrack.getCurrentTime() + 5);
@@ -217,7 +240,7 @@ const MultitrackMixer = () => {
       console.log(`Track ${id} volume updated to ${volume}`);
     });
 
-    
+
   };
 
   return (

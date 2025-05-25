@@ -102,7 +102,7 @@ const buttonStyles = {
     },
 };
 
-function BasicBtn({ type = "default", text, icon: Icon, onClick }) {
+function Buttons({ type = "default", text, icon: Icon, onClick}) {
     const [clicked, setClicked] = useState(false);
 
 
