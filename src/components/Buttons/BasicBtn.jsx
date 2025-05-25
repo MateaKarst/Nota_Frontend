@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "../../styles/variables.css";
+import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 const buttonStyles = {
     viewAll: {
@@ -39,6 +40,24 @@ const buttonStyles = {
         justifyContent: "center",
         fontSize: "var(--font-size-18)",
         fontFamily: "var(--font-family-primary)",
+    },
+    mediumOutline: {
+        width: "140px",
+        height: "28px",
+        backgroundColor: "transparent",
+        color: "var(--color-yellow)",
+        borderRadius: "var(--border-radius-20)",
+        borderColor: "var(--color-yellow)",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        boxShadow: "none",
+        outline: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "var(--font-size-14)",
+        fontFamily: "var(--font-family-primary)",
+        fontWeight: "400",
     },
     small: {
         width: "140px",
@@ -80,12 +99,12 @@ const buttonStyles = {
         fontSize: "var(--font-size-24)",
         fontFamily: "var(--font-family-secondary)",
         letterSpacing: "2px",
-
     },
 };
 
-function Buttons({ type = "default", text, icon: Icon }) {
+function Buttons({ type = "default", text, icon: Icon, onClick}) {
     const [clicked, setClicked] = useState(false);
+
 
     const handleClick = () => {
         setClicked(!clicked);
@@ -94,11 +113,12 @@ function Buttons({ type = "default", text, icon: Icon }) {
     return (
         <button
             style={buttonStyles[type]}
-            onClick={handleClick}
+            onClick={onClick}
         >
             {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
         </button>
+
     );
 }
 
-export default Buttons;
+export default BasicBtn;

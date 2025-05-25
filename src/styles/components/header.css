@@ -1,20 +1,27 @@
 @import '../variables.css';
 
 .header {
-  height: 83px;
-  width: 90%;
+  height: 53px;
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-left: var(--spacing-24);
-  margin-right: var(--spacing-24);
-  padding-left: var(--spacing-24);
-  padding-right: var(--spacing-24);
+  justify-content: space-between;
   border-bottom-right-radius: var(--border-radius-24);
   border-bottom-left-radius: var(--border-radius-24);
-  justify-content: space-between;
   font-family: var(--font-family-secondary);
   color: var(--color-white);
 }
+
+.header .content {
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+
 
 .header .nav {
   display: flex;
@@ -36,6 +43,7 @@
   cursor: pointer;
   opacity: 0.75;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .back-btn {
@@ -58,6 +66,11 @@
   text-decoration: underline;
 }
 
+.tab-button.no-underline{
+  
+  text-decoration: none;
+}
+
 .header-text {
   font-weight: var(--font-weight-regular);
   line-height: var(--font-line-height-32);
@@ -68,6 +81,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-24);
+  padding-left: 14px;
 }
 
 .center-section {
@@ -79,7 +93,8 @@
 .right-section {
   display: flex;
   align-items: center;
-  gap: var(--spacing-8)
+  gap: var(--spacing-8);
+  padding-right: 14px;
 }
 
 .user-avatar {

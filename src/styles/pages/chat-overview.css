@@ -1,0 +1,35 @@
+body{
+    background-color: var(--color-black);
+  }
+
+.header-text {
+    color: var(--color-white);
+  }
+
+
+  .searchbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom:20px;
+      }
+      
+
+  .icon-button {
+    width: 34px;
+    height: 32px;
+    cursor: pointer;
+    fill: white; /* or any color you like */
+  }
+
+  .overview{
+    margin-left: var(--spacing-14);
+    margin-right: var(--spacing-14);
+    
+  }
+  
+  .search-container.hide-search {
+    display: flex !important;
+  }

@@ -1,0 +1,15 @@
+@import '../variables.css';
+
+.my-songs-wrapper {
+    width: 100%;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-black);
+}
+
+.music-cards-mapping {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 80px; 
+}

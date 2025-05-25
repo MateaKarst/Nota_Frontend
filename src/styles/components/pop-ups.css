@@ -7,7 +7,7 @@
     display: flex;
     width: 100%;
     min-height: 600px;
-    padding: var(--spacing-md-7, 20px) var(--spacing-md-7, 20px) var(--Spacing-play, 185px) var(--Spacing-xxl, 40px);
+    padding-top:var(--Spacing-play, 185px) ;
     flex-direction: column;
     align-items: center;
   }

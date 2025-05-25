@@ -1,5 +1,7 @@
+@import '../variables.css';
+
 .login-page {
-    background-image: url(../../assets/login-bg.jpg);
+    background-image: url(../../assets/backgrounds/login-bg.jpg);
     display: flex;
     flex-direction: column;
     align-items: center;
