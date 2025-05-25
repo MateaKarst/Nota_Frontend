@@ -10,8 +10,6 @@ import "../../styles/variables.css";
 
 import { useNavigate } from 'react-router-dom';
 
-
-
 // const HomeCarousel = ({ onPlay }) => {
 
 const HomeCarousel = () => {

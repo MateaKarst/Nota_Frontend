@@ -66,8 +66,7 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
-   
+      <SearchPage />
     </Router>
   );
 }
