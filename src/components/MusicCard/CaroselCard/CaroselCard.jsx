@@ -3,7 +3,6 @@ import PlayerBtn from "../../Buttons/PlayBtn";
 import CaroselSvg from "./CaroselSvg";
 import { useNavigate } from "react-router-dom";
 
-// <<<<<<< HEAD
 // const CaroselCard = ({ imageUrl, title, creator, contributersNbr, audio, onPlay }) => {
 
 //     const handlePlay = () => {
@@ -15,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 //   return (
 //     <div
 //       onClick={handlePlay}
-// =======
 const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
     const navigate = useNavigate();
   
