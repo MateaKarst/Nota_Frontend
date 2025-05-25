@@ -6,14 +6,16 @@ import Editor from '../src/pages/Editor2';
 //import ringtone2 from '../src/assets/editor/iphone-ringtone.mp3'
 //import MultitrackMixer from './components/WorkingEditor/MultitrackMixer';
 //import TestingEd from './components/Editor/LibraryMulti/TestingEd';
+import ProPage from './pages/ProPage';
 
 function App() {
   return (
-    <Editor/>
+    // <Editor/>
     // <Soundwave
     //  audioUrl = {ringtone2}/>
     //<MultiTrackEditor/>
     //<MultitrackMixer />
+    <ProPage/>
   );
 }
 
