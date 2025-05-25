@@ -17,6 +17,8 @@ import UploadSong from "./pages/UploadSong"
 import ViewAllPage from "./pages/ViewAllPage"
 import PersonalizationAccount from "./pages/personalisation/AccountPersonalisation";
 import Personalization1 from "./pages/personalisation/Personalization1";
+import Personalization2 from "./pages/personalisation/Personalization2";
+import Settings from "./pages/Settings";
 
 import "./App.css";
 // import { Search } from "lucide-react";
@@ -37,6 +39,7 @@ function AppContent() {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/personalisation" element={<PersonalizationAccount />} />
         <Route path="/personalisation1-filters" element={<Personalization1 />} />
+        <Route path="/personalisation2" element={<Personalization2 />} />
 
         {/* nav bar routes */}
         <Route path="/home" element={<HomePage />} />
@@ -60,6 +63,10 @@ function AppContent() {
         {/* search routes */}
         <Route path="/search" element={<SearchPage />} />
         <Route path="/filter" element={<FilterPage />} />
+
+        {/* settings */}
+        <Route path="/settings" element={<Settings />} />
+
       </Routes>
       {showNavBar && <NavBar />}
     </>

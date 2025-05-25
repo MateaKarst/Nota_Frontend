@@ -1,10 +1,12 @@
-import React from "react";
-import PurpleTag from "../../components/Tags/PurpleTag"
+import React, { useState } from "react";
+//import PurpleTag from "../../components/Tags/PurpleTag"
+import MusicTag from "../../components/Tags/MusicTag";
 import Buttons from "../../components/Buttons/BasicBtn"
 import HeaderVariants from "../../components/Headers/HeaderVariants";
+import SearchBar from "../../components/Search/SearchBar";
 
-import "../../styles/variables.css";
-import "../../styles/pages/personalization-1.css";
+import "../../styles/variables.css"
+import "../../styles/pages/personalization-1.css"
 
 const genres = [
     "Pop",
@@ -26,14 +28,28 @@ const genres = [
 ];
 
 const Personalization1 = () => {
+      const [selectedGenres, setSelectedGenres] = useState([]);
+
+  const handleTagClick = (genre) => {
+    setSelectedGenres((prevSelected) =>
+      prevSelected.includes(genre)
+        ? prevSelected.filter((item) => item !== genre)
+        : [...prevSelected, genre]
+    );
+  };
     return (
         <div className="container">
             <div>
-                <HeaderVariants mode="black text" title="What music genre do you" />
+                <HeaderVariants className="header" mode="default" />
+
+        <h2 className="question1">What music genre do you like to create or work on?</h2>
+
+          <SearchBar 
+            variant={1}/>
 
                 <div className="tags">
                     {genres.map((genre) => (
-                        <PurpleTag key={genre} text={`#${genre}`} />
+                        <MusicTag key={genre} text={`${genre}`} colorIndex={2} isSelected={selectedGenres.includes(genre)} onClick={() => handleTagClick(genre)} />
                     ))}
                 </div>
 

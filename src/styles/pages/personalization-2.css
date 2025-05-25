@@ -24,14 +24,14 @@ padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-12);
-    margin-bottom: 50px;
     justify-content: center;
+    padding: 0 15px;
 }
 
 
 .next-button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top:200px;
+    margin-top:150px;
     
 }
