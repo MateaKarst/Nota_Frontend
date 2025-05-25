@@ -37,7 +37,8 @@ const MultitrackMixer = () => {
       }
       document.body.removeChild(script);
     };
-  }, []);
+  },);
+  // }, []);
 
   const initMultitrack = () => {
     containerRef.current.innerHTML = '';
