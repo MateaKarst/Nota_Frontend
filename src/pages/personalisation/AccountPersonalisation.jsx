@@ -1,6 +1,7 @@
 import React from "react";
 import Buttons from "../../components/Buttons/BasicBtn"
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import "../../styles/pages/personalisation/account-personalisation.css"
 
@@ -9,6 +10,7 @@ import backgroundImg from "../../assets/backgrounds/headphones-image.jpg";
 const PersonalizationAccount = () => {
     const [profileImage, setProfileImage] = useState(null);
     const fileInputRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -28,13 +30,11 @@ const PersonalizationAccount = () => {
     return (
         <div className="onboarding-container" style={{ backgroundImage: `url(${backgroundImg})` }}>
 
-            {/* Block 1: Headings */}
             <div className="personalisation-block">
                 <h2 className="heading-primary">Congratulations!</h2>
                 <p className="subheading">Let’s get to know you a bit better</p>
             </div>
 
-            {/* Block 2: Profile Picture Upload */}
             <div className="personalisation-block profile-picture-section" onClick={triggerFileInput}>
                 <input
                     type="file"
@@ -64,7 +64,6 @@ const PersonalizationAccount = () => {
                 <p className="add-picture-text">Add profile picture</p>
             </div>
 
-            {/* Block 3: Name Prompt + Fields */}
             <div className="personalisation-block">
                 <h3 className="name-prompt">How should we call you?</h3>
                 <div className="form-section">
@@ -73,9 +72,8 @@ const PersonalizationAccount = () => {
                 </div>
             </div>
 
-            {/* Block 4: Button */}
             <div className="personalisation-block">
-                <Buttons type="default" text="Save" />
+                <Buttons type="default" text="Save" onClick = {() => navigate("/personalisation1-filters")} />
             </div>
 
         </div>

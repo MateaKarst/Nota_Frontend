@@ -15,14 +15,15 @@ import { useNavigate } from "react-router-dom";
 //     <div
 //       onClick={handlePlay}
 const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
-    const navigate = useNavigate();
-  
-    const handleClick = () => {
-      navigate("/song-description");
-    };
-    
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/song-description");
+  };
+
   return (
-    <div onClick={handleClick}
+    <div
+      onClick={handleClick}
       style={{
         width: "auto",
         height: "auto",
@@ -58,10 +59,10 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
       </div>
 
       {/* Text content */}
-      
+
       <div
         style={{
-          width: "200px", 
+          width: "200px",
           backgroundColor: "var(--color-light)",
           borderBottomLeftRadius: "var(--border-radius-56)",
           borderBottomRightRadius: "var(--border-radius-56)",
@@ -83,6 +84,7 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
             fontSize: "12px",
             color: "var(--color-white-trans-50)",
             textAlign: "center",
+            margin: 0,
           }}
         >
           {creator} + {contributersNbr}
