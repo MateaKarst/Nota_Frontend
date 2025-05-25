@@ -54,7 +54,7 @@ const TrackDropdown = () => {
           onClick={toggleShowMore}
           role="button"
           tabIndex={0}
-          onKeyPress={(e) => {
+          onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") toggleShowMore();
           }}
         >

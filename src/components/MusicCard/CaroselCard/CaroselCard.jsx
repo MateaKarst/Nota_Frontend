@@ -1,19 +1,30 @@
 import React from "react";
 import PlayerBtn from "../../Buttons/PlayBtn";
 import CaroselSvg from "./CaroselSvg";
+import { useNavigate } from "react-router-dom";
 
+// <<<<<<< HEAD
+// const CaroselCard = ({ imageUrl, title, creator, contributersNbr, audio, onPlay }) => {
 
-const CaroselCard = ({ imageUrl, title, creator, contributersNbr, audio, onPlay }) => {
+//     const handlePlay = () => {
+//     if (onPlay) {
+//       onPlay({ imageUrl, title, creator, contributersNbr, audio });
+//     }
+//   };
 
-    const handlePlay = () => {
-    if (onPlay) {
-      onPlay({ imageUrl, title, creator, contributersNbr, audio });
-    }
-  };
-
+//   return (
+//     <div
+//       onClick={handlePlay}
+// =======
+const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
+    const navigate = useNavigate();
+  
+    const handleClick = () => {
+      navigate("/song-description");
+    };
+    
   return (
-    <div
-      onClick={handlePlay}
+    <div onClick={handleClick}
       style={{
         width: "auto",
         height: "auto",

@@ -1,0 +1,23 @@
+@import "../variables.css";
+
+body{
+    background-color: var(--color-black);
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.header-block,
+.timer-block {
+    text-align: center;
+    width: 100%;
+}
+
+.mixer-block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}

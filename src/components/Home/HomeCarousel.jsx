@@ -8,8 +8,16 @@ import PlusImage from '../../assets/plus-img.png';
 import "../../styles/pages/home-page.css";
 import "../../styles/variables.css";
 
+import { useNavigate } from 'react-router-dom';
 
+
+
+<<<<<<< HEAD
 const HomeCarousel = ({ onPlay }) => {
+=======
+const HomeCarousel = () => {
+  const navigate = useNavigate();
+>>>>>>> violeta
 
     const cards =[
         { 
@@ -77,6 +85,7 @@ const HomeCarousel = ({ onPlay }) => {
     }}
   >
     <div
+     onClick={() => navigate('/upload-song')} // technically there should be a pop up here
       style={{
         borderRadius: 'var(--border-radius-56)',
         backgroundColor: '#2c2c2c',
