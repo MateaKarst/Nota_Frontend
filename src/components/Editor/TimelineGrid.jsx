@@ -1,58 +1,86 @@
 import React, { useState, useRef, useEffect } from "react";
-
+import { useWavesurfer } from "@wavesurfer/react";
+import ringtone1 from "../../assets/editor/bangla-background-music-no-copyright-background-music-218993.mp3";
+import ringtone2 from '../../assets/editor/iphone-ringtone.mp3'
 import "../../styles/components/editor/timeline-grid.css";
 
+// Constant values
+const TRACKS = [
+  { name: "Guitar", url: ringtone1, offset: 0 }, // The offset is where the track starts in the timeline (in seconds)
+  { name: "Vocal", url: ringtone2, offset: 1 }, // e.g., Vocal starts 1 second into the timeline
+  { name: "Piano", url: ringtone1, offset: 2 }, // Piano starts at 2 seconds
+  { name: "Flute", url: ringtone1, offset: 3 }, // Flute starts at 3 seconds
+];
+
+const PIXELS_PER_SECOND = 100;
+const TIMELINE_OFFSET = 100;
+const TIME_INTERVAL = 0.5;
+
 const TimelineGrid = () => {
-  const [timeMarkers] = useState(Array.from({ length: 120 }, (_, i) => i * 0.5)); // Time in seconds
-  const [tracks] = useState(["Guitar", "Vocal", "Piano", "Flute"]); // Track names
-  const [playheadPosition, setPlayheadPosition] = useState(100); // Start from 100px from the left
-  const playheadRef = useRef(null);
+  const [playheadX, setPlayheadX] = useState(TIMELINE_OFFSET);
+  const [timeMarkers] = useState(Array.from({ length: 120 }, (_, i) => i * TIME_INTERVAL));
+  const waveRefs = useRef([]);
   const intervalRef = useRef(null);
   const timelineRef = useRef(null);
 
-  // Function to start playhead movement
-  const startPlayback = () => {
-    if (!intervalRef.current) {
-      intervalRef.current = setInterval(() => {
-        setPlayheadPosition((prev) => prev + 50); // Move 50px every 0.5s
-      }, 500); // Moves every 0.5s
-    }
+  const pxToSec = (px) => (px - TIMELINE_OFFSET) / PIXELS_PER_SECOND;
+  const secToPx = (sec) => sec * PIXELS_PER_SECOND + TIMELINE_OFFSET;
+
+  const syncPlayheadToWaves = (posX) => {
+    const currentTime = pxToSec(posX);
+    waveRefs.current.forEach((wave) => wave?.setTime(currentTime));
   };
 
-  // Function to stop playhead movement
+  const startPlayback = () => {
+    if (intervalRef.current) return;
+
+    intervalRef.current = setInterval(() => {
+      setPlayheadX((prevX) => {
+        const newX = prevX + PIXELS_PER_SECOND * TIME_INTERVAL;
+        syncPlayheadToWaves(newX);
+        return newX;
+      });
+    }, TIME_INTERVAL * 1000);
+
+    waveRefs.current.forEach((wave) => wave?.play());
+  };
+
   const stopPlayback = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
+    waveRefs.current.forEach((wave) => wave?.pause());
   };
 
-  // Reset playhead when reaching end
-  useEffect(() => {
-    if (playheadPosition >= timeMarkers.length * 10 + 100) { // Adjust based on timeline size
-      setPlayheadPosition(100); // Reset playhead to start position
-      stopPlayback();
-    }
-  }, [playheadPosition, timeMarkers.length]);
-
-  // Dragging logic
   const handleMouseDown = (e) => {
     e.preventDefault();
-    const timelineRect = timelineRef.current.getBoundingClientRect();
-    const offsetX = e.clientX - timelineRect.left;
-    setPlayheadPosition(offsetX);
+    const timelineLeft = timelineRef.current.getBoundingClientRect().left;
+    const initialX = e.clientX - timelineLeft;
+    setPlayheadX(initialX);
+    syncPlayheadToWaves(initialX);
 
-    const handleMouseMove = (moveEvent) => {
-      const moveX = moveEvent.clientX - timelineRect.left;
-      setPlayheadPosition(moveX);
+    const handleMouseMove = (e) => {
+      const moveX = e.clientX - timelineLeft;
+      setPlayheadX(moveX);
+      syncPlayheadToWaves(moveX);
     };
 
-    const handleMouseUp = () => {
+    const stopDrag = () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseup", stopDrag);
     };
 
     document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseup", stopDrag);
   };
+
+  useEffect(() => {
+    const maxPos = secToPx(timeMarkers.length * TIME_INTERVAL);
+    if (playheadX >= maxPos) {
+      setPlayheadX(TIMELINE_OFFSET);
+      stopPlayback();
+      syncPlayheadToWaves(TIMELINE_OFFSET);
+    }
+  }, [playheadX, timeMarkers.length]);
 
   return (
     <div className="timeline-container">
@@ -61,28 +89,26 @@ const TimelineGrid = () => {
 
       <div className="timeline-wrapper" ref={timelineRef}>
         <div className="time-ruler">
-          {timeMarkers.map((time, index) => (
-            <div key={index} className="time-marker">
-              {time}s
-            </div>
+          {timeMarkers.map((time, i) => (
+            <div key={i} className="time-marker">{time}s</div>
           ))}
         </div>
 
         <div className="tracks">
           <div
             className="playhead"
-            ref={playheadRef}
-            style={{ left: `${playheadPosition}px` }}
-            onMouseDown={handleMouseDown} // Add mouse down event to handle dragging
-          ></div>
+            style={{ left: `${playheadX}px` }}
+            onMouseDown={handleMouseDown}
+          />
 
-          {tracks.map((track, index) => (
-            <div key={index} className="track-row">
-              <div className="track-name">{track}</div>
+          {TRACKS.map((track, i) => (
+            <div key={i} className="track-row" style={{ left: `${secToPx(track.offset)}px` }}>
+              <div className="track-name">{track.name}</div>
               <div className="track-grid">
-                {timeMarkers.map((_, i) => (
-                  <div key={i} className="grid-cell"></div>
-                ))}
+                <Waveform
+                  url={track.url}
+                  onReady={(ws) => (waveRefs.current[i] = ws)}
+                />
               </div>
             </div>
           ))}
@@ -90,6 +116,25 @@ const TimelineGrid = () => {
       </div>
     </div>
   );
+};
+
+const Waveform = ({ url, onReady }) => {
+  const containerRef = useRef(null);
+
+  const { wavesurfer } = useWavesurfer({
+    container: containerRef,
+    height: 60,
+    waveColor: "#b4b4ff",
+    progressColor: "#5050c8",
+    url,
+    normalize: true,
+  });
+
+  useEffect(() => {
+    if (wavesurfer && onReady) onReady(wavesurfer);
+  }, [wavesurfer, onReady]);
+
+  return <div ref={containerRef} style={{ width: "100%" }} />;
 };
 
 export default TimelineGrid;

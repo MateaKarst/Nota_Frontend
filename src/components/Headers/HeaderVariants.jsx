@@ -50,7 +50,7 @@ const headers = [
 
 const HeaderVariants = ({ mode, title }) => {
   const headerConfig = headers.find((h) => h.mode === mode);
-  const navigate = useNavigate(); 
+  //const navigate = useNavigate(); 
 
   if (!headerConfig || !headerConfig.visibility) return null;
 
@@ -59,7 +59,7 @@ const HeaderVariants = ({ mode, title }) => {
   const isLeftAlignedHeader = mode === "text" || mode === "black text";
 
   const handleBackClick = () => {
-    navigate(-1);
+    //navigate(-1);
   };
 
   return (

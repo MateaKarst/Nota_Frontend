@@ -45,7 +45,6 @@ const FilterPage = () => {
                 </div>
             </div>
 
-            {/* Genres */}
             <div className="container">
                 <p className="heading">Genres</p>
                 <div className="tags-container">
@@ -55,13 +54,12 @@ const FilterPage = () => {
                             text={tag}
                             colorIndex={2}
                             isSelected={selectedTags.includes(tag)}
-                            onClick={() => handleTagClick(tag)} // Add the onClick handler here too
+                            onClick={() => handleTagClick(tag)} 
                         />
                     ))}
                 </div>
             </div>
 
-            {/* Buttons Section */}
             <div className="buttons-section">
                 <Small2 text="Cancel" />
                 <SmallButton text="Apply" />
