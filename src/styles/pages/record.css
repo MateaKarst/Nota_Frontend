@@ -121,3 +121,32 @@
   cursor: pointer;
 }
 
+.overlay {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  width: 370px;
+  height: 236px;
+  background-color: var(--color-black);
+  opacity: 0.7;
+  z-index: 999;
+   border-radius: 12px;
+   transform: translate(-50%, -50%);
+}
+
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 998;
+}
+
+.overlay-count{
+  font-size: 68px;
+  font-family: var(--font-family-primary);
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+}

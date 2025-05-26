@@ -11,20 +11,57 @@ const RecordingPage = () => {
   const [seconds, setSeconds] = useState(0);
   const [hasRecorded, setHasRecorded] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
+  const [bpm, setBpm] = useState(120); // initial BPM is 120
+
+  const increaseBpm = () => {
+  setBpm(prev => Math.min(prev + 1, 300)); // limits to max 300 bpm
+};
+
+const decreaseBpm = () => {
+  setBpm(prev => Math.max(prev - 1, 20)); // limits to min 20 bpm
+};
+
+const handleRestart = () => { //"reset" buttons resets everything
+  setIsRecording(false);
+  setSeconds(0);
+  setHasRecorded(false);
+  setShowSnippet(false);
+  setBpm(120); // optional: reset BPM to default
+};
+
+const [showOverlay, setShowOverlay] = useState(false);
+const [countdown, setCountdown] = useState(null); // null when not showing numbers
+
+
+
 
 
   //toggles recording state
 const handleRecordClick = () => {
   if (!isRecording) {
-    // Starting the recording
-    if (!hasRecorded) setHasRecorded(true);
-    setShowSnippet(false); // hide snippet while recording
+     if (!hasRecorded) setHasRecorded(true);
+    setShowSnippet(false);
+    setShowOverlay(true); // show black overlay when recording starts
+    setCountdown(3);
+  
+    let count = 3;
+    const countdownInterval = setInterval(() => {
+      count--;
+      if (count === 0) {
+        clearInterval(countdownInterval);
+        setShowOverlay(false);
+        setCountdown(null);
+        setIsRecording(true); // Start recording only after countdown
+      } else {
+        setCountdown(count);
+      }
+    }, 1000);
   } else {
-    // Stopping the recording
-    setShowSnippet(true); // show snippet after pause
+    setIsRecording(false);
+    setShowSnippet(true);
+    setShowOverlay(false);
+    setCountdown(null);
   }
-
-  setIsRecording(prev => !prev); // toggle recording state
 };
 
     // Start/stop the timer when recording
@@ -58,13 +95,13 @@ const handleRecordClick = () => {
 </div>
 
     {/* Metronome */}
-        <div className="metronome">
-    <button className="minus">-</button>
-    <div className="number-container">
-        <p className="number">120</p>
+    <div className="metronome">
+      <button className="minus" onClick={decreaseBpm}>-</button>
+      <div className="number-container">
+        <p className="number">{bpm}</p>
         <p className="beats">Beats per minute</p>
-    </div>
-    <button className="plus">+</button>
+      </div>
+      <button className="plus" onClick={increaseBpm}>+</button>
     </div>
 
     {/* Record Button */}
@@ -90,12 +127,21 @@ const handleRecordClick = () => {
     )}
 
     <div className="control-buttons">
-      <BasicBtn type="mediumOutline" text='Restart' />
+      <BasicBtn type="mediumOutline" text='Restart' onClick={handleRestart}   />
       <BasicBtn type="small" text='Post' />
     </div>
   </>
 )}
-</div> 
+
+{showOverlay && (
+  <>
+  <div className="overlay-backdrop"></div>
+  <div className="overlay">
+    {countdown && <p className="overlay-count">{countdown}</p>}
+  </div>
+  </>
+)}
+</div>
   );
 };
 
