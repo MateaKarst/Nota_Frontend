@@ -19,6 +19,7 @@ import PersonalizationAccount from "./pages/personalisation/AccountPersonalisati
 import Personalization1 from "./pages/personalisation/Personalization1";
 import Personalization2 from "./pages/personalisation/Personalization2";
 import Settings from "./pages/Settings";
+import Record from "./pages/Record";
 
 import "./App.css";
 // import { Search } from "lucide-react";
@@ -59,6 +60,7 @@ function AppContent() {
 
         {/* create song routes */}
         <Route path="/upload-song" element={<UploadSong />} />
+        <Route path="/record" element={<Record />} />
 
         {/* search routes */}
         <Route path="/search" element={<SearchPage />} />
