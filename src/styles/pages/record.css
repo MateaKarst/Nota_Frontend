@@ -5,7 +5,7 @@
 }
 
 
-.song-info {
+.recording-page  .song-info {
     display: flex;
   justify-content: center;     /* centers the text horizontally inside the container */
   align-items: center; 
@@ -115,13 +115,13 @@
   gap: 50px;
 }
 
-.play-icon {
+.recording-page  .play-icon {
   width: 30px;
   height: 30px;
   cursor: pointer;
 }
 
-.overlay {
+.recording-page .overlay {
   position: fixed;
   top: 55%;
   left: 50%;
@@ -134,7 +134,7 @@
    transform: translate(-50%, -50%);
 }
 
-.overlay-backdrop {
+.recording-page .overlay-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -144,7 +144,7 @@
   z-index: 998;
 }
 
-.overlay-count{
+ .recording-page .overlay-count{
   font-size: 68px;
   font-family: var(--font-family-primary);
   text-align: center;
