@@ -17,10 +17,12 @@ const LoginPage = () => {
                 <input type="password" name="Password" className="input-field" placeholder="Password" />
                 <BasicBtn text='Login'
                 onClick={() => navigate("/home")} />
-                <a href="/" className="forgot-password">Forgot your password?</a>
-                <p>or</p>
+                <div className="forgot-password">
+                <a className="forgot-password">Forgot your password?</a>
+                <p className="or">or</p>
                 <BasicBtn text='Create an account'
                 onClick={() => navigate("/create-account")} />
+                </div>
             </div>
         </div>
     )

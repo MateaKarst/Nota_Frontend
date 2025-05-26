@@ -28,12 +28,14 @@ const CreateAccount = () => {
           className="input-field"
           placeholder="Password"
         />
+       <div className ="login-link">
         <BasicBtn text="Create account" onClick={onCLickPersonalisation} />
-        <p>or</p>
+        <p className="or">or</p>
         <BasicBtn text="Login" onClick={onClickLogin} />
-        <p>
+        </div>
+        <p className="terms">
           By clicking Create Account, you agree to our{" "}
-          <a href="/">Terms and Conditions.</a>
+          <p className="terms-link">Terms and Conditions.</p>
         </p>
       </div>
     </div>
