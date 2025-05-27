@@ -1,10 +1,10 @@
 "use client"
 
 import React, { useState } from 'react';
-import MusicTag from '../components/MusicTag';
-import SmallButton from '../components/SmallButton';
-import Small2 from '../components/Small2';
-import HeaderVariants from '../components/header-backarrow';
+import MusicTag from '../components/Tags/MusicTag';
+import SmallButton from '../components/Buttons/BasicBtn';
+import Small2 from '../components/Buttons/BasicBtn';
+import HeaderVariants from '../components/Headers/HeaderVariants';
 
 import '../styles/pages/filter-page.css';
 
