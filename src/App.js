@@ -15,61 +15,23 @@ import Track from "./components/Tracks/UserTrack"
 import SongDescription from "./pages/SongDescription"
 import UploadSong from "./pages/UploadSong"
 import ViewAllPage from "./pages/ViewAllPage"
-
-
+import AccountSettings from "./pages/account-settings/AccountSettings";
+import Personalization1 from "./pages/personalisation/Personalization1";
+import SelectTopSongs from './pages/account-settings/SelectTopSongs'
 import "./App.css";
-import { Search } from "lucide-react";
 
-function AppContent() {
-  const location = useLocation();
-
-  // Define paths where NavBar should appear
-  const showNavBarPaths = ["/home", "/songs" /* , "/discover", "/profile" */];
-  const showNavBar = showNavBarPaths.includes(location.pathname);
-
-  return (
-    <>
-      <Routes>
-        {/* log in routes */}
-        <Route path="/" element={<Onboarding />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/create-account" element={<CreateAccount />} />
-
-        {/* nav bar routes */}
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/songs" element={<MySongsPage />} />
-        <Route path="/discover" element={<SearchPage />} />
-        <Route path="/prfile" element={<ProfilePage />} /> {/* fix styling*/}
-
-        {/* friend routes */}
-        <Route path="/profilefriend" element={<ProfileFriendPage />} />
-
-        {/* honme page routes */}
-        <Route path="/notifications" element={<Not />} />
-        <Route path="/view-all" element={<ViewAllPage />} /> {/* fix navigation*/}
-
-        {/* song routes */}
-        <Route path="/song-description" element={<SongDescription />} />
-
-        {/* create song routes */}
-       <Route path="/upload-song" element={<UploadSong />} />
-
-        {/* search routes */}
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/filter" element={<FilterPage />} />
-      </Routes>
-      {showNavBar && <NavBar />}
-    </>
-  );
-}
-
-function App() {
+   function App() {
   return (
     <Router>
-      <AppContent />
-   
+    <Routes>
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/account-settings" element={<AccountSettings />} />
+      <Route path="/select-top-songs" element={<SelectTopSongs />} />
+
+    </Routes>
     </Router>
   );
 }
+
 
 export default App;

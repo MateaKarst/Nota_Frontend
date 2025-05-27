@@ -1,0 +1,66 @@
+.account-settings-page{
+    color: var(--color-white);
+    font-family: var(--font-family-primary);
+}
+.profile-picture-container{
+  width: 100px;      
+  height: 100px;
+  border-radius: 50%; 
+  overflow: hidden;   
+  margin: 0 auto;
+}
+
+.profile-picture{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.profile-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: var(--spacing-10);
+}
+
+.account-form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-16);
+}
+
+.account-form input,
+.account-form textarea{
+    width: 320px;
+    padding: var(--spacing-8);
+    border-radius: var(--border-radius-20);
+    border: 2px solid var(--color-white);
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.account-form span{
+    margin-bottom: var(--spacing-10);
+}
+
+.account-form{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.interests ::placeholder{
+    color: var(--color-orange);
+}
+
+.top-songs-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--spacing-8);
+    margin: var(--spacing-16);
+}
+
+.small-cards {
+    padding: 0 var(--spacing-16);
+}

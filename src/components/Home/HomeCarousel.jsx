@@ -12,12 +12,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-<<<<<<< HEAD
+
 const HomeCarousel = ({ onPlay }) => {
-=======
-const HomeCarousel = () => {
+
   const navigate = useNavigate();
->>>>>>> violeta
 
     const cards =[
         { 
