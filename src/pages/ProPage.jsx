@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/pages/pro-page.css';
 import '../assets/backgrounds/pro-page-back.jpeg'
 import NotaLogo from '../components/Logos/NotaLogo';
@@ -9,24 +9,24 @@ import { ReactComponent as HeadphonesIcon } from '../assets/icons/headphones-ico
 import BasicBtn from '../components/Buttons/BasicBtn';
 
 const ProPage = () => {
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-//   const handleClose = () => {
-//     navigate(-1); // Повернення на попередню сторінку
-//   };
+  const handleClose = () => {
+    navigate('/home'); // Повернення на попередню сторінку
+  };
 
-//   const handleDiscover = () => {
-//     navigate('/plans'); // Заміни "/plans" на свою цільову сторінку
-//   };
+  const handleDiscover = () => {
+    navigate('/plans'); // Заміни "/plans" на свою цільову сторінку
+  };
 
   return (
     <div className="pro-page">
-        <div className='top'>
-      <button className="close-button">×</button>
+        <div className='top-pro'>
+      <button className="close-button" onClick={handleClose}>×</button>
       <NotaLogo colorIndex={3} width="110px" height="30px" ></NotaLogo>
       </div>
       <div className='middle'>
-      <h1 className="title">Try Pro version<br />with new opportunities</h1>
+      <h1 className="title-pro">Try Pro version<br />with new opportunities</h1>
 <div className='middle2'>
       <div className="feature feature-green">
         <span className="icon"> <HeadphonesIcon width={24} height={24} /></span>
@@ -44,7 +44,7 @@ const ProPage = () => {
       </div>
       </div>
 </div>
-      <BasicBtn type="main" text="Discover plans" />
+      <BasicBtn type="main" text="Discover plans" onClick={handleDiscover} />
     </div>
   );
 };

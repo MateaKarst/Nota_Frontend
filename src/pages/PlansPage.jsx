@@ -3,6 +3,7 @@ import "../styles/pages/plans-page.css";
 import NotaLogo from '../components/Logos/NotaLogo';
 import BasicBtn from '../components/Buttons/BasicBtn';
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from 'react-router-dom';
 
 const stripePromise = loadStripe("pk_test_51RTQK2CWh9wpzDVIFTkfAN10Tu2dYpHHyiPGLRC2w7rArvKFIXIsXLzjrDafSA8PlBXiwWHaqp8jhwLh2WMRTJyk00iKEWjtw7");
 
@@ -39,6 +40,10 @@ const plans = [
 ];
 
 const PlansPage = ({ onClose }) => {
+  const navigate = useNavigate();
+  const handleClose = () => {
+    navigate('/home'); 
+  };
   const [selectedPlan, setSelectedPlan] = useState(null);
   // Функція оплати:
 const handleCheckout = async () => {
@@ -46,6 +51,7 @@ const handleCheckout = async () => {
     alert("Please select a plan first");
     return;
   }
+
 
   const plan = plans[selectedPlan];
 
@@ -78,8 +84,7 @@ const handleCheckout = async () => {
     <div className="plans-page">
       <div className="top">
       <NotaLogo colorIndex={3} width="110px" height="30px" />
-        <button className="close-button" onClick={onClose}>×</button>
-
+      <button className="close-button" onClick={handleClose}>×</button>
       </div>
 
       <h2 className="title-plans">
