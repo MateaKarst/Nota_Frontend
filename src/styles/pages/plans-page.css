@@ -1,0 +1,214 @@
+@import '../variables.css';
+.plans-page {
+    position: relative;
+    background: url('../../assets/backgrounds/pro-page-back.jpeg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 1s ease-in;
+    gap: 10vh;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+gap: 5vh;
+align-self: stretch;
+flex-direction: row;
+width: 70vh
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .title-plans {
+    color: #FFF;
+    text-align: center;
+    font-family: var(--font-family-secondary);
+    font-size: var(--Size-head-text-h5-h6, 34px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 51px;
+    margin-bottom: 2.5rem;
+    animation: slideDown 1s ease-out;
+  }
+  .grid-table {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .feature-label {
+    font-family: var(--font-family-secondary);
+    text-align: left;
+    font-size: 16px;
+    padding: 6px 0;
+    color: #FFF;
+    animation: slideDown 1s ease-out;
+
+  }
+  
+  .empty-cell {
+    height: 44px; 
+  }
+  
+  .plan-header-section {
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 4px;
+  }
+  
+  .plan-title {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: var(--font-family-secondary);
+    color: #FFF;
+    animation: slideDown 1s ease-out;
+  }
+  
+  .plan-price {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 4px;
+    font-family: var(--font-family-secondary);
+  }
+  
+  .track-count {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 4px 0;
+    font-family: var(--font-family-secondary);
+  }
+  
+  .checkmark {
+    font-size: 20px;
+    text-align: center;
+    padding: 4px 0;
+  }
+  
+  .radio-select {
+    text-align: center;
+    padding-top: 10px;
+  }
+  
+  .radio-select input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #9C3EFF;
+    cursor: pointer;
+  }
+  .track-count.yellow,
+.radio-select.yellow input[type="radio"] {
+  color: #FFD700;
+}
+
+.track-count.red,
+.radio-select.red input[type="radio"] {
+  color: #FF4D4D;
+}
+
+.track-count.purple,
+.radio-select.purple input[type="radio"] {
+  color: #9C3EFF;
+}
+
+.checkmark.yellow {
+  color: #FFD700; 
+}
+
+.checkmark.red {
+  color: #FF4D4D; 
+}
+
+.checkmark.purple {
+  color: #9C3EFF; 
+}
+.plan-title.yellow {
+  color: #FFD700;
+}
+
+.plan-title.red {
+  color: #FF4D4D;
+}
+
+.plan-title.purple {
+  color: #9C3EFF;
+}
+
+.custom-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px;
+  
+}
+
+.custom-radio input[type="radio"] {
+  display: none;
+}
+
+
+.radio-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: transparent;
+  position: relative;
+  border-style: solid; 
+}
+
+.custom-radio.yellow .radio-indicator {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#E3CF5D, white), linear-gradient(45deg, #FFD700, #FFB800);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+.custom-radio.red .radio-indicator {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#C5456F, white), linear-gradient(45deg, #FF4D4D, #FF8888);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.custom-radio.purple .radio-indicator {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#9C3EFF, white), linear-gradient(45deg, #B266FF, #DDA0FF);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.custom-radio input[type="radio"]:checked + .radio-indicator {
+  background: linear-gradient(45deg, var(--start), var(--end));
+  transform: scale(1.1);
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+.custom-radio.yellow input[type="radio"]:checked + .radio-indicator {
+  --start: #FFD700;
+  --end: #FFB807;
+}
+
+.custom-radio.red input[type="radio"]:checked + .radio-indicator {
+  --start: #FF4D4D;
+  --end: #FF8888;
+}
+
+.custom-radio.purple input[type="radio"]:checked + .radio-indicator {
+  --start: #9C3EFF;
+  --end: #DDA0FF;
+}

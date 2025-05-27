@@ -1,21 +1,19 @@
-
-import '../src/App.css'
-import Editor from '../src/pages/Editor2';
-//import Editor from './pages/editor';
-//import Soundwave from './components/Editor/Soundwave';
-//import ringtone2 from '../src/assets/editor/iphone-ringtone.mp3'
-//import MultitrackMixer from './components/WorkingEditor/MultitrackMixer';
-//import TestingEd from './components/Editor/LibraryMulti/TestingEd';
-import ProPage from './pages/ProPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
+import PlansPage from './pages/PlansPage';
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
-    // <Editor/>
-    // <Soundwave
-    //  audioUrl = {ringtone2}/>
-    //<MultiTrackEditor/>
-    //<MultitrackMixer />
-    <ProPage/>
+    <Router>
+      <Routes>
+      <Route path="/" element={<PlansPage />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 
