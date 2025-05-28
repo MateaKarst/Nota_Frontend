@@ -1,6 +1,6 @@
 
 html, body, #root {
-  height: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
 }
@@ -8,7 +8,7 @@ html, body, #root {
 .App {
   text-align: center;
   background-color: #282c34;
-  height: 100%;
+  height: auto;
   width: auto;
 }
 

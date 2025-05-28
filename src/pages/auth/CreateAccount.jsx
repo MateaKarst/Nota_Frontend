@@ -1,21 +1,24 @@
 import React from "react";
-import NotaLogo from "../components/Logos/NotaLogo";
-import BasicBtn from "../components/Buttons/BasicBtn";
+import NotaLogo from "../../components/Logos/NotaLogo";
+import BasicBtn from "../../components/Buttons/BasicBtn";
 import { useNavigate } from "react-router-dom";
 
-import "../styles/variables.css";
-import "../styles/pages/create-account.css";
+import "../../styles/variables.css";
+import "../../styles/pages/create-account.css";
+import createAccountBg from "../../assets/backgrounds/createaccount-bg.jpg"; // background image import
 
 const CreateAccount = () => {
   const navigate = useNavigate();
-  const onClickLogin = () => navigate("/login");
-  const onCLickPersonalisation = () => navigate("/personalisation");
 
   return (
-    <div className="createaccount-page">
+    <div
+      className="createaccount-page"
+      style={{ backgroundImage: `url(${createAccountBg})` }}
+    >
       <div className="createaccount-page-container">
         <NotaLogo />
         <h1 className="title">Create an account</h1>
+
         <input
           type="email"
           name="Email"
@@ -28,14 +31,16 @@ const CreateAccount = () => {
           className="input-field"
           placeholder="Password"
         />
-       <div className ="login-link">
-        <BasicBtn text="Create account" onClick={onCLickPersonalisation} />
-        <p className="or">or</p>
-        <BasicBtn text="Login" onClick={onClickLogin} />
+
+        <div className="login-link">
+          <BasicBtn text="Create account" onClick={() => navigate("/personalisation")} />
+          <p className="or">or</p>
+          <BasicBtn text="Login" onClick={() => navigate("/login")} />
         </div>
+
         <p className="terms">
           By clicking Create Account, you agree to our{" "}
-          <p className="terms-link">Terms and Conditions.</p>
+          <span className="terms-link">Terms and Conditions.</span>
         </p>
       </div>
     </div>
