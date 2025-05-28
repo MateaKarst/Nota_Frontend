@@ -39,7 +39,7 @@ const LoginPage = () => {
             const response = await fetch(API_ENDPOINTS.AUTH.LOGIN, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: "include",
+                credentials: "include", // important for cookies
                 body: JSON.stringify({ email, password }),
             });
 
@@ -50,9 +50,12 @@ const LoginPage = () => {
                 return;
             }
 
-            Cookies.set('access_token', result.access_token, { expires: 7, secure: true, sameSite: 'lax' });
-            Cookies.set('refresh_token', result.refresh_token, { expires: 30, secure: true, sameSite: 'lax' });
+            Cookies.set('access_token', result.access_token, { expires: 7, sameSite: 'lax' });
+            Cookies.set('refresh_token', result.refresh_token, { expires: 30, sameSite: 'lax' });
 
+
+            // Just use user info from response
+            console.log('user:', result.user);
             setUser(result.user);
 
             toast.success("Login successful");

@@ -7,7 +7,7 @@ export const API_ENDPOINTS = {
         REGISTER: `${API_BASE_URL}/auth/register`,
     },
     CONNECTIONS: (userId) => `${API_BASE_URL}/connections/${userId}`,
-    USER: (id) => `${API_BASE_URL}/user/${id}`,
+    USER: (userId) => `${API_BASE_URL}/user/${userId}`,
 
 };
 

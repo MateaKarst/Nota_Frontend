@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Friend from "./Friend";
 import { useAuth } from "../../context/AuthProvider";
 import API_ENDPOINTS from "../../routes/apiEndpoints";
+import Cookies from "js-cookie";
 
 import '../../styles/components/friend.css';
 
@@ -17,35 +18,76 @@ const friendsData = [
   { name: "Petra", ProfilePicture: Petra, hasNewPosts: false, newPostsCount: 0 },
   { name: "Matea", ProfilePicture: Matea, hasNewPosts: false, newPostsCount: 0 },
 ];
-
 const FriendsCard = () => {
   const { user } = useAuth();
-  const [friends, setFriends] = useState([]);
+  const [connections, setConnections] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!user) return;
+
+    const userId = user.id;
+    console.log("user on friendcard:", user);
+    console.log("user on friendcard userId:", userId);
+
     const fetchFriends = async () => {
-      if (!user) return;
+      setLoading(true);
+      setError(null);
 
       try {
-        // Step 1: Fetch friend IDs
-        const res = await fetch(API_ENDPOINTS.CONNECTIONS(user.id));
-        const connections = await res.json();
+        const accessToken = Cookies.get("access_token");
+        if (!accessToken) throw new Error("No access token");
+
+        const res = await fetch(API_ENDPOINTS.CONNECTIONS(userId), {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
 
         if (!res.ok) throw new Error("Failed to fetch connections");
 
-        // Step 2: Fetch user details for each friend
+        const connections = await res.json();
+        console.log("connections fetched:", connections);
+
+        // Filter out connections missing connection_id
+        const validConnections = connections.filter(conn => {
+          if (!conn.connection_id) {
+            console.warn("Skipping connection without connection_id:", conn);
+            return false;
+          }
+          return true;
+        });
+
+        // Fetch friend details only for valid connection_ids
         const details = await Promise.all(
-          connections.map(async (conn) => {
-            const res = await fetch(API_ENDPOINTS.USER(conn.friend_id)); // Adjust key if needed
+          validConnections.map(async (conn) => {
+            const res = await fetch(API_ENDPOINTS.USER(conn.connection_id), {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            });
+            console.log("details res", res)
+
+            if (!res.ok) {
+              console.error(`Failed to fetch friend data for id: ${conn.connection_id}`, await res.text());
+              return null;
+            }
+
             const data = await res.json();
+            console.log("details data", data)
+            console.log("Fetched friend data:", data);
             return data;
           })
         );
 
-        setFriends(details);
+
+        // Filter out nulls from failed fetches
+        setConnections(details.filter(Boolean));
+
       } catch (err) {
         console.error("Error fetching friend details:", err);
+        setError(err.message || "Failed to load friends");
       } finally {
         setLoading(false);
       }
@@ -55,26 +97,27 @@ const FriendsCard = () => {
   }, [user]);
 
   if (loading) return <div className="friends-section">Loading...</div>;
-  if (!friends.length) return <div className="friends-section">No friends found.</div>;
+  if (error) return <div className="friends-section error">Error: {error}</div>;
+  if (!connections.length) return <div className="friends-section">No friends found.</div>;
 
   return (
     <div className="friends-section">
       <h2 className="friends-heading">Connections</h2>
       <div className="friends-row">
-        {friends.map((friend, index) => (
+        {connections.map((connections) => (
           <Friend
-            key={friend.id}
-            id={friend.id}
-            name={friend.name}
+            key={connections}
+            id={connections.user.id}
+            name={`${connections.user_details.first_name} ${connections.user_details.last_name}`}
             ProfilePicture={() =>
-              friend.avatar ? (
-                <img src={friend.avatar} alt={friend.name} className="avatar-img" />
+              connections.user_details.avatar ? (
+                <img src={connections.user_details.avatar} alt={connections.user_details.first_name} className="avatar-img" />
               ) : (
                 <div className="default-avatar" />
               )
             }
-            hasNewPosts={friend.hasNewPosts}
-            newPostsCount={friend.newPostsCount}
+            hasNewPosts={connections.user_details.hasNewPosts}
+            newPostsCount={connections.user_details.newPostsCount}
           />
         ))}
       </div>
