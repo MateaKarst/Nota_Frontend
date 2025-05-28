@@ -5,7 +5,6 @@ import HeaderMain from '../components/Headers/HeaderMain';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
-import NavBar from '../components/Navigation/NavBar'
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 

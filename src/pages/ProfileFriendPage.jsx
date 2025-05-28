@@ -4,7 +4,6 @@ import '../styles/pages/profile-friend-page.css'
 import ProfileCard from '../components/profile-container';
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
-import NavBar from '../components/Navigation/NavBar';
 import MusicPlayer from '../components/MusicPlayer';
 
 const ProfileFriendPage = () => {
@@ -193,8 +192,6 @@ const ProfileFriendPage = () => {
                 <MusicPlayer song={currentSong} />
               </div>
             )}
-
-      <NavBar />
     </div>
   );
 };
