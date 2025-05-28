@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ReactComponent as ShareIcon } from '../assets/share-icon.svg';
+import { ReactComponent as ShareIcon } from '../assets/icons/share-icon.svg';
 import '../styles/components/share-button.css';
 
 const ShareButton = () => {

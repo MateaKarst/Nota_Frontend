@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ReactComponent as CommentIcon } from '../assets/comment-icon.svg';
-import { ReactComponent as SendIcon } from '../assets/send-icon.svg';
+import { ReactComponent as CommentIcon } from '../assets/icons/comment-icon.svg';
+import { ReactComponent as SendIcon } from '../assets/icons/send-icon.svg';
 import '../styles/components/comment-button.css';
 
 const CommentButton = () => {

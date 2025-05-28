@@ -1,0 +1,60 @@
+@import '../variables.css';
+.popup-menu {
+    background-color: var( --color-black);
+    color: white;
+    border-radius: 24px;
+    box-shadow: 0 4px 10px rgba(255, 0, 102, 0.5);
+    padding: 10px 0;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font-family-primary);
+  }
+  
+  .popup-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #444;
+  }
+  
+  .popup-item:last-child {
+    border-bottom: none;
+  }
+  
+  .popup-item:hover {
+    background-color: #333;
+  }
+  
+  .popup-icon {
+    margin-right: 8px;
+  }
+  .share-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-white);
+    color: var(--color-orange);
+    padding: 9px var(--Spacing-xxxl, 48px);
+    border-radius: 24px;
+    font-size: 18px;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out;
+    justify-content: center;
+    width:60%
+  }
+  .share-button svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+  }
+  
+  .share-button span {
+    font-size: 14px;
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-regular);
+  }

@@ -1,6 +1,6 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom'; // Додаємо useNavigate
-
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; 
+import SmallPopups from '../SmallPopUps';
 import '../../styles/components/header.css';
 
 import { ReactComponent as PencilIcon } from '../../assets/icons/pencil-icon.svg';
@@ -51,6 +51,25 @@ const headers = [
 const HeaderVariants = ({ mode, title }) => {
   const headerConfig = headers.find((h) => h.mode === mode);
   const navigate = useNavigate(); 
+  const [showPopup, setShowPopup] = useState(false);
+  const menuBtnRef = useRef(null);
+  const handleMenuClick = () => {
+    setShowPopup(!showPopup);
+  };
+  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuBtnRef.current &&
+        !menuBtnRef.current.contains(event.target)
+      ) {
+        setShowPopup(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (!headerConfig || !headerConfig.visibility) return null;
 
@@ -61,6 +80,7 @@ const HeaderVariants = ({ mode, title }) => {
   const handleBackClick = () => {
     navigate(-1);
   };
+
 
   return (
     <header
@@ -86,18 +106,27 @@ const HeaderVariants = ({ mode, title }) => {
         </div>
       )}
 
-      <div className="right-section">
-        {headerConfig.hasEditIcon && (
-          <button className="edit-btn" style={{ background: "none", border: "none" }}>
-            <PencilIcon className="icon-style" />
-          </button>
-        )}
-        {headerConfig.hasMenuIcon && (
-          <button className="menu-btn" style={{ background: "none", border: "none" }}>
-            <MenuIcon className="icon-style" />
-          </button>
-        )}
-      </div>
+<div className="right-section" ref={menuBtnRef} style={{ position: "relative" }}>
+  {headerConfig.hasEditIcon && (
+    <button className="edit-btn" style={{ background: "none", border: "none" }}>
+      <PencilIcon className="icon-style" />
+    </button>
+  )}
+  {headerConfig.hasMenuIcon && (
+    <button
+      className="menu-btn"
+      style={{ background: "none", border: "none" }}
+      onClick={handleMenuClick}
+    >
+      <MenuIcon className="icon-style" />
+    </button>
+  )}
+  {showPopup && (
+    <div style={{ position: "absolute", top: "40px", right: 0, zIndex: 999 }}>
+      <SmallPopups type="delete" />
+    </div>
+  )}
+</div>
 
       {!isUserHeader && !isLeftAlignedHeader && headerConfig.title && (
         <div className="header-title">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ReactComponent as LikeIcon } from '../assets/like-icon.svg';
+import { ReactComponent as LikeIcon } from '../assets/icons/like-icon.svg';
 import '../styles/components/like-button.css';
 
 const LikeButton = () => {
