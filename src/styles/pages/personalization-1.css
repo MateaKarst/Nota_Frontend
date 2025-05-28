@@ -7,14 +7,17 @@
   padding: var(--spacing-14);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-
 
 .tags {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
     gap: var(--spacing-14);
     margin-bottom: var(--spacing-32);
+      align-items: center;
+  justify-content: center;
 }
 
 

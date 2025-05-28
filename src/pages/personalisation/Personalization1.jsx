@@ -1,7 +1,9 @@
 import React from "react";
-import PurpleTag from "../../components/Tags/PurpleTag"
+import { useState } from "react";
 import Buttons from "../../components/Buttons/BasicBtn"
 import HeaderVariants from "../../components/Headers/HeaderVariants";
+import { useNavigate } from "react-router-dom";
+import MusicTag from "../../components/Tags/MusicTag";
 
 import "../../styles/variables.css";
 import "../../styles/pages/personalization-1.css";
@@ -26,6 +28,17 @@ const genres = [
 ];
 
 const Personalization1 = () => {
+    const navigate = useNavigate();
+    const [selectedGenres, setSelectedGenres] = useState([]);
+
+    const toggleGenre = (genre) => {
+        setSelectedGenres((prev) =>
+            prev.includes(genre)
+                ? prev.filter((g) => g !== genre)
+                : [...prev, genre]
+        );
+    };
+
     return (
         <div className="container">
             <div>
@@ -33,16 +46,26 @@ const Personalization1 = () => {
 
                 <div className="tags">
                     {genres.map((genre) => (
-                        <PurpleTag key={genre} text={`#${genre}`} />
+                        <MusicTag
+                            key={genre}
+                            text={genre}
+                            colorIndex={selectedGenres.includes(genre) ? 3 : 2}
+                            isSelected={selectedGenres.includes(genre)}
+                            onClick={() => toggleGenre(genre)}
+                        />
                     ))}
                 </div>
 
                 <div className="next-button-wrapper">
-                    <Buttons type="default" text="Next" />
+                    <Buttons
+                        type="default"
+                        text="Next"
+                        onClick={() => navigate("/home")}
+                    />
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Personalization1;

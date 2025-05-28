@@ -11,7 +11,6 @@ import NavBar from "./components/Navigation/NavBar";
 import Not from "./pages/NotificationsPage"
 import SearchPage from "./pages/SearchPage"
 import FilterPage from "./pages/FilterPage";
-// import Track from "./components/Tracks/UserTrack"
 import SongDescription from "./pages/SongDescription"
 import UploadSong from "./pages/UploadSong"
 import ViewAllPage from "./pages/ViewAllPage"
@@ -37,6 +36,9 @@ function AppContent() {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/personalisation" element={<PersonalizationAccount />} />
         <Route path="/personalisation1-filters" element={<Personalization1 />} />
+        {/* to be done in the future <Route path="/personalisation2-filters" element={<Personalization2 />} />*/}
+        
+
 
         {/* nav bar routes */}
         <Route path="/home" element={<HomePage />} />
