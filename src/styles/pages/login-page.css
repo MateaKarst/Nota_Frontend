@@ -10,7 +10,7 @@
     justify-content: top;
     font-family: var(--font-family-primary);
     height: 100dvh;
-    padding-top: 6dvh;
+    padding-top: 6%;
 }
 
 .login-page-container {
