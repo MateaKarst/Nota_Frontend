@@ -4,19 +4,13 @@ import "../../styles/components/editor/editor-instrument.css";
 
 const EditorInstrument = ({ icon: Icon, label, }) => {
   const colorMap = {
-    pink: "var(--color-pink)",
-    orange: "var(--color-orange)",
-    purple: "var(--color-purple)",
+    Drum: "var(--color-pink)",
+    Guitar: "var(--color-orange)",
+    Bass: "var(--color-purple)",
   };
 
-  //get random color square
-  const getRandomColor = () => {
-    const colors = Object.values(colorMap);
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-  };
+ const bgColor = colorMap[label] || "var(--color-pink)";
 
-  const bgColor = getRandomColor();
 
   return (
     <div className="editor-instrument" style={{ backgroundColor: bgColor }}>
