@@ -10,17 +10,22 @@ import "./App.css"
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <ProtectedRoute>
-          <Routes>
-            {appRoutes.map(({ path, element }) => (
-              <Route key={path} path={path} element={element} />
-            ))}
-          </Routes>
-        </ProtectedRoute>
-      </Router>
-    </AuthProvider>
+    <div className="App">
+    <div className="mobile-wrap">
+
+      <AuthProvider>
+        <Router>
+          <ProtectedRoute>
+            <Routes>
+              {appRoutes.map(({ path, element }) => (
+                <Route key={path} path={path} element={element} />
+              ))}
+            </Routes>
+          </ProtectedRoute>
+        </Router>
+      </AuthProvider>
+    </div>
+    </div>
   );
 }
 
