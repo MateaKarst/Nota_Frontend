@@ -14,7 +14,11 @@ import HeaderVariants from "../../components/Headers/HeaderVariants";
 import SearchBar from "../../components/Search/SearchBar";
 >>>>>>> dominyka
 
+<<<<<<< HEAD
 import "../../styles/variables.css"
+=======
+import "../../styles/variables.css";
+>>>>>>> petra
 import "../../styles/pages/personalization-1.css"
 
 const genres = [

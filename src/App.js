@@ -14,11 +14,13 @@ import FilterPage from "./pages/FilterPage";
 import SongDescription from "./pages/SongDescription"
 import UploadSong from "./pages/UploadSong"
 import ViewAllPage from "./pages/ViewAllPage"
-import PersonalizationAccount from "./pages/personalisation/AccountPersonalisation";
+import AccountSettings from "./pages/account-settings/AccountSettings";
 import Personalization1 from "./pages/personalisation/Personalization1";
 import Personalization2 from "./pages/personalisation/Personalization2";
+import PersonalizationAccount from "./pages/personalisation/AccountPersonalisation";
 import Settings from "./pages/Settings";
 import Record from "./pages/Record";
+
 
 import "./App.css";
 // import { Search } from "lucide-react";
@@ -52,7 +54,7 @@ function AppContent() {
 
         {/* honme page routes */}
         <Route path="/notifications" element={<Not />} />
-        <Route path="/view-all" element={<ViewAllPage />} /> 
+        <Route path="/view-all" element={<ViewAllPage />} />
 
         {/* song routes */}
         <Route path="/song-description" element={<SongDescription />} />
@@ -67,6 +69,9 @@ function AppContent() {
 
         {/* settings */}
         <Route path="/settings" element={<Settings />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
+        {/* <Route path="/select-top-songs" element={<SelectTopSongs />} /> */}
 
       </Routes>
       {showNavBar && <NavBar />}
@@ -77,9 +82,10 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent /> 
+      <AppContent />
     </Router>
   );
 }
+
 
 export default App;

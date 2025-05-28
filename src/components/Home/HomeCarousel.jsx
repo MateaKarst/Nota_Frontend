@@ -10,9 +10,7 @@ import "../../styles/variables.css";
 
 import { useNavigate } from 'react-router-dom';
 
-// const HomeCarousel = ({ onPlay }) => {
-
-const HomeCarousel = () => {
+const HomeCarousel = ({ onPlay }) => {
   const navigate = useNavigate();
 
   const cards = [
@@ -104,14 +102,14 @@ const HomeCarousel = () => {
         {cards.map((card) => (
           <SwiperSlide key={card.id} style={{ width: '250px' }}>
             <CaroselCard {...card}
-            // onPlay={() =>
-            //         onPlay({
-            //           title: card.title,
-            //           artist: card.creator,
-            //           cover: card.imageUrl,
-            //           audio: card.audio,
-            //   })
-            // }
+            onPlay={() =>
+                    onPlay({
+                      title: card.title,
+                      artist: card.creator,
+                      cover: card.imageUrl,
+                      audio: card.audio,
+              })
+            }
             />
           </SwiperSlide>
         ))}
