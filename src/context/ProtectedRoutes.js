@@ -1,25 +1,23 @@
-"use client";
+// src/context/ProtectedRoute.jsx
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 import { appRoutes } from "../routes/routesConfig";
-import useAppHook from "./AppHook";
 
-const PUBLIC_ROUTES = appRoutes
-    .filter(route => route.isPublic)
-    .map(route => route.path);
+const PUBLIC_ROUTES = appRoutes.filter(route => route.isPublic).map(route => route.path);
 
 const ProtectedRoute = ({ children }) => {
-    const { isLoggedIn, loading } = useAppHook();
-    const navigate = useNavigate();
+    const { user, loading } = useAuth();
     const location = useLocation();
-
-    const isPublicRoute = PUBLIC_ROUTES.includes(location.pathname);
+    const navigate = useNavigate();
+    const isPublic = PUBLIC_ROUTES.includes(location.pathname);
 
     useEffect(() => {
-        if (!loading && !isLoggedIn && !isPublicRoute) {
+        if (!loading && !user && !isPublic) {
             navigate("/login");
         }
-    }, [isLoggedIn, isPublicRoute, navigate, loading]);
+    });
+
 
     if (loading) return <div>Loading...</div>;
 
