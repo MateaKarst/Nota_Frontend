@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import SmallCard from "../../components/MusicCard/SmallCard/SmallCard";
 import BasicBtn from "../../components/Buttons/BasicBtn";
+import HeaderVariants from "../../components/Headers/HeaderVariants";
 
 const allSongs = [
      {
@@ -77,15 +78,14 @@ const SelectTopSongs = () => {
 
   return (
     <div>
-      <h2 style={{ color: 'white', fontSize: '20px', marginBottom: '16px' }}>Pick your top 3 songs</h2>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <HeaderVariants mode='default' />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '2rem' }}>
         {allSongs.map((song, index) => (
           <div
             key={song.id}
             onClick={() => toggleSelect(song)}
             style={{
-              border: selected.some(s => s.id === song.id) ? '2px solid var(--color-pink)' : '2px solid transparent',
+              backgroundColor: selected.some(s => s.id === song.id) ? 'var(--color-pink-trans-55)' : 'transparent',
               borderRadius: '12px',
               padding: '4px',
               pointerEvents: 'auto',
@@ -105,7 +105,7 @@ const SelectTopSongs = () => {
         ))}
       </div>
 
-      <div style={{ marginTop: '20px' }} onClick={handleSave}>
+      <div style={{ marginTop: '20px', justifyContent: 'center', display: 'flex' }} onClick={handleSave}>
         <BasicBtn text="Save Selection" />
       </div>
     </div>

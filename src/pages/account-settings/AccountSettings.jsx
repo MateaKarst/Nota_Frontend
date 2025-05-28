@@ -106,7 +106,7 @@ return (
           placeholder="#music, #jazz, #guitar"
         />
       </label>
-      <div onClick={handleSubmit}>
+      <div onClick={handleSubmit} className='button'>
       <BasicBtn text='Save Changes' type="medium"></BasicBtn>
         </div>
         </form>

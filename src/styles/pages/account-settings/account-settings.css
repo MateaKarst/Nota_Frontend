@@ -64,3 +64,7 @@
 .small-cards {
     padding: 0 var(--spacing-16);
 }
+
+.button {
+    margin-top: 2rem;
+}
