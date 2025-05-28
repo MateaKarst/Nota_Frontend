@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/variables.css";
 import "../../styles/components/friend.css";
 
-const Friend = ({ name, ProfilePicture, hasNewPosts, newPostsCount }) => {
+const Friend = ({ id, name, ProfilePicture, hasNewPosts, newPostsCount }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/profilefriend");
+    navigate(`/profilefriend/${id}`); // Pass friend ID to the URL
   };
 
   return (

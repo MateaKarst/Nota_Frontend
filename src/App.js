@@ -1,35 +1,48 @@
-"use client"
+"use client";
 
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./context/ProtectedRoutes"; // Your ProtectedRoute component
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import ProtectedRoute from "./context/ProtectedRoutes";
 import { AuthProvider } from "./context/AuthProvider";
-import { appRoutes } from "./routes/routesConfig"; // Adjust path as needed
+import { appRoutes } from "./routes/routesConfig";
+import NavBar from "./components/Navigation/NavBar";
 
-import "./App.css"
+import "./App.css";
 
-function App() {
+function AppWrapper() {
+  const location = useLocation();
+
+  // List of paths where NavBar should be hidden
+  const hiddenNavPaths = ["/login", "/register", "/splash", "/onboarding"];
+
+  const shouldHideNavBar = hiddenNavPaths.includes(location.pathname);
+
   return (
     <div className="App">
-    <div className="mobile-wrap">
-
-      <AuthProvider>
-        <Router>
-          <ProtectedRoute>
+      <div className="mobile-frame">
+        <ProtectedRoute>
+          <div className="page-content">
             <Routes>
               {appRoutes.map(({ path, element }) => (
                 <Route key={path} path={path} element={element} />
               ))}
             </Routes>
-          </ProtectedRoute>
-        </Router>
-      </AuthProvider>
-    </div>
+          </div>
+          {!shouldHideNavBar && <NavBar />}
+        </ProtectedRoute>
+      </div>
     </div>
   );
 }
 
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppWrapper />
+      </Router>
+    </AuthProvider>
+  );
+}
+
 export default App;
-
-
-

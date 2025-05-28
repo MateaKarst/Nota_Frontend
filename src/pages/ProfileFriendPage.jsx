@@ -1,15 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import '../styles/pages/profile-friend-page.css'
 import ProfileCard from '../components/profile-container';
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import NavBar from '../components/Navigation/NavBar';
-import emilyImg from '../assets/emily-profile.jpg';
 import MusicPlayer from '../components/MusicPlayer';
 
 const ProfileFriendPage = () => {
+  const { id } = useParams();
+  const [userData, setUserData] = useState(null);
+  const [connections, setConnections] = useState([]);
   const [currentSong, setCurrentSong]=useState(null);
   const [activeTab, setActiveTab] = useState("own"); // "own" або "collab"
+
+   // Fetch user info
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const res = await fetch(`/api/users/${id}`);
+      const data = await res.json();
+      setUserData(data);
+    };
+
+    fetchUserData();
+  }, [id]);
+
+  // Fetch connections
+  useEffect(() => {
+    const fetchConnections = async () => {
+      const res = await fetch(`/api/connections/${id}`);
+      const connData = await res.json();
+
+      // Fetch each connected user
+      const detailedConnections = await Promise.all(
+        connData.map(async (conn) => {
+          const friendRes = await fetch(`/api/users/${conn.connection_id}`);
+          const friend = await friendRes.json();
+          return friend;
+        })
+      );
+
+      setConnections(detailedConnections);
+    };
+
+    fetchConnections();
+  }, [id]);
+
+  const handleTabClick = (tab) => setActiveTab(tab);
+
+  if (!userData) return <div>Loading user profile...</div>;
+
 
   const ownSongs = [
     {
@@ -57,10 +97,6 @@ const ProfileFriendPage = () => {
     }
   ];
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
-
   // Стилі для кнопок, можна винести в css
   const switcherBtnStyle = {
     width: "fit-content",
@@ -85,10 +121,10 @@ const ProfileFriendPage = () => {
         <HeaderVariants mode="menu" className="header1" />
         <div style={{ paddingRight: 20, paddingLeft: 20 }}>
           <ProfileCard
-            image={emilyImg}
-            name="Emily Star"
+            image={userData.avatar}
+            name={userData.name}
             tagline="Music is the path of my life and heart🖤"
-            connections={15}
+            connections={connections.length}
             btns={true}
           />
         </div>
