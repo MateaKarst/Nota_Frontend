@@ -9,7 +9,6 @@ import MusicPlayer from '../components/MusicPlayer';
 import API_ENDPOINTS from '../routes/apiEndpoints';
 import { useNavigate } from 'react-router-dom';
 
-
 const ProfileFriendPage = () => {
   const navigate = useNavigate();
 
