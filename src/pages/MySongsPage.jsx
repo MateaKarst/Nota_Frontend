@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from '../components/Search/SearchBar';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import HeaderMySongs from '../components/Headers/HeaderMySongs';
-import MusicPlayer from '../components/MusicPlayer';
+// import MusicPlayer from '../components/MusicPlayer';
 
 import "../styles/pages/my-songs.css"
 
@@ -108,9 +108,9 @@ function MySongsPage() {
         ))}
       </div>
 
-{currentSong && (
-  <MusicPlayer song={currentSong} />
-)}
+{/* {currentSong && (
+   <MusicPlayer song={currentSong} />
+)} */}
     </div>
   );
 }

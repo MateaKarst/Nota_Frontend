@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Cookies from 'js-cookie'; // ✅ Required import
+import Cookies from 'js-cookie'; 
 import '../styles/pages/profile-friend-page.css';
 import ProfileCard from '../components/profile-container';
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
-import MusicPlayer from '../components/MusicPlayer';
+//import MusicPlayer from '../components/MusicPlayer';
 import API_ENDPOINTS from '../routes/apiEndpoints';
 import { useNavigate } from 'react-router-dom';
 
@@ -213,7 +213,7 @@ const ProfileFriendPage = () => {
 
       {currentSong && (
         <div className="music-player-container">
-          <MusicPlayer song={currentSong} />
+          {/* <MusicPlayer song={currentSong} /> */}
         </div>
       )}
     </div>
