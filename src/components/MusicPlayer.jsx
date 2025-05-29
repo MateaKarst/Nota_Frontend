@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "../styles/components/music-player.css";
 import playIcon from "../assets/musicplayer/play.svg";
 import pauseIcon from "../assets/musicplayer/pause.svg";
-import heartIcon from "../assets/musicplayer/heart.svg";
+import LikeButton from "./like-button";
 import songCover from "../assets/musicplayer/song-cover.svg";
 
 export const dummySong = {
@@ -83,7 +83,7 @@ const MusicPlayer = ({ song }) => {
         </div>
       </div>
       <img
-        src={heartIcon}
+        src={LikeButton}
         alt="Like"
         className="mini-icon heart-icon"
         onClick={() => console.log("Liked")}
