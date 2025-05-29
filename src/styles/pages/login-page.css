@@ -1,6 +1,9 @@
 @import '../variables.css';
 
+
 .login-page {
+    height: 100dvh;
+    max-height: 800px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -9,8 +12,6 @@
     align-items: center;
     justify-content: top;
     font-family: var(--font-family-primary);
-    height: 100dvh;
-    padding-top: 6%;
 }
 
 .login-page-container {
@@ -20,6 +21,8 @@
     width: 100%;
     gap: 1.5rem;
     max-width: 400px;
+    height: 100%;
+    padding-top: 6%;
 }
 
 .title {

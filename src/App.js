@@ -21,7 +21,7 @@ function AppWrapper() {
     <div className="App">
       <div className="mobile-frame">
         <ProtectedRoute>
-          <div className="page-content">
+          <div className={`page-content ${shouldHideNavBar ? "no-navbar" : "with-navbar"}`}>
             <Routes>
               {appRoutes.map(({ path, element }) => (
                 <Route key={path} path={path} element={element} />
