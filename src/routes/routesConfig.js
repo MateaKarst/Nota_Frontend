@@ -29,7 +29,6 @@ export const appRoutes = [
     { path: "/search", element: <SearchPage /> },
 
     { path: "/profile", element: <ProfilePage /> },
-    // { path: "/profilefriend", element: <ProfileFriendPage /> },
     { path: "/profilefriend/:id", element: <ProfileFriendPage /> },
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },

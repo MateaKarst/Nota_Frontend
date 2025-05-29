@@ -3,6 +3,7 @@ import Friend from "./Friend";
 import { useAuth } from "../../context/AuthProvider";
 import API_ENDPOINTS from "../../routes/apiEndpoints";
 import Cookies from "js-cookie";
+import { Link } from 'react-router-dom';
 
 import '../../styles/components/friend.css';
 
@@ -104,22 +105,33 @@ const FriendsCard = () => {
     <div className="friends-section">
       <h2 className="friends-heading">Connections</h2>
       <div className="friends-row">
-        {connections.map((connections) => (
-          <Friend
-            key={connections}
-            id={connections.user.id}
-            name={`${connections.user_details.first_name} ${connections.user_details.last_name}`}
-            ProfilePicture={() =>
-              connections.user_details.avatar ? (
-                <img src={connections.user_details.avatar} alt={connections.user_details.first_name} className="avatar-img" />
-              ) : (
-                <div className="default-avatar" />
-              )
-            }
-            hasNewPosts={connections.user_details.hasNewPosts}
-            newPostsCount={connections.user_details.newPostsCount}
-          />
-        ))}
+        {connections.map((connection, index) => {
+          if (!connection.user.user?.id) {
+            console.warn("Missing user ID for connection:", connection);
+            return null; // Skip rendering this item
+          }
+
+          const userId = connection.user.user?.id;
+          console.log("userId on friend card", userId);
+
+          return (
+            <Link key={userId || index} to={`/profilefriend/${userId}`}>
+              <Friend
+                id={userId}
+                name={`${connection.user_details.first_name} ${connection.user_details.last_name}`}
+                ProfilePicture={() =>
+                  connection.user_details.avatar ? (
+                    <img src={connection.user_details.avatar} alt={connection.user_details.first_name} className="avatar-img" />
+                  ) : (
+                    <div className="default-avatar" />
+                  )
+                }
+                hasNewPosts={connection.user_details.hasNewPosts}
+                newPostsCount={connection.user_details.newPostsCount}
+              />
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
