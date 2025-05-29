@@ -11,12 +11,10 @@ const EditorInstrument = ({ icon: Icon, label, }) => {
     Accordion: "var(--color-orange)",
     Ukulele: "var(--color-purple)", 
     Flute: "var(--color-pink)", 
-    Guitar: "var(--color-orange)",
     Piano: "var(--color-purple)",
     Saxophone: "var(--color-pink)", 
     Violin: "var(--color-orange)",
-    Trombone: "var(--color-purple)", 
-    DoubleBass: "var(--color-orange)"
+    Trombone: "var(--color-purple)"
   };
 
  const bgColor = colorMap[label] || "var(--color-pink)";
