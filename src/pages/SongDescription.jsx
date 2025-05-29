@@ -1,7 +1,6 @@
 import React from 'react';
 import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
-import NavBar from '../components/Navigation/NavBar';
 import HeaderVariants from "../components/Headers/HeaderVariants";
 import BasicBtn from "../components/Buttons/BasicBtn";
 
@@ -24,11 +23,6 @@ const SongDescription = () => {
           <TrackDropdown />
         </div>
       </div>
-
-    {/* NavBar */}
-      <div className="navbar-bottom">
-        <NavBar />
-      </div> 
 
     {/* Collaborate Button*/}
       <div className="collaborate">

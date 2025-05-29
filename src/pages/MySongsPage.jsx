@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from '../components/Search/SearchBar';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import HeaderMySongs from '../components/Headers/HeaderMySongs';
-import NavBar from '../components/Navigation/NavBar';
-import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
+import MusicPlayer from '../components/MusicPlayer';
 
 import "../styles/pages/my-songs.css"
 
@@ -112,8 +111,6 @@ function MySongsPage() {
 {currentSong && (
   <MusicPlayer song={currentSong} />
 )}
-
-      <NavBar />
     </div>
   );
 }

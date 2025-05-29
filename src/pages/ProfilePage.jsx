@@ -3,7 +3,6 @@ import '../styles/pages/profile-page.css';
 import ProfileCard from '../components/profile-container';
 import HeaderProfile from '../components/Headers/HeaderProfile';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
-import NavBar from '../components/Navigation/NavBar';
 import lilyImg from '../assets/lily-profile.jpg';
 import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 
@@ -151,8 +150,6 @@ const ProfilePage = () => {
           <MusicPlayer song={currentSong} />
         </div>
       )}
-
-      <NavBar />
     </div>
   );
 };

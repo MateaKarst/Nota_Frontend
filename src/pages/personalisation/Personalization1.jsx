@@ -1,14 +1,14 @@
 
-import React, { useState } from "react";
-//import PurpleTag from "../../components/Tags/PurpleTag"
-import MusicTag from "../../components/Tags/MusicTag";
+import React from "react";
+import { useState } from "react";
 import Buttons from "../../components/Buttons/BasicBtn"
 import HeaderVariants from "../../components/Headers/HeaderVariants";
-import SearchBar from "../../components/Search/SearchBar";
 import { useNavigate } from "react-router-dom";
+import MusicTag from "../../components/Tags/MusicTag";
+//import PurpleTag from "../../components/Tags/PurpleTag"
+import SearchBar from "../../components/Search/SearchBar";
 
 import "../../styles/variables.css";
-
 import "../../styles/pages/personalization-1.css"
 
 const genres = [
@@ -32,30 +32,33 @@ const genres = [
 
 const Personalization1 = () => {
     const navigate = useNavigate();
-      const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
 
-  const handleTagClick = (genre) => {
-    setSelectedGenres((prevSelected) =>
-      prevSelected.includes(genre)
-        ? prevSelected.filter((item) => item !== genre)
-        : [...prevSelected, genre]
-    );
-  };
-
+    const handleTagClick = (genre) => {
+        setSelectedGenres((prevSelected) =>
+            prevSelected.includes(genre)
+                ? prevSelected.filter((item) => item !== genre)
+                : [...prevSelected, genre]
+        );
+    };
     return (
         <div className="container">
             <div>
                 <HeaderVariants className="header" mode="default" />
 
-        <h2 className="question1">What music genre do you like to create or work on?</h2>
+                <h2 className="question1">What music genre do you like to create or work on?</h2>
 
-          <SearchBar 
-            variant={1}/>
+                <SearchBar
+                    variant={1} />
 
                 <div className="tags">
                     {genres.map((genre) => (
-                        <MusicTag key={genre} text={`${genre}`} colorIndex={2} isSelected={selectedGenres.includes(genre)} onClick={() => handleTagClick(genre)} />
-
+                        <MusicTag
+                            key={genre}
+                            text={`${genre}`}
+                            colorIndex={2}
+                            isSelected={selectedGenres.includes(genre)}
+                            onClick={() => handleTagClick(genre)} />
                     ))}
                 </div>
 

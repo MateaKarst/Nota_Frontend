@@ -1,15 +1,40 @@
-
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
+
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #282c34;
   height: 100%;
-  width: auto;
+}
+
+/* Mobile phone frame */
+.mobile-frame {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  max-height: 800px;
+  height: 100vh; /* For responsiveness */
+  border: 1px solid #555;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollable page content inside frame */
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 50px; /* Enough space for NavBar */
 }
 
 .App-logo {
