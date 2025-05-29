@@ -5,7 +5,7 @@ import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import NavBar from '../components/Navigation/NavBar';
 import emilyImg from '../assets/emily-profile.jpg';
-import MusicPlayer from '../components/MusicPlayer';
+import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 
 const ProfileFriendPage = () => {
   const [currentSong, setCurrentSong]=useState(null);

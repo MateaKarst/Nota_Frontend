@@ -3,7 +3,15 @@ import PlayBtn from "../../Buttons/PlayBtn";
 import CoverImg from "./CoverImg";
 import { useNavigate } from "react-router-dom";
 
-const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNbr, onPlay, audio }) => {
+const MusicCard = ({
+  imageUrl,
+  title,
+  creator,
+  layout = "column",
+  contributersNbr,
+  onPlay,
+  audio,
+}) => {
   const isRow = layout === "row";
 
   const navigate = useNavigate();
@@ -13,7 +21,8 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
   };
 
   return (
-    <div onClick={handleClick}
+    <div
+      onClick={handleClick}
       style={{
         width: isRow ? "auto" : "165px",
         height: isRow ? "auto" : "200px",
@@ -30,7 +39,6 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
     >
       <div style={{ width: "150px", position: "relative" }}>
         <CoverImg SVGImg={imageUrl} /> {/* Pass the image URL directly here */}
-
         {/* music btn */}
         <div
           style={{
@@ -46,12 +54,14 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
             circleColor="var(--color-purple)"
             iconColor="white"
             size={40}
-            onClick={() => onPlay({
-  title,
-  artist: creator,
-  cover: imageUrl,
-  audio
-})}
+            onClick={() =>
+              onPlay({
+                title,
+                artist: creator,
+                cover: imageUrl,
+                audio,
+              })
+            }
           />
         </div>
       </div>
@@ -69,18 +79,18 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
           marginTop: isRow ? "0" : "8px",
         }}
       >
-  <h2
-    style={{
-      fontSize: "18px",
-      fontWeight: "600",
-      margin: "0px 0 4px 0",
-      color: "var(--color-white)",
-      textAlign: "left",       
-      width: "100%",            
-    }}
-  >
-    {title}
-  </h2>
+        <h2
+          style={{
+            fontSize: "18px",
+            fontWeight: "600",
+            margin: "0px 0 4px 0",
+            color: "var(--color-white)",
+            textAlign: "left",
+            width: "100%",
+          }}
+        >
+          {title}
+        </h2>
         <p
           style={{
             fontSize: "12px",
@@ -98,7 +108,6 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
 };
 
 export default MusicCard;
-
 
 /*
   calling example

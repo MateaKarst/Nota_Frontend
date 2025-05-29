@@ -1,5 +1,4 @@
-
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MySongsPage from "./pages/MySongsPage";
 import Onboarding from "./pages/Onboarding";
@@ -8,34 +7,35 @@ import CreateAccount from "./pages/CreateAccount";
 import ProfilePage from './pages/ProfilePage';
 import ProfileFriendPage from './pages/ProfileFriendPage';
 import NavBar from "./components/Navigation/NavBar";
-import Not from "./pages/NotificationsPage"
-import SearchPage from "./pages/SearchPage"
+import Not from "./pages/NotificationsPage";
+import SearchPage from "./pages/SearchPage";
 import FilterPage from "./pages/FilterPage";
-import SongDescription from "./pages/SongDescription"
-import UploadSong from "./pages/UploadSong"
-import ViewAllPage from "./pages/ViewAllPage"
+import SongDescription from "./pages/SongDescription";
+import UploadSong from "./pages/UploadSong";
+import ViewAllPage from "./pages/ViewAllPage";
 import AccountSettings from "./pages/account-settings/AccountSettings";
 import Personalization1 from "./pages/personalisation/Personalization1";
 import Personalization2 from "./pages/personalisation/Personalization2";
 import PersonalizationAccount from "./pages/personalisation/AccountPersonalisation";
 import Settings from "./pages/Settings";
 import Record from "./pages/Record";
-
+import MusicPlayer from "./components/MusicPlayer/MusicPlayer";
 
 import "./App.css";
-// import { Search } from "lucide-react";
 
-function AppContent() {
+function App() {
   const location = useLocation();
+  const hidePlayerPaths = ["/song-description"];
+  const showMusicPlayer = !hidePlayerPaths.includes(location.pathname);
 
   // Define paths where NavBar should appear
-  const showNavBarPaths = ["/home", "/songs" /* , "/discover", "/profile" */];
+  const showNavBarPaths = ["/home", "/songs"];
   const showNavBar = showNavBarPaths.includes(location.pathname);
 
   return (
     <>
       <Routes>
-        {/* log in routes */}
+        {/* Log in routes */}
         <Route path="/" element={<Onboarding />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-account" element={<CreateAccount />} />
@@ -43,49 +43,30 @@ function AppContent() {
         <Route path="/personalisation1-filters" element={<Personalization1 />} />
         <Route path="/personalisation2" element={<Personalization2 />} />
 
-        {/* nav bar routes */}
+        {/* Main app routes */}
         <Route path="/home" element={<HomePage />} />
         <Route path="/songs" element={<MySongsPage />} />
         <Route path="/discover" element={<SearchPage />} />
-        <Route path="/profile" element={<ProfilePage />} /> {/* fix styling*/}
-
-        {/* friend routes */}
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profilefriend" element={<ProfileFriendPage />} />
-
-        {/* honme page routes */}
         <Route path="/notifications" element={<Not />} />
         <Route path="/view-all" element={<ViewAllPage />} />
-
-        {/* song routes */}
         <Route path="/song-description" element={<SongDescription />} />
-
-        {/* create song routes */}
         <Route path="/upload-song" element={<UploadSong />} />
         <Route path="/record" element={<Record />} />
-
-        {/* search routes */}
         <Route path="/search" element={<SearchPage />} />
         <Route path="/filter" element={<FilterPage />} />
-
-        {/* settings */}
         <Route path="/settings" element={<Settings />} />
-        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/account-settings" element={<AccountSettings />} />
-        {/* <Route path="/select-top-songs" element={<SelectTopSongs />} /> */}
 
+        {/* Catch-all route */}
+        <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>
+
       {showNavBar && <NavBar />}
+      {showMusicPlayer && <MusicPlayer />}
     </>
   );
 }
-
-function App() {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-}
-
 
 export default App;

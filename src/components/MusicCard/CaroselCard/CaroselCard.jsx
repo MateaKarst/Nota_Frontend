@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 //   return (
 //     <div
 //       onClick={handlePlay}
-const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
+const CaroselCard = ({ imageUrl, title, creator, contributersNbr, onPlay, audio }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -48,12 +48,17 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
           }}
         >
           <PlayerBtn
-            showProgress={false}
-            bordered={false}
-            showSkipButtons={false}
             circleColor="var(--color-purple)"
             iconColor="white"
             size={50}
+            onClick={() =>
+              onPlay?.({
+                title,
+                artist: creator,
+                cover: imageUrl,
+                audio,
+              })
+            }
           />
         </div>
       </div>

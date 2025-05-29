@@ -7,8 +7,7 @@ import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
 import NavBar from '../components/Navigation/NavBar'
 import { useNavigate } from 'react-router-dom';
-import MusicPlayer from '../components/MusicPlayer';
-
+import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 
 const HomePage = () => {
   const [currentSong, setCurrentSong]=useState(null);

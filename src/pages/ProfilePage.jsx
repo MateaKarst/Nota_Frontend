@@ -5,8 +5,7 @@ import HeaderProfile from '../components/Headers/HeaderProfile';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import NavBar from '../components/Navigation/NavBar';
 import lilyImg from '../assets/lily-profile.jpg';
-import MusicPlayer from '../components/MusicPlayer';
-
+import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 
 const ProfilePage = () => {
   const [currentSong, setCurrentSong]=useState(null);
