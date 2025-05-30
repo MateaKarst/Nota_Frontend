@@ -18,20 +18,21 @@ import ViewAllPage from "./pages/ViewAllPage"
 import AccountSettings from "./pages/account-settings/AccountSettings";
 import Personalization1 from "./pages/personalisation/Personalization1";
 import SelectTopSongs from './pages/account-settings/SelectTopSongs'
+import Editor from './pages/Editor2'
 import "./App.css";
 
    function App() {
   return (
-    <Router>
-    <Routes>
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/account-settings" element={<AccountSettings />} />
-      <Route path="/select-top-songs" element={<SelectTopSongs />} />
-
-    </Routes>
-    </Router>
+    <Editor />
   );
 }
+//<Router>
+//    <Routes>
+//      <Route path="/profile" element={<ProfilePage />} />
+//      <Route path="/account-settings" element={<AccountSettings />} />
+//      <Route path="/select-top-songs" element={<SelectTopSongs />} />//
 
+//    </Routes>
+//    </Router>
 
 export default App;
