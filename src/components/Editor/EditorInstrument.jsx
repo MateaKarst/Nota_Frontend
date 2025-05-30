@@ -7,6 +7,14 @@ const EditorInstrument = ({ icon: Icon, label, id, onDelete }) => {
     Drum: "var(--color-pink)",
     Guitar: "var(--color-orange)",
     Bass: "var(--color-purple)",
+    Vocal: "var(--color-pink)",
+    Accordion: "var(--color-orange)",
+    Ukulele: "var(--color-purple)", 
+    Flute: "var(--color-pink)", 
+    Piano: "var(--color-purple)",
+    Saxophone: "var(--color-pink)", 
+    Violin: "var(--color-orange)",
+    Trombone: "var(--color-purple)"
   };
 
   const bgColor = colorMap[label] || "var(--color-pink)";
