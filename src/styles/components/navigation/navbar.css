@@ -5,7 +5,6 @@
     background-color: var(--color-pink);
     padding: 10px 0;
     position: absolute;
-    /* 👈 Changed from fixed */
     bottom: 0;
     left: 0;
     width: 100%;

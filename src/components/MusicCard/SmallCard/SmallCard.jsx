@@ -1,10 +1,10 @@
+
 import React from "react";
 import PlayBtn from "../../Buttons/PlayBtn";
 import SmallCardSvg from "./SmallCardSvg";
 import { useNavigate } from "react-router-dom";
 
-const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay, audio }) => {
-// const SmallCard = ({ imageUrl, title, creator, contributersNbr }) => {
+const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {}, audio }) => {
     const navigate = useNavigate();
   
     const handleClick = () => {
