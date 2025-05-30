@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ringtone1 from '../../assets/editor/iphone-ringtone.mp3';
 import Drum from '../../assets/instrument-samples/01_DrumLoop.wav';
 import Guitar from '../../assets/instrument-samples/13_ElecGtr1.wav';
 import Bass from '../../assets/instrument-samples/11_Bass.wav';
 import Button from '../Buttons/BasicBtn';
-import Instrument from '../Editor/EditorInstrument';
+import EditorInstrument from '../Editor/EditorInstrument';
 
 import { ReactComponent as GuitarIcon } from '../../assets/instruments/guitar.svg';
 import { ReactComponent as DrumIcon } from '../../assets/instruments/drum.svg';
@@ -20,8 +19,7 @@ import '../../styles/variables.css';
 
 const MultitrackMixer = () => {
   const containerRef = useRef();
-  const scrollContainerRef = useRef(); // Додаємо ref для скроллу
-  const initializedRef = useRef(false);
+  const scrollContainerRef = useRef();
   const playButtonRef = useRef();
   const forwardButtonRef = useRef();
   const backwardButtonRef = useRef();
@@ -30,85 +28,95 @@ const MultitrackMixer = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  let multitrack;
+  const [tracks, setTracks] = useState([
+    {
+      id: 1,
+      label: 'Drum',
+      url: Drum,
+      startPosition: 4,
+      envelope: [
+        { time: 2, volume: 0.2 },
+        { time: 10, volume: 0.2 },
+        { time: 22, volume: 0.2 },
+      ],
+      volume: 0.95,
+      options: {
+        waveColor: 'hsl(341, 100%, 48%, 1)',
+        progressColor: 'rgba(163, 19, 50, 1)',
+      },
+      icon: DrumIcon,
+    },
+    {
+      id: 2,
+      label: 'Guitar',
+      url: Guitar,
+      startPosition: 1,
+      envelope: [
+        { time: 2, volume: 0.5 },
+        { time: 20, volume: 0.5 },
+        { time: 40, volume: 0.5 },
+      ],
+      volume: 0.8,
+      options: {
+        waveColor: 'hsl(41, 100%, 50%)',
+        progressColor: 'hsl(32, 96%, 37%)',
+      },
+      icon: GuitarIcon,
+    },
+    {
+      id: 3,
+      label: 'Bass',
+      url: Bass,
+      startPosition: 3,
+      envelope: [
+        { time: 2, volume: 0.5 },
+        { time: 10, volume: 0.5 },
+        { time: 22, volume: 0.5 },
+      ],
+      volume: 0.8,
+      options: {
+        waveColor: 'hsl(269, 100%, 50%)',
+        progressColor: 'hsl(269, 96%, 36%)',
+      },
+      icon: OtherInstrumentIcon,
+    },
+  ]);
+
+  const multitrackRef = useRef(null);
 
   useEffect(() => {
-    if (initializedRef.current) return;
-    initializedRef.current = true;
-
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/wavesurfer-multitrack/dist/multitrack.min.js';
-    script.async = true;
-    script.onload = () => {
-      initMultitrack();
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      if (multitrack && multitrack.destroy) {
-        multitrack.destroy();
+    if (!tracks.length) {
+      if (multitrackRef.current) {
+        multitrackRef.current.destroy();
+        multitrackRef.current = null;
       }
-      document.body.removeChild(script);
-      cancelAnimationFrame(animationFrameRef.current); // зупинити анімацію при демонтажі
-    };
-  }, []);
+      containerRef.current.innerHTML = '';
+      return;
+    }
 
-  const initMultitrack = () => {
-    containerRef.current.innerHTML = '';
-    const Multitrack = window.Multitrack;
+    if (!window.Multitrack) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/wavesurfer-multitrack/dist/multitrack.min.js';
+      script.async = true;
+      script.onload = () => initMultitrack();
+      document.body.appendChild(script);
 
-    multitrack = Multitrack.create(
-      [
-        {
-          id: 1,
-          draggable: true,
-          startPosition: 4,
-          url: Drum,
-          envelope: [
-            { time: 2, volume: 0.2 },
-            { time: 10, volume: 0.2 },
-            { time: 22, volume: 0.2 },
-          ],
-          volume: 0.95,
-          options: {
-            waveColor: 'hsl(341, 100%, 48%, 1)',
-            progressColor: 'rgba(163, 19, 50, 1)',
-          },
-        },
-        {
-          id: 2,
-          draggable: true,
-          startPosition: 1,
-          envelope: [
-            { time: 2, volume: 0.5 },
-            { time: 20, volume: 0.5 },
-            { time: 40, volume: 0.5 },
-          ],
-          volume: 0.8,
-          options: {
-            waveColor: 'hsl(41, 100%, 50%)',
-            progressColor: 'hsl(32, 96%, 37%)',
-          },
-          url: Guitar,
-        },
-        {
-          id: 3,
-          draggable: true,
-          startPosition: 3,
-          envelope: [
-            { time: 2, volume: 0.5 },
-            { time: 10, volume: 0.5 },
-            { time: 22, volume: 0.5 },
-          ],
-          volume: 0.8,
-          options: {
-            waveColor: 'hsl(269, 100%, 50%)',
-            progressColor: 'hsl(269, 96%, 36%)',
-          },
-          url: Bass,
-        },
-      ],
-      {
+      return () => {
+        if (multitrackRef.current) {
+          multitrackRef.current.destroy();
+          multitrackRef.current = null;
+        }
+        document.body.removeChild(script);
+      };
+    } else {
+      initMultitrack();
+    }
+
+    function initMultitrack() {
+      containerRef.current.innerHTML = '';
+      const Multitrack = window.Multitrack;
+
+      multitrackRef.current = Multitrack.create(tracks, {
         container: containerRef.current,
         minPxPerSec: 100,
         rightButtonDrag: false,
@@ -133,108 +141,100 @@ const MultitrackMixer = () => {
           font: '12px Karla',
           textColor: '#fff',
         },
-      }
-    );
-
-    playButtonRef.current.disabled = true;
-
-    multitrack.once('canplay', () => {
-      playButtonRef.current.disabled = false;
-
-      playButtonRef.current.onclick = () => {
-        if (multitrack.isPlaying()) {
-          multitrack.pause();
-          setIsPlaying(false);
-          cancelAnimationFrame(animationFrameRef.current);
-        } else {
-          multitrack.play();
-          setIsPlaying(true);
-          startAutoScroll();
-        }
-      };
-
-      const trackEls = containerRef.current.querySelectorAll('.track');
-      const trackNames = ['Click', 'Main Melody', 'Background Music', 'Outro Layer'];
-
-      trackEls.forEach((trackEl, index) => {
-        trackEl.classList.add('multitrack-track');
-        const labelDiv = document.createElement('div');
-        labelDiv.className = 'multitrack-label';
-        labelDiv.textContent = trackNames[index] || `Track ${index}`;
-        trackEl.prepend(labelDiv);
-        const infoEl = trackEl.querySelector('.info');
-        if (infoEl) infoEl.classList.add('multitrack-info');
-        const waveEl = trackEl.querySelector('.wave');
-        if (waveEl) waveEl.classList.add('multitrack-wave');
       });
-    });
 
-    forwardButtonRef.current.onclick = () => {
-      multitrack.setTime(multitrack.getCurrentTime() + 5);
-    };
+      if (playButtonRef.current) {
+        playButtonRef.current.disabled = false;
 
-    backwardButtonRef.current.onclick = () => {
-      multitrack.setTime(multitrack.getCurrentTime() - 5);
-    };
+        playButtonRef.current.onclick = () => {
+          if (multitrackRef.current.isPlaying()) {
+            multitrackRef.current.pause();
+            setIsPlaying(false);
+            cancelAnimationFrame(animationFrameRef.current);
+          } else {
+            multitrackRef.current.play();
+            setIsPlaying(true);
+            startAutoScroll();
+          }
+        };
+      }
+    }
 
-    zoomRef.current.oninput = () => {
-      multitrack.zoom(zoomRef.current.valueAsNumber);
-    };
-  };
-
-  const startAutoScroll = () => {
-    const scroll = () => {
-      if (!multitrack || !scrollContainerRef.current) return;
-      const time = multitrack.getCurrentTime();
-      const pxPerSec = multitrack.options.minPxPerSec;
-      const scrollX = time * pxPerSec - 100; // 100 — зміщення, щоб курсор не був по краю
-      scrollContainerRef.current.scrollLeft = scrollX;
+    function startAutoScroll() {
+      const scroll = () => {
+        if (!multitrackRef.current || !scrollContainerRef.current) return;
+        const time = multitrackRef.current.getCurrentTime();
+        const pxPerSec = multitrackRef.current.options.minPxPerSec;
+        const scrollX = time * pxPerSec - 100;
+        scrollContainerRef.current.scrollLeft = scrollX;
+        animationFrameRef.current = requestAnimationFrame(scroll);
+      };
       animationFrameRef.current = requestAnimationFrame(scroll);
+    }
+
+    return () => {
+      if (multitrackRef.current) {
+        multitrackRef.current.destroy();
+        multitrackRef.current = null;
+      }
+      cancelAnimationFrame(animationFrameRef.current);
     };
-    animationFrameRef.current = requestAnimationFrame(scroll);
+  }, [tracks]);
+
+  const handleDeleteTrack = (id) => {
+    setTracks((prev) => prev.filter((track) => track.id !== id));
   };
 
   return (
     <div className="multitrack-container">
-      <label className='zoom'>
-        Zoom: <input type="range" min="10" max="100" defaultValue="10" ref={zoomRef} />
+      <label className="zoom">
+        Zoom:{' '}
+        <input
+          type="range"
+          min="10"
+          max="100"
+          defaultValue="10"
+          ref={zoomRef}
+          onInput={(e) => {
+            if (multitrackRef.current) {
+              multitrackRef.current.zoom(e.target.valueAsNumber);
+            }
+          }}
+        />
       </label>
 
-      <div className='multitrack-main'>
-        <div className='instruments-column'>
-          <Instrument label="Drum" icon={DrumIcon} />
-          <Instrument label="Guitar" icon={GuitarIcon} />
-          <Instrument label="Bass" icon={OtherInstrumentIcon} />
+      <div className="multitrack-main">
+        <div className="instruments-column">
+          {tracks.map(({ id, label, icon }) => (
+            <EditorInstrument
+              key={id}
+              id={id}
+              label={label}
+              icon={icon}
+              onDelete={handleDeleteTrack}
+            />
+          ))}
         </div>
 
-        {/* Додаємо scrollContainerRef тут */}
-        <div
-          className="multitrack-scroll"
-          ref={scrollContainerRef}
-          style={{ overflowX: 'auto', width: '100%' }}
-        >
-          <div
-            id="container"
-            ref={containerRef}
-            style={{ background: '#343331', color: '#fff', minWidth: '100%' }}
-          ></div>
+        <div className="multitrack-scroll" ref={scrollContainerRef} style={{ overflowX: 'auto', width: '100%' }}>
+          <div id="container" ref={containerRef} style={{ background: '#343331', color: '#fff', minWidth: '100%' }} />
         </div>
       </div>
 
       <div className="button-block">
-        <Button text="Cut" type="medium"></Button>
-        <Button text="Split" type="medium"></Button>
+        <Button text="Cut" type="medium" />
+        <Button text="Split" type="medium" />
       </div>
 
-      <div className='button-wrapper'>
-        <button id="backward" ref={backwardButtonRef}>
-          <img src={BackwardIcon} alt='Back 5s' />
+      <div className="button-wrapper">
+        <button id="backward" ref={backwardButtonRef} onClick={() => multitrackRef.current?.setTime(multitrackRef.current.getCurrentTime() - 5)}>
+          <img src={BackwardIcon} alt="Back 5s" />
         </button>
-        <button id="play" ref={playButtonRef}>
-          <img src={isPlaying ? PauseIcon : PlayIcon} alt='Play/Pause' />
+        <button id="play" ref={playButtonRef} disabled>
+          <img src={isPlaying ? PauseIcon : PlayIcon} alt="Play/Pause" />
         </button>
-        <button id="forward" ref={forwardButtonRef}>
-          <img src={ForwardIcon} alt='Forward 5s' />
+        <button id="forward" ref={forwardButtonRef} onClick={() => multitrackRef.current?.setTime(multitrackRef.current.getCurrentTime() + 5)}>
+          <img src={ForwardIcon} alt="Forward 5s" />
         </button>
       </div>
     </div>
