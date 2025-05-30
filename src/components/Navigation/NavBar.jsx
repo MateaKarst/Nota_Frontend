@@ -6,7 +6,7 @@ import SearchIcon from '../../components/Navigation/SVGcode/SearchSvg';
 import NoteIcon from '../../components/Navigation/SVGcode/MySongsSvg';
 import ProfileIcon from '../../components/Navigation/SVGcode/ProfileSvg';
 
-import '../../styles/components/navigation/navbar.css'; // ✅ Import CSS
+import '../../styles/components/navigation/navbar.css'; 
 
 const NavBar = () => {
   const location = useLocation();
