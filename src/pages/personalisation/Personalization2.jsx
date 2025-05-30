@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 //import PurpleTag from "../../components/Tags/PurpleTag"
 import MusicTag from "../../components/Tags/MusicTag";
 import Buttons from "../../components/Buttons/BasicBtn"
@@ -26,6 +27,7 @@ const instruments = [
 ];
 
 const Personalization2 = () => {
+    const navigate = useNavigate();
       const [selectedInstruments, setSelectedInstruments] = useState([]);
 
   const handleTagClick = (instrument) => {
@@ -52,7 +54,7 @@ const Personalization2 = () => {
                 </div>
 
                 <div className="next-button-wrapper">
-                    <Buttons type="default" text="Next" />
+                    <Buttons type="default" text="Next" onClick={() => navigate("/home")} />
                 </div>
             </div>
         </div>

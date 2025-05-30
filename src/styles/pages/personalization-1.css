@@ -10,28 +10,29 @@
 }
 
 .header{
-  margin-bottom:24px;
+  margin-bottom:2.4dvh;
 }
 
 .question1{
 font-family: var(--font-family-secondary);
 font-size:var(--font-size-34);
-margin-bottom:24px;
-padding: 0 20px;
+margin-bottom:2.4dvh;
+padding: 0 2dvh;
 }
 
 .tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-12);
-    margin-bottom: 50px;
+    margin-bottom: 5dvh;
     justify-content: center;
+    padding-bottom: 5dvh;
 }
 
 
 .next-button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top:200px;
-    
+    position: relative;
+    top: -10dvh;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import PopupContent from './pop-up-content';
+import PopupContent from './PopUpContent';
 
 import '../../styles/components/pop-ups.css';
 

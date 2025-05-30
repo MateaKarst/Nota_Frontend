@@ -66,7 +66,7 @@ const Personalization1 = () => {
                     <Buttons
                         type="default"
                         text="Next"
-                        onClick={() => navigate("/home")}
+                        onClick={() => navigate("/personalisation2")}
                     />
                 </div>
             </div>

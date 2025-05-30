@@ -31,7 +31,7 @@ const NotificationsPage = () => {
         <div className="header">
           <HeaderVariants mode="text" title="Notifications" />
         </div>
-        <div className="titles" style={{ marginTop: "60px" }}>
+        <div className="titles" style={{ marginTop: "30px" }}>
           <Section title="Recent" items={groupedNotifications.recent} />
           <Section title="Yesterday" items={groupedNotifications.yesterday} />
           <Section title="Older" items={groupedNotifications.older} />
@@ -42,8 +42,8 @@ const NotificationsPage = () => {
 };
 
 const Section = ({ title, items }) => (
-  <div>
-    <h2 style={{ textAlign: "left", paddingLeft: "20px", color: "white" }}>{title}</h2>
+  <div style={{ marginBottom: '20px' }}>  {/* Add spacing between sections */}
+    <h2 style={{ textAlign: "left", paddingLeft: "2dvh", color: "white" }}>{title}</h2>
     {items.map(n => (
       <NotificationItem key={n.id} {...n} />
     ))}

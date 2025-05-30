@@ -8,10 +8,10 @@
 }
 
 .avatar {
-    width: 63px;
-    height: 63px;
-    border-radius: 999px;
-    margin-right: 20px;
+    width: 8dvh !important;
+    height: 8dvh !important;
+    border-radius: 99.9dvh;
+    margin-right: 2dvh;
     object-fit: cover;
 }
 

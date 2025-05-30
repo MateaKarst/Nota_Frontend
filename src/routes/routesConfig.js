@@ -17,6 +17,7 @@ import Personalization2 from "../pages/personalisation/Personalization2";
 import PersonalizationAccount from "../pages/personalisation/AccountPersonalisation";
 import Settings from "../pages/Settings";
 import Record from "../pages/Record";
+import ChatOverview from "../pages/ChatOverview";
 
 export const appRoutes = [
     { path: "/", element: <Onboarding />, isPublic: true },
@@ -26,11 +27,11 @@ export const appRoutes = [
     { path: "/profile", element: <ProfilePage /> },
     { path: "/profilefriend/:id", element: <ProfileFriendPage /> },
     
-    { path: "/home", element: <HomePage /> },
+    { path: "/home", element: <HomePage /> ,isPublic: true},
     
     { path: "/songs", element: <MySongsPage /> },
-    { path: "/song-description", element: <SongDescription /> },
-    { path: "/upload-song", element: <UploadSong /> },
+    { path: "/song-description", element: <SongDescription />,isPublic: true },
+    { path: "/upload-song", element: <UploadSong />, isPublic: true },
     { path: "/record", element: <Record /> },
     
     { path: "/discover", element: <SearchPage /> },
@@ -40,9 +41,10 @@ export const appRoutes = [
     
     { path: "/personalisation", element: <PersonalizationAccount /> },
     { path: "/personalisation1-filters", element: <Personalization1 /> },
-    { path: "/personalisation2", element: <Personalization2 /> },
+    { path: "/personalisation2", element: <Personalization2 />},
 
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },
-    { path: "/notifications", element: <NotificationsPage /> },
+    { path: "/notifications", element: <NotificationsPage />,isPublic: true },
+    { path: "/chatoverview", element: <ChatOverview />,isPublic: true},
 ];

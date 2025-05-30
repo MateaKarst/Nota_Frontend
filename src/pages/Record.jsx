@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import '../styles/pages/record.css';
 import HeaderVariants from "../components/Headers/HeaderVariants";
 import BasicBtn from '../components/Buttons/BasicBtn';
@@ -27,6 +28,12 @@ const handleRestart = () => { //"reset" buttons resets everything
   setHasRecorded(false);
   setShowSnippet(false);
   setBpm(120); // optional: reset BPM to default
+};
+
+const navigate = useNavigate();
+
+const handlePostClick = () => {
+  navigate('/upload-song');
 };
 
 const [showOverlay, setShowOverlay] = useState(false);
@@ -128,7 +135,7 @@ const handleRecordClick = () => {
 
     <div className="control-buttons">
       <BasicBtn type="mediumOutline" text='Restart' onClick={handleRestart}   />
-      <BasicBtn type="small" text='Post' />
+      <BasicBtn type="small" text='Post' onClick={handlePostClick} />
     </div>
   </>
 )}

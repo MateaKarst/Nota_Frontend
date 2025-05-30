@@ -6,10 +6,10 @@ import profile from "../../assets/songdescription/profile.svg";
 import "../../styles/variables.css";
 import "../../styles/components/headimage.css";
 
-const HeadImage = () => {
+const HeadImage = ({ imageUrl }) => {
   return (
     <div className="image-wrapper">
-      <img src={song} alt="song cover" className="song-img" />
+      <img src={imageUrl} alt="song cover" className="song-img" />
 
       <img src={profile} alt="profile image" className="profile-img" />
 
