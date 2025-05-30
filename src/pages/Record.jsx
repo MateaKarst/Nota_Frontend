@@ -6,6 +6,7 @@ import BasicBtn from '../components/Buttons/BasicBtn';
 //import  { ReactComponent as NoteIcon } from '../assets/note2.svg';
 import { ReactComponent as PlayIcon } from '../assets/musicplayer/play.svg';
 import { ReactComponent as SoundWave } from '../assets/soundwave.svg';
+import LoadingProgress from '../components/progressbar';
 
 const RecordingPage = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -13,6 +14,8 @@ const RecordingPage = () => {
   const [hasRecorded, setHasRecorded] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
   const [bpm, setBpm] = useState(120); // initial BPM is 120
+
+  const [isLoading, setIsLoading] = useState(false); 
 
   const increaseBpm = () => {
   setBpm(prev => Math.min(prev + 1, 300)); // limits to max 300 bpm
@@ -33,8 +36,14 @@ const handleRestart = () => { //"reset" buttons resets everything
 const navigate = useNavigate();
 
 const handlePostClick = () => {
-  navigate('/upload-song');
-};
+ setIsLoading(true);
+
+    // simulate progress then navigate
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/upload-song');
+    }, 4000);
+  };
 
 const [showOverlay, setShowOverlay] = useState(false);
 const [countdown, setCountdown] = useState(null); // null when not showing numbers
@@ -148,6 +157,8 @@ const handleRecordClick = () => {
   </div>
   </>
 )}
+
+{isLoading && <LoadingProgress label="Processing..." isLoading={isLoading} />}
 </div>
   );
 };

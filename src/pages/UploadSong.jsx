@@ -4,12 +4,21 @@ import Buttons from "../components/Buttons/BasicBtn";
 import UserTrack from "../components/Tracks/UserTrack";
 import TagInput from "../components/Tags/TagInput";
 import "../styles/pages/upload-song.css";
+import LoadingProgress from "../components/progressbar";
 
 const UploadSong = () => {
   const fileInputRef = useRef();
+  const [isLoading, setIsLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [description, setDescription] = useState("");
   const maxDescriptionLength = 150;
+
+  const handlePost = () => {
+  setIsLoading(true);
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 4000); // 4 seconds for demo
+};
 
   const handleClick = () => {
     fileInputRef.current.click();
@@ -126,8 +135,10 @@ const UploadSong = () => {
         </div>
 
         <div className="upload-soong-btn">
-          <Buttons type="main" text="Post" />
+          <Buttons type="main" text="Post" onClick={handlePost}/>
         </div>
+        {isLoading && <LoadingProgress label="Posting..." isLoading={isLoading} />}
+
       </div>
     </div>
   );

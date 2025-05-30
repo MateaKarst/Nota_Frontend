@@ -27,12 +27,12 @@ export const appRoutes = [
     { path: "/profile", element: <ProfilePage /> },
     { path: "/profilefriend/:id", element: <ProfileFriendPage /> },
     
-    { path: "/home", element: <HomePage /> ,isPublic: true},
+    { path: "/home", element: <HomePage />},
     
     { path: "/songs", element: <MySongsPage /> },
-    { path: "/song-description", element: <SongDescription />,isPublic: true },
-    { path: "/upload-song", element: <UploadSong />, isPublic: true },
-    { path: "/record", element: <Record /> },
+    { path: "/song-description", element: <SongDescription /> },
+    { path: "/upload-song", element: <UploadSong /> },
+    { path: "/record", element: <Record />},
     
     { path: "/discover", element: <SearchPage /> },
     { path: "/search", element: <SearchPage /> },
@@ -45,6 +45,6 @@ export const appRoutes = [
 
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },
-    { path: "/notifications", element: <NotificationsPage />,isPublic: true },
-    { path: "/chatoverview", element: <ChatOverview />,isPublic: true},
+    { path: "/notifications", element: <NotificationsPage /> },
+    { path: "/chatoverview", element: <ChatOverview />},
 ];
