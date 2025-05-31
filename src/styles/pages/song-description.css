@@ -4,6 +4,10 @@
 padding-top:2dvh;
 }
 
+.header-section header{
+  background-color: var(--color-pink) !important;
+}
+
 .dropdown{
     margin: 1dvh;
     padding-bottom: 10dvh;

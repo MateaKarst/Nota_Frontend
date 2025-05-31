@@ -30,7 +30,7 @@ export const appRoutes = [
     { path: "/home", element: <HomePage />},
     
     { path: "/songs", element: <MySongsPage /> },
-    { path: "/song-description", element: <SongDescription /> },
+    { path: "/song-description", element: <SongDescription />},
     { path: "/upload-song", element: <UploadSong /> },
     { path: "/record", element: <Record />},
     
@@ -45,6 +45,6 @@ export const appRoutes = [
 
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },
-    { path: "/notifications", element: <NotificationsPage /> },
+    { path: "/notifications", element: <NotificationsPage />},
     { path: "/chatoverview", element: <ChatOverview />},
 ];

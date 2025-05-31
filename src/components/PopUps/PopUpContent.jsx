@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import AttachFileBtn from '../Buttons/AttachFileBtn';
 import BasicBtn from '../Buttons/BasicBtn';
 import ProBtn from '../Buttons/ProBtn';
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ReportIcon } from '../../assets/icons/report-icon.svg';
 
 const PopUpContent = ({ type, data, onClose }) => {
   const [selected, setSelected] = useState('');
   // const isReport = type === 'report';
+  const navigate = useNavigate();
+
+  const handleRecordClick = () => {
+    navigate('/record');
+    
+  };
 
   switch (type) {
     case 'upload-picture':
@@ -32,7 +39,7 @@ const PopUpContent = ({ type, data, onClose }) => {
           </div>
           <div className="btn-group">
             <AttachFileBtn variant={1} text={'Upload'} />
-            <AttachFileBtn variant={1} text={'Record'} />
+            <AttachFileBtn variant={1} text={'Record'} onClick={handleRecordClick} />
           </div>
         </>
       );

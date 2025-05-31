@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/record.css';
-import HeaderVariants from "../components/Headers/HeaderVariants";
+import HeaderSongDescription from "../components/Headers/HeaderSongDescription";
 import BasicBtn from '../components/Buttons/BasicBtn';
 //import  { ReactComponent as NoteIcon } from '../assets/note2.svg';
 import { ReactComponent as PlayIcon } from '../assets/musicplayer/play.svg';
 import { ReactComponent as SoundWave } from '../assets/soundwave.svg';
 import LoadingProgress from '../components/progressbar';
+import PopUp from "../components/PopUps/PopUp";
 
 const RecordingPage = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -33,6 +34,9 @@ const handleRestart = () => { //"reset" buttons resets everything
   setBpm(120); // optional: reset BPM to default
 };
 
+const [showPopup, setShowPopup] = useState(false);
+const [popupData, setPopupData] = useState(null);
+
 const navigate = useNavigate();
 
 const handlePostClick = () => {
@@ -41,8 +45,8 @@ const handlePostClick = () => {
     // simulate progress then navigate
     setTimeout(() => {
       setIsLoading(false);
-      navigate('/upload-song');
-    }, 4000);
+    setShowPopup(true);
+  }, 4000);
   };
 
 const [showOverlay, setShowOverlay] = useState(false);
@@ -102,8 +106,8 @@ const handleRecordClick = () => {
 
   return (
     <div className="recording-page">
-       <HeaderVariants mode="text" title="Record" />
-
+       {/* <HeaderVariants mode="text" title="Record" /> */}
+    <HeaderSongDescription mode="pinkText" title="Record" />
 
 <div className="song-info">
 {/* <NoteIcon className="note-icon" /> */}
@@ -156,6 +160,17 @@ const handleRecordClick = () => {
     {countdown && <p className="overlay-count">{countdown}</p>}
   </div>
   </>
+)}
+
+{showPopup && (
+  <div className="popup-overlay">
+    <div className="popup-container">
+      <PopUp
+        type="upload-to-editor" 
+        onClose={() => setShowPopup(false)} 
+      />
+    </div>
+  </div>
 )}
 
 {isLoading && <LoadingProgress label="Processing..." isLoading={isLoading} />}

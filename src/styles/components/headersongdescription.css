@@ -1,0 +1,15 @@
+@import '../../styles/variables.css';
+
+.header-title {
+  font-family: var(--font-family-secondary);
+  color: white; 
+  font-size: var(--font-size-32);
+  padding-right:32dvh;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+

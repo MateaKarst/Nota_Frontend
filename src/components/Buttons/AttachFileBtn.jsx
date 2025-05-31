@@ -4,7 +4,7 @@ import "../../styles/variables.css";
 
 import { ReactComponent as ClipIcon } from '../../icons/clip.svg'; // Imports SVG file as React component
 
-function AttachFileBtn({ text, variant = 0 }) {
+function AttachFileBtn({ text, variant = 0, onClick }) {
     const styles = [
         {
             width: "103px",
@@ -36,8 +36,8 @@ function AttachFileBtn({ text, variant = 0 }) {
     ];
 
     return (
-        <button style={styles[variant]} onClick={() => { }}>
-            <ClipIcon style={{ width: "13px", height: "17px", marginRight: "5px" }} />
+        <button style={styles[variant]} onClick={onClick}>
+            <ClipIcon style={{ width: "13px", height: "17px", marginRight: "5px"  }}/>
             {text}
         </button>
     );

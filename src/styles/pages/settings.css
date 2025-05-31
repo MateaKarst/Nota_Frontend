@@ -3,14 +3,14 @@
 .settings-icon-text {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
-  padding-left:24px;
+  gap: 2dvh;
+  padding: 1.6dvh;
+  padding-left:2.4dvh;
 }
 
 .settings-icon {
-  width: 24px;
-  height: 24px;
+  width: 3.4dvh;
+  height: 3.4dvh;
   fill: var(--color-pink);
 }
 
@@ -23,13 +23,13 @@
   font-size: var(--font-size-20);
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-bold);
-  margin: 0; /* reset default margin */
+  margin: 0; 
   color: var(--color-white);
 }
 
 .settings-text2 {
   font-size: var(--font-size-14);
-  margin: 0; /* reset default margin */
+  margin: 0; 
   color: var(--color-white-trans-surface-45);
   font-family: var(--font-family-primary);
 }
