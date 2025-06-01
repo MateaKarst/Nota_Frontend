@@ -1,6 +1,10 @@
 @import '../variables.css';
 
+
+
 .createaccount-page {
+    height: 100dvh;
+    max-height: 800px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -9,8 +13,7 @@
     align-items: center;
     justify-content: top;
     font-family: var(--font-family-primary);
-    height: 100dvh;
-    padding-top: 6%;
+
 }
 
 .createaccount-page-container {
@@ -19,7 +22,7 @@
     align-items: center;
     gap: 1.5rem;
     width: 100%;
-    max-width: 400px;
+    padding-top: 6%;
 }
 
 .title {

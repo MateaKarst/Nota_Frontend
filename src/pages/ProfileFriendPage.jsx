@@ -8,12 +8,14 @@ import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import MusicPlayer from '../components/MusicPlayer';
 import API_ENDPOINTS from '../routes/apiEndpoints';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthProvider';
 
 
 const ProfileFriendPage = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const { user } = useAuth();
   const [userData, setUserData] = useState(null);
   const [friendConnections, setFriendConnections] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
@@ -29,10 +31,20 @@ const ProfileFriendPage = () => {
       setLoading(true);
       setError(null);
 
+      if (!user || !user.access_token) {
+        setError("User not authenticated");
+        setLoading(false);
+        return;
+      }
+
+      if (user?.access_token) {
+        Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
+      }
+
       console.log("connectionID on profile friend page", connectionId)
 
       try {
-        const accessToken = Cookies.get("access_token");
+        const accessToken = user?.access_token || Cookies.get("access_token");
         if (!accessToken) throw new Error("No access token");
 
         // Fetch user data
@@ -64,7 +76,8 @@ const ProfileFriendPage = () => {
     };
 
     fetchData();
-  }, [connectionId]);
+  }, [connectionId, user]);
+
 
   if (loading) return <div>Loading user profile...</div>;
   if (error) return <div>Error: {error}</div>;

@@ -17,6 +17,8 @@ import Personalization2 from "../pages/personalisation/Personalization2";
 import PersonalizationAccount from "../pages/personalisation/AccountPersonalisation";
 import Settings from "../pages/Settings";
 import Record from "../pages/Record";
+import Chat from "../pages/Chat";
+import ChatOverview from "../pages/ChatOverview";
 
 export const appRoutes = [
     { path: "/", element: <Onboarding />, isPublic: true },
@@ -39,6 +41,9 @@ export const appRoutes = [
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },
     { path: "/notifications", element: <NotificationsPage /> },
+
+    { path: "/chat", element: <Chat /> },
+    { path: "/chat-overview", element: <ChatOverview /> },
 
     { path: "/view-all", element: <ViewAllPage /> },
     { path: "/filter", element: <FilterPage /> },

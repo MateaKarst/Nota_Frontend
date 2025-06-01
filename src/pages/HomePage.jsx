@@ -22,7 +22,7 @@ const HomePage = () => {
       <div className="hero-wrapper">
         <HeaderMain className="header" />
         <div className="home-carousel-overlay">
-          <h1 className='title'>My Songs</h1>
+          <h1 className='title-content'>My Songs</h1>
           <HomeCarousel onPlay={(song) => setCurrentSong(song)} />
         </div>
       </div>

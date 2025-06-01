@@ -4,6 +4,7 @@ import MusicTag from "../../components/Tags/MusicTag";
 import Buttons from "../../components/Buttons/BasicBtn"
 import HeaderVariants from "../../components/Headers/HeaderVariants";
 import SearchBar from "../../components/Search/SearchBar";
+import { useNavigate } from "react-router-dom";
 
 import "../../styles/variables.css"
 import "../../styles/pages/personalization-2.css"
@@ -27,6 +28,7 @@ const instruments = [
 
 const Personalization2 = () => {
       const [selectedInstruments, setSelectedInstruments] = useState([]);
+      const navigate = useNavigate();
 
   const handleTagClick = (instrument) => {
     setSelectedInstruments((prevSelected) =>
@@ -52,7 +54,7 @@ const Personalization2 = () => {
                 </div>
 
                 <div className="next-button-wrapper">
-                    <Buttons type="default" text="Next" />
+                    <Buttons type="default" text="Next" onClick={() => navigate("/home")}/>
                 </div>
             </div>
         </div>
