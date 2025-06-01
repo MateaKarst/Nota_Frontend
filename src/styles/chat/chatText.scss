@@ -6,12 +6,12 @@
   width: 100%;
   font-family: var(--font-family-primary);
 
-  &.sender {
+  &.receiver {
     justify-content: flex-start; // left align
     padding-right: 20%;          
   }
 
-  &.receiver {
+  &.sender {
     justify-content: flex-end;   // right align
     padding-left: 20%;           
   }
@@ -41,13 +41,13 @@
     opacity: 0.6;
   }
 
-  &.receiver .bubble {
+  &.sender .bubble {
     background-color: var(--color-purple);
     color: white;
     border-radius: 20px 20px 0 20px;
   }
 
-  &.sender .bubble {
+  &.receiver .bubble {
     background-color: gray;
     color: black;
     border-radius: 20px 20px 20px 0;
