@@ -1,5 +1,5 @@
 import React from "react";
-import PlayBtn from "../Buttons/PlayBtn";
+import TrackDescriptionBtn from "../Buttons/TrackdescriptionBtn";
 import song from "../../assets/songdescription/song.svg";
 import profile from "../../assets/songdescription/profile.svg";
 
@@ -14,7 +14,7 @@ const HeadImage = () => {
       <img src={profile} alt="profile image" className="profile-img" />
 
       <div className="overlay">
-        <PlayBtn
+        <TrackDescriptionBtn
           showProgress={true}
           showSkipButtons={false}
           bordered={false}
