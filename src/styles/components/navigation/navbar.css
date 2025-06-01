@@ -5,7 +5,6 @@
     background-color: var(--color-pink);
     padding: 10px 0;
     position: absolute;
-    /* 👈 Changed from fixed */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -29,6 +28,7 @@
     width: 24px;
     height: 24px;
     transition: fill 0.2s ease;
+    margin-left: 5px;
 }
 
 .navbar-label {

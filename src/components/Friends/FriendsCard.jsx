@@ -28,6 +28,10 @@ const FriendsCard = () => {
   useEffect(() => {
     if (!user) return;
 
+    if (user?.access_token) {
+      Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
+    }
+
     const userId = user.id;
     console.log("user on friendcard:", user);
     console.log("user on friendcard userId:", userId);
@@ -37,8 +41,9 @@ const FriendsCard = () => {
       setError(null);
 
       try {
-        const accessToken = Cookies.get("access_token");
-        if (!accessToken) throw new Error("No access token");
+        const accessToken = await Cookies.get("access_token") || user.access_token;
+        if (!accessToken) throw new Error("No access token available");
+
 
         const res = await fetch(API_ENDPOINTS.CONNECTIONS(userId), {
           headers: {

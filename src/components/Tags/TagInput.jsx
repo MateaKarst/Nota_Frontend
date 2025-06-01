@@ -10,7 +10,7 @@ const TagInput = ({ placeholder = "Add tag" }) => {
   // dummy data
   const instruments = ["Guitar", "Piano", "Drums", "Violin", "Bass", "Synth", "Trumpet", "Flute"];
   const genres = ["Rock", "Hip Hop", "Jazz", "Electronic", "Pop", "Blues", "Reggae", "Classical"];
-
+  
   const allSuggestions = {
     Instruments: instruments,
     Genres: genres,

@@ -8,10 +8,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100dvh;
   position: relative;
   /* padding: 2rem 1rem; */
   text-align: center;
+}
+
+.onboarding,
+.onboarding-swiper {
+  height: 100dvh;
+  max-height: 800px;
 }
 
 .logo {
@@ -24,7 +29,6 @@
 
 .onboarding-swiper {
   width: 100%;
-  height: 100dvh;
 }
 
 .swiper-pagination-bullet-active {

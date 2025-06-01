@@ -4,8 +4,9 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-}
 
+  overflow: hidden
+}
 
 .App {
   display: flex;
@@ -21,7 +22,8 @@ body,
   width: 100%;
   max-width: 400px;
   max-height: 800px;
-  height: 100vh; /* For responsiveness */
+  height: 100vh;
+  /* For responsiveness */
   border: 1px solid #555;
   border-radius: 24px;
   overflow: hidden;
@@ -34,7 +36,15 @@ body,
 .page-content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 50px; /* Enough space for NavBar */
+}
+
+.page-content.with-navbar {
+  padding-bottom: 50px;
+}
+
+/* When NavBar is hidden */
+.page-content.no-navbar {
+  padding-bottom: 0;
 }
 
 .App-logo {
@@ -71,4 +81,17 @@ body,
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Hide scrollbars in a cross-browser way */
+.page-content {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.page-content::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
 }
