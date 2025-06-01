@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         if (!user) fetchUser();
         else setLoading(false); // We already have a user, skip fetching
-    }, []);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{ user, setUser, loading, refreshUser: fetchUser }}>

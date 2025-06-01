@@ -7,12 +7,12 @@ import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import MusicPlayer from '../components/MusicPlayer';
 import API_ENDPOINTS from '../routes/apiEndpoints';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 
 
 const ProfileFriendPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { id } = useParams();
   const { user } = useAuth();

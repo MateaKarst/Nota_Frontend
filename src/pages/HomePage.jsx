@@ -13,9 +13,10 @@ const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const navigate = useNavigate();
 
-  const handleViewAllClick = () => {
-    navigate('/view-all');
-  };
+  // const handleViewAllClick = () => {
+  //   navigate('/view-all');
+  // };
+  
   return (
     <div className="home-page">
 

@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
 import Cookies from "js-cookie";
 import API_ENDPOINTS from "../routes/apiEndpoints";
 import { useAuth } from "../context/AuthProvider";
 
-import { ReactComponent as BackArrow } from '../assets/icons/backarrow-icon.svg';
+import { ReactComponent as BackArrow } from "../assets/icons/backarrow-icon.svg";
 import { ReactComponent as Pfp } from "../assets/chat/man.svg";
 
 import "../styles/chat/chat.scss";
 
 const Chat = () => {
   const navigate = useNavigate();
-  // const { id: otherUserId } = useParams(); // Get userId from URL
-  const { user } = useAuth(); // Your logged-in user
+  const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [textInput, setTextInput] = useState("");
 
+  const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; // TEMP: Hardcoded; ideally from useParams()
+
   const handleBackClick = () => navigate(-1);
-  const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822";
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -33,9 +33,10 @@ const Chat = () => {
         return;
       }
 
-      if (user?.access_token) {
-        Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
-      }
+      Cookies.set("access_token", user.access_token, {
+        expires: 7,
+        sameSite: "lax",
+      });
 
       try {
         const accessToken = user?.access_token || Cookies.get("access_token");
@@ -43,7 +44,7 @@ const Chat = () => {
 
         const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
           headers: {
-            "Authorization": `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             "x-user-id": user.id,
           },
         });
@@ -59,9 +60,40 @@ const Chat = () => {
         setLoading(false);
       }
     };
-
     fetchMessages();
   }, [user, otherUserId]);
+
+  const handleSendMessage = async () => {
+    if (!textInput.trim()) return;
+
+    setError(null);
+
+    try {
+      const accessToken = user?.access_token || Cookies.get("access_token");
+      if (!accessToken) throw new Error("No access token");
+
+      const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          "x-user-id": user.id,
+        },
+        body: JSON.stringify({ text: textInput }), // ✅ Correct body
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+
+      const newMessage = await res.json();
+      setMessages((prev) => [...prev, newMessage]);
+      setTextInput("");
+    } catch (err) {
+      console.error(err);
+      setError(err.message || "Error sending message");
+    }
+  };
+
+  // ✅ Send message (POST)
 
   if (loading) return <div className="chat-app">Loading...</div>;
   if (error) return <div className="chat-app">Error: {error}</div>;
@@ -81,7 +113,7 @@ const Chat = () => {
           <ChatText
             key={msg.id}
             text={msg.text}
-            time={new Date(msg.created_at).toLocaleTimeString()}
+            timestamp={msg.created_at}
             variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
         ))}
@@ -93,9 +125,18 @@ const Chat = () => {
           placeholder="Type here..."
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSendMessage();
+          }}
         />
-        <button>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="20" height="20">
+        <button onClick={handleSendMessage}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="white"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+          >
             <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
           </svg>
         </button>

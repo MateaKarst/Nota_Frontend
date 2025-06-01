@@ -7,7 +7,7 @@ import { ReactComponent as ProfilePic1 } from "../assets/chat//man.svg";
 import { ReactComponent as ProfilePic2 } from "../assets/chat/johnny.svg"; 
 import { ReactComponent as ProfilePic3 } from "../assets/chat/girl.svg"; 
 import { ReactComponent as ProfilePic4 } from "../assets/chat/dog.svg"; 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { db } from '../firebase'; 
 import { collection, getDocs } from 'firebase/firestore';
@@ -17,7 +17,7 @@ import "../styles/pages/chat-overview.css";
 
 function ChatOverview() {
   const [chats, setChats] = useState([]); //state to store chats
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
     useEffect(() => {
       const fetchChats = async () => {
