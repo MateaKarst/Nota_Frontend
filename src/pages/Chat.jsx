@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
-import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import API_ENDPOINTS from "../routes/apiEndpoints";
+import { useAuth } from "../context/AuthProvider";
 
 import { ReactComponent as BackArrow } from '../assets/icons/backarrow-icon.svg';
 import { ReactComponent as Pfp } from "../assets/chat/man.svg";
@@ -8,45 +11,84 @@ import { ReactComponent as Pfp } from "../assets/chat/man.svg";
 import "../styles/chat/chat.scss";
 
 const Chat = () => {
-
   const navigate = useNavigate();
-    const handleBackClick = () => {
-    navigate(-1);
-  };
+  // const { id: otherUserId } = useParams(); // Get userId from URL
+  const { user } = useAuth(); // Your logged-in user
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [textInput, setTextInput] = useState("");
+
+  const handleBackClick = () => navigate(-1);
+  const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822";
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+
+      if (!user || !otherUserId) return;
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        const accessToken = Cookies.get("access_token");
+        if (!accessToken) throw new Error("No access token");
+
+        const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "x-user-id": user.id,
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch messages");
+
+        const data = await res.json();
+        setMessages(data);
+      } catch (err) {
+        console.error(err);
+        setError(err.message || "Error fetching messages");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMessages();
+  }, [user, otherUserId]);
+
+  if (loading) return <div className="chat-app">Loading...</div>;
+  if (error) return <div className="chat-app">Error: {error}</div>;
+
   return (
     <div className="chat-app">
       <div className="chat-header">
-         <button className="go-back" onClick={handleBackClick}>
+        <button className="go-back" onClick={handleBackClick}>
           <BackArrow className="icon-style" />
         </button>
         <Pfp className="pfp" />
-        <span className="username">Guitarist1001</span>
+        <span className="username">Chat with {otherUserId}</span>
       </div>
 
-        <div className="chat-body">
+      <div className="chat-body">
+        {messages.map((msg) => (
           <ChatText
-            text="Hey! You're really good at playing drums, wanna collab?"
-            time="12:30 PM"
-            variant="receiver"
+            key={msg.id}
+            text={msg.text}
+            time={new Date(msg.created_at).toLocaleTimeString()}
+            variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
-  
-          <ChatText
-            text="Thanks! I have a perfect drum track for your song"
-            time="12:39 PM"
-            variant="sender"
-          />
-        </div>
+        ))}
+      </div>
 
       <div className="chat-input">
-        <input type="text" placeholder="Type here..." />
+        <input
+          type="text"
+          placeholder="Type here..."
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+        />
         <button>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="white"
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="20" height="20">
             <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
           </svg>
         </button>

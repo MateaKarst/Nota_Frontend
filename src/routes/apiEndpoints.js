@@ -8,7 +8,7 @@ export const API_ENDPOINTS = {
     },
     CONNECTIONS: (userId) => `${API_BASE_URL}/connections/${userId}`,
     USER: (userId) => `${API_BASE_URL}/user/${userId}`,
-
+    CHAT: (otherUserId) => `${API_BASE_URL}/chat/${otherUserId}`,
 };
 
 export default API_ENDPOINTS;
