@@ -55,6 +55,9 @@
   overflow-x: auto;
   padding: 12px 24px;
   gap: 12px;
+
+    scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Фейкова кнопка додати трек */
