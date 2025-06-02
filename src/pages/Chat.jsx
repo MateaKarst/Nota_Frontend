@@ -5,14 +5,15 @@ import Cookies from "js-cookie";
 import API_ENDPOINTS from "../routes/apiEndpoints";
 import { useAuth } from "../context/AuthProvider";
 
-import { ReactComponent as BackArrow } from "../assets/icons/backarrow-icon.svg";
+import { ReactComponent as BackArrow } from '../assets/icons/backarrow-icon.svg';
 import { ReactComponent as Pfp } from "../assets/chat/man.svg";
 
 import "../styles/chat/chat.scss";
 
 const Chat = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  // const { id: otherUserId } = useParams(); // Get userId from URL
+  const { user } = useAuth(); // Your logged-in user
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,10 +35,9 @@ const Chat = () => {
         return;
       }
 
-      Cookies.set("access_token", user.access_token, {
-        expires: 7,
-        sameSite: "lax",
-      });
+      if (user?.access_token) {
+        Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
+      }
 
       try {
         const accessToken = user?.access_token || Cookies.get("access_token");
@@ -45,7 +45,7 @@ const Chat = () => {
 
         const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            "Authorization": `Bearer ${accessToken}`,
             "x-user-id": user.id,
           },
         });
@@ -61,6 +61,7 @@ const Chat = () => {
         setLoading(false);
       }
     };
+
     fetchMessages();
   }, [user, otherUserId]);
 
@@ -113,7 +114,7 @@ const Chat = () => {
           <ChatText
             key={msg.id}
             text={msg.text}
-            timestamp={msg.created_at}
+            time={new Date(msg.created_at).toLocaleTimeString()}
             variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
         ))}
@@ -125,18 +126,9 @@ const Chat = () => {
           placeholder="Type here..."
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSendMessage();
-          }}
         />
-        <button onClick={handleSendMessage}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="white"
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-          >
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="20" height="20">
             <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
           </svg>
         </button>
