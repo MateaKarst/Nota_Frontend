@@ -18,10 +18,11 @@ const Chat = () => {
   const [error, setError] = useState(null);
   const [textInput, setTextInput] = useState("");
 
-  const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; // TEMP: Hardcoded; ideally from useParams()
+  const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; //dummy usern from db
 
   const handleBackClick = () => navigate(-1);
 
+  // GET
   useEffect(() => {
     const fetchMessages = async () => {
       setLoading(true);
@@ -63,6 +64,7 @@ const Chat = () => {
     fetchMessages();
   }, [user, otherUserId]);
 
+  //POST
   const handleSendMessage = async () => {
     if (!textInput.trim()) return;
 
@@ -79,7 +81,7 @@ const Chat = () => {
           Authorization: `Bearer ${accessToken}`,
           "x-user-id": user.id,
         },
-        body: JSON.stringify({ text: textInput }), // ✅ Correct body
+        body: JSON.stringify({ text: textInput }), 
       });
 
       if (!res.ok) throw new Error("Failed to send message");
@@ -92,9 +94,7 @@ const Chat = () => {
       setError(err.message || "Error sending message");
     }
   };
-
-  // ✅ Send message (POST)
-
+  
   if (loading) return <div className="chat-app">Loading...</div>;
   if (error) return <div className="chat-app">Error: {error}</div>;
 
