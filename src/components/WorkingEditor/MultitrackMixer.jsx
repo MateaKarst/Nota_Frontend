@@ -31,6 +31,7 @@ const MultitrackMixer = () => {
   const [tracks, setTracks] = useState([
     {
       id: 1,
+      draggable: true,
       label: 'Drum',
       url: Drum,
       startPosition: 4,
@@ -48,6 +49,7 @@ const MultitrackMixer = () => {
     },
     {
       id: 2,
+      draggable: true,
       label: 'Guitar',
       url: Guitar,
       startPosition: 1,
@@ -65,6 +67,7 @@ const MultitrackMixer = () => {
     },
     {
       id: 3,
+      draggable: true,
       label: 'Bass',
       url: Bass,
       startPosition: 3,
