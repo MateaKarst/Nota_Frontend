@@ -19,6 +19,7 @@ import Settings from "../pages/Settings";
 import Record from "../pages/Record";
 import Chat from "../pages/Chat";
 import ChatOverview from "../pages/ChatOverview";
+import Editor2 from "../pages/Editor2";
 
 export const appRoutes = [
     { path: "/", element: <Onboarding />, isPublic: true },
@@ -34,6 +35,7 @@ export const appRoutes = [
     { path: "/song-description", element: <SongDescription /> },
     { path: "/upload-song", element: <UploadSong /> },
     { path: "/record", element: <Record /> },
+    { path: "/editor2", element: <Editor2 /> },
     
     { path: "/discover", element: <SearchPage /> },
     { path: "/search", element: <SearchPage /> },
@@ -51,4 +53,5 @@ export const appRoutes = [
     { path: "/personalisation", element: <PersonalizationAccount /> },
     { path: "/personalisation1-filters", element: <Personalization1 /> },
     { path: "/personalisation2", element: <Personalization2 /> },
+
 ];

@@ -3,9 +3,11 @@ import HeaderVariants from "../components/Headers/HeaderVariants";
 import Buttons from "../components/Buttons/BasicBtn";
 import UserTrack from "../components/Tracks/UserTrack";
 import TagInput from "../components/Tags/TagInput";
+import { useNavigate } from "react-router-dom";
 import "../styles/pages/upload-song.css";
 
 const UploadSong = () => {
+  const navigate = useNavigate();
   const fileInputRef = useRef();
   const [imagePreview, setImagePreview] = useState(null);
   const [description, setDescription] = useState("");
@@ -126,7 +128,7 @@ const UploadSong = () => {
         </div>
 
         <div className="upload-soong-btn">
-          <Buttons type="main" text="Post" />
+          <Buttons type="main" text="Post" onClick={() => navigate("/editor2")} />
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@ import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 
-
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const navigate = useNavigate();
