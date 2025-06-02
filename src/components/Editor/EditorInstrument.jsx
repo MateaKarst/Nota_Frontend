@@ -1,28 +1,42 @@
 import React from "react";
-
+import TrashIcon from "../../assets/icons/trash-icon.svg";
 import "../../styles/components/editor/editor-instrument.css";
 
-const EditorInstrument = ({ icon: Icon, label, }) => {
+const EditorInstrument = ({ icon: Icon, label, id, onDelete }) => {
   const colorMap = {
-    pink: "var(--color-pink)",
-    orange: "var(--color-orange)",
-    purple: "var(--color-purple)",
+    Drum: "var(--color-pink)",
+    Guitar: "var(--color-orange)",
+    Bass: "var(--color-purple)",
+    Vocal: "var(--color-pink)",
+    Accordion: "var(--color-orange)",
+    Ukulele: "var(--color-purple)", 
+    Flute: "var(--color-pink)", 
+    Piano: "var(--color-purple)",
+    Saxophone: "var(--color-pink)", 
+    Violin: "var(--color-orange)",
+    Trombone: "var(--color-purple)"
   };
 
-  //get random color square
-  const getRandomColor = () => {
-    const colors = Object.values(colorMap);
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-  };
-
-  const bgColor = getRandomColor();
+  const bgColor = colorMap[label] || "var(--color-pink)";
 
   return (
     <div className="editor-instrument" style={{ backgroundColor: bgColor }}>
       {Icon && <Icon className="icon" />}
       {label && <span className="label">#{label}</span>}
-
+      {onDelete && (
+        <button
+          className="delete-track-btn"
+          onClick={() => onDelete(id)}
+          title={`Delete ${label}`}
+          style={{
+            background: 'none',
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          <img src={TrashIcon} alt="Delete" width={20} height={20} />
+        </button>
+      )}
     </div>
   );
 };
