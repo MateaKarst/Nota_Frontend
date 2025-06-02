@@ -1,38 +1,48 @@
+"use client";
 
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import MySongsPage from "./pages/MySongsPage";
-import Onboarding from "./pages/Onboarding";
-import LoginPage from "./pages/LoginPage";
-import CreateAccount from "./pages/CreateAccount";
-import ProfilePage from './pages/ProfilePage';
-import ProfileFriendPage from './pages/ProfileFriendPage';
+import ProtectedRoute from "./context/ProtectedRoutes";
+import { AuthProvider } from "./context/AuthProvider";
+import { appRoutes } from "./routes/routesConfig";
 import NavBar from "./components/Navigation/NavBar";
-import Not from "./pages/NotificationsPage"
-import SearchPage from "./pages/SearchPage"
-import FilterPage from "./pages/FilterPage";
-import Track from "./components/Tracks/UserTrack"
-import SongDescription from "./pages/SongDescription"
-import UploadSong from "./pages/UploadSong"
-import ViewAllPage from "./pages/ViewAllPage"
-import AccountSettings from "./pages/account-settings/AccountSettings";
-import Personalization1 from "./pages/personalisation/Personalization1";
-import SelectTopSongs from './pages/account-settings/SelectTopSongs'
-import Editor from './pages/Editor2'
+
 import "./App.css";
 
-   function App() {
+function AppWrapper() {
+  const location = useLocation();
+
+  // List of paths where NavBar should be hidden
+  const hiddenNavPaths = ["/login", "/register", "/splash", "/", "/chat"];
+
+  const shouldHideNavBar = hiddenNavPaths.includes(location.pathname);
+
   return (
-    <Editor />
+    <div className="App">
+      <div className="mobile-frame">
+        <ProtectedRoute>
+          <div className={`page-content ${shouldHideNavBar ? "no-navbar" : "with-navbar"}`}>
+            <Routes>
+              {appRoutes.map(({ path, element }) => (
+                <Route key={path} path={path} element={element} />
+              ))}
+            </Routes>
+          </div>
+          {!shouldHideNavBar && <NavBar />}
+        </ProtectedRoute>
+      </div>
+    </div>
   );
 }
-//<Router>
-//    <Routes>
-//      <Route path="/profile" element={<ProfilePage />} />
-//      <Route path="/account-settings" element={<AccountSettings />} />
-//      <Route path="/select-top-songs" element={<SelectTopSongs />} />//
 
-//    </Routes>
-//    </Router>
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppWrapper />
+      </Router>
+    </AuthProvider>
+  );
+}
 
 export default App;

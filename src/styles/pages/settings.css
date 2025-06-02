@@ -1,0 +1,35 @@
+@import '../variables.css';
+
+.settings-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  padding-left:24px;
+}
+
+.settings-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-pink);
+}
+
+.settings-text-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-text {
+  font-size: var(--font-size-20);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+  margin: 0; /* reset default margin */
+  color: var(--color-white);
+}
+
+.settings-text2 {
+  font-size: var(--font-size-14);
+  margin: 0; /* reset default margin */
+  color: var(--color-white-trans-surface-45);
+  font-family: var(--font-family-primary);
+}

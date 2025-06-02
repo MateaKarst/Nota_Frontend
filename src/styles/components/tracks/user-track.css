@@ -23,7 +23,8 @@
 .user-info {
     display: flex;
     align-items: flex-start;
-    margin-left: 5px;
+    gap: var(--spacing-8);
+    
 }
 
 .avatar {
@@ -119,9 +120,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-
     background-color: var(--color-white-trans-surface-25);
-
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -139,9 +138,7 @@
 }
 
 input:checked + .slider {
-
     background-color: var(--color-pink);
-
 }
 
 
@@ -157,7 +154,6 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
-
 }
 
 
@@ -168,4 +164,3 @@ input:checked + .slider:before {
     opacity: 0.6;
     transition: filter 0.3s ease, opacity 0.3s ease;
 }
-

@@ -1,7 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import "../../styles/variables.css";
-import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
+// import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 const buttonStyles = {
     viewAll: {
@@ -103,12 +103,12 @@ const buttonStyles = {
 };
 
 function BasicBtn({ type = "default", text, icon: Icon, onClick }) {
-    const [clicked, setClicked] = useState(false);
+    // const [clicked, setClicked] = useState(false);
 
 
-    const handleClick = () => {
-        setClicked(!clicked);
-    };
+    // const handleClick = () => {
+    //     setClicked(!clicked);
+    // };
 
     return (
         <button

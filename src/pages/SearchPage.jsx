@@ -3,7 +3,6 @@ import HeaderVariants from "../components/Headers/HeaderVariants";
 import SearchBar from "../components/Search/SearchBar";
 import GenreCard from "../components/Search/GenreCard"
 import FilterIcon from "../assets/filter-icon.svg"
-import NavBar from "../components/Navigation/NavBar";
 import "../styles/variables.css"
 
 import "../styles/pages/SearchPage.scss"
@@ -26,7 +25,6 @@ const SearchPage = () => {
                 <GenreCard mode="pop" />
                 <GenreCard mode="indie" />
             </div>
-            <NavBar />
         </div>
     )
 }

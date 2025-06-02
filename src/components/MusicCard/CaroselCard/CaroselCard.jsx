@@ -3,7 +3,6 @@ import PlayerBtn from "../../Buttons/PlayBtn";
 import CaroselSvg from "./CaroselSvg";
 import { useNavigate } from "react-router-dom";
 
-// <<<<<<< HEAD
 // const CaroselCard = ({ imageUrl, title, creator, contributersNbr, audio, onPlay }) => {
 
 //     const handlePlay = () => {
@@ -15,16 +14,16 @@ import { useNavigate } from "react-router-dom";
 //   return (
 //     <div
 //       onClick={handlePlay}
-// =======
-const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
-    const navigate = useNavigate();
-  
-    const handleClick = () => {
-      navigate("/song-description");
-    };
-    
+const CaroselCard = ({ imageUrl, title, creator, contributersNbr, onPlay, audio }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/song-description");
+  };
+
   return (
-    <div onClick={handleClick}
+    <div
+      onClick={handleClick}
       style={{
         width: "auto",
         height: "auto",
@@ -49,21 +48,26 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
           }}
         >
           <PlayerBtn
-            showProgress={false}
-            bordered={false}
-            showSkipButtons={false}
             circleColor="var(--color-purple)"
             iconColor="white"
             size={50}
+            onClick={() =>
+              onPlay?.({
+                title,
+                artist: creator,
+                cover: imageUrl,
+                audio,
+              })
+            }
           />
         </div>
       </div>
 
       {/* Text content */}
-      
+
       <div
         style={{
-          width: "200px", 
+          width: "200px",
           backgroundColor: "var(--color-light)",
           borderBottomLeftRadius: "var(--border-radius-56)",
           borderBottomRightRadius: "var(--border-radius-56)",
@@ -85,6 +89,7 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr }) => {
             fontSize: "12px",
             color: "var(--color-white-trans-50)",
             textAlign: "center",
+            margin: 0,
           }}
         >
           {creator} + {contributersNbr}

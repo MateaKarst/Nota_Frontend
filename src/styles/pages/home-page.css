@@ -23,7 +23,6 @@
   width: 100%;
   height: 300px;
   z-index: 10;
-
 }
 
 /* Хедер — під каруселлю */
@@ -37,9 +36,8 @@
   font-family: var(--font-family-secondary);
   border-bottom-left-radius: var(--border-radius-24);
   border-bottom-right-radius: var(--border-radius-24);
-
   display: flex;
-  align-items: flex-start; /* Контент прикріплено до верху контейнера */
+  align-items: flex-start ;  /* Контент прикріплено до верху контейнера */
   justify-content: space-between;
 }
 
@@ -57,6 +55,9 @@
   overflow-x: auto;
   padding: 12px 24px;
   gap: 12px;
+
+    scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Фейкова кнопка додати трек */
@@ -73,7 +74,7 @@
 }
 
 .title {
-  color: var(--Colors-White, #FFF);
+color: var(--Colors-White, #FFF);
 font-family: var(--font-family-secondary);
 font-size: var(--Size-head-text-h5-h6, 34px);
 font-style: normal;
@@ -82,6 +83,7 @@ text-align: left;
 padding-left: 24px;
 line-height: 15px;
 }
+
 .title-content{
   flex-direction: row;
   display: flex;
@@ -89,6 +91,7 @@ line-height: 15px;
   justify-content: space-between;
   padding-right: 12px;
 }
+
 .friends-section{
   width: 100%;
   overflow: hidden;
