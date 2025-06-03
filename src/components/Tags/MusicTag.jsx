@@ -85,5 +85,5 @@ export default MusicTag;
 <MusicTag text="Guitar" colorIndex={4} />
 
   Yellow just text (Instrument tag)
-<MusicTag text="Guitar" colorIndex={4} />
+<MusicTag text="Guitar" colorIndex={5} />
  */

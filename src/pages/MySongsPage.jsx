@@ -3,6 +3,7 @@ import SearchBar from '../components/Search/SearchBar';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import HeaderMySongs from '../components/Headers/HeaderMySongs';
 import NavBar from '../components/Navigation/NavBar';
+import MusicPlayer from '../components/MusicPlayer';
 
 import "../styles/pages/my-songs.css"
 
@@ -15,7 +16,8 @@ const allSongs = {
       title: "Rolling In The Deep",
       creator: "Adele",
       contributersNbr: 3,
-      genre: "Pop"
+      genre: "Pop",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     },
     {
       id: 2,
@@ -23,7 +25,8 @@ const allSongs = {
       title: "Thriller",
       creator: "Michael Jackson",
       contributersNbr: 5,
-      genre: "Pop"
+      genre: "Pop",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     }
   ],
   "collaborations": [
@@ -33,7 +36,8 @@ const allSongs = {
       title: "Back in Black",
       creator: "AC/DC",
       contributersNbr: 4,
-      genre: "Rock"
+      genre: "Rock",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     }
   ],
   "liked-songs": [
@@ -43,7 +47,8 @@ const allSongs = {
       title: "Abbey Road",
       creator: "The Beatles",
       contributersNbr: 4,
-      genre: "Rock"
+      genre: "Rock",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     },
     {
       id: 5,
@@ -51,7 +56,8 @@ const allSongs = {
       title: "The Dark Side of the Moon",
       creator: "Pink Floyd",
       contributersNbr: 6,
-      genre: "Progressive Rock"
+      genre: "Progressive Rock",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
     }
   ]
 };
@@ -59,6 +65,7 @@ const allSongs = {
 function MySongsPage() {
   const [activeTab, setActiveTab] = useState("my-songs");
   const [filteredSongs, setFilteredSongs] = useState(allSongs["my-songs"]);
+  const [currentSong, setCurrentSong] = useState(null);
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
@@ -74,6 +81,15 @@ function MySongsPage() {
     }
   };
 
+   const handlePlay = (song) => {
+    setCurrentSong({
+      title: song.title,
+      artist: song.creator,
+      cover: song.imageUrl,
+      audio: song.audioUrl
+    });
+  };
+
   return (
     <div className="my-songs-wrapper">
       <HeaderMySongs activeTab={activeTab} onTabChange={handleTabChange} />
@@ -87,9 +103,16 @@ function MySongsPage() {
             creator={song.creator}
             contributersNbr={song.contributersNbr}
             layout="row"
+            onPlay={() => handlePlay(song)} 
+            audio={song.audioUrl}
           />
         ))}
       </div>
+
+{currentSong && (
+  <MusicPlayer song={currentSong} />
+)}
+
       <NavBar />
     </div>
   );

@@ -5,8 +5,10 @@ import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import NavBar from '../components/Navigation/NavBar';
 import emilyImg from '../assets/emily-profile.jpg';
+import MusicPlayer from '../components/MusicPlayer';
 
 const ProfileFriendPage = () => {
+  const [currentSong, setCurrentSong]=useState(null);
   const [activeTab, setActiveTab] = useState("own"); // "own" або "collab"
 
   const ownSongs = [
@@ -14,19 +16,25 @@ const ProfileFriendPage = () => {
       title: "Ou va le monde",
       creator: "Emily Star",
       contributersNbr: 4,
-      imageUrl: "https://img.freepik.com/free-vector/flat-too-gay-too-good-vertical-illustration_23-2150572875.jpg?t=st=1747582791~exp=1747586391~hmac=de2c6b4e3a7ad10d46402a0d94b9fa88c0777a316137a0df66c6c538fa2c0812&w=1380"
+      imageUrl: "https://img.freepik.com/free-vector/flat-too-gay-too-good-vertical-illustration_23-2150572875.jpg?t=st=1747582791~exp=1747586391~hmac=de2c6b4e3a7ad10d46402a0d94b9fa88c0777a316137a0df66c6c538fa2c0812&w=1380",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+
     },
     {
       title: "Oui Oui Marie",
       creator: "Emily Star",
       contributersNbr: 3,
-      imageUrl: "https://img.freepik.com/free-photo/fantasy-marine-landscape-with-bioluminescent-nature_23-2151206853.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/fantasy-marine-landscape-with-bioluminescent-nature_23-2151206853.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+
     },
     {
       title: "Sun Sea Tone",
       creator: "Emily Star",
       contributersNbr: 2,
-      imageUrl: "https://img.freepik.com/free-photo/high-angle-shot-beautiful-beach-breathtaking-sunset-sky_181624-26026.jpg?t=st=1747585524~exp=1747589124~hmac=ab1a1f521cbdd65aede4b1606dca436482ba3820d485dce65c3b33a3ec3def7f&w=1380"
+      imageUrl: "https://img.freepik.com/free-photo/high-angle-shot-beautiful-beach-breathtaking-sunset-sky_181624-26026.jpg?t=st=1747585524~exp=1747589124~hmac=ab1a1f521cbdd65aede4b1606dca436482ba3820d485dce65c3b33a3ec3def7f&w=1380",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+
     }
   ];
 
@@ -35,13 +43,17 @@ const ProfileFriendPage = () => {
       title: "She is a Devil",
       creator: "Janne",
       contributersNbr: 2,
-      imageUrl: "https://img.freepik.com/free-photo/abstract-portrait-with-light-effects_23-2151118133.jpg?t=st=1747585683~exp=1747589283~hmac=f8048ad1e28620fe327eae5bdc7ed7d811afd35ec9d1b2490e1f465ad8dd8b72&w=1380"
+      imageUrl: "https://img.freepik.com/free-photo/abstract-portrait-with-light-effects_23-2151118133.jpg?t=st=1747585683~exp=1747589283~hmac=f8048ad1e28620fe327eae5bdc7ed7d811afd35ec9d1b2490e1f465ad8dd8b72&w=1380",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+
     },
     {
       title: "Soul Echo",
       creator: "JazzDev",
       contributersNbr: 5,
-      imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg"
+      imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg",
+      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+
     }
   ];
 
@@ -86,9 +98,9 @@ const ProfileFriendPage = () => {
         <div>
           <div><h1 className='title1'>Top Songs</h1></div>
           <div style={{ display: "flex", flexDirection: "column", alignContent: "left" }}>
-            <SmallCard title="My favourite game" creator="Emily StarShine" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/portrait-woman-posing-with-plastic-foil_23-2148864885.jpg?t=st=1747582494~exp=1747586094~hmac=00f6875f2997120fa41c044c603945afd43a48b9ef16e624344cccdaeffa938e&w=1380" />
-            <SmallCard title="Mon dream" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-vector/hand-drawn-streetwear-illustration_52683-159204.jpg?t=st=1747583383~exp=1747586983~hmac=49226085c9de1c3bb0374ee1d92c9f81571edb43d4d37ffbef8b03fa27953e63&w=1380" />
-            <SmallCard title="My Little Star" creator="Emily StarShine" contributersNbr={3} imageUrl="https://img.freepik.com/free-photo/colorful-red-drop-falling-water_23-2147786700.jpg?t=st=1747585599~exp=1747589199~hmac=6ca9e774e3393834b607a4c96e4a3a51c67327f48f32a593f16e1ee5ae679e00&w=1380" />
+            <SmallCard title="My favourite game" creator="Emily StarShine" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/portrait-woman-posing-with-plastic-foil_23-2148864885.jpg?t=st=1747582494~exp=1747586094~hmac=00f6875f2997120fa41c044c603945afd43a48b9ef16e624344cccdaeffa938e&w=1380" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+            <SmallCard title="Mon dream" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-vector/hand-drawn-streetwear-illustration_52683-159204.jpg?t=st=1747583383~exp=1747586983~hmac=49226085c9de1c3bb0374ee1d92c9f81571edb43d4d37ffbef8b03fa27953e63&w=1380" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"/>
+            <SmallCard title="My Little Star" creator="Emily StarShine" contributersNbr={3} imageUrl="https://img.freepik.com/free-photo/colorful-red-drop-falling-water_23-2147786700.jpg?t=st=1747585599~exp=1747589199~hmac=6ca9e774e3393834b607a4c96e4a3a51c67327f48f32a593f16e1ee5ae679e00&w=1380"  onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"/>
           </div>
         </div>
 
@@ -129,10 +141,22 @@ const ProfileFriendPage = () => {
               creator={song.creator}
               contributersNbr={song.contributersNbr}
               imageUrl={song.imageUrl}
+              onPlay={() => setCurrentSong({
+              title: song.title,
+              artist: song.creator,    
+              cover: song.imageUrl,     //to match the format audio player expects
+              audio: song.audioUrl       
+            })}
             />
           ))}
         </div>
       </div>
+
+      {currentSong && (
+              <div className="music-player-container">
+                <MusicPlayer song={currentSong} />
+              </div>
+            )}
 
       <NavBar />
     </div>

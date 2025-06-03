@@ -2,7 +2,7 @@
 
 .voice-card {
     display: flex;
-    padding: 5px var(--spacing-4);
+    padding: 6px var(--spacing-4);
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
@@ -32,6 +32,7 @@
     height: 40px;
     border-radius: var(--border-radius-56);
     object-fit: cover;
+     margin-right: 12px; 
 }
 
 
@@ -154,6 +155,7 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
 
 .voice-card.inactive .avatar,
 .voice-card.inactive .user-info-txt,

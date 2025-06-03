@@ -15,7 +15,8 @@ const LoginPage = () => {
                 <h1 className="title">Welcome</h1>
                 <input type="email" name="Email" className="input-field" placeholder="Email" />
                 <input type="password" name="Password" className="input-field" placeholder="Password" />
-                <BasicBtn text='Login' />
+                <BasicBtn text='Login'
+                onClick={() => navigate("/home")} />
                 <a href="/" className="forgot-password">Forgot your password?</a>
                 <p>or</p>
                 <BasicBtn text='Create an account'

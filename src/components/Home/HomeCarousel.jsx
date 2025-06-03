@@ -6,10 +6,16 @@ import { EffectCoverflow } from 'swiper/modules'
 import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
 import PlusImage from '../../assets/plus-img.png';
 import "../../styles/pages/home-page.css";
-import "../../styles/variables.css"
+import "../../styles/variables.css";
+
+import { useNavigate } from 'react-router-dom';
 
 
-const HomeCarousel = () => {
+
+
+const HomeCarousel = ({ onPlay }) => {
+  const navigate = useNavigate();
+
 
     const cards =[
         { 
@@ -18,6 +24,7 @@ const HomeCarousel = () => {
             title: "Paris 2012",
             creator: "Lily Vermeer",
             contributersNbr: 6,
+            audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         },
         { 
             id: 2,
@@ -25,6 +32,7 @@ const HomeCarousel = () => {
             title: "Ressort",
             creator: "Emily StarShine",
             contributersNbr: 4,
+            audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         },
         { 
             id: 3,
@@ -32,6 +40,7 @@ const HomeCarousel = () => {
             title: "Midnight echo",
             creator: "Nutella",
             contributersNbr: 2,
+            audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         },
         { 
             id: 4,
@@ -39,6 +48,7 @@ const HomeCarousel = () => {
             title: "Rain of tears",
             creator: "Lily Vermeer",
             contributersNbr: 5,
+            audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         },
     ];
 
@@ -73,6 +83,7 @@ const HomeCarousel = () => {
     }}
   >
     <div
+     onClick={() => navigate('/upload-song')} // technically there should be a pop up here
       style={{
         borderRadius: 'var(--border-radius-56)',
         backgroundColor: '#2c2c2c',
@@ -94,8 +105,17 @@ const HomeCarousel = () => {
         {/* Regular Cards */}
         {cards.map((card) => (
           <SwiperSlide key={card.id} style={{ width: '250px' }}>
-            <CaroselCard {...card} />
-          </SwiperSlide>
+            <CaroselCard {...card}  
+            onPlay={() =>
+              onPlay({
+                title: card.title,
+                artist: card.creator,
+                cover: card.imageUrl,
+                audio: card.audio,
+        })
+      }
+    />
+  </SwiperSlide>
         ))}
       </Swiper>
     </div>
