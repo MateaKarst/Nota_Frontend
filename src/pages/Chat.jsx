@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
 import Cookies from "js-cookie";
 import API_ENDPOINTS from "../routes/apiEndpoints";
 import { useAuth } from "../context/AuthProvider";
 
-import { ReactComponent as BackArrow } from '../assets/icons/backarrow-icon.svg';
+import { ReactComponent as BackArrow } from "../assets/icons/backarrow-icon.svg";
 import { ReactComponent as Pfp } from "../assets/chat/man.svg";
 
 import "../styles/chat/chat.scss";
 
 const Chat = () => {
   const navigate = useNavigate();
-  // const { id: otherUserId } = useParams(); // Get userId from URL
-  const { user } = useAuth(); // Your logged-in user
+  const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,7 +20,14 @@ const Chat = () => {
 
   const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; //dummy usern from db
 
+  const messagesJumpRef = useRef(null);
   const handleBackClick = () => navigate(-1);
+
+  useEffect(() => {
+  if (messagesJumpRef.current) {
+    messagesJumpRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+}, [messages]);
 
   // GET
   useEffect(() => {
@@ -35,9 +41,10 @@ const Chat = () => {
         return;
       }
 
-      if (user?.access_token) {
-        Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
-      }
+      Cookies.set("access_token", user.access_token, {
+        expires: 7,
+        sameSite: "lax",
+      });
 
       try {
         const accessToken = user?.access_token || Cookies.get("access_token");
@@ -45,7 +52,7 @@ const Chat = () => {
 
         const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
           headers: {
-            "Authorization": `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             "x-user-id": user.id,
           },
         });
@@ -61,7 +68,6 @@ const Chat = () => {
         setLoading(false);
       }
     };
-
     fetchMessages();
   }, [user, otherUserId]);
 
@@ -114,21 +120,31 @@ const Chat = () => {
           <ChatText
             key={msg.id}
             text={msg.text}
-            time={new Date(msg.created_at).toLocaleTimeString()}
+            timestamp={msg.created_at}
             variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
         ))}
+        <div ref={messagesJumpRef} /> 
       </div>
 
       <div className="chat-input">
-        <input
+        <input className="text-input"
           type="text"
           placeholder="Type here..."
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSendMessage();
+          }}
         />
-        <button>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="20" height="20">
+        <button onClick={handleSendMessage}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="white"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+          >
             <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
           </svg>
         </button>

@@ -13,7 +13,7 @@ function AppWrapper() {
   const location = useLocation();
 
   // List of paths where NavBar should be hidden
-  const hiddenNavPaths = ["/login", "/register", "/splash", "/", "/chat"];
+  const hiddenNavPaths = ["/login", "/splash", "/", "/chat", "/create-account", "/onboarding", "/personalisation", "/personalisation1-filters", "/personalisation2", ];
 
   const shouldHideNavBar = hiddenNavPaths.includes(location.pathname);
 

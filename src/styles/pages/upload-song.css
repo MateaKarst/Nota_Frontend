@@ -8,6 +8,7 @@
   background-color: var(--color-black);
   color: var(--color-white);
   font-family: var(--font-family-primary);
+  padding-bottom: 50px;
 }
 
 .criteria-container {
@@ -22,7 +23,8 @@
 
 .song-input {
   display: flex;
-  padding: var(--spacing-xs-5, 6px);
+  padding: 12px;
+  font-family: var(--font-family-primary);
   align-items: center;
   align-self: stretch;
   border-radius: var(--Radius-xl, 20px);
@@ -71,11 +73,9 @@
   border: 1px solid #aaa;
 }
 
-.plus-icon {
-  font-size: 48px;
+.plus {
+  font-size: 24px;
   font-weight: bold;
-  color: white;
-  z-index: 1;
 }
 
 .textarea-wrapper {
@@ -85,8 +85,10 @@
 
 .word-counter {
   position: absolute;
-  bottom: 8px;
-  right: 10px;
+  right: 0;
+  bottom: 0;
+  margin-right: 12px;
+  margin-bottom: 20px;
   font-size: 0.75rem;
   font-weight: 300;
   color: #aaa;
@@ -97,9 +99,15 @@
 
 textarea.song-input {
   width: 100%;
+  font-size: 14px;
   min-height: 100px;
-  padding-right: 80px;
-  padding-bottom: 24px;
+  padding: 12px;
   box-sizing: border-box;
   resize: vertical;
+}
+
+.upload-song-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
