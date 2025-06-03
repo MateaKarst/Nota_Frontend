@@ -7,7 +7,7 @@ const ProfileCard = ({ image, name, tagline, connections, btns }) => {
   return (
     <div className="profile-card">
         <div style={{display: "flex", flexDirection: "row", alignItems: "center", alignContent: "space-between", width: "100%"}}>
-      <img src={image} alt={`${name}'s profile`} className="profile-img" />
+      <img src={image} alt={`${name}'s profile`} className="profile-img-top" />
       {btns && (
           <div className="profile-buttons">
             

@@ -5,6 +5,7 @@
     background-position: center;
     height: 100vh;
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     padding-top: var(--spacing-64);
@@ -33,9 +34,10 @@
 }
 
 .subheading {
-    align-self: stretch;
+    align-items: center;
+    align-items: center;
     font-family: var(--font-family-primary);
-    font-size: var(--font-size-20);
+    font-size: var(--font-size-14);
     font-weight: var(--font-weight-bold);
     line-height: var(--font-line-height-20);
     margin-bottom: var(--spacing-32);
@@ -55,11 +57,12 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    position: relative; 
 }
+
 
 .add-picture-text {
     margin-top: var(--spacing-12);
-    align-self: stretch;
     font-family: var(--font-family-secondary);
     font-size: var(--font-size-34);
     font-weight: var(--font-weight-regular);
@@ -88,6 +91,7 @@
 .input-field {
     display: flex;
     height: 47px;
+    width: 305px;
     border-radius: 20px;
     border: 1px solid var(--color-white);
     padding: 0 var(--spacing-16);
@@ -100,7 +104,8 @@
 .textarea-field {
     display: flex;
     height: 87px;
-    padding: 10px 219px 13px 16px;
+    width: 305px;
+    padding: 10px var(--spacing-16) 13px var(--spacing-16); /* match input-field horizontal padding */
     border-radius: 20px;
     border: 1px solid var(--color-white);
     background: transparent;
@@ -108,7 +113,6 @@
     font-size: var(--font-size-14);
     font-family: var(--font-family-primary);
     resize: none;
-    align-self: stretch;
 }
 
 .save-button {
@@ -131,3 +135,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.plus-icon {
+    position: absolute;
+    bottom: 0;
+    right: 8px; 
+    font-size: 35px; 
+    color: var(--color-white);
+    background: none; 
+    padding: 0;
+    line-height: 1;
+    z-index: 2;
+    pointer-events: none; 
+}
+

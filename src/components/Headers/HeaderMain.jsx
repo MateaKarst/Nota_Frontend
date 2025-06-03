@@ -13,7 +13,7 @@ const HeaderMain = () => (
         <Link to="/notifications">
           <BellIcon className="icon-style" />
         </Link>
-        <Link to="/messages">
+        <Link to="/chat-overview">
           <MessageIcon className="icon-style" />
         </Link>
       </div>

@@ -4,9 +4,6 @@ import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import { useLocation } from 'react-router-dom';
 
-
-import NavBar from '../components/Navigation/NavBar'
-
 const ViewAllPage = () => {
     const location = useLocation();
 const title = location.state?.title || 'All Songs'; 
@@ -30,10 +27,7 @@ const title = location.state?.title || 'All Songs';
       <SmallCard title="Que est que" creator="Nancy Hi" contributersNbr={2} imageUrl="https://img.freepik.com/free-photo/metallic-holographic-background_23-2148862181.jpg?t=st=1747596479~exp=1747600079~hmac=1577f13f2209d40065bee71a6c7b3dfcbcf6efc23e5246f9e1c249a4fa0379de&w=1380" />
       <SmallCard title="Votre adore" creator="Megan Fox" contributersNbr={1} imageUrl="https://img.freepik.com/free-photo/abstract-stain-with-ferromagnetic-liquid-metal-with-copy-space_23-2148253549.jpg?t=st=1747596439~exp=1747600039~hmac=4782381cbf2c23d18816fd758e6ad78e14c890cb47edd3407286eb9cf2dd7466&w=1380" />
       <SmallCard title="Purple Sound" creator="Jamy Lynn" contributersNbr={5} imageUrl="https://img.freepik.com/free-photo/monochrome-view-person-playing-electric-guitar_23-2151406191.jpg?t=st=1747596394~exp=1747599994~hmac=4fb8863baaf493f4b36702e5c0b3aec5275dab0b2a2ef5079c61ffb2fc240c62&w=1380" />
-
       </div>
-
-      <NavBar/>
     </div>
   );
 };

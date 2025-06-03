@@ -1,15 +1,50 @@
-
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
+
+  overflow: hidden
 }
 
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #282c34;
   height: 100%;
-  width: auto;
+}
+
+/* Mobile phone frame */
+.mobile-frame {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  max-height: 800px;
+  height: 100vh;
+  /* For responsiveness */
+  border: 1px solid #555;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollable page content inside frame */
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.page-content.with-navbar {
+  padding-bottom: 50px;
+}
+
+/* When NavBar is hidden */
+.page-content.no-navbar {
+  padding-bottom: 0;
 }
 
 .App-logo {
@@ -46,4 +81,17 @@ html, body, #root {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Hide scrollbars in a cross-browser way */
+.page-content {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.page-content::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
 }

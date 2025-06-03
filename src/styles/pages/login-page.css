@@ -1,50 +1,89 @@
 @import '../variables.css';
 
+
 .login-page {
-    background-image: url(../../assets/backgrounds/login-bg.jpg);
+    height: 100dvh;
+    max-height: 800px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     font-family: var(--font-family-primary);
-    height: 100vh;
 }
 
 .login-page-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    width: 100%;
+    gap: 1.5rem;
+    max-width: 400px;
+    height: 100%;
+    padding-top: 6%;
 }
 
 .title {
-    
     font-size: var(--font-size-34);
     color: var(--color-white);
-}
-
-p {
-
-    color: var(--color-white);
-    font-size: var(--font-size-20);
-}
-
-.forgot-password {
-
-    font-size: var(--font-size-20);
-    color: var(--color-white);
-    text-decoration: none;
+    margin-bottom: 3rem;
 }
 
 .input-field {
     background-color: transparent;
     color: var(--color-white);
     border: 1px solid var(--color-white);
-    border-radius: var( --border-radius-20);
+    border-radius: var(--border-radius-20);
     font-size: var(--font-size-22);
-    padding: 0.5rem 1rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    box-sizing: border-box;
 }
+
 
 .input-field::placeholder {
     color: var(--color-white);
+    opacity: 0.8;
+}
+
+
+.forgot-password {
+    font-size: var(--font-size-20);
+    color: var(--color-white);
+    text-decoration: none;
+    text-align: center;
+
+}
+
+.or-create-account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.or {
+    color: var(--color-white);
+    font-size: var(--font-size-20);
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.error-text {
+    color: var(--color-yellow);
+    font-size: var(--font-size-16);
+    margin: -0.5rem 0 0.5rem;
+    text-align: left;
+    width: 85%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
 }

@@ -1,24 +1,49 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Success from './pages/Success';
-import Cancel from './pages/Cancel';
-import PlansPage from './pages/PlansPage';
-import ProPage from './pages/ProPage';
-import HomePage from './pages/HomePage'
-import SongDescription from './pages/SongDescription'
+
+"use client";
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import ProtectedRoute from "./context/ProtectedRoutes";
+import { AuthProvider } from "./context/AuthProvider";
+import { appRoutes } from "./routes/routesConfig";
+import NavBar from "./components/Navigation/NavBar";
+
+import "./App.css";
+
+function AppWrapper() {
+  const location = useLocation();
+
+  // List of paths where NavBar should be hidden
+  const hiddenNavPaths = ["/login", "/register", "/splash", "/", "/chat"];
+
+  const shouldHideNavBar = hiddenNavPaths.includes(location.pathname);
+
+  return (
+    <div className="App">
+      <div className="mobile-frame">
+        <ProtectedRoute>
+          <div className={`page-content ${shouldHideNavBar ? "no-navbar" : "with-navbar"}`}>
+            <Routes>
+              {appRoutes.map(({ path, element }) => (
+                <Route key={path} path={path} element={element} />
+              ))}
+            </Routes>
+          </div>
+          {!shouldHideNavBar && <NavBar />}
+        </ProtectedRoute>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <Router>
-      <Routes>
-      <Route path="/" element={<SongDescription />} />
-      <Route path="/plans" element={<PlansPage />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/cancel" element={<Cancel />} />
-        <Route path="/home" element={<HomePage />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AppWrapper />
+      </Router>
+    </AuthProvider>
   );
 }
 
 export default App;
-

@@ -15,15 +15,12 @@ color: var(--color-white);
 font-size:  var( --font-size-28);
 }
 
-.navbar-bottom {
-  position: fixed;
-  z-index: 1000;
-}
 
 .collaborate {
   position: fixed;
-  bottom: 80px;
+  bottom: 70px;
   left: 50%;  
   transform: translateX(-50%);
   z-index: 1100; /* above other elements */
+  margin-bottom: 5px;
 }

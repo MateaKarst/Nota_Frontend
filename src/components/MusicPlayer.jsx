@@ -9,65 +9,72 @@ export const dummySong = {
   title: "Paris 2012",
   artist: "Lily Vermeer +12",
   cover: songCover,
-  audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" // replace with real song if needed
+  audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+};
+
+const formatTime = (time) => {
+  if (isNaN(time)) return "0:00";
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
 };
 
 const MusicPlayer = ({ song }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0); 
-  const [duration, setDuration] = useState(0); // Step 1
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
+  const progressBarRef = useRef(null);
 
   const togglePlay = () => {
+    if (!audioRef.current) return;
     if (isPlaying) {
       audioRef.current.pause();
-      setIsPlaying(false);
     } else {
       audioRef.current.play();
-    setIsPlaying(true);
     }
+    setIsPlaying(!isPlaying);
   };
 
-   useEffect(() => {
+  // Handle song change
+  useEffect(() => {
     if (song && audioRef.current) {
-        audioRef.current.pause();
-    audioRef.current.load(); //resets audio
+      audioRef.current.pause();
+      audioRef.current.load();
       audioRef.current.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch((error) => {
-          console.log("Autoplay prevented:", error);
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.log("Autoplay prevented:", err);
           setIsPlaying(false);
         });
     }
   }, [song]);
 
+  // Track time updates and duration
   useEffect(() => {
     const audio = audioRef.current;
+    if (!audio) return;
+    const setAudioDuration = () => setDuration(audio.duration);
 
-    const updateProgress = () => {
-      setProgress(audio.currentTime);
-    };
-
-    const setAudioDuration = () => {
-      setDuration(audio.duration);
-    };
-
-    if (audio) {
-      audio.addEventListener("timeupdate", updateProgress);
-      audio.addEventListener("loadedmetadata", setAudioDuration);
-    }
+    audio.addEventListener("loadedmetadata", setAudioDuration);
 
     return () => {
-      if (audio) {
-        audio.removeEventListener("timeupdate", updateProgress);
-        audio.removeEventListener("loadedmetadata", setAudioDuration);
-      }
+      audio.removeEventListener("loadedmetadata", setAudioDuration);
     };
   }, []);
 
-  if (!song) return null; // Don't render if there's no song
+  // click to seek
+  const handleSeek = (e) => {
+    const bar = progressBarRef.current;
+    if (!bar || !audioRef.current) return;
+    const rect = bar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * duration;
+    audioRef.current.currentTime = newTime;
+    setProgress(newTime);
+  };
+
+  if (!song) return null;
 
   return (
     <div className="mini-player">
@@ -75,12 +82,17 @@ const MusicPlayer = ({ song }) => {
       <div className="mini-info">
         <p className="mini-title">{song.title}</p>
         <p className="mini-artist">{song.artist}</p>
-        <div className="progress-bar-container">
+        <div
+          className="progress-bar-container"
+          onClick={handleSeek}
+          ref={progressBarRef}
+        >
           <div
             className="progress-bar"
             style={{ width: duration ? `${(progress / duration) * 100}%` : "0%" }}
           />
         </div>
+
       </div>
       <img
         src={heartIcon}

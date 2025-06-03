@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "../../styles/variables.css";
-import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
+// import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 const buttonStyles = {
     viewAll: {
@@ -14,6 +14,7 @@ const buttonStyles = {
         fontSize: "var(--font-size-16)",
         fontWeight: "--font-weight-semibold",
         fontFamily: "var(--font-family-primary)",
+        whiteSpace: "nowrap",
     },
     tiny: {
         width: "fit-content",
@@ -106,13 +107,13 @@ function BasicBtn({ type = "default", text, icon: Icon, onClick}) {
     const [clicked, setClicked] = useState(false);
 
 
-    const handleClick = () => {
-        setClicked(!clicked);
-    };
+    // const handleClick = () => {
+    //     setClicked(!clicked);
+    // };
 
     return (
         <button
-            style={buttonStyles[type]}
+            style={{ ...buttonStyles[type], whiteSpace: "nowrap" }}
             onClick={onClick}
         >
             {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
