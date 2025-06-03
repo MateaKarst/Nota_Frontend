@@ -69,19 +69,19 @@ const Chat = () => {
     if (!textInput.trim()) return;
 
     setError(null);
-
+    
     try {
       const accessToken = user?.access_token || Cookies.get("access_token");
       if (!accessToken) throw new Error("No access token");
 
       const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
-        method: "POST",
+        method: "POST",// mandatory
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json", // mandatory
+          Authorization: `Bearer ${accessToken}`, // mandatory
           "x-user-id": user.id,
         },
-        body: JSON.stringify({ text: textInput }), 
+        body: JSON.stringify({ text: textInput }), // whatever you post as body
       });
 
       if (!res.ok) throw new Error("Failed to send message");
@@ -94,7 +94,7 @@ const Chat = () => {
       setError(err.message || "Error sending message");
     }
   };
-  
+
   if (loading) return <div className="chat-app">Loading...</div>;
   if (error) return <div className="chat-app">Error: {error}</div>;
 
