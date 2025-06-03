@@ -14,6 +14,7 @@ const buttonStyles = {
         fontSize: "var(--font-size-16)",
         fontWeight: "--font-weight-semibold",
         fontFamily: "var(--font-family-primary)",
+        whiteSpace: "nowrap",
     },
     tiny: {
         width: "fit-content",
@@ -112,7 +113,7 @@ function BasicBtn({ type = "default", text, icon: Icon, onClick }) {
 
     return (
         <button
-            style={buttonStyles[type]}
+            style={{ ...buttonStyles[type], whiteSpace: "nowrap" }}
             onClick={onClick}
         >
             {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}

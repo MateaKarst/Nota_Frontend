@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
 import Cookies from "js-cookie";
 import API_ENDPOINTS from "../routes/apiEndpoints";
