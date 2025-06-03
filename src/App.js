@@ -1,74 +1,24 @@
-
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import MySongsPage from "./pages/MySongsPage";
-import Onboarding from "./pages/Onboarding";
-import LoginPage from "./pages/LoginPage";
-import CreateAccount from "./pages/CreateAccount";
-import ProfilePage from './pages/ProfilePage';
-import ProfileFriendPage from './pages/ProfileFriendPage';
-import NavBar from "./components/Navigation/NavBar";
-import Not from "./pages/NotificationsPage"
-import SearchPage from "./pages/SearchPage"
-import FilterPage from "./pages/FilterPage";
-import Track from "./components/Tracks/UserTrack"
-import SongDescription from "./pages/SongDescription"
-import UploadSong from "./pages/UploadSong"
-import ViewAllPage from "./pages/ViewAllPage"
-
-
-import "./App.css";
-import { Search } from "lucide-react";
-
-function AppContent() {
-  const location = useLocation();
-
-  // Define paths where NavBar should appear
-  const showNavBarPaths = ["/home", "/songs" /* , "/discover", "/profile" */];
-  const showNavBar = showNavBarPaths.includes(location.pathname);
-
-  return (
-    <>
-      <Routes>
-        {/* log in routes */}
-        <Route path="/" element={<Onboarding />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/create-account" element={<CreateAccount />} />
-
-        {/* nav bar routes */}
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/songs" element={<MySongsPage />} />
-        <Route path="/discover" element={<SearchPage />} />
-        <Route path="/prfile" element={<ProfilePage />} /> {/* fix styling*/}
-
-        {/* friend routes */}
-        <Route path="/profilefriend" element={<ProfileFriendPage />} />
-
-        {/* honme page routes */}
-        <Route path="/notifications" element={<Not />} />
-        <Route path="/view-all" element={<ViewAllPage />} /> {/* fix navigation*/}
-
-        {/* song routes */}
-        <Route path="/song-description" element={<SongDescription />} />
-
-        {/* create song routes */}
-       <Route path="/upload-song" element={<UploadSong />} />
-
-        {/* search routes */}
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/filter" element={<FilterPage />} />
-      </Routes>
-      {showNavBar && <NavBar />}
-    </>
-  );
-}
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
+import PlansPage from './pages/PlansPage';
+import ProPage from './pages/ProPage';
+import HomePage from './pages/HomePage'
+import SongDescription from './pages/SongDescription'
 
 function App() {
   return (
     <Router>
-      <Onboarding />
+      <Routes>
+      <Route path="/" element={<SongDescription />} />
+      <Route path="/plans" element={<PlansPage />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
     </Router>
   );
 }
 
 export default App;
+
