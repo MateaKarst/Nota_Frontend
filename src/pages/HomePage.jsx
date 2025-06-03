@@ -28,8 +28,9 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div> <div className='title-content'><h1 className='title'>New songs</h1>
-        <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
+      <div> 
+        <div className='title-content'><h1 className='title'>New songs</h1>
+          <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New Songs' } })} />
 
       </div>
         <div className="horizontal-scroll">
