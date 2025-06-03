@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/pages/home-page.css'
 import HomeCarousel from '../components/Home/HomeCarousel';
 import HeaderMain from '../components/Headers/HeaderMain';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
@@ -8,6 +7,7 @@ import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 
+import '../styles/pages/home-page.css'
 
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
@@ -23,7 +23,7 @@ const HomePage = () => {
       <div className="hero-wrapper">
         <HeaderMain className="header" />
         <div className="home-carousel-overlay">
-          <h1 className='title-content'>My Songs</h1>
+          <h1 className='title-my-songs'>My Songs</h1>
           <HomeCarousel onPlay={(song) => setCurrentSong(song)} />
         </div>
       </div>
