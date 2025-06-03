@@ -9,7 +9,7 @@ const ViewAllPage = () => {
 const title = location.state?.title || 'All Songs'; 
 
   return (
-    <div style={{ backgroundColor: "#343331", paddingBottom: "20px"}}>
+    <div style={{ backgroundColor: "#343331", paddingBottom: "20px", alignContent:"content", maxWidth:"1200px", margin: "0 auto",}}>
         <div className="fixed-header">
 
       <HeaderVariants mode="black text" title={title}  />
