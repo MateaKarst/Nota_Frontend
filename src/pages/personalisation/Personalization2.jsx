@@ -44,16 +44,18 @@ const Personalization2 = () => {
 
         <h2 className="question1">What instruments do you play?</h2>
 
+        <div className="search1">
           <SearchBar 
             variant={1}/>
+            </div>
 
-                <div className="tags">
+                <div className="tags2">
                     {instruments.map((instrument) => (
                         <MusicTag key={instrument} text={`${instrument}`} colorIndex={0} isSelected={selectedInstruments.includes(instrument)} onClick={() => handleTagClick(instrument)} />
                     ))}
                 </div>
 
-                <div className="next-button-wrapper">
+                <div className="next-button-wrapper2">
                     <Buttons type="default" text="Next" onClick={() => navigate("/home")}/>
                 </div>
             </div>

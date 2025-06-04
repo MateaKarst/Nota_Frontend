@@ -10,7 +10,7 @@
 }
 
 .header{
-  margin-bottom:24px;
+  margin-bottom:14px;
 }
 
 .question1{
@@ -24,7 +24,6 @@ padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-12);
-    margin-bottom: 50px;
     justify-content: center;
 }
 
@@ -32,6 +31,13 @@ padding: 0 20px;
 .next-button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top:200px;
-    
+    margin-top:20px;
+
+}
+
+.search {
+  width: 100%;
+  max-width: 350px; /* or whatever max width fits your design */
+  padding: 0 15px; /* optional */
+  margin: 0 auto;
 }

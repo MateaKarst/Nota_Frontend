@@ -27,7 +27,7 @@ const NotificationsPage = () => {
 
   return (
     <div>
-      <div style={{ backgroundColor: "#343331", height: "100vh", color: "white" }}>
+      <div style={{ backgroundColor: "#343331", height: "100vh", color: "white",  paddingBottom: "8dvh" }}>
         <div className="header">
           <HeaderVariants mode="text" title="Notifications" />
         </div>
@@ -42,8 +42,8 @@ const NotificationsPage = () => {
 };
 
 const Section = ({ title, items }) => (
-  <div>
-    <h2 style={{ textAlign: "left", paddingLeft: "20px", color: "white" }}>{title}</h2>
+  <div style={{ marginBottom: '20px' }}>  {/* Add spacing between sections */}
+    <h2 style={{ textAlign: "left", paddingLeft: "2dvh", color: "white" }}>{title}</h2>
     {items.map(n => (
       <NotificationItem key={n.id} {...n} />
     ))}

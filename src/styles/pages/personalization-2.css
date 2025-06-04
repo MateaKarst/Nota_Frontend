@@ -10,17 +10,17 @@
 }
 
 .header{
-  margin-bottom:24px;
+  margin-bottom:10px;
 }
 
 .question1{
 font-family: var(--font-family-secondary);
 font-size:var(--font-size-34);
-margin-bottom:24px;
+margin-bottom:14px;
 padding: 0 20px;
 }
 
-.tags {
+.tags2 {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-12);
@@ -29,9 +29,16 @@ padding: 0 20px;
 }
 
 
-.next-button-wrapper {
+.next-button-wrapper2 {
     display: flex;
     justify-content: center;
-    margin-top:150px;
+    margin-top:40px;
     
+}
+
+.search1 {
+  width: 100%;
+  max-width: 350px; 
+  padding: 0 15px;
+  margin: 0 auto;
 }
