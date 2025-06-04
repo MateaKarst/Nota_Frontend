@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
 import Cookies from "js-cookie";
@@ -20,14 +20,7 @@ const Chat = () => {
 
   const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; //dummy usern from db
 
-  const messagesJumpRef = useRef(null);
   const handleBackClick = () => navigate(-1);
-
-  useEffect(() => {
-  if (messagesJumpRef.current) {
-    messagesJumpRef.current.scrollIntoView({ behavior: "smooth" });
-  }
-}, [messages]);
 
   // GET
   useEffect(() => {
@@ -76,19 +69,19 @@ const Chat = () => {
     if (!textInput.trim()) return;
 
     setError(null);
-    
+
     try {
       const accessToken = user?.access_token || Cookies.get("access_token");
       if (!accessToken) throw new Error("No access token");
 
       const res = await fetch(API_ENDPOINTS.MESSAGES(otherUserId), {
-        method: "POST",// mandatory
+        method: "POST",
         headers: {
-          "Content-Type": "application/json", // mandatory
-          Authorization: `Bearer ${accessToken}`, // mandatory
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
           "x-user-id": user.id,
         },
-        body: JSON.stringify({ text: textInput }), // whatever you post as body
+        body: JSON.stringify({ text: textInput }), 
       });
 
       if (!res.ok) throw new Error("Failed to send message");
@@ -101,7 +94,7 @@ const Chat = () => {
       setError(err.message || "Error sending message");
     }
   };
-
+  
   if (loading) return <div className="chat-app">Loading...</div>;
   if (error) return <div className="chat-app">Error: {error}</div>;
 
@@ -124,11 +117,10 @@ const Chat = () => {
             variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
         ))}
-        <div ref={messagesJumpRef} /> 
       </div>
 
       <div className="chat-input">
-        <input className="text-input"
+        <input
           type="text"
           placeholder="Type here..."
           value={textInput}

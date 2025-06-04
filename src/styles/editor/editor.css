@@ -17,7 +17,6 @@
     border: 1px solid #777777;
 }
 
-
 .multitrack-timeline {
     position: sticky;
     top: 0;
@@ -38,13 +37,11 @@
     border-right: 1px solid #555;
 }
 
-
 .multitrack {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-
 
 .multitrack-track {
     display: flex;
@@ -54,7 +51,6 @@
     padding: 4px 0;
     background: #343331;
 }
-
 
 .multitrack-info {
     flex: 0 0 120px;
@@ -68,12 +64,10 @@
     white-space: nowrap;
 }
 
-
 .multitrack-wave {
     flex: 1;
     min-width: 1000px;
 }
-
 
 button {
     margin: 5px;
@@ -83,29 +77,28 @@ button {
     color: #fff;
     border: none;
     cursor: pointer;
-    }
+}
 
-    .button-wrapper {
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      padding-top: 1rem;
-    }
+.button-wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding-top: 1rem;
+}
 
-    .button-block {
-      padding-top: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.button-block {
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .multitrack-main {
-      display: flex;
-    }
+.multitrack-main {
+    display: flex;
+}
 
-    .instrument-column {
-      display: flex;
-  
-      flex: 0 0 120px;
-    }
-    
+.instrument-column {
+    display: flex;
+
+    flex: 0 0 120px;
+}

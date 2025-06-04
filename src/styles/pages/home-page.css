@@ -85,7 +85,7 @@
   line-height: 15px;
 }
 
-.title-my-songs{
+/* .title-my-songs{
   color: var(--Colors-White, #FFF);
   font-family: var(--font-family-secondary);
   font-size: var(--Size-head-text-h5-h6, 34px);
@@ -94,7 +94,7 @@
   text-align: left;
   padding-left: 24px;
   line-height: 15px;
-}
+} */
 
 .title-content {
   flex-direction: row;
@@ -112,4 +112,11 @@
 .pink-header-title {
   width: 100%;
   padding-left: 20px;
+  color: var(--Colors-White, #FFF);
+  font-family: var(--font-family-secondary);
+  font-size: var(--Size-head-text-h5-h6, 34px);
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+  padding-left: 24px;
 }

@@ -1,21 +1,16 @@
 @import '../variables.css';
 
-.page-content {
-  background-color: var(--color-black);
-}
-
 .chat-app {
-  background-color: var(--color-black);
   color: white;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   .chat-header {
     display: flex;
     align-items: center;
-  background-color: var(--color-black);
+    background-color: #1f1f1f;
     padding: 1rem;
 
     .go-back {
@@ -41,28 +36,30 @@
     flex-grow: 1;
     overflow-y: auto;
     align-content: baseline;
-    margin-left: 16px;
+    margin-left: 10px;
+
   }
 
   .chat-input {
     display: flex;
-    background-color: var(--color-black);
+    background-color: #1f1f1f;
     padding: 0.75rem;
       font-family: var(--font-family-primary);
 
-    .text-input {
+    input {
       flex-grow: 1;
       padding: 0.5rem 1rem;
+      border: none;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
       font-size: 1rem;
       outline: none;
-      background-color: white;
-      color: white;
+      background-color: #ddd;
+      color: black;
     }
 
     button {
-      background-color: var(--color-purple);
+      background-color: #7c3aed;
       border: none;
       padding: 0.5rem 1rem;
       border-top-right-radius: 20px;

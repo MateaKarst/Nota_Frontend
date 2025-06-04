@@ -9,7 +9,7 @@ import MusicPlayer from '../components/MusicPlayer';
 
 const ProfilePage = () => {
   const [currentSong, setCurrentSong]=useState(null);
-  const [activeTab, setActiveTab] = useState("own"); // "own" або "collab"
+  const [activeTab, setActiveTab] = useState("own");
 
   const ownSongs = [
     {
@@ -56,7 +56,6 @@ const ProfilePage = () => {
     setActiveTab(tab);
   };
 
-  // Стилі для кнопок
   const switcherBtnStyle = {
     width: "fit-content",
         height: "23px",
@@ -138,7 +137,7 @@ const ProfilePage = () => {
              onPlay={() => setCurrentSong({
               title: song.title,
               artist: song.creator,    
-              cover: song.imageUrl,     //to match the format audio player expects
+              cover: song.imageUrl,    
               audio: song.audioUrl       
             })}
             />

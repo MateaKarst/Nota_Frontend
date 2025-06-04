@@ -10,20 +10,11 @@ const TagInput = ({ placeholder = "Add tag", type = "instruments" }) => {
   // dummy data
   const instruments = ["Guitar", "Piano", "Drums", "Violin", "Bass", "Synth", "Trumpet", "Flute"];
   const genres = ["Rock", "Hip Hop", "Jazz", "Electronic", "Pop", "Blues", "Reggae", "Classical"];
-
-  var allSuggestions = {}
-
-  if (type === "instruments") {
-    allSuggestions = {
-      Instruments: instruments
-    }
-  }
-  else {
-    allSuggestions = {
-      Genres: genres
-    }
-  }
-
+  
+  const allSuggestions = {
+    Instruments: instruments,
+    Genres: genres,
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;

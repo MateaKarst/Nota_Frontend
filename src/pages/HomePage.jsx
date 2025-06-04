@@ -7,8 +7,6 @@ import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 
-import '../styles/pages/home-page.css'
-
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const navigate = useNavigate();
@@ -16,21 +14,20 @@ const HomePage = () => {
   // const handleViewAllClick = () => {
   //   navigate('/view-all');
   // };
-  
+
   return (
     <div className="home-page">
 
       <div className="hero-wrapper">
         <HeaderMain className="header" />
         <div className="home-carousel-overlay">
-          <h1 className='title-my-songs'>My Songs</h1>
+          <h1 className='pink-header-title'>My Songs</h1>
           <HomeCarousel onPlay={(song) => setCurrentSong(song)} />
         </div>
       </div>
 
-      <div> 
-        <div className='title-content'><h1 className='title'>New songs</h1>
-          <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New Songs' } })} />
+      <div> <div className='title-content'><h1 className='title'>New songs</h1>
+        <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
 
       </div>
         <div className="horizontal-scroll">
@@ -40,10 +37,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div> <div className='title-content'><h1 className='title'>Collaborations</h1>
-        <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'Collaborations' } })} />
+      <div>
+        <div className='title-content'><h1 className='title'>Collaborations</h1>
+          <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'Collaborations' } })} />
 
-      </div>
+        </div>
         <div className="horizontal-scroll">
           <MusicCard title="Dreamy" creator="Bestguitar123" contributersNbr={1} imageUrl={"https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg?t=st=1746643614~exp=1746647214~hmac=a7e5c96486e48adbc90516fa4a6cdf0cec31c7bdb7c167ad72b00b88966a15b0&w=740"} onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
           <MusicCard title="Memories" creator="Jamesvoice" contributersNbr={3} imageUrl={"https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg?t=st=1746643570~exp=1746647170~hmac=0ba17f92d1e2691e78daca127bd3f9857f3df09f04502382721058cd18655527&w=1380"} onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />

@@ -43,14 +43,8 @@ const Personalization1 = () => {
     };
     return (
         <div className="container">
-                <HeaderVariants className="header" mode="default" />
-
-                <h2 className="question1">What music genre do you like to create or work on?</h2>
-
-        <div className="search">
-                <SearchBar
-                    variant={1} />
-                    </div>
+            <div>
+                <HeaderVariants mode="black text" title="What music genre do you" />
 
                 <div className="tags">
                     {genres.map((genre) => (
@@ -71,7 +65,8 @@ const Personalization1 = () => {
                     />
                 </div>
             </div>
-    );
-};
+        </div>
+    )
+}
 
 export default Personalization1;

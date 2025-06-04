@@ -3,7 +3,7 @@
 .onboarding-container {
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     position: relative;
     flex-direction: column;
