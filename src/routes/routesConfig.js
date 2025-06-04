@@ -42,7 +42,7 @@ export const appRoutes = [
 
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },
-    { path: "/notifications", element: <NotificationsPage /> ,isPublic:true},
+    { path: "/notifications", element: <NotificationsPage /> },
 
     { path: "/chat", element: <Chat /> },
     { path: "/chat-overview", element: <ChatOverview /> },
