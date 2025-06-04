@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
 import Cookies from "js-cookie";
@@ -20,7 +20,14 @@ const Chat = () => {
 
   const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; //dummy usern from db
 
+  const messagesJumpRef = useRef(null);
   const handleBackClick = () => navigate(-1);
+
+  useEffect(() => {
+  if (messagesJumpRef.current) {
+    messagesJumpRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+}, [messages]);
 
   // GET
   useEffect(() => {
@@ -117,10 +124,11 @@ const Chat = () => {
             variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
         ))}
+        <div ref={messagesJumpRef} /> 
       </div>
 
       <div className="chat-input">
-        <input
+        <input className="text-input"
           type="text"
           placeholder="Type here..."
           value={textInput}

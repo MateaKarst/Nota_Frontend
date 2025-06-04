@@ -72,7 +72,7 @@ const UploadSong = () => {
           {imagePreview ? (
             <img src={imagePreview} alt="Uploaded" />
           ) : (
-            <span className="plus-icon">+</span>
+            <p className="plus">+</p>
           )}
           <input
             type="file"
@@ -117,6 +117,7 @@ const UploadSong = () => {
             suggestions={genres}
             placeholder="Add genres..."
             colorIndex={4}
+            type="genres"
           />
 
           <p className="section-title">Instrument tag</p>
@@ -127,7 +128,7 @@ const UploadSong = () => {
           />
         </div>
 
-        <div className="upload-soong-btn">
+        <div className="upload-song-btn">
           <Buttons type="main" text="Post" onClick={() => navigate("/editor2")} />
         </div>
       </div>

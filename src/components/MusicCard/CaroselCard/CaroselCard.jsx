@@ -43,8 +43,8 @@ const CaroselCard = ({ imageUrl, title, creator, contributersNbr, onPlay, audio 
         <div
           style={{
             position: "absolute",
-            bottom: "0px",
-            right: "5px",
+            bottom: "-6px",
+            right: "0px",
           }}
         >
           <PlayerBtn

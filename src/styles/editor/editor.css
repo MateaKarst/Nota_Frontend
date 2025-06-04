@@ -17,7 +17,7 @@
     border: 1px solid #777777;
 }
 
-/* Sticky timeline bar */
+
 .multitrack-timeline {
     position: sticky;
     top: 0;
@@ -38,14 +38,14 @@
     border-right: 1px solid #555;
 }
 
-/* Wrapper for all tracks */
+
 .multitrack {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-/* Each track row */
+
 .multitrack-track {
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@
     background: #343331;
 }
 
-/* Track label */
+
 .multitrack-info {
     flex: 0 0 120px;
     color: #000;
@@ -68,13 +68,13 @@
     white-space: nowrap;
 }
 
-/* Waveform container */
+
 .multitrack-wave {
     flex: 1;
     min-width: 1000px;
 }
 
-/* Optional button styling */
+
 button {
     margin: 5px;
     padding: 6px 12px;

@@ -34,8 +34,8 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {
         <div
           style={{
             position: "absolute",
-            bottom: "-1px",
-            right: "-2px",
+            bottom: "-6px",
+            right: "-8px",
           }}
         >
           <PlayBtn

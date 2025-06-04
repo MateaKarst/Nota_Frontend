@@ -29,14 +29,14 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
       }}
     >
       <div style={{ width: "150px", position: "relative" }}>
-        <CoverImg SVGImg={imageUrl} /> {/* Pass the image URL directly here */}
+        <CoverImg SVGImg={imageUrl} /> 
 
         {/* music btn */}
         <div
           style={{
             position: "absolute",
-            bottom: "-5px",
-            right: "-3px",
+            bottom: "-7px",
+            right: "-5px",
           }}
         >
           <PlayBtn
