@@ -12,7 +12,7 @@ import { useAuth } from '../context/AuthProvider';
 
 const ProfilePage = () => {
   const [ownSongs, setOwnSongs] = useState([]);
-const [collaborations, setCollaborations] = useState([]);
+  const [collaborations, setCollaborations] = useState([]);
 
   const [currentSong, setCurrentSong] = useState(null);
   const [activeTab, setActiveTab] = useState("own");
@@ -23,7 +23,7 @@ const [collaborations, setCollaborations] = useState([]);
   const [friendConnections, setFriendConnections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
 
   // Використовуємо або ID з URL, або ID поточного користувача
   const connectionId = id || user?.id;
@@ -32,56 +32,62 @@ const [collaborations, setCollaborations] = useState([]);
     const fetchData = async () => {
       setLoading(true);
       setError(null);
-  
+
       if (!user || !user.access_token) {
         setError("User not authenticated");
         setLoading(false);
         return;
       }
-  
+
       Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
-  
+
       try {
         const accessToken = user?.access_token || Cookies.get("access_token");
         if (!accessToken) throw new Error("No access token");
-  
+
         // Отримуємо дані користувача
         const res = await fetch(API_ENDPOINTS.USER(connectionId), {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-  
+
         const fetchedUser = await res.json();
         if (!res.ok) throw new Error(fetchedUser.message || "Failed to fetch user data");
         setUserData(fetchedUser);
-  
+
         // Отримуємо підключення
         const connRes = await fetch(API_ENDPOINTS.CONNECTIONS(connectionId), {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-  
+
         const connections = await connRes.json();
         setFriendConnections(connections);
-  
+
         console.log("Fetching songs from:", API_ENDPOINTS.SONGS.MULTIPLE + `?userId=${connectionId}`);
 
         // Отримуємо пісні
         const songsRes = await fetch(API_ENDPOINTS.SONGS.MULTIPLE + `?userId=${connectionId}`, {
-        
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-  
+
         const userSongs = await songsRes.json();
         if (!songsRes.ok) throw new Error(userSongs.message || "Failed to fetch user songs");
-  
-        const own = userSongs.filter(song => song.is_owner);
-        const collabs = userSongs.filter(song => !song.is_owner);
-  
+
+        const userId = user?.id;
+
+        const own = userSongs.filter(song => song.user_id === userId);
+
+        const collabs = userSongs.filter(song =>
+          song.user_id !== userId &&
+          song.tracks?.some(track => track.user_id === userId)
+        );
+
+
         setOwnSongs(own);
         setCollaborations(collabs);
       } catch (err) {
@@ -91,12 +97,12 @@ const [collaborations, setCollaborations] = useState([]);
         setLoading(false);
       }
     };
-  
+
     if (connectionId) {
       fetchData();
     }
   }, [connectionId, user]);
-  
+
 
   if (loading) return <div>Loading user profile...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -218,23 +224,23 @@ const [collaborations, setCollaborations] = useState([]);
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-        {(activeTab === "own" ? ownSongs : collaborations).map((song, index) => (
-  <SmallCard
-    key={song.id || index}
-    title={song.title}
-    creator={userData.user_details.username} 
-    contributersNbr={song.contributors?.length || 0}
-    imageUrl={song.cover_image}
-    onPlay={() =>
-      setCurrentSong({
-        title: song.title,
-        artist: userData.user_details.username,
-        cover: song.cover_image,
-        audio: song.audio_url,
-      })
-    }
-  />
-))}
+          {(activeTab === "own" ? ownSongs : collaborations).map((song, index) => (
+            <SmallCard
+              key={song.id || index}
+              title={song.title}
+              creator={userData.user_details.username}
+              contributersNbr={song.contributors?.length || 0}
+              imageUrl={song.cover_image}
+              onPlay={() =>
+                setCurrentSong({
+                  title: song.title,
+                  artist: userData.user_details.username,
+                  cover: song.cover_image,
+                  audio: song.audio_url,
+                })
+              }
+            />
+          ))}
 
         </div>
       </div>
