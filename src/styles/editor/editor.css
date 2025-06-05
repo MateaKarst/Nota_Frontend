@@ -1,24 +1,35 @@
 /* MultitrackMixer.css */
 
+body, html {
+    overflow-x: hidden;
+    background-color: var(--color-black);
+}
+
 .multitrack-container {
     color: #fff;
     background-color: #343331;
     font-family: sans-serif;
-    overflow-x: auto;
-}
-
-#container {
+    width: 100%;
+    overflow-x: hidden;
+    }
+    
+    #container {
     background: #343331;
     color: #fff;
     max-height: 500px;
-    overflow-y: none;
-    overflow-x: none;
-    min-width: max-content;
+    min-width: 100%;
+    width: fit-content;
     border: 1px solid #777777;
-}
+    }
 
-/* Sticky timeline bar */
-.multitrack-timeline {
+    .multitrack-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        width: 100%;
+    }
+    
+    /* Sticky timeline bar */
+    .multitrack-timeline {
     position: sticky;
     top: 0;
     background-color: #343331;
@@ -101,6 +112,8 @@ button {
 
     .multitrack-main {
       display: flex;
+      width: 100%;
+      overflow: hidden;
     }
 
     .instrument-column {
