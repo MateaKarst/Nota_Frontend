@@ -14,24 +14,24 @@ const RecordingPage = () => {
   const [seconds, setSeconds] = useState(0);
   const [hasRecorded, setHasRecorded] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
-  const [bpm, setBpm] = useState(120); // initial BPM is 120
+  const [bpm, setBpm] = useState(120);
 
   const [isLoading, setIsLoading] = useState(false); 
 
   const increaseBpm = () => {
-  setBpm(prev => Math.min(prev + 1, 300)); // limits to max 300 bpm
+  setBpm(prev => Math.min(prev + 1, 300));
 };
 
 const decreaseBpm = () => {
-  setBpm(prev => Math.max(prev - 1, 20)); // limits to min 20 bpm
+  setBpm(prev => Math.max(prev - 1, 20));
 };
 
-const handleRestart = () => { //"reset" buttons resets everything
+const handleRestart = () => {
   setIsRecording(false);
   setSeconds(0);
   setHasRecorded(false);
   setShowSnippet(false);
-  setBpm(120); // optional: reset BPM to default
+  setBpm(120);
 };
 
 const [showPopup, setShowPopup] = useState(false);
@@ -42,7 +42,7 @@ const navigate = useNavigate();
 const handlePostClick = () => {
  setIsLoading(true);
 
-    // simulate progress then navigate
+   
     setTimeout(() => {
       setIsLoading(false);
     setShowPopup(true);
@@ -50,18 +50,18 @@ const handlePostClick = () => {
   };
 
 const [showOverlay, setShowOverlay] = useState(false);
-const [countdown, setCountdown] = useState(null); // null when not showing numbers
+const [countdown, setCountdown] = useState(null); 
 
 
 
 
 
-  //toggles recording state
+  
 const handleRecordClick = () => {
   if (!isRecording) {
      if (!hasRecorded) setHasRecorded(true);
     setShowSnippet(false);
-    setShowOverlay(true); // show black overlay when recording starts
+    setShowOverlay(true); 
     setCountdown(3);
   
     let count = 3;
@@ -71,7 +71,7 @@ const handleRecordClick = () => {
         clearInterval(countdownInterval);
         setShowOverlay(false);
         setCountdown(null);
-        setIsRecording(true); // Start recording only after countdown
+        setIsRecording(true); 
       } else {
         setCountdown(count);
       }
@@ -84,7 +84,7 @@ const handleRecordClick = () => {
   }
 };
 
-    // Start/stop the timer when recording
+    
   useEffect(() => {
     let interval = null;
     if (isRecording) {
@@ -97,7 +97,7 @@ const handleRecordClick = () => {
     return () => clearInterval(interval);
   }, [isRecording]);
 
-  // Format seconds into MM:SS
+  
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);
     const secs = totalSeconds % 60;
@@ -112,7 +112,6 @@ const handleRecordClick = () => {
 
 
 <div className="song-info">
-{/* <NoteIcon className="note-icon" /> */}
  <div>  Paris 2012</div>
 </div>
 

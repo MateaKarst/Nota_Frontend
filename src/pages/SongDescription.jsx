@@ -16,7 +16,7 @@ const SongDescription = () => {
     setShowPopup(true);
   };
 
-  const { title, imageUrl } = location.state || {};//gives empty if nothing is passed
+  const { title, imageUrl } = location.state || {};
   return (
   <div className="song-description-page">
       {/*header section */}
@@ -41,7 +41,7 @@ const SongDescription = () => {
 
         {showPopup && (
         <Popup
-          type="upload-track" // this shows both Upload and Record options
+          type="upload-track"
           onClose={() => setShowPopup(false)}
         />
       )}  
