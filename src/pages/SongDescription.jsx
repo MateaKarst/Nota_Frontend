@@ -4,47 +4,48 @@ import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
 import HeaderSongDescription from '../components/Headers/HeaderSongDescription';
 import BasicBtn from "../components/Buttons/BasicBtn";
-import Popup from '../components/PopUps/PopUp';
+// import Popup from '../components/PopUps/PopUp';
 
 import '../styles/pages/song-description.css';
 
 const SongDescription = () => {
   const location = useLocation();
-  const [showPopup, setShowPopup] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false);
 
-  const handleCollaborateClick = () => {
-    setShowPopup(true);
-  };
+  // const handleCollaborateClick = () => {
+  //   setShowPopup(true);
+  // };
 
   const { title, imageUrl } = location.state || {};
   return (
-  <div className="song-description-page">
+    <div className="song-description-page">
       {/*header section */}
       <div className="header-section">
-        <HeaderSongDescription/>
+        <HeaderSongDescription />
       </div>
 
       {/*image + dropdown */}
       <div className="top-part">
-        <SectionHeadImage title={title} imageUrl={imageUrl}/>
+        <SectionHeadImage title={title} imageUrl={imageUrl} />
 
         <div className="dropdown">
-            <h1 className="tracks"> Tracks (9)</h1>
+          <h1 className="tracks"> Tracks (9)</h1>
           <TrackDropdown />
         </div>
       </div>
 
-    {/* Collaborate Button*/}
+      {/* Collaborate Button*/}
       <div className="collaborate">
-        <BasicBtn type="main" text="Collaborate" onClick={handleCollaborateClick}/> 
-      </div> 
+        {/* onClick={handleCollaborateClick} */}
+        <BasicBtn type="main" text="Collaborate" />
+      </div>
 
-        {showPopup && (
+      {/* {showPopup && (
         <Popup
           type="upload-track"
           onClose={() => setShowPopup(false)}
         />
-      )}  
+      )}   */}
     </div>
   );
 };

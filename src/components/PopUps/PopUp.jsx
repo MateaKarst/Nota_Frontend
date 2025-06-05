@@ -1,16 +1,16 @@
 import React from 'react';
-import PopupContent from './PopUpContent';
+import PopupContent from './pop-up-content';
 
 import '../../styles/components/pop-ups.css';
 
 import { ReactComponent as PlusIcon } from '../../assets/icons/plus-icon.svg';
 
-const Popup = ({ type, onClose, data, onNavigate }) => {
+const Popup = ({ type, onClose, data }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-card">
         <button className="popup-close" onClick={onClose}><PlusIcon /></button>
-        <PopupContent type={type} data={data} onClick={onClose} />
+        <PopupContent type={type} data={data} onClose={onClose} />
       </div>
     </div>
   );

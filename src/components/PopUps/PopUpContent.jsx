@@ -2,19 +2,12 @@ import React, { useState } from 'react';
 import AttachFileBtn from '../Buttons/AttachFileBtn';
 import BasicBtn from '../Buttons/BasicBtn';
 import ProBtn from '../Buttons/ProBtn';
-import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ReportIcon } from '../../assets/icons/report-icon.svg';
 
-const PopUpContent = ({ type, data, onClose, onNavigate }) => {
+const PopUpContent = ({ type, data, onClose }) => {
   const [selected, setSelected] = useState('');
   // const isReport = type === 'report';
- const navigate = useNavigate();
-
- const handleRecordClick = () => {
-    navigate('/record');
-    
-  };
 
   switch (type) {
     case 'upload-picture':
@@ -39,7 +32,7 @@ const PopUpContent = ({ type, data, onClose, onNavigate }) => {
           </div>
           <div className="btn-group">
             <AttachFileBtn variant={1} text={'Upload'} />
-            <AttachFileBtn variant={1} text={'Record'} onClick={handleRecordClick} />
+            <AttachFileBtn variant={1} text={'Record'} />
           </div>
         </>
       );
@@ -52,11 +45,7 @@ const PopUpContent = ({ type, data, onClose, onNavigate }) => {
             <span className="icon">🔴</span> {data?.name || 'MoonshineTry521.mp3'}<br />
             <small>{data?.length || '4:24'} | {data?.size || '4.1 MB'}</small>
           </div>
-          <BasicBtn type="tiny" text="Upload to editor"
-           onClick={() => {
-          onClose();
-          onNavigate && onNavigate();
-        }}/>
+          <BasicBtn type="tiny" text="Upload to editor" />
 
         </>
       );
@@ -64,7 +53,7 @@ const PopUpContent = ({ type, data, onClose, onNavigate }) => {
     case 'report':
       return (
         <>
-          <div className='header-popup'>
+          <div className='header'>
             <ReportIcon />
             <h2>Report Form</h2>
           </div>

@@ -6,7 +6,7 @@ import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
-import PopUp from '../components/PopUps/PopUp'
+// import PopUp from '../components/PopUps/PopUp'
 
 import '../styles/pages/home-page.css';
 
@@ -79,7 +79,7 @@ const HomePage = () => {
 
 {isPopupOpen && (
   <div className='popups1'>
- <PopUp type={'upload-track'} onClose={handleClosePopup}/>
+ {/* <PopUp type={'upload-track'} onClose={handleClosePopup}/> */}
 </div>
 )}
 
