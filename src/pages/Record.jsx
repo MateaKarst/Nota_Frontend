@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import '../styles/pages/record.css';
-import HeaderVariants from "../components/Headers/HeaderVariants";
+import { useNavigate } from 'react-router-dom';
+import HeaderSongDescription from "../components/Headers/HeaderSongDescription";
 import BasicBtn from '../components/Buttons/BasicBtn';
 //import  { ReactComponent as NoteIcon } from '../assets/note2.svg';
 import { ReactComponent as PlayIcon } from '../assets/musicplayer/play.svg';
 import { ReactComponent as SoundWave } from '../assets/soundwave.svg';
+import LoadingProgress from '../components/progressbar';
+import Popup from "../components/PopUps/PopUp";
 
 const RecordingPage = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -12,6 +15,8 @@ const RecordingPage = () => {
   const [hasRecorded, setHasRecorded] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
   const [bpm, setBpm] = useState(120); // initial BPM is 120
+
+  const [isLoading, setIsLoading] = useState(false); 
 
   const increaseBpm = () => {
   setBpm(prev => Math.min(prev + 1, 300)); // limits to max 300 bpm
@@ -28,6 +33,21 @@ const handleRestart = () => { //"reset" buttons resets everything
   setShowSnippet(false);
   setBpm(120); // optional: reset BPM to default
 };
+
+const [showPopup, setShowPopup] = useState(false);
+const [popupData, setPopupData] = useState(null);
+
+const navigate = useNavigate();
+
+const handlePostClick = () => {
+ setIsLoading(true);
+
+    // simulate progress then navigate
+    setTimeout(() => {
+      setIsLoading(false);
+    setShowPopup(true);
+  }, 4000);
+  };
 
 const [showOverlay, setShowOverlay] = useState(false);
 const [countdown, setCountdown] = useState(null); // null when not showing numbers
@@ -86,7 +106,9 @@ const handleRecordClick = () => {
 
   return (
     <div className="recording-page">
-       <HeaderVariants mode="text" title="Record" />
+       {/* <HeaderVariants mode="text" title="Record" /> */}
+    <HeaderSongDescription mode="pinkText" title="Record" />
+
 
 
 <div className="song-info">
@@ -114,9 +136,8 @@ const handleRecordClick = () => {
       <div className="timer">{formatTime(seconds)}</div>
 
       {/* Playback Options */}
-    {!isRecording && hasRecorded && (
-  <>
-
+ {!isRecording && hasRecorded && !showOverlay && (
+      <>
     {showSnippet && (
     <div className="recording-snippet">
         <div className="snippet-row">
@@ -128,7 +149,7 @@ const handleRecordClick = () => {
 
     <div className="control-buttons">
       <BasicBtn type="mediumOutline" text='Restart' onClick={handleRestart}   />
-      <BasicBtn type="small" text='Post' />
+      <BasicBtn type="small" text='Post' onClick={handlePostClick} />
     </div>
   </>
 )}
@@ -141,6 +162,20 @@ const handleRecordClick = () => {
   </div>
   </>
 )}
+
+{showPopup && (
+  <div className="popup-overlay">
+    <div className="popup-container">
+      <Popup
+        type="upload-to-editor" 
+        onClose={() => setShowPopup(false)} 
+        onNavigate={() => navigate("/editor2")}
+      />
+    </div>
+  </div>
+)}
+
+{isLoading && <LoadingProgress label="Processing..." isLoading={isLoading} />}
 </div>
   );
 };

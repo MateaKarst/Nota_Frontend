@@ -44,6 +44,7 @@
   opacity: 0.75;
   transition: all 0.3s ease;
   white-space: nowrap;
+  
 }
 
 .back-btn {
@@ -64,6 +65,7 @@
   box-sizing: border-box;
   min-width: max-content;
   text-decoration: underline;
+  margin: 0 10px;
 }
 
 .tab-button.no-underline{
