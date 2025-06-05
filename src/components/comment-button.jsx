@@ -36,8 +36,10 @@ const CommentButton = () => {
       {isPopupOpen && (
         <div className="comment-popup">
           <div className="comment-popup-content">
-            <button className="close-button" onClick={togglePopup}>×</button>
-            <h2>Comments</h2>
+            <div className="comment-popup-title">
+              <h2>Comments</h2>
+              <button className="close-button" onClick={togglePopup}>×</button>
+            </div>
             <div className="comment-list">
               {comments.map((c) => (
                 <div className="comment-item" key={c.id}>
