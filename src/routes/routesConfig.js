@@ -35,8 +35,8 @@ export const appRoutes = [
     
     { path: "/home", element: <HomePage /> },
     
-    { path: "/songs", element: <MySongsPage /> },
-    { path: "/song-description", element: <SongDescription /> },
+    { path: "/songs", element: <MySongsPage />},
+    { path: "/song-description", element: <SongDescription />},
     { path: "/upload-song", element: <UploadSong /> },
     { path: "/record", element: <Record /> },
     { path: "/editor2", element: <Editor2 /> },

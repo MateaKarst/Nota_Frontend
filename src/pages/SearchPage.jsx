@@ -39,6 +39,7 @@ const SearchPage = () => {
                 if (!res.ok) throw new Error("Failed to fetch songs");
 
                 const data = await res.json();
+                console.log("Fetched songs:", data);
                 setSongs(data);
             } catch (err) {
                 setError(err.message);
@@ -55,6 +56,7 @@ const SearchPage = () => {
     };
 
     const handleResultsUpdate = (filtered) => {
+        console.log("Filtered results:", filtered); // ✅ log filtered results
         setFilteredSongs(filtered);
     };
 
@@ -65,17 +67,17 @@ const SearchPage = () => {
                 <SearchBar
                     variant={2}
                     filterData={songs}
-                    onFilterChange={handleFilterChange}
                     onResultsUpdate={handleResultsUpdate}
+                    onFilterChange={handleFilterChange}
                 />
             </div>
 
             {loading && <div>Loading songs...</div>}
             {error && <div className="error">Error: {error}</div>}
 
-            {filteredSongs && filteredSongs.length > 0 ? (
+            {filteredSongs.length > 0 ? (
                 <div style={{ marginTop: "16px" }}>
-                    {filteredSongs.map((song, index) => (
+                    {filteredSongs.map((song) => (
                         <SmallCard
                             key={song.id}
                             title={song.title}
@@ -98,16 +100,10 @@ const SearchPage = () => {
                         />
                     ))}
                 </div>
-            ) : (
-                <div className="genre-box">
-                    <GenreCard />
-                    <GenreCard mode="country" />
-                    <GenreCard mode="metal" />
-                    <GenreCard mode="rock" />
-                    <GenreCard mode="pop" />
-                    <GenreCard mode="indie" />
-                </div>
-            )}
+            ) : !loading && !error ? (
+                <div>No matching songs found.</div> // ← new fallback
+            ) : null}
+
         </div>
     );
 };

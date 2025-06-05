@@ -39,11 +39,8 @@
 
 .search {
   width: 100%;
-  max-width: 350px;
-  /* or whatever max width fits your design */
-  padding: 0 15px;
-  /* optional */
+  max-width: 350px; 
+  padding: 0 15px; 
   margin: 0 auto;
   margin-top: 200px;
-
 }

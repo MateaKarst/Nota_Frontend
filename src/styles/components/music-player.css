@@ -65,3 +65,11 @@
   background-color: var(--color-white) !important;
   transition: width 0.2s linear;
 }
+
+.heart-icon {
+  transition: filter 0.3s ease;
+}
+
+.heart-icon.liked {
+  filter: invert(25%) sepia(90%) saturate(5000%) hue-rotate(320deg) brightness(95%) contrast(110%);
+}

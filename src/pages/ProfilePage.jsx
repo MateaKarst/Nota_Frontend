@@ -1,15 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/pages/profile-page.css';
 import ProfileCard from '../components/profile-container';
 import HeaderProfile from '../components/Headers/HeaderProfile';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
-import lilyImg from '../assets/lily-profile.jpg';
 import MusicPlayer from '../components/MusicPlayer';
-
+import { useParams } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import API_ENDPOINTS from '../routes/apiEndpoints';
+import { useAuth } from '../context/AuthProvider';
 
 const ProfilePage = () => {
-  const [currentSong, setCurrentSong]=useState(null);
+  const [currentSong, setCurrentSong] = useState(null);
   const [activeTab, setActiveTab] = useState("own");
+  const { id } = useParams();
+  const { user } = useAuth();
+
+  const [userData, setUserData] = useState(null);
+  const [friendConnections, setFriendConnections] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+
+  // Використовуємо або ID з URL, або ID поточного користувача
+  const connectionId = id || user?.id;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      if (!user || !user.access_token) {
+        setError("User not authenticated");
+        setLoading(false);
+        return;
+      }
+
+      // Збереження access_token в cookies
+      Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
+
+      try {
+        const accessToken = user?.access_token || Cookies.get("access_token");
+        if (!accessToken) throw new Error("No access token");
+
+        // Отримуємо дані користувача
+        const res = await fetch(API_ENDPOINTS.USER(connectionId), {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const fetchedUser = await res.json();
+        if (!res.ok) throw new Error(fetchedUser.message || "Failed to fetch user data");
+        setUserData(fetchedUser);
+
+        // Отримуємо підключення
+        const connRes = await fetch(API_ENDPOINTS.CONNECTIONS(connectionId), {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const connections = await connRes.json();
+        setFriendConnections(connections);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (connectionId) {
+      fetchData();
+    }
+  }, [connectionId, user]);
+
+  if (loading) return <div>Loading user profile...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!userData) return <div>No user data found.</div>;
 
   const ownSongs = [
     {
@@ -58,18 +126,18 @@ const ProfilePage = () => {
 
   const switcherBtnStyle = {
     width: "fit-content",
-        height: "23px",
-        backgroundColor: "transparent",
-        color: "var(--color-white)",
-        borderRadius: "var(--border-radius-20)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "var(--font-size-14)",
-        fontFamily: "var(--font-family-primary)",
-        paddingLeft: "20px",
-        paddingRight: "20px",
-        border: "1px solid var(--color-purple)",
+    height: "23px",
+    backgroundColor: "transparent",
+    color: "var(--color-white)",
+    borderRadius: "var(--border-radius-20)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "var(--font-size-14)",
+    fontFamily: "var(--font-family-primary)",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    border: "1px solid var(--color-purple)",
   };
 
   return (
@@ -78,11 +146,11 @@ const ProfilePage = () => {
         <HeaderProfile className="header2" />
         <div style={{ padding: 20 }}>
           <ProfileCard
-            image={lilyImg}
-            name="Lily Vermeer"
-            tagline="Aspiring vocal musician🌟Open to experiments"
-            connections={5}
-            btns={false}
+            image={userData.user_details.avatar}
+            name={userData.user_details.name}
+            tagline={userData.user_details.profile_description}
+            connections={friendConnections.length}
+            btns={true}
           />
         </div>
       </div>
@@ -137,7 +205,7 @@ const ProfilePage = () => {
              onPlay={() => setCurrentSong({
               title: song.title,
               artist: song.creator,    
-              cover: song.imageUrl,    
+              cover: song.imageUrl,     //to match the format audio player expects
               audio: song.audioUrl       
             })}
             />

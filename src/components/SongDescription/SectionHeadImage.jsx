@@ -8,12 +8,13 @@ import ShareButton from "../share-button.jsx";
 import "../../styles/variables.css";
 import "../../styles/components/sectionheadimage.css";
 
-const SectionHeadImage = ({ audioPlayersRef }) => {
+const SectionHeadImage = ({ imageUrl, title }) => {
+   console.log("SectionHeadImage imageUrl:", imageUrl);
   return (
       <div>
-        <HeadImage audioPlayersRef={audioPlayersRef} />
+        <HeadImage imageUrl={imageUrl} />
         <div className="song-info">
-        <h1 className="song-title">Paris 2012</h1>
+        <h1 className="song-title">{title || "Unknown Title"}</h1>
         <p className="song-description">
           Future top track with musical harmony that brings new fresh electro vibes.
         </p>

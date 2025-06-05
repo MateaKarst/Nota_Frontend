@@ -35,7 +35,7 @@ const genreStyles = {
 
 };
 
-const GenreCard = ({ mode = 'jazz'}) => {
+const GenreCard = ({ mode = 'jazz', onClick}) => {
     const genre = genreStyles[mode];
 
     if (!genre) return null;
@@ -53,7 +53,7 @@ const GenreCard = ({ mode = 'jazz'}) => {
         fontSize: 'var(--font-size-40)',
     };
 
-    return <div style={cardStyle}>#{genre.text}</div>
+    return <div style={cardStyle} onClick={onClick}>#{genre.text}</div>
 };
 
 export default GenreCard;

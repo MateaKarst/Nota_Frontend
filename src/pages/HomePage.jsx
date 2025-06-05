@@ -6,12 +6,17 @@ import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
+// import PopUp from '../components/PopUps/PopUp'
 
 import '../styles/pages/home-page.css';
 
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const navigate = useNavigate();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleOpenPopup = () => setIsPopupOpen(true);
+  const handleClosePopup = () => setIsPopupOpen(false);
 
   // const handleViewAllClick = () => {
   //   navigate('/view-all');
@@ -24,12 +29,12 @@ const HomePage = () => {
         <HeaderMain className="header" />
         <div className="home-carousel-overlay">
           <h1 className='pink-header-title'>My Songs</h1>
-          <HomeCarousel onPlay={(song) => setCurrentSong(song)} />
+          <HomeCarousel onPlay={(song) => setCurrentSong(song)} onAddClick={handleOpenPopup} />
         </div>
       </div>
 
-      <div> <div className='title-content'><h1 className='title'>New songs</h1>
-        <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
+      <div> <div className='title-content'><h1 className='title-home'>New songs</h1>
+      <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New Songs' } })} />
 
       </div>
         <div className="horizontal-scroll">
@@ -40,7 +45,7 @@ const HomePage = () => {
       </div>
 
       <div>
-        <div className='title-content'><h1 className='title'>Collaborations</h1>
+        <div className='title-content'><h1 className='title-home'>Collaborations</h1>
           <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'Collaborations' } })} />
 
         </div>
@@ -55,7 +60,7 @@ const HomePage = () => {
         <FriendsCard />
       </div>
 
-      <div> <div className='title-content'><h1 className='title'>Trendy songs</h1>
+      <div> <div className='title-content'><h1 className='title-home'>Trendy songs</h1>
         <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'Trendy songs' } })} />
 
       </div>
@@ -71,7 +76,15 @@ const HomePage = () => {
           <MusicPlayer song={currentSong} />
         </div>
       )}
+
+{isPopupOpen && (
+  <div className='popups1'>
+ {/* <PopUp type={'upload-track'} onClose={handleClosePopup}/> */}
+</div>
+)}
+
     </div>
+    
   );
 };
 

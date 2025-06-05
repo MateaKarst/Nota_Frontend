@@ -16,7 +16,7 @@ import "../styles/variables.css";
 import "../styles/pages/chat-overview.css";
 
 function ChatOverview() {
-  const [chats, setChats] = useState([]); //state to store chats
+  const [chats, setChats] = useState([]);
   // const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function ChatOverview() {
       fetchChats();
     }, []); 
 
-// Function to assign profile image based on the user's name
+
 const getProfileImage = (name) => {
   switch (name) {
     case "Guitarist1001":
@@ -44,7 +44,7 @@ const getProfileImage = (name) => {
     case "Guitarist1002":
       return <ProfilePic4 />;
     default:
-      return <ProfilePic1 />; // default image for unknown users
+      return <ProfilePic1 />; 
   }
 };
     

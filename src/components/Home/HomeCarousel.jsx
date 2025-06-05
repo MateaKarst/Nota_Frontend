@@ -10,7 +10,7 @@ import "../../styles/variables.css";
 
 import { useNavigate } from 'react-router-dom';
 
-const HomeCarousel = ({ onPlay }) => {
+const HomeCarousel = ({ onPlay, onAddClick }) => {
   const navigate = useNavigate();
 
   const cards = [
@@ -79,7 +79,7 @@ const HomeCarousel = ({ onPlay }) => {
             }}
           >
             <div
-              onClick={() => navigate('/upload-song')} // technically there should be a pop up here
+              onClick={onAddClick}
               style={{
                 borderRadius: 'var(--border-radius-56)',
                 backgroundColor: '#2c2c2c',
@@ -100,7 +100,9 @@ const HomeCarousel = ({ onPlay }) => {
 
         {/* Regular Cards */}
         {cards.map((card) => (
-          <SwiperSlide key={card.id} style={{ width: '250px' }}>
+          <SwiperSlide key={card.id} style={{ width: '250px' }}
+         onClick={() => navigate('/song-description', { replace: true, //avoids stackinig another history entry (double nav issue)
+         state: { title: card.title, imageUrl: card.imageUrl } })}>
             <CaroselCard {...card}
             onPlay={() =>
                     onPlay({
