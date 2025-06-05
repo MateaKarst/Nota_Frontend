@@ -122,6 +122,7 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* FRIENDS */}
       <div className="friends-section">
         <FriendsCard />
       </div>

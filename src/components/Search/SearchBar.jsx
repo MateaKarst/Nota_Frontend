@@ -42,7 +42,7 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
             if (filterData.length > 0) {
                 setResults(filterData);
                 onFilterChange("All", filterData);
-                onResultsUpdate(filterData);
+                //onResultsUpdate(filterData);
             }
             return;
         }
@@ -58,9 +58,7 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
 
             const tagsMatch = tagTexts.some(tag =>
                 (song.genres || []).some(genre => genre.toLowerCase() === tag) ||
-                (song.tracks || []).some(track =>
-                    (track.instruments || []).some(inst => inst.toLowerCase() === tag)
-                )
+                (song.tracks || []).some(track => (track.instruments || []).some(inst => inst.toLowerCase() === tag))
             );
 
             return titleMatch && tagsMatch;
