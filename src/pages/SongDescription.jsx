@@ -8,21 +8,21 @@ import BasicBtn from "../components/Buttons/BasicBtn";
 import "../styles/pages/song-description.css";
 
 const SongDescription = () => {
-  const audioPlayersRef = useRef([]); 
+  const audioPlayersRef = useRef([]);
 
   return (
     <div className="song-description-page">
       {/* header section */}
       <div className="header-section">
-        <HeaderSongDescription />
+        {/* <HeaderSongDescription /> */}
       </div>
 
       {/* image + dropdown */}
       <div className="top-part">
-        <SectionHeadImage audioPlayersRef={audioPlayersRef} /> 
+        <SectionHeadImage audioPlayersRef={audioPlayersRef} />
         <div className="dropdown">
           <h1 className="tracks"> Tracks (9)</h1>
-          <TrackDropdown audioPlayersRef={audioPlayersRef} /> 
+          <TrackDropdown audioPlayersRef={audioPlayersRef} />
         </div>
       </div>
 

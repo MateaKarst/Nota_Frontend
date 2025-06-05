@@ -9,6 +9,7 @@ import "../../styles/variables.css";
 import "../../styles/components/sectionheadimage.css";
 
 const SectionHeadImage = ({ audioPlayersRef }) => {
+  const title = "title"
   return (
       <div>
         <HeadImage audioPlayersRef={audioPlayersRef} />
