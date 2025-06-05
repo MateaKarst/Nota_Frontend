@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import UserTrack from "./UserTrack";
 
 const TrackDropdown = ({ audioPlayersRef }) => {
@@ -20,7 +20,7 @@ const TrackDropdown = ({ audioPlayersRef }) => {
       profileImage:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png",
     },
-    { isOwnTrack: false, name: "Sara", tag: "#Guitar" },
+    { isOwnTrack: true, name: "Sara", tag: "#Guitar" },
     { isOwnTrack: false, name: "Leo", tag: "#Drums" },
     { isOwnTrack: false, name: "Mina", tag: "#Synth" },
     { isOwnTrack: false, name: "Drew", tag: "#Bass" },
