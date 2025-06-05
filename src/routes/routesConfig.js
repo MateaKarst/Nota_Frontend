@@ -29,13 +29,13 @@ export const appRoutes = [
     { path: "/profile", element: <ProfilePage /> },
     { path: "/profilefriend/:id", element: <ProfileFriendPage /> },
     
-    { path: "/home", element: <HomePage />,isPublic:true },
+    { path: "/home", element: <HomePage /> },
     
     { path: "/songs", element: <MySongsPage />},
-    { path: "/song-description", element: <SongDescription /> ,isPublic:true},
+    { path: "/song-description", element: <SongDescription />},
     { path: "/upload-song", element: <UploadSong /> },
-    { path: "/record", element: <Record />,isPublic:true },
-    { path: "/editor2", element: <Editor2 />,isPublic:true },
+    { path: "/record", element: <Record /> },
+    { path: "/editor2", element: <Editor2 /> },
     
     { path: "/discover", element: <SearchPage /> },
     { path: "/search", element: <SearchPage /> },
