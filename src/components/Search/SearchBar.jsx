@@ -26,8 +26,7 @@ const INSTRUMENTS = [
     "other",
 ];
 
-const SearchBar = ({ filterData = [], onFilterChange, variant = 2 }) => {
-    const [query, setQuery] = useState("");
+const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant = 2 }) => {    const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const inputRef = useRef(null);
 
@@ -72,6 +71,7 @@ const SearchBar = ({ filterData = [], onFilterChange, variant = 2 }) => {
 
         setResults(filtered);
         onFilterChange(filterType, filtered);
+        onResultsUpdate(filtered);
     };
 
     const toggleFilterMenu = () => setShowFilter((prev) => !prev);
@@ -114,7 +114,7 @@ const SearchBar = ({ filterData = [], onFilterChange, variant = 2 }) => {
                             onChange={handleInputChange}
                         />
 
-                        {results.length > 0 && <SearchResultsList results={results} />}
+                        {/* {results.length > 0 && <SearchResultsList results={results} />} */}
                     </div>
 
                     <div className={`filter-container ${variant === 1 ? 'hide-filter' : ''}`}>

@@ -7,6 +7,7 @@ import SearchBar from "../components/Search/SearchBar";
 import GenreCard from "../components/Search/GenreCard"
 import API_ENDPOINTS from "../routes/apiEndpoints";
 import { useAuth } from '../context/AuthProvider';
+import SearchResults from "../components/Search/SearchResults";
 
 import "../styles/variables.css"
 import "../styles/pages/SearchPage.scss"
@@ -14,8 +15,8 @@ import "../styles/pages/SearchPage.scss"
 
 
 const SearchPage = () => {
-const { user } = useAuth()
-
+    const { user } = useAuth()
+    const [filteredSongs, setFilteredSongs] = useState([]);
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -57,6 +58,10 @@ const { user } = useAuth()
         console.log("Filter changed:", filterType, filteredResults);
     };
 
+    const handleResultsUpdate = (filtered) => {
+        setFilteredSongs(filtered);
+    };
+
     return (
         <div className="container">
             <HeaderVariants className="genre-card" mode="default" />
@@ -66,20 +71,29 @@ const { user } = useAuth()
                     variant={2}
                     filterData={songs}
                     onFilterChange={handleFilterChange}
+                    onResultsUpdate={handleResultsUpdate}
                 />
             </div>
 
             {loading && <div>Loading songs...</div>}
             {error && <div className="error">Error: {error}</div>}
 
-            <div className="genre-box">
-                <GenreCard />
-                <GenreCard mode="country" />
-                <GenreCard mode="metal" />
-                <GenreCard mode="rock" />
-                <GenreCard mode="pop" />
-                <GenreCard mode="indie" />
-            </div>
+            {(filteredSongs && filteredSongs.length > 0) ? (
+                <div className="results-list" style={{ marginTop: '16px' }}>
+                    {filteredSongs.map((result) => (
+                        <SearchResults result={result} key={result.id} />
+                    ))}
+                </div>
+            ) : (
+                <div className="genre-box">
+                    <GenreCard />
+                    <GenreCard mode="country" />
+                    <GenreCard mode="metal" />
+                    <GenreCard mode="rock" />
+                    <GenreCard mode="pop" />
+                    <GenreCard mode="indie" />
+                </div>
+            )}
         </div>
     );
 };
