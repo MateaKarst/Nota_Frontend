@@ -40,23 +40,28 @@ const CreateAccount = () => {
       const response = await fetch(API_ENDPOINTS.AUTH.REGISTER, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
       const result = await response.json();
 
       if (!response.ok) {
-        toast.error(result.message || "Account creation failed");
+        toast.error(result.message || "Invalid login credentials");
         return;
       }
+      toast.success("Account created successfully!");
 
-      // Store tokens from response
-      Cookies.set("access_token", result.access_token, { expires: 7, secure: true, sameSite: "lax" });
-      Cookies.set("refresh_token", result.refresh_token, { expires: 30, secure: true, sameSite: "lax" });
+      Cookies.set('access_token', result.user.access_token, { expires: 7, sameSite: 'lax' });
+      Cookies.set('refresh_token', result.user.refresh_token, { expires: 30, sameSite: 'lax' });
 
+      console.log("access_token", result.user.access_token)
+      console.log("refresh-token", result.user.refresh_token)
+      // Just use user info from response
+      console.log('user:', result.user);
       setUser(result.user);
 
-      toast.success("Account created successfully!");
+      toast.success("Login successful");
       navigate("/personalisation"); // or wherever you want
     } catch (error) {
       toast.error("Something went wrong. Please try again.");

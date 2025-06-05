@@ -26,6 +26,10 @@ export const appRoutes = [
     { path: "/login", element: <LoginPage />, isPublic: true },
     { path: "/create-account", element: <CreateAccount />, isPublic: true },
     
+    { path: "/personalisation", element: <PersonalizationAccount /> },
+    { path: "/personalisation1-filters", element: <Personalization1 /> },
+    { path: "/personalisation2", element: <Personalization2 /> },
+
     { path: "/profile", element: <ProfilePage /> },
     { path: "/profilefriend/:id", element: <ProfileFriendPage /> },
     
@@ -49,9 +53,4 @@ export const appRoutes = [
 
     { path: "/view-all", element: <ViewAllPage /> },
     { path: "/filter", element: <FilterPage /> },
-    
-    { path: "/personalisation", element: <PersonalizationAccount /> },
-    { path: "/personalisation1-filters", element: <Personalization1 /> },
-    { path: "/personalisation2", element: <Personalization2 /> },
-
 ];

@@ -1,5 +1,4 @@
-// const API_BASE_URL = "http://192.168.1.38:3000/api";
-const API_BASE_URL = "https://nota-backend-delta.vercel.app/api";
+const API_BASE_URL = "http://192.168.1.38:3000/api";
 
 export const API_ENDPOINTS = {
     AUTH: {
