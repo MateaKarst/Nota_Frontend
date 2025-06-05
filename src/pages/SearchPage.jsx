@@ -65,7 +65,6 @@ const SearchPage = () => {
                 <SearchBar
                     variant={2}
                     filterData={songs}
-                    onFilterChange={handleFilterChange}
                     onResultsUpdate={handleResultsUpdate}
                 />
             </div>
