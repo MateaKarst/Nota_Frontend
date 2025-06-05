@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 import PopUp from '../components/PopUps/PopUp'
 
+import '../styles/pages/home-page.css';
+
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const navigate = useNavigate();

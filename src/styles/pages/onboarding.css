@@ -38,7 +38,7 @@
 
 .text-container {
   margin-top: auto;
-  margin-bottom: 120px;
+  margin-bottom: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,7 +62,7 @@
 }
 
 .button-container {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   display: flex;
   justify-content: center;
   width: 100%;
