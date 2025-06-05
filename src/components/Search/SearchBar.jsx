@@ -36,70 +36,81 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
 
     const [activeTags, setActiveTags] = useState([]);
 
-    const filterResults = (searchQuery, filterType) => {
-        if (!searchQuery.trim() && (filterType === "All" || !filterType)) {
-            if (results.length !== 0) {
-                setResults([]);
-                onFilterChange("All", []);
-                onResultsUpdate([]);
+    // Filter function
+    const filterResults = (searchQuery, activeTags) => {
+        if (!searchQuery.trim() && activeTags.length === 0) {
+            if (filterData.length > 0) {
+                setResults(filterData);
+                onFilterChange("All", filterData);
+                onResultsUpdate(filterData);
             }
             return;
         }
 
+        const tagTexts = activeTags.map(tag => tag.text.toLowerCase());
+
         const filtered = filterData.filter((song) => {
             const titleMatch = song.title.toLowerCase().includes(searchQuery.toLowerCase());
-            const filterMatch =
-                filterType === "All" ||
-                (song.genres || []).some(
-                    genre => genre.toLowerCase() === filterType.toLowerCase()
-                ) ||
-                (song.tracks || []).some(
-                    track => (track.instruments || []).some(
-                        inst => inst.toLowerCase() === filterType.toLowerCase()
-                    )
-                );
 
-            return titleMatch && filterMatch;
+            if (tagTexts.length === 0) {
+                return titleMatch;
+            }
+
+            const tagsMatch = tagTexts.some(tag =>
+                (song.genres || []).some(genre => genre.toLowerCase() === tag) ||
+                (song.tracks || []).some(track =>
+                    (track.instruments || []).some(inst => inst.toLowerCase() === tag)
+                )
+            );
+
+            return titleMatch && tagsMatch;
         });
 
-        const isDifferent =
-            filtered.length !== results.length ||
-            filtered.some((item, i) => item !== results[i]);
+        const isDifferent = JSON.stringify(filtered) !== JSON.stringify(results);
 
         if (isDifferent) {
             setResults(filtered);
-            onFilterChange(filterType, filtered);
+            onFilterChange(
+                activeTags.length === 0 ? "All" : activeTags.map(t => t.text).join(", "),
+                filtered
+            );
             onResultsUpdate(filtered);
         }
     };
 
-    // Run filtering on query, selectedType or filterData changes
+    // Updated useEffect
     useEffect(() => {
-        filterResults(query, selectedType);
-    }, [query, selectedType, filterData]);
+        filterResults(query, activeTags);
+    }, [query, activeTags]);
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
 
     const toggleFilterMenu = () => setShowFilter((prev) => !prev);
-
     const handleFilterSelect = (type) => {
-        setSelectedType(type);
-        setShowFilter(false);
-
-        const tagIndex = activeTags.findIndex(tag => tag.text === type);
-
-        if (tagIndex === -1 && type !== "All") {
-            const colorIndex = Math.floor(Math.random() * 4);
-            setActiveTags(prev => [...prev, { text: type, colorIndex }]);
-        } else if (type === "All") {
+        if (type === "All") {
             setActiveTags([]);
-        } else {
-            setActiveTags(prev => prev.filter((tag, index) => index !== tagIndex));
+            setSelectedType("All");
+            return;
         }
+
+        setSelectedType(null); // clear single selected type because now we work with multiple tags
+
+        setActiveTags(prev => {
+            const exists = prev.some(tag => tag.text === type);
+            if (exists) {
+                // remove the tag if already selected
+                return prev.filter(tag => tag.text !== type);
+            } else {
+                // add the new tag with a color index
+                const colorIndex = Math.floor(Math.random() * 4);
+                return [...prev, { text: type, colorIndex }];
+            }
+        });
     };
-    
+
+
     return (
         <div className={`search-bar-wrapper ${variant === 2 ? 'search-bar-variant-2' : ''}`}>
             <div className="searching">
