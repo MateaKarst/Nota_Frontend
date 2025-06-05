@@ -64,7 +64,7 @@ const PopUpContent = ({ type, data, onClose, onNavigate }) => {
     case 'report':
       return (
         <>
-          <div className='header'>
+          <div className='header-popup'>
             <ReportIcon />
             <h2>Report Form</h2>
           </div>

@@ -9,7 +9,6 @@
   padding-bottom: 15%;
 }
 
-/* Обгортка для хедера і каруселі */
 .hero-wrapper2 {
   position: relative;
   width: 100%;
@@ -26,31 +25,28 @@
 
 }
 
-/* Хедер — під каруселлю */
 .header2 {
   position: relative;
   z-index: 1;
   height: 83px;
   width: 100%;
   background-color: var(--color-pink);
-  padding-top: var(--spacing-8); /* Відступ згори, щоб контент не "плавав" */
+  padding-top: var(--spacing-8);
   font-family: var(--font-family-secondary);
   border-bottom-left-radius: var(--border-radius-24);
   border-bottom-right-radius: var(--border-radius-24);
 
   display: flex;
-  align-items: flex-start; /* Контент прикріплено до верху контейнера */
+  align-items: flex-start; 
   justify-content: space-between;
 }
 
-/* Іконки */
 .icon-style {
   background: none;
   border: none;
   align-items: center;
 }
 
-/* Скрол зона для треків */
 .songs-scroll,
 .horizontal-scroll {
   display: flex;
@@ -59,7 +55,6 @@
   gap: 12px;
 }
 
-/* Фейкова кнопка додати трек */
 .add-song {
   width: 80px;
   height: 80px;

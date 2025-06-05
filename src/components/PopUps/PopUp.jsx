@@ -10,7 +10,7 @@ const Popup = ({ type, onClose, data, onNavigate }) => {
     <div className="popup-overlay">
       <div className="popup-card">
         <button className="popup-close" onClick={onClose}><PlusIcon /></button>
-        <PopupContent type={type} data={data} onClose={onClose} onNavigate={onNavigate} />
+        <PopupContent type={type} data={data} onClick={onClose} />
       </div>
     </div>
   );
