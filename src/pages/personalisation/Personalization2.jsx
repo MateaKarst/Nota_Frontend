@@ -27,25 +27,28 @@ const instruments = [
 ];
 
 const Personalization2 = () => {
-      const [selectedInstruments, setSelectedInstruments] = useState([]);
-      const navigate = useNavigate();
+    const [selectedInstruments, setSelectedInstruments] = useState([]);
+    const navigate = useNavigate();
 
-  const handleTagClick = (instrument) => {
-    setSelectedInstruments((prevSelected) =>
-      prevSelected.includes(instrument)
-        ? prevSelected.filter((item) => item !== instrument)
-        : [...prevSelected, instrument]
-    );
-  };
+    const handleTagClick = (instrument) => {
+        setSelectedInstruments((prevSelected) =>
+            prevSelected.includes(instrument)
+                ? prevSelected.filter((item) => item !== instrument)
+                : [...prevSelected, instrument]
+        );
+    };
     return (
         <div className="container">
             <div>
                 <HeaderVariants className="header" mode="default" />
 
-        <h2 className="question1">What instruments do you play?</h2>
+                <h2 className="question1">What instruments do you play?</h2>
 
-          <SearchBar 
-            variant={1}/>
+                <SearchBar
+                    variant={1}
+                    onFilterChange={() => { }}
+                    onResultsUpdate={() => { }}
+                />
 
                 <div className="tags">
                     {instruments.map((instrument) => (
@@ -54,7 +57,7 @@ const Personalization2 = () => {
                 </div>
 
                 <div className="next-button-wrapper">
-                    <Buttons type="default" text="Next" onClick={() => navigate("/home")}/>
+                    <Buttons type="default" text="Next" onClick={() => navigate("/home")} />
                 </div>
             </div>
         </div>

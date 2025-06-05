@@ -26,7 +26,8 @@ const INSTRUMENTS = [
     "other",
 ];
 
-const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant = 2 }) => {    const [query, setQuery] = useState("");
+const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant = 2 }) => {
+    const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const inputRef = useRef(null);
 
@@ -35,26 +36,18 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
 
     const [activeTags, setActiveTags] = useState([]);
 
-    // Filter results whenever query, selectedType, or filterData changes
-    useEffect(() => {
-        filterResults(query, selectedType);
-    }, [query, selectedType, filterData]);
-
-    const handleInputChange = (e) => {
-        const value = e.target.value;
-        setQuery(value);
-    };
-
     const filterResults = (searchQuery, filterType) => {
         if (!searchQuery.trim() && (filterType === "All" || !filterType)) {
-            setResults([]); // No results if no query and no filter
-            onFilterChange("All");
+            if (results.length !== 0) {
+                setResults([]);
+                onFilterChange("All", []);
+                onResultsUpdate([]);
+            }
             return;
         }
 
         const filtered = filterData.filter((song) => {
             const titleMatch = song.title.toLowerCase().includes(searchQuery.toLowerCase());
-
             const filterMatch =
                 filterType === "All" ||
                 (song.genres || []).some(
@@ -69,9 +62,24 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
             return titleMatch && filterMatch;
         });
 
-        setResults(filtered);
-        onFilterChange(filterType, filtered);
-        onResultsUpdate(filtered);
+        const isDifferent =
+            filtered.length !== results.length ||
+            filtered.some((item, i) => item !== results[i]);
+
+        if (isDifferent) {
+            setResults(filtered);
+            onFilterChange(filterType, filtered);
+            onResultsUpdate(filtered);
+        }
+    };
+
+    // Run filtering on query, selectedType or filterData changes
+    useEffect(() => {
+        filterResults(query, selectedType);
+    }, [query, selectedType, filterData]);
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
     };
 
     const toggleFilterMenu = () => setShowFilter((prev) => !prev);
@@ -91,7 +99,7 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
             setActiveTags(prev => prev.filter((tag, index) => index !== tagIndex));
         }
     };
-
+    
     return (
         <div className={`search-bar-wrapper ${variant === 2 ? 'search-bar-variant-2' : ''}`}>
             <div className="searching">
