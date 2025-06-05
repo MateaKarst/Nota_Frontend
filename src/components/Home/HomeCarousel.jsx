@@ -10,7 +10,7 @@ import "../../styles/variables.css";
 
 import { useNavigate } from 'react-router-dom';
 
-const HomeCarousel = ({ onPlay }) => {
+const HomeCarousel = ({ onPlay, onAddClick }) => {
   const navigate = useNavigate();
 
   const cards = [
@@ -79,7 +79,7 @@ const HomeCarousel = ({ onPlay }) => {
             }}
           >
             <div
-              onClick={() => navigate('/upload-song')} // technically there should be a pop up here
+              onClick={onAddClick}
               style={{
                 borderRadius: 'var(--border-radius-56)',
                 backgroundColor: '#2c2c2c',

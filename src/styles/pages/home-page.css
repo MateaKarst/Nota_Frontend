@@ -75,7 +75,7 @@
   cursor: pointer;
 }
 
-.title {
+.title-home {
   color: var(--Colors-White, #FFF);
   font-family: var(--font-family-secondary);
   font-size: var(--Size-head-text-h5-h6, 34px);
@@ -84,6 +84,7 @@
   text-align: left;
   padding-left: 24px;
   line-height: 15px;
+  justify-content: center;
 }
 
 .title-content {
@@ -92,6 +93,7 @@
   align-items: center;
   justify-content: space-between;
   padding-right: 12px;
+  padding-left: 0px;
 }
 
 .friends-section {
@@ -111,4 +113,13 @@
   font-weight: 400;
   text-align: left;
   padding-left: 24px;
+}
+.popups1 {
+  position: fixed;
+  inset: 0; 
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 285px;
 }

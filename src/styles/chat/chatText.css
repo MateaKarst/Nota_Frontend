@@ -1,0 +1,48 @@
+@import '../variables.css';
+.chat-message {
+  display: flex;
+  margin: 8px 0;
+  width: 100%;
+  font-family: var(--font-family-primary);
+}
+.chat-message.receiver {
+  justify-content: flex-start;
+  padding-right: 20%;
+}
+.chat-message.sender {
+  justify-content: flex-end;
+  padding-left: 20%;
+}
+.chat-message .bubble {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 20px;
+  max-width: 80%;
+  background-color: #e5e5ea;
+  color: #000;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow: visible;
+}
+.chat-message .bubble p {
+  margin: 0;
+  line-height: 1.4;
+}
+.chat-message .bubble .time {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  text-align: right;
+  opacity: 0.6;
+}
+.chat-message.sender .bubble {
+  background-color: var(--color-purple);
+  color: white;
+  border-radius: 20px 20px 0 20px;
+}
+.chat-message.receiver .bubble {
+  background-color: gray;
+  color: black;
+  border-radius: 20px 20px 20px 0;
+}/*# sourceMappingURL=chatText.css.map */

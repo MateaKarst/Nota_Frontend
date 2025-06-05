@@ -1,27 +1,28 @@
 @import '../variables.css';
 .popup-overlay {
-    position: fixed;
-    z-index: 0;
-    inset: 0;
+    position: relative;
+    z-index: 9999;
     background: rgba(0,0,0,0.75);
     display: flex;
+    max-width: 400px;
     width: 100%;
     min-height: 600px;
     padding-top:var(--Spacing-play, 185px) ;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   
   .popup-card {
     display: flex;
-    height: 600px;
+    height: 100dvh;
     min-height: 600px;
     padding: var(--spacing-md-7, 20px) var(--spacing-md-7, 20px) var(--Spacing-play, 185px) var(--Spacing-xxl, 40px);
     flex-direction: column;
     gap: var(--spacing-md-7, 20px);
     flex: 1 0 0;
     color: white;
-    width: 90%;
+    width:345px;
     position: relative;
     border-radius: var(--Spacing-lg, 24px) var(--Spacing-lg, 24px) 0px 0px;
     background: var(--TransBlack, rgba(52, 51, 49, 0.90));
@@ -237,7 +238,7 @@ font-size: var(--font-size-28);
 font-weight: var(--font-weight-bold);
 line-height: var(--font-line-height-32);
   }
-  .header{
+  .header-popup{
     display: flex;
 justify-content: center;
 align-items: center;
