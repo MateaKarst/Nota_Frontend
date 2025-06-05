@@ -8,11 +8,10 @@ import ShareButton from "../share-button.jsx";
 import "../../styles/variables.css";
 import "../../styles/components/sectionheadimage.css";
 
-const SectionHeadImage = ({ imageUrl, title }) => {
-   console.log("SectionHeadImage imageUrl:", imageUrl);
+const SectionHeadImage = ({ audioPlayersRef }) => {
   return (
       <div>
-        <HeadImage imageUrl={imageUrl} />
+        <HeadImage audioPlayersRef={audioPlayersRef} />
         <div className="song-info">
         <h1 className="song-title">{title || "Unknown Title"}</h1>
         <p className="song-description">
