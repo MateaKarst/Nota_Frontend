@@ -6,8 +6,8 @@
 
 
 .recording-page  .song-info {
-    display: flex;
-  justify-content: center;     /* centers the text horizontally inside the container */
+  display: flex;
+  justify-content: center;   
   align-items: center; 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-18);
@@ -16,7 +16,7 @@
   border-radius: 50px;
   width:188px;
   height:34px;
- margin: 40px auto 0 auto; 
+  margin: 40px auto 0 auto; 
   background-color: var(--color-white-trans-surface-45);
 } 
 
@@ -26,8 +26,8 @@
   align-items: center;
   justify-content: center;
   gap: 45px;
-  margin-top:30px;
-  padding-bottom:40px;
+  margin-top:3dvh;
+  padding-bottom:4dvh;
 }
 
 .number-container {
@@ -39,15 +39,20 @@
 .number {
   font-size: 68px;
   margin: 0;
+  padding-left:2dvh;
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-bold);
+  color: var(--color-white);
 }
 
 .beats {
   margin: 0;
   font-size: var(--font-size-16);
   font-family: var(--font-family-primary);
+  color: var(--color-white); 
+  padding-left:2dvh;
 }
+
 
 .minus{
     font-size: 64px;
@@ -65,8 +70,8 @@
 
 
 .record-btn {
-  width: 100px;
-  height: 100px;
+  width: 13dvh;
+  height: 13dvh;
   border-radius: 50%;
   background-color: var(--color-pink);
   border: none;
@@ -74,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 50px auto;
+  margin: 5dvh auto;
   background: radial-gradient(circle, var(--color-pink) 50%, rgba(255, 0, 128, 0) 80%);
 }
 
@@ -83,7 +88,8 @@
     font-family: var(--font-family-primary);
     font-weight: var(--font-weight-bold);
     text-align: center;
-    margin-top:-30px;
+    margin-top:-3dvh;
+    color: var(--color-white); 
 }
 
 .timer{
@@ -92,18 +98,19 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-white-trans-surface-45);
     text-align: center;
-    margin-top: -20px;
+    margin-top: -2dvh;
 }
 
 .control-buttons {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 90px;
+  margin-top: 9dvh;
+  margin-bottom:5dvh;
 }
 
 .recording-snippet {
-  margin-top: 80px;
+  margin-top: 8dvh;
     align-items: center;
     display: flex;
   justify-content: center; 
@@ -112,12 +119,12 @@
 .snippet-row {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 5dvh;
 }
 
 .recording-page  .play-icon {
-  width: 30px;
-  height: 30px;
+  width: 3dvh;
+  height: 3dvh;
   cursor: pointer;
 }
 
@@ -125,21 +132,24 @@
   position: fixed;
   top: 55%;
   left: 50%;
-  width: 370px;
-  height: 236px;
+  width: 37dvh;
+  height: 23.6dvh;
   background-color: var(--color-black);
   opacity: 0.7;
   z-index: 999;
-   border-radius: 12px;
-   transform: translate(-50%, -50%);
+  border-radius: 12px;
+  transform: translate(-50%, -50%);
+  display: flex;               
+  justify-content: center;     
+  align-items: center;  
 }
 
 .recording-page .overlay-backdrop {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvh;
+  height: 100dvh;
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 998;
 }

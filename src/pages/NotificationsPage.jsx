@@ -15,7 +15,7 @@ const NotificationsPage = () => {
     const loadData = async () => {
       const data = await getNotifications();
 
-      //group notifications by 'time' string
+  
       const recent = data.filter(n => n.time.includes("min ago"));
       const yesterday = data.filter(n => n.time.includes("Yesterday"));
       const older = data.filter(n => !n.time.includes("min ago") && !n.time.includes("Yesterday"));
@@ -42,7 +42,7 @@ const NotificationsPage = () => {
 };
 
 const Section = ({ title, items }) => (
-  <div style={{ marginBottom: '20px' }}>  {/* Add spacing between sections */}
+  <div style={{ marginBottom: '20px' }}>  
     <h2 style={{ textAlign: "left", paddingLeft: "2dvh", color: "white" }}>{title}</h2>
     {items.map(n => (
       <NotificationItem key={n.id} {...n} />

@@ -74,6 +74,9 @@ const MusicPlayer = ({ song }) => {
     setProgress(newTime);
   };
 
+  const [liked, setLiked] = useState(false);
+
+
   if (!song) return null;
 
   return (
@@ -95,11 +98,12 @@ const MusicPlayer = ({ song }) => {
 
       </div>
       <img
-        src={heartIcon}
-        alt="Like"
-        className="mini-icon heart-icon"
-        onClick={() => console.log("Liked")}
+      src={heartIcon}
+      alt="Like"
+      className={`mini-icon heart-icon ${liked ? 'liked' : ''}`}
+      onClick={() => setLiked(!liked)}
       />
+
       <img
         src={isPlaying ? pauseIcon : playIcon}
         alt="Play/Pause"

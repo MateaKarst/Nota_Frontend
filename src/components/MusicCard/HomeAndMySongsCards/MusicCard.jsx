@@ -9,7 +9,15 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/song-description");
+    navigate("/song-description", {
+     state: {
+      title,
+      imageUrl,
+      creator,
+      contributersNbr,
+      audio
+    }, 
+    });
   };
 
   return (

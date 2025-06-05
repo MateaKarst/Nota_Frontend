@@ -100,7 +100,9 @@ const HomeCarousel = ({ onPlay }) => {
 
         {/* Regular Cards */}
         {cards.map((card) => (
-          <SwiperSlide key={card.id} style={{ width: '250px' }}>
+          <SwiperSlide key={card.id} style={{ width: '250px' }}
+         onClick={() => navigate('/song-description', { replace: true, //avoids stackinig another history entry (double nav issue)
+         state: { title: card.title, imageUrl: card.imageUrl } })}>
             <CaroselCard {...card}
             onPlay={() =>
                     onPlay({

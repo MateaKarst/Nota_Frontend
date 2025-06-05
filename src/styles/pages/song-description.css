@@ -1,12 +1,12 @@
 @import '../variables.css';
 
 .top-part{
-padding-top:20px;
+padding-top:2dvh;
 }
 
 .dropdown{
-    margin: 10px;
-    padding-bottom: 150px;
+    margin: 1dvh;
+    padding-bottom: 13dvh;
 }
 
 .tracks{
@@ -18,9 +18,8 @@ font-size:  var( --font-size-28);
 
 .collaborate {
   position: fixed;
-  bottom: 70px;
+  bottom: 10dvh;
   left: 50%;  
   transform: translateX(-50%);
-  z-index: 1100; /* above other elements */
-  margin-bottom: 5px;
+  z-index: 1100;
 }

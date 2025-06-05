@@ -1,0 +1,34 @@
+@import '../../styles/variables.css';
+
+.header-title {
+  font-family: var(--font-family-secondary);
+  color: white; 
+  font-size: var(--font-size-32);
+  padding-right:32dvh;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+.header {
+  height: 53px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-right-radius: var(--border-radius-24);
+  border-bottom-left-radius: var(--border-radius-24);
+  color: var(--color-white);
+}
+
+
+.icon-style {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  cursor: pointer;
+  padding-right:10px;
+}

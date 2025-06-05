@@ -1,47 +1,67 @@
 import React, { useState, useEffect } from "react";
 import '../styles/pages/record.css';
-import HeaderVariants from "../components/Headers/HeaderVariants";
+import { useNavigate } from 'react-router-dom';
+import HeaderSongDescription from "../components/Headers/HeaderSongDescription";
 import BasicBtn from '../components/Buttons/BasicBtn';
 //import  { ReactComponent as NoteIcon } from '../assets/note2.svg';
 import { ReactComponent as PlayIcon } from '../assets/musicplayer/play.svg';
 import { ReactComponent as SoundWave } from '../assets/soundwave.svg';
+import LoadingProgress from '../components/progressbar';
+import Popup from "../components/PopUps/PopUp";
 
 const RecordingPage = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [hasRecorded, setHasRecorded] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
-  const [bpm, setBpm] = useState(120); // initial BPM is 120
+  const [bpm, setBpm] = useState(120);
+
+  const [isLoading, setIsLoading] = useState(false); 
 
   const increaseBpm = () => {
-  setBpm(prev => Math.min(prev + 1, 300)); // limits to max 300 bpm
+  setBpm(prev => Math.min(prev + 1, 300));
 };
 
 const decreaseBpm = () => {
-  setBpm(prev => Math.max(prev - 1, 20)); // limits to min 20 bpm
+  setBpm(prev => Math.max(prev - 1, 20));
 };
 
-const handleRestart = () => { //"reset" buttons resets everything
+const handleRestart = () => {
   setIsRecording(false);
   setSeconds(0);
   setHasRecorded(false);
   setShowSnippet(false);
-  setBpm(120); // optional: reset BPM to default
+  setBpm(120);
 };
 
+const [showPopup, setShowPopup] = useState(false);
+const [popupData, setPopupData] = useState(null);
+
+const navigate = useNavigate();
+
+const handlePostClick = () => {
+ setIsLoading(true);
+
+   
+    setTimeout(() => {
+      setIsLoading(false);
+    setShowPopup(true);
+  }, 4000);
+  };
+
 const [showOverlay, setShowOverlay] = useState(false);
-const [countdown, setCountdown] = useState(null); // null when not showing numbers
+const [countdown, setCountdown] = useState(null); 
 
 
 
 
 
-  //toggles recording state
+  
 const handleRecordClick = () => {
   if (!isRecording) {
      if (!hasRecorded) setHasRecorded(true);
     setShowSnippet(false);
-    setShowOverlay(true); // show black overlay when recording starts
+    setShowOverlay(true); 
     setCountdown(3);
   
     let count = 3;
@@ -51,7 +71,7 @@ const handleRecordClick = () => {
         clearInterval(countdownInterval);
         setShowOverlay(false);
         setCountdown(null);
-        setIsRecording(true); // Start recording only after countdown
+        setIsRecording(true); 
       } else {
         setCountdown(count);
       }
@@ -64,7 +84,7 @@ const handleRecordClick = () => {
   }
 };
 
-    // Start/stop the timer when recording
+    
   useEffect(() => {
     let interval = null;
     if (isRecording) {
@@ -77,7 +97,7 @@ const handleRecordClick = () => {
     return () => clearInterval(interval);
   }, [isRecording]);
 
-  // Format seconds into MM:SS
+  
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);
     const secs = totalSeconds % 60;
@@ -86,11 +106,12 @@ const handleRecordClick = () => {
 
   return (
     <div className="recording-page">
-       <HeaderVariants mode="text" title="Record" />
+       {/* <HeaderVariants mode="text" title="Record" /> */}
+    <HeaderSongDescription mode="pinkText" title="Record" />
+
 
 
 <div className="song-info">
-{/* <NoteIcon className="note-icon" /> */}
  <div>  Paris 2012</div>
 </div>
 
@@ -114,9 +135,8 @@ const handleRecordClick = () => {
       <div className="timer">{formatTime(seconds)}</div>
 
       {/* Playback Options */}
-    {!isRecording && hasRecorded && (
-  <>
-
+ {!isRecording && hasRecorded && !showOverlay && (
+      <>
     {showSnippet && (
     <div className="recording-snippet">
         <div className="snippet-row">
@@ -128,7 +148,7 @@ const handleRecordClick = () => {
 
     <div className="control-buttons">
       <BasicBtn type="mediumOutline" text='Restart' onClick={handleRestart}   />
-      <BasicBtn type="small" text='Post' />
+      <BasicBtn type="small" text='Post' onClick={handlePostClick} />
     </div>
   </>
 )}
@@ -141,6 +161,20 @@ const handleRecordClick = () => {
   </div>
   </>
 )}
+
+{showPopup && (
+  <div className="popup-overlay">
+    <div className="popup-container">
+      <Popup
+        type="upload-to-editor" 
+        onClose={() => setShowPopup(false)} 
+        onNavigate={() => navigate("/editor2")}
+      />
+    </div>
+  </div>
+)}
+
+{isLoading && <LoadingProgress label="Processing..." isLoading={isLoading} />}
 </div>
   );
 };
