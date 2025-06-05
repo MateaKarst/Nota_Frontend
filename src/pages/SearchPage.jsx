@@ -1,25 +1,23 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 import HeaderVariants from "../components/Headers/HeaderVariants";
 import SearchBar from "../components/Search/SearchBar";
-import GenreCard from "../components/Search/GenreCard"
+import GenreCard from "../components/Search/GenreCard";
+import SmallCard from "../components/MusicCard/SmallCard/SmallCard";
 import API_ENDPOINTS from "../routes/apiEndpoints";
-import { useAuth } from '../context/AuthProvider';
-import SearchResults from "../components/Search/SearchResults";
+import { useAuth } from "../context/AuthProvider";
 
-import "../styles/variables.css"
-import "../styles/pages/SearchPage.scss"
-
-
+import "../styles/variables.css";
+import "../styles/pages/SearchPage.scss";
 
 const SearchPage = () => {
-    const { user } = useAuth()
+    const { user } = useAuth();
     const [filteredSongs, setFilteredSongs] = useState([]);
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [currentSong, setCurrentSong] = useState(null);
 
     useEffect(() => {
         const fetchSongs = async () => {
@@ -27,21 +25,20 @@ const SearchPage = () => {
             setError(null);
 
             try {
-                // Try to get access token from user or cookie
                 const accessToken = user?.access_token || Cookies.get("access_token");
                 if (!accessToken) throw new Error("User not authenticated");
 
                 const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE, {
                     headers: {
+                        "Content-Type": "application/json",
                         Authorization: `Bearer ${accessToken}`,
                     },
+                    credentials: "include",
                 });
 
                 if (!res.ok) throw new Error("Failed to fetch songs");
 
                 const data = await res.json();
-
-                // Assuming data is an array of songs
                 setSongs(data);
             } catch (err) {
                 setError(err.message);
@@ -54,7 +51,6 @@ const SearchPage = () => {
     }, [user]);
 
     const handleFilterChange = (filterType, filteredResults) => {
-        // Optionally do something on filter change, e.g. log, update state, etc.
         console.log("Filter changed:", filterType, filteredResults);
     };
 
@@ -66,7 +62,6 @@ const SearchPage = () => {
         <div className="container">
             <HeaderVariants className="genre-card" mode="default" />
             <div className="search-bar-container">
-                {/* Pass songs as filterData */}
                 <SearchBar
                     variant={2}
                     filterData={songs}
@@ -78,10 +73,29 @@ const SearchPage = () => {
             {loading && <div>Loading songs...</div>}
             {error && <div className="error">Error: {error}</div>}
 
-            {(filteredSongs && filteredSongs.length > 0) ? (
-                <div className="results-list" style={{ marginTop: '16px' }}>
-                    {filteredSongs.map((result) => (
-                        <SearchResults result={result} key={result.id} />
+            {filteredSongs && filteredSongs.length > 0 ? (
+                <div style={{ marginTop: "16px" }}>
+                    {filteredSongs.map((song, index) => (
+                        <SmallCard
+                            key={song.id}
+                            title={song.title}
+                            creator={song.user_details.name}
+                            contributersNbr={
+                                (() => {
+                                    const contributorsCount = new Set(song.tracks?.map(track => track.user_id).filter(Boolean)).size;
+                                    return contributorsCount > 0 ? contributorsCount : "";
+                                })()
+                            }
+                            imageUrl={song.cover_image}
+                            onPlay={() =>
+                                setCurrentSong({
+                                    title: song.title,
+                                    artist: song.user_details.name,
+                                    cover: song.user_id,
+                                    audio: song,
+                                })
+                            }
+                        />
                     ))}
                 </div>
             ) : (

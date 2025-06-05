@@ -4,12 +4,12 @@ import PlayBtn from "../../Buttons/PlayBtn";
 import SmallCardSvg from "./SmallCardSvg";
 import { useNavigate } from "react-router-dom";
 
-const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {}, audio }) => {
-    const navigate = useNavigate();
-  
-    const handleClick = () => {
-      navigate("/song-description");
-    };
+const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => { }, audio }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/song-description");
+  };
   return (
     <div onClick={handleClick}
       style={{
@@ -46,11 +46,11 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {
             iconColor="white"
             size={24}
             onClick={() => onPlay({
-            title,
-            artist: creator,
-            cover: imageUrl,
-            audio
-        })}
+              title,
+              artist: creator,
+              cover: imageUrl,
+              audio
+            })}
           />
         </div>
       </div>
@@ -58,7 +58,7 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {
       {/* Text content */}
       <div
         style={{
-          width: "auto", 
+          width: "auto",
           height: "auto",
           backgroundColor: "var(--color-light)",
           borderBottomLeftRadius: "var(--border-radius-56)",
@@ -83,7 +83,7 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {
             color: "var(--color-white-trans-50)",
           }}
         >
-          {creator} + {contributersNbr}
+          {creator} {contributersNbr > 0 ? `+ ${contributersNbr}` : ""}
         </p>
       </div>
     </div>
