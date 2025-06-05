@@ -1,22 +1,52 @@
-import React, { useState } from "react";
-import HomeCarousel from "../components/Home/HomeCarousel";
-import HeaderMain from "../components/Headers/HeaderMain";
-import MusicCard from "../components/MusicCard/HomeAndMySongsCards/MusicCard";
-import BasicBtn from "../components/Buttons/BasicBtn";
-import FriendsCard from "../components/Friends/FriendsCard";
-import { useNavigate } from "react-router-dom";
-import MusicPlayer from "../components/MusicPlayer";
-import PopUp from "../components/PopUps/PopUp";
+import React, { useEffect, useState } from 'react';
+import '../styles/pages/home-page.css'
+import HomeCarousel from '../components/Home/HomeCarousel';
+import HeaderMain from '../components/Headers/HeaderMain';
+import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
+import BasicBtn from '../components/Buttons/BasicBtn'
+import FriendsCard from '../components/Friends/FriendsCard';
+import { useNavigate } from 'react-router-dom';
+import MusicPlayer from '../components/MusicPlayer';
 
-import "../styles/pages/home-page.css";
+import API_ENDPOINTS from '../routes/apiEndpoints';
+
 
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
+  const [newSongs, setNewSongs] = useState([]);
   const navigate = useNavigate();
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [trendySongs, setTrendySongs] = useState([]);
 
-  const handleOpenPopup = () => setIsPopupOpen(true);
-  const handleClosePopup = () => setIsPopupOpen(false);
+useEffect(() => {
+  const fetchTrendySongs = async () => {
+    try {
+      const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+      const data = await res.json();
+      
+      // Optional: Sort by created_at or add filter logic here
+      setTrendySongs(data.slice(0, 10)); // Limit to 10 songs for UI
+    } catch (err) {
+      console.error("Failed to fetch trendy songs:", err);
+    }
+  };
+
+  fetchTrendySongs();
+}, []);
+
+
+  useEffect(() => {
+    const fetchNewSongs = async () => {
+      try {
+        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+        const data = await res.json();
+        setNewSongs(data); // you can limit to latest if needed
+      } catch (err) {
+        console.error("Failed to fetch new songs", err);
+      }
+    };
+
+    fetchNewSongs();
+  }, []);
 
   return (
     <div className="home-page">
@@ -32,48 +62,22 @@ const HomePage = () => {
       </div>
 
       <div>
-        {" "}
-        <div className="title-content">
-          <h1 className="title-home">New songs</h1>
-          <BasicBtn
-            type="viewAll"
-            text="View All"
-            onClick={() =>
-              navigate("/view-all", { state: { title: "New Songs" } })
-            }
-          />
+        <div className='title-content'>
+          <h1 className='title'>New songs</h1>
+          <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
         </div>
         <div className="horizontal-scroll">
-          <MusicCard
-            title="Paris 2012"
-            creator="Emily Star"
-            contributersNbr={2}
-            imageUrl={
-              "https://img.freepik.com/free-photo/aesthetic-universe-nature-background-earth-mountain-remixed-media_53876-128642.jpg?t=st=1746643209~exp=1746646809~hmac=d25d49f85f544f590b5928dc145e7a5af7e402a9e263f642dbc57f2973a32c72&w=1380"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="Jazzy night"
-            creator="Lily Vermeer"
-            contributersNbr={4}
-            imageUrl={
-              "https://img.freepik.com/free-photo/aesthetic-dark-wallpaper-background-neon-light_53876-129243.jpg?t=st=1746643324~exp=1746646924~hmac=743b8d04f706426c4dc0e517a8ae5606de9522b6b6355ff65dac23521264dc0d&w=1380"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="Rain of tears"
-            creator="Jamy Lynn"
-            contributersNbr={3}
-            imageUrl={
-              "https://img.freepik.com/free-photo/closeup-view-beautiful-japanese-umbrellas_185193-162917.jpg?t=st=1746643657~exp=1746647257~hmac=c43e416111ed392589a1936822ec937a0df01dccce93c800ed8a1a3fe5a4d9fc&w=1380"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
+          {newSongs.map((song) => (
+            <MusicCard
+              key={song.id}
+              title={song.title}
+              creator={song.user_details?.username || "Unknown"}
+              contributersNbr={song.tracks?.length || 1}
+              imageUrl={song.cover_image}
+              audio={song.compiled_path}
+              onPlay={() => setCurrentSong(song)}
+            />
+          ))}
         </div>
       </div>
 
@@ -128,50 +132,37 @@ const HomePage = () => {
       </div>
 
       <div>
-        {" "}
-        <div className="title-content">
-          <h1 className="title-home">Trendy songs</h1>
-          <BasicBtn
-            type="viewAll"
-            text="View All"
-            onClick={() =>
-              navigate("/view-all", { state: { title: "Trendy songs" } })
-            }
-          />
-        </div>
-        <div className="horizontal-scroll">
-          <MusicCard
-            title="LightNight"
-            creator="MamaMia"
-            contributersNbr={2}
-            imageUrl={
-              "https://img.freepik.com/free-photo/background-bokeh-red-hearts_23-2149440429.jpg?t=st=1746643483~exp=1746647083~hmac=7ad8fd2819dbeb83cd16ca3097c8d4d149d1fafdd7acd693860d073bb615ab44&w=740"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="Purple elctr"
-            creator="Jannnny"
-            contributersNbr={4}
-            imageUrl={
-              "https://img.freepik.com/free-vector/red-neon-rose-mobile-phone-background_53876-98926.jpg?t=st=1746643449~exp=1746647049~hmac=9603114130e78c3cdcbc7a7251cc88b92c9f9515d3e8221d0c5bb8a9f5362aa5&w=740"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="Lady Bird"
-            creator="HoverG"
-            contributersNbr={1}
-            imageUrl={
-              "https://img.freepik.com/free-photo/abstract-fantasy-landscape-with-color-year-purple-tones_23-2151394170.jpg?t=st=1746643412~exp=1746647012~hmac=89cfcdad1f9b74393cbe964b2dc9e063f2c296ee105e0d7de8b261352fc89f20&w=900"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-        </div>
-      </div>
+  <div className='title-content'>
+    <h1 className='title'>Trendy songs</h1>
+    <BasicBtn
+      type="viewAll"
+      text="View All"
+      onClick={() => navigate('/view-all', { state: { title: 'Trendy songs' } })}
+    />
+  </div>
+
+  <div className="horizontal-scroll">
+    {trendySongs.map((song) => (
+      <MusicCard
+        key={song.id}
+        title={song.title}
+        creator={song.user_details?.username || "Unknown"}
+        contributersNbr={song.tracks?.length || 1}
+        imageUrl={song.cover_image}
+        audio={song.compiled_path}
+        onPlay={() =>
+          setCurrentSong({
+            title: song.title,
+            artist: song.user_details?.username || "Unknown",
+            audio: song.compiled_path,
+            cover: song.cover_image,
+          })
+        }
+      />
+    ))}
+  </div>
+</div>
+
 
       {currentSong && (
         <div className="music-player-container">

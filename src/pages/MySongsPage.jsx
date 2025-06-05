@@ -1,55 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import API_ENDPOINTS from '../routes/apiEndpoints';
+import { useAuth } from '../context/AuthProvider';
+
 import SearchBar from '../components/Search/SearchBar';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import HeaderMySongs from '../components/Headers/HeaderMySongs';
 import MusicPlayer from '../components/MusicPlayer';
-import { useAuth } from '../context/AuthProvider';
-import Cookies from 'js-cookie';
-import API_ENDPOINTS from '../routes/apiEndpoints';
 
-import '../styles/pages/my-songs.css';
+import "../styles/pages/my-songs.css";
 
 function MySongsPage() {
-  const [activeTab, setActiveTab] = useState('my-songs');
-  const [allSongs, setAllSongs] = useState({ 'my-songs': [], collaborations: [] });
+  const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState("my-songs");
+  const [allSongs, setAllSongs] = useState([]);
+  const [createdSongs, setCreatedSongs] = useState([]);
+  const [collaborationSongs, setCollaborationSongs] = useState([]);
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
-  const [error, setError] = useState(null);
-
-  const { user } = useAuth();
 
   useEffect(() => {
     const fetchSongs = async () => {
-      if (!user || !user.access_token) {
-        setError('User not authenticated');
-        return;
-      }
-
-      Cookies.set('access_token', user.access_token, { expires: 7, sameSite: 'lax' });
-
+      if (!user) return;
       try {
-        const accessToken = user.access_token;
-        const songsRes = await fetch(`${API_ENDPOINTS.SONGS.MULTIPLE}?userId=${user.id}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+        const data = await res.json();
+
+        console.log("All song objects:", data);
+        console.log("Current user ID:", user.id);
+
+        const mySongs = data.filter(song => song.user_id === user.id);
+
+        const collaborations = data.filter(song => {
+          if (song.user_id === user.id) return false;
+          return song.tracks?.some(track => track.user_id === user.id);
         });
 
-        const fetchedSongs = await songsRes.json();
-        if (!songsRes.ok) throw new Error(fetchedSongs.message || 'Failed to fetch songs');
+        setAllSongs(data);
+        setCreatedSongs(mySongs);
+        setCollaborationSongs(collaborations);
+        setFilteredSongs(mySongs); // default to my songs
 
-        const own = fetchedSongs.filter(song => song.user_id === user.id);
-        const collabs = fetchedSongs.filter(
-          song =>
-            song.user_id !== user.id &&
-            song.tracks?.some(track => track.user_id === user.id)
-        );
-
-        setAllSongs({ 'my-songs': own, collaborations: collabs });
-        setFilteredSongs(own);
       } catch (err) {
-        setError(err.message);
-        console.error(err);
+        console.error("Error fetching songs:", err);
       }
     };
 
@@ -58,24 +50,32 @@ function MySongsPage() {
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
-    setFilteredSongs(allSongs[tabId] || []);
+    if (tabId === "my-songs") {
+      setFilteredSongs(createdSongs);
+    } else if (tabId === "collaborations") {
+      setFilteredSongs(collaborationSongs);
+    }
   };
 
   const handleFilterChange = (selectedGenre) => {
-    const songsInTab = allSongs[activeTab] || [];
-    if (selectedGenre === 'All') {
-      setFilteredSongs(songsInTab);
+    const source =
+      activeTab === "my-songs" ? createdSongs : collaborationSongs;
+
+    if (selectedGenre === "All") {
+      setFilteredSongs(source);
     } else {
-      setFilteredSongs(songsInTab.filter(song => song.genre === selectedGenre));
+      setFilteredSongs(source.filter(song =>
+        song.genre?.includes(selectedGenre)
+      ));
     }
   };
 
   const handlePlay = (song) => {
     setCurrentSong({
       title: song.title,
-      artist: song.user_details?.name || song.creator,
-      cover: song.cover_image || song.imageUrl,
-      audio: song.audio_url || song.audioUrl,
+      artist: song.user_id === user.id ? (user?.username || "You") : "Collaborator",
+      cover: song.cover_image,
+      audio: song.compiled_path
     });
   };
 
@@ -84,19 +84,22 @@ function MySongsPage() {
   return (
     <div className="my-songs-wrapper">
       <HeaderMySongs activeTab={activeTab} onTabChange={handleTabChange} />
-      <SearchBar filterData={allSongs[activeTab]} onFilterChange={handleFilterChange} variant={2} />
-
+      <SearchBar
+        filterData={activeTab === "my-songs" ? createdSongs : collaborationSongs}
+        onFilterChange={handleFilterChange}
+        variant={2}
+      />
       <div className="music-cards-mapping">
         {filteredSongs.map((song) => (
           <MusicCard
             key={song.id}
-            imageUrl={song.cover_image || song.imageUrl}
+            imageUrl={song.cover_image}
             title={song.title}
-            creator={song.user_details?.name || song.creator}
-            contributersNbr={song.contributors?.length || song.contributersNbr || 0}
+            creator={song.user_id === user.id ? (user?.username || "You") : "Collaborator"}
+            contributersNbr={song.tracks?.length || 1}
             layout="row"
             onPlay={() => handlePlay(song)}
-            audio={song.audio_url || song.audioUrl}
+            audio={song.compiled_path}
           />
         ))}
       </div>
