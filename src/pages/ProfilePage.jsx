@@ -147,8 +147,8 @@ const ProfilePage = () => {
         <div style={{ padding: 20 }}>
           <ProfileCard
             image={userData.user_details.avatar}
-            name={`${userData.user_details.first_name} ${userData.user_details.last_name}`}
-            tagline="Music is the path of my life and heart🖤"
+            name={userData.user_details.name}
+            tagline={userData.user_details.profile_description}
             connections={friendConnections.length}
             btns={true}
           />
