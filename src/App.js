@@ -7,9 +7,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import ProtectedRoute from "./context/ProtectedRoutes";
 import { AuthProvider } from "./context/AuthProvider";
 import { appRoutes } from "./routes/routesConfig";
-import ProtectedRoute from "./context/ProtectedRoutes";
-import { AuthProvider } from "./context/AuthProvider";
-import { appRoutes } from "./routes/routesConfig";
 import NavBar from "./components/Navigation/NavBar";
 
 import "./App.css";

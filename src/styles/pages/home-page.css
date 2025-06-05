@@ -96,8 +96,6 @@
 }
 
 .title-content {
-
-.title-content {
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -106,7 +104,6 @@
   padding-left: 0px;
 }
 
-.friends-section {
 
 .friends-section {
   width: 100%;

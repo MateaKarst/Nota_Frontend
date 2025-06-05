@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 
 import "../../styles/variables.css";
 // import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
@@ -119,7 +119,7 @@ function BasicBtn({ type = "default", text, icon: Icon, onClick}) {
     return (
         <button
             style={{ ...buttonStyles[type], whiteSpace: "nowrap" }}
-            style={{ ...buttonStyles[type], whiteSpace: "nowrap" }}
+         
             onClick={onClick}
         >
             {Icon && <Icon style={{ marginRight: "5px" }} />} {text && <span>{text}</span>}
