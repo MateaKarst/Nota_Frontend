@@ -9,12 +9,12 @@ import "../../styles/variables.css";
 import "../../styles/components/sectionheadimage.css";
 
 const SectionHeadImage = ({ audioPlayersRef }) => {
-  const title = "title"
+
   return (
       <div>
         <HeadImage audioPlayersRef={audioPlayersRef} />
         <div className="song-info">
-        <h1 className="song-title">{title || "Unknown Title"}</h1>
+        <h1 className="song-title">Paris 2012</h1>
         <p className="song-description">
           Future top track with musical harmony that brings new fresh electro vibes.
         </p>
