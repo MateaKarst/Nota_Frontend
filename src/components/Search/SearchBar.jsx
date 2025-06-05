@@ -1,12 +1,32 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SearchResultsList from "./SearchResultsList";
 import MusicTag from "../Tags/MusicTag";
 
 import "../../styles/components/search/search-bar.css";
 
-const SearchBar = ({ filterData, onFilterChange, variant = 2 }) => {
+const GENRES = [
+    "rock",
+    "pop",
+    "jazz",
+    "classical",
+    "hiphop",
+    "electronic",
+    "country",
+    "other",
+];
+
+const INSTRUMENTS = [
+    "guitar",
+    "bass",
+    "drums",
+    "keyboard",
+    "vocals",
+    "other",
+];
+
+const SearchBar = ({ filterData = [], onFilterChange, variant = 2 }) => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const inputRef = useRef(null);
@@ -16,25 +36,42 @@ const SearchBar = ({ filterData, onFilterChange, variant = 2 }) => {
 
     const [activeTags, setActiveTags] = useState([]);
 
+    // Filter results whenever query, selectedType, or filterData changes
+    useEffect(() => {
+        filterResults(query, selectedType);
+    }, [query, selectedType, filterData]);
+
     const handleInputChange = (e) => {
         const value = e.target.value;
         setQuery(value);
-        filterResults(value);
     };
 
-    const filterResults = (value) => {
-        if (!value.trim()) {
-            setResults([]);
+    const filterResults = (searchQuery, filterType) => {
+        if (!searchQuery.trim() && (filterType === "All" || !filterType)) {
+            setResults([]); // No results if no query and no filter
+            onFilterChange("All");
             return;
         }
 
-        const filtered = filterData.filter((item) => {
-            const matchesQuery = item.title.toLowerCase().includes(value.toLowerCase());
-            const matchesType = selectedType === "All" || item.genre === selectedType;
-            return matchesQuery && matchesType;
+        const filtered = filterData.filter((song) => {
+            const titleMatch = song.title.toLowerCase().includes(searchQuery.toLowerCase());
+
+            const filterMatch =
+                filterType === "All" ||
+                (song.genres || []).some(
+                    genre => genre.toLowerCase() === filterType.toLowerCase()
+                ) ||
+                (song.tracks || []).some(
+                    track => (track.instruments || []).some(
+                        inst => inst.toLowerCase() === filterType.toLowerCase()
+                    )
+                );
+
+            return titleMatch && filterMatch;
         });
 
         setResults(filtered);
+        onFilterChange(filterType, filtered);
     };
 
     const toggleFilterMenu = () => setShowFilter((prev) => !prev);
@@ -42,16 +79,14 @@ const SearchBar = ({ filterData, onFilterChange, variant = 2 }) => {
     const handleFilterSelect = (type) => {
         setSelectedType(type);
         setShowFilter(false);
-        filterResults(query);
-
-        // Notify parent component about the selected genre
-        onFilterChange(type);
 
         const tagIndex = activeTags.findIndex(tag => tag.text === type);
 
-        if (tagIndex === -1) {
+        if (tagIndex === -1 && type !== "All") {
             const colorIndex = Math.floor(Math.random() * 4);
             setActiveTags(prev => [...prev, { text: type, colorIndex }]);
+        } else if (type === "All") {
+            setActiveTags([]);
         } else {
             setActiveTags(prev => prev.filter((tag, index) => index !== tagIndex));
         }
@@ -74,14 +109,13 @@ const SearchBar = ({ filterData, onFilterChange, variant = 2 }) => {
                             ref={inputRef}
                             type="text"
                             className="search-input"
-                            placeholder="Search..."
+                            placeholder="Search songs..."
                             value={query}
                             onChange={handleInputChange}
                         />
 
-{results.length > 0 && (
-                            <SearchResultsList results={results} />
-                        )}                    </div>
+                        {results.length > 0 && <SearchResultsList results={results} />}
+                    </div>
 
                     <div className={`filter-container ${variant === 1 ? 'hide-filter' : ''}`}>
                         <button className="filter-button" onClick={toggleFilterMenu} aria-label="Toggle Filter Menu">
@@ -103,18 +137,29 @@ const SearchBar = ({ filterData, onFilterChange, variant = 2 }) => {
                         {showFilter && (
                             <div className="filter-menu">
                                 <button onClick={() => handleFilterSelect("All")}>All</button>
-                                <button onClick={() => handleFilterSelect("Pop")}>Pop</button>
-                                <button onClick={() => handleFilterSelect("Rock")}>Rock</button>
-                                <button onClick={() => handleFilterSelect("Progressive Rock")}>Progressive Rock</button>
+
+                                <div><strong>Genres</strong></div>
+                                {GENRES.map((genre) => (
+                                    <button key={genre} onClick={() => handleFilterSelect(genre)}>
+                                        {genre.charAt(0).toUpperCase() + genre.slice(1)}
+                                    </button>
+                                ))}
+
+                                <div style={{ marginTop: "10px" }}><strong>Instruments</strong></div>
+                                {INSTRUMENTS.map((inst) => (
+                                    <button key={inst} onClick={() => handleFilterSelect(inst)}>
+                                        {inst.charAt(0).toUpperCase() + inst.slice(1)}
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-            
-            <div className={`tags ${variant === 1 ? 'hide-filter' : ''}  ${variant === 2 ? 'tags-variant-2' : ''} `}>
-                {activeTags.map((tag, index) => (
-                    <MusicTag key={index} text={tag.text} colorIndex={tag.colorIndex} />
+
+            <div className={`tags ${variant === 1 ? 'hide-filter' : ''}  ${variant === 2 ? 'tags-variant-2' : ''}`}>
+                {activeTags.map(({ text, colorIndex }, index) => (
+                    <MusicTag key={index} text={text} colorIndex={colorIndex} />
                 ))}
             </div>
         </div>

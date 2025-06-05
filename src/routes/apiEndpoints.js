@@ -10,12 +10,12 @@ export const API_ENDPOINTS = {
     USER: (userId) => `${API_BASE_URL}/user/${userId}`,
     MESSAGES: (otherUserId) => `${API_BASE_URL}/messages/${otherUserId}`,
     TRACKS: {
-        POST: `${API_BASE_URL}/tracks`,
-        OTHER: (trackId) => `${API_BASE_URL}/tracks/${trackId}`,
+        MULTIPLE: `${API_BASE_URL}/tracks`,
+        SINGLE: (trackId) => `${API_BASE_URL}/tracks/${trackId}`,
     },
     SONGS: {
-        POST: `${API_BASE_URL}/songs`,
-        OTHER: (songsId) => `${API_BASE_URL}/songs/${songsId}`,
+        MULTIPLE: `${API_BASE_URL}/songs`,
+        SINGLE: (songsId) => `${API_BASE_URL}/songs/${songsId}`,
     }
 };
 
