@@ -5,11 +5,12 @@ import HeaderVariants from "../components/Headers/HeaderVariants";
 import BasicBtn from "../components/Buttons/BasicBtn";
 
 import "../styles/pages/song-description.css";
+import { useNavigate } from "react-router-dom";
 
 const SongDescription = () => {
 
   const audioPlayersRef = useRef([]);
-
+  const navigate = useNavigate();
 
   return (
     <div className="song-description-page">
@@ -28,7 +29,7 @@ const SongDescription = () => {
       </div>
 
       <div className="collaborate">
-        <BasicBtn type="main" text="Collaborate" />
+        <BasicBtn type="main" text="Collaborate" onClick={() => navigate("/add-tracks")}/>
       </div>
     </div>
   );

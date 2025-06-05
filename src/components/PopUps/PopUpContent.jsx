@@ -13,6 +13,10 @@ const PopUpContent = ({ type, data, onClose }) => {
   const [selected, setSelected] = useState('');
   // const isReport = type === 'report';
 
+  const handleUploadTrack = () => {
+    //
+  };
+
   switch (type) {
     case 'upload-picture':
       return (
@@ -35,7 +39,7 @@ const PopUpContent = ({ type, data, onClose }) => {
             <p className="hint pink">Explore premium plans to get better quality for your tracks!</p>
           </div>
           <div className="btn-group">
-            <AttachFileBtn variant={1} text={'Upload'} />
+            <AttachFileBtn variant={1} text={'Upload'} type="file" />
             <AttachFileBtn variant={1} text={'Record'} onClick={() => navigate('/record')} />
           </div>
         </>
