@@ -106,11 +106,6 @@ const buttonStyles = {
 };
 
 function BasicBtn({ type = "default", text, icon: Icon, onClick}) {
-<<<<<<< HEAD
-    //const [clicked, setClicked] = useState(false);
-=======
-    const [clicked, setClicked] = useState(false);
->>>>>>> sofiia
 
 
     // const handleClick = () => {

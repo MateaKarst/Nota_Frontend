@@ -42,7 +42,7 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
             if (filterData.length > 0) {
                 setResults(filterData);
                 onFilterChange("All", filterData);
-                onResultsUpdate(filterData);
+                //onResultsUpdate(filterData);
             }
             return;
         }

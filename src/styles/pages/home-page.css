@@ -118,11 +118,6 @@
 
 .pink-header-title {
   padding-left: 20px;
-<<<<<<< HEAD
-=======
-}
-.pink-header-title{
->>>>>>> sofiia
   color: var(--Colors-White, #FFF);
   font-family: var(--font-family-secondary);
   font-size: var(--Size-head-text-h5-h6, 34px);
