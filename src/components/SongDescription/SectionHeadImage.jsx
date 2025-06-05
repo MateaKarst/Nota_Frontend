@@ -8,10 +8,10 @@ import ShareButton from "../share-button.jsx";
 import "../../styles/variables.css";
 import "../../styles/components/sectionheadimage.css";
 
-const SectionHeadImage = () => {
+const SectionHeadImage = ({ audioPlayersRef }) => {
   return (
       <div>
-        <HeadImage />
+        <HeadImage audioPlayersRef={audioPlayersRef} />
         <div className="song-info">
         <h1 className="song-title">Paris 2012</h1>
         <p className="song-description">

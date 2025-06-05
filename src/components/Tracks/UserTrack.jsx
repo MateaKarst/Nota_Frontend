@@ -13,12 +13,13 @@ const UserTrack = ({
   tag = "#Vocal",
   profileImage = profImg,
   audioSrc = Track,
+  registerAudio, // optional prop to expose WaveSurfer instance
 }) => {
   const waveformRef = useRef(null);
   const waveSurferRef = useRef(null);
   const isReadyRef = useRef(false);
   const abortControllerRef = useRef(new AbortController());
-  const rootStyles = getComputedStyle(document.documentElement);
+  const rootStyles = typeof window !== "undefined" ? getComputedStyle(document.documentElement) : {};
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
@@ -26,9 +27,8 @@ const UserTrack = ({
 
     const ws = WaveSurfer.create({
       container: waveformRef.current,
-      waveColor: rootStyles.getPropertyValue("--color-orange") || "#FFA500", // bright orange
-      progressColor:
-        rootStyles.getPropertyValue("--color-orange-dark") || "#CC7000", // darker orange
+      waveColor: rootStyles.getPropertyValue("--color-orange") || "#FFA500",
+      progressColor: rootStyles.getPropertyValue("--color-orange-dark") || "#CC7000",
       responsive: true,
       height: 50,
       cursorWidth: 0,
@@ -36,7 +36,7 @@ const UserTrack = ({
 
     waveSurferRef.current = ws;
 
-    ws.load(Track, null, controller.signal).catch((e) => {
+    ws.load(audioSrc, null, controller.signal).catch((e) => {
       if (e.name !== "AbortError") {
         console.error("WaveSurfer load error:", e);
       }
@@ -44,6 +44,9 @@ const UserTrack = ({
 
     ws.on("ready", () => {
       isReadyRef.current = true;
+      if (typeof registerAudio === "function") {
+        registerAudio(ws);
+      }
     });
 
     const handleClick = (e) => {
@@ -53,10 +56,9 @@ const UserTrack = ({
       const rect = waveformRef.current.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const percent = clickX / rect.width;
-      const duration = waveSurfer.getDuration();
 
-      waveSurfer.seekTo(percent); // seek to clicked position
-      waveSurfer.play(); // auto-play on seek
+      waveSurfer.seekTo(percent);
+      waveSurfer.play();
     };
 
     const waveformEl = waveformRef.current;
@@ -99,11 +101,10 @@ const UserTrack = ({
 
 export default UserTrack;
 
-//HOW TO USE
-//<UserTrack isOwnTrack={false} to use for other users track
-// name="Sara"
-// tag= "Guitar"
-// profileImage={}
-// audioSrc={}
-//or
-//<UserTrack isOwnTrack={true}/> to use the version for the users own track
+// <UserTrack
+//   isOwnTrack={true}
+//   name="Sara"
+//   tag="#Guitar"
+//   profileImage={profImg}
+//   audioSrc={Track}
+// />

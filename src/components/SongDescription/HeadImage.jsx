@@ -6,11 +6,10 @@ import profile from "../../assets/songdescription/profile.svg";
 import "../../styles/variables.css";
 import "../../styles/components/headimage.css";
 
-const HeadImage = () => {
+const HeadImage = ({ audioPlayersRef }) => {
   return (
     <div className="image-wrapper">
       <img src={song} alt="song cover" className="song-img" />
-
       <img src={profile} alt="profile image" className="profile-img" />
 
       <div className="overlay">
@@ -20,6 +19,7 @@ const HeadImage = () => {
           bordered={false}
           iconColor="var(--color-pink)"
           size={70}
+          audioPlayersRef={audioPlayersRef}
         />
       </div>
     </div>
