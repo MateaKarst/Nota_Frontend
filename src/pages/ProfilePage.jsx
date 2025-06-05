@@ -228,13 +228,15 @@ const ProfilePage = () => {
             <SmallCard
               key={song.id || index}
               title={song.title}
-              creator={userData.user_details.username}
+              creator={song.user_details.name}
               contributersNbr={song.contributors?.length || 0}
               imageUrl={song.cover_image}
+              audio={song.audio_url}
+              songData={song}
               onPlay={() =>
                 setCurrentSong({
                   title: song.title,
-                  artist: userData.user_details.username,
+                  artist: song.user_details.name,
                   cover: song.cover_image,
                   audio: song.audio_url,
                 })
