@@ -43,6 +43,7 @@ function AppWrapper() {
         </ProtectedRoute>
       </div>
     </div>
+  
   );
 }
 
@@ -57,3 +58,4 @@ function App() {
 }
 
 export default App;
+
