@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/pages/viewall.css';
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 const ViewAllPage = () => {
   const location = useLocation();
- const [currentSong, setCurrentSong] = useState(null);
+ // const [currentSong, setCurrentSong] = useState(null);
   const title = location.state?.title || 'All Songs';
 
   return (

@@ -7,19 +7,6 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/components/friend.css';
 
-
-// import { ReactComponent as Violeta } from "../../assets/avatars/violeta.svg";
-// import { ReactComponent as Sofiia } from "../../assets/avatars/sofiia.svg";
-// import { ReactComponent as Petra } from "../../assets/avatars/petra.svg";
-// import { ReactComponent as Matea } from "../../assets/avatars/matea.svg";
-
-// const friendsData = [
-//   { name: "Violeta", ProfilePicture: Violeta, hasNewPosts: true, newPostsCount: 1 },
-//   { name: "Sofiia", ProfilePicture: Sofiia, hasNewPosts: true, newPostsCount: 3 },
-//   { name: "Petra", ProfilePicture: Petra, hasNewPosts: false, newPostsCount: 0 },
-//   { name: "Matea", ProfilePicture: Matea, hasNewPosts: false, newPostsCount: 0 },
-// ];
-
 const FriendsCard = () => {
   const { user } = useAuth();
   const [connections, setConnections] = useState([]);
@@ -124,10 +111,10 @@ const FriendsCard = () => {
             <Link key={userId || index} to={`/profilefriend/${userId}`}>
               <Friend
                 id={userId}
-                name={`${connection.user_details.first_name} ${connection.user_details.last_name}`}
+                name={`${connection.user_details.name} ${connection.user_details.last_name}`}
                 ProfilePicture={() =>
                   connection.user_details.avatar ? (
-                    <img src={connection.user_details.avatar} alt={connection.user_details.first_name} className="avatar-img" />
+                    <img src={connection.user_details.avatar} alt={connection.user_details.name} className="avatar-img" />
                   ) : (
                     <div className="default-avatar" />
                   )
@@ -145,3 +132,16 @@ const FriendsCard = () => {
 
 
 export default FriendsCard;
+
+
+// import { ReactComponent as Violeta } from "../../assets/avatars/violeta.svg";
+// import { ReactComponent as Sofiia } from "../../assets/avatars/sofiia.svg";
+// import { ReactComponent as Petra } from "../../assets/avatars/petra.svg";
+// import { ReactComponent as Matea } from "../../assets/avatars/matea.svg";
+
+// const friendsData = [
+//   { name: "Violeta", ProfilePicture: Violeta, hasNewPosts: true, newPostsCount: 1 },
+//   { name: "Sofiia", ProfilePicture: Sofiia, hasNewPosts: true, newPostsCount: 3 },
+//   { name: "Petra", ProfilePicture: Petra, hasNewPosts: false, newPostsCount: 0 },
+//   { name: "Matea", ProfilePicture: Matea, hasNewPosts: false, newPostsCount: 0 },
+// ];

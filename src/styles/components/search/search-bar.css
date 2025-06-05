@@ -135,12 +135,13 @@ display: none;
   display: none;
 }
 
-.search-bar-variant-2{
-  display:flex;
-  flex-direction: row-reverse;
-  align-items: center;
+.search-bar-variant-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: center;
 }
+
 
 .tags-variant-2 {
   width: 100%;

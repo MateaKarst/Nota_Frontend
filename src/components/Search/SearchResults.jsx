@@ -11,8 +11,8 @@ const SearchResults = ({ result }) => {
     return (
         <div className="search-result">
             {/* If result.ref exists, wrap the result name in an anchor tag */}
-            <a href={result.ref || "#"} onClick={handleClick}>
-                {result.name}
+            <a href={`${result.id}` || "#"} onClick={handleClick}>
+                {result.title}
             </a>
         </div>
     );
