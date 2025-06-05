@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import UserTrack from "./UserTrack";
 
-const TrackDropdown = () => {
-  // Dummy data inside the component as requested
-  const tracks = [
-    { isOwnTrack: true,
-      profileImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png"
+const TrackDropdown = ({ tracks: propTracks }) => {
+  // Use dummy data if no props are passed
+  const defaultTracks = [
+    {
+      isOwnTrack: true,
+      profileImage:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png",
     },
     { isOwnTrack: false },
     { isOwnTrack: false },
@@ -16,6 +18,8 @@ const TrackDropdown = () => {
     { isOwnTrack: false },
     { isOwnTrack: false },
   ];
+
+  const tracks = propTracks.length ? propTracks : defaultTracks;
 
   const [showMore, setShowMore] = useState(false);
 
@@ -29,7 +33,8 @@ const TrackDropdown = () => {
   return (
     <div className="track-dropdown">
       {displayedTracks.map((track, index) => (
-        <UserTrack key={index} {...track} />
+        // <UserTrack key={index} {...track} />
+        <UserTrack key={track.id || index} {...track} />
       ))}
 
       {hasMoreThanFive && (

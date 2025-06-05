@@ -7,6 +7,7 @@ import { ReactComponent as ReportIcon } from '../../assets/icons/report-icon.svg
 
 const PopUpContent = ({ type, data, onClose }) => {
   const [selected, setSelected] = useState('');
+
   // const isReport = type === 'report';
 
   switch (type) {
