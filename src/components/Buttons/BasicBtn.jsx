@@ -1,6 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import "../../styles/variables.css";
+// import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 // import { pointer } from "@testing-library/user-event/dist/cjs/pointer/index.js";
 
 const buttonStyles = {
@@ -14,6 +15,7 @@ const buttonStyles = {
         fontSize: "var(--font-size-16)",
         fontWeight: "--font-weight-semibold",
         fontFamily: "var(--font-family-primary)",
+        whiteSpace: "nowrap",
         whiteSpace: "nowrap",
     },
     tiny: {
@@ -110,9 +112,13 @@ function BasicBtn({ type = "default", text, icon: Icon, onClick}) {
     // const handleClick = () => {
     //     setClicked(!clicked);
     // };
+    // const handleClick = () => {
+    //     setClicked(!clicked);
+    // };
 
     return (
         <button
+            style={{ ...buttonStyles[type], whiteSpace: "nowrap" }}
             style={{ ...buttonStyles[type], whiteSpace: "nowrap" }}
             onClick={onClick}
         >

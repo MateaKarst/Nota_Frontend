@@ -1,8 +1,12 @@
+"use client";
 
 "use client";
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import ProtectedRoute from "./context/ProtectedRoutes";
+import { AuthProvider } from "./context/AuthProvider";
+import { appRoutes } from "./routes/routesConfig";
 import ProtectedRoute from "./context/ProtectedRoutes";
 import { AuthProvider } from "./context/AuthProvider";
 import { appRoutes } from "./routes/routesConfig";
@@ -33,6 +37,7 @@ function AppWrapper() {
         </ProtectedRoute>
       </div>
     </div>
+  
   );
 }
 
@@ -47,3 +52,4 @@ function App() {
 }
 
 export default App;
+

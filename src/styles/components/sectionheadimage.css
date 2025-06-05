@@ -7,6 +7,7 @@
     color: var(--color-white);
     text-align: center;
     width:100%;
+    width:100%;
 }
 
 .song-description{
@@ -15,6 +16,8 @@
     color: var(--color-white-trans-surface-45);
     max-width: 350px;
     margin-top:-5px;
+    margin: -5px auto 0 auto;
+    text-align: center;
     margin: -5px auto 0 auto;
     text-align: center;
 }
@@ -38,6 +41,8 @@
     align-items: center; 
     margin-top:13px;
     justify-content: center;
+    margin-top: 12px;
+    width:100%;
     margin-top: 12px;
     width:100%;
 }
