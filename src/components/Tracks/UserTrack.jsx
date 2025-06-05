@@ -13,13 +13,16 @@ const UserTrack = ({
   tag = "#Vocal",
   profileImage = profImg,
   audioSrc = Track,
-  registerAudio, // optional prop to expose WaveSurfer instance
+  registerAudio,
 }) => {
   const waveformRef = useRef(null);
   const waveSurferRef = useRef(null);
   const isReadyRef = useRef(false);
   const abortControllerRef = useRef(new AbortController());
-  const rootStyles = typeof window !== "undefined" ? getComputedStyle(document.documentElement) : {};
+  const rootStyles =
+    typeof window !== "undefined"
+      ? getComputedStyle(document.documentElement)
+      : {};
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
@@ -28,7 +31,8 @@ const UserTrack = ({
     const ws = WaveSurfer.create({
       container: waveformRef.current,
       waveColor: rootStyles.getPropertyValue("--color-orange") || "#FFA500",
-      progressColor: rootStyles.getPropertyValue("--color-orange-dark") || "#CC7000",
+      progressColor:
+        rootStyles.getPropertyValue("--color-orange-dark") || "#CC7000",
       responsive: true,
       height: 50,
       cursorWidth: 0,

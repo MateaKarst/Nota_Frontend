@@ -7,6 +7,7 @@ import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
+// import PopUp from '../components/PopUps/PopUp';
 
 import API_ENDPOINTS from '../routes/apiEndpoints';
 
@@ -17,21 +18,21 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [trendySongs, setTrendySongs] = useState([]);
 
-useEffect(() => {
-  const fetchTrendySongs = async () => {
-    try {
-      const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
-      const data = await res.json();
-      
-      // Optional: Sort by created_at or add filter logic here
-      setTrendySongs(data.slice(0, 10)); // Limit to 10 songs for UI
-    } catch (err) {
-      console.error("Failed to fetch trendy songs:", err);
-    }
-  };
+  useEffect(() => {
+    const fetchTrendySongs = async () => {
+      try {
+        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+        const data = await res.json();
 
-  fetchTrendySongs();
-}, []);
+        // Optional: Sort by created_at or add filter logic here
+        setTrendySongs(data.slice(0, 10)); // Limit to 10 songs for UI
+      } catch (err) {
+        console.error("Failed to fetch trendy songs:", err);
+      }
+    };
+
+    fetchTrendySongs();
+  }, []);
 
 
   useEffect(() => {
@@ -56,7 +57,7 @@ useEffect(() => {
           <h1 className="pink-header-title">My Songs</h1>
           <HomeCarousel
             onPlay={(song) => setCurrentSong(song)}
-            onAddClick={handleOpenPopup}
+            // onAddClick={handleOpenPopup}
           />
         </div>
       </div>
@@ -132,36 +133,36 @@ useEffect(() => {
       </div>
 
       <div>
-  <div className='title-content'>
-    <h1 className='title'>Trendy songs</h1>
-    <BasicBtn
-      type="viewAll"
-      text="View All"
-      onClick={() => navigate('/view-all', { state: { title: 'Trendy songs' } })}
-    />
-  </div>
+        <div className='title-content'>
+          <h1 className='title'>Trendy songs</h1>
+          <BasicBtn
+            type="viewAll"
+            text="View All"
+            onClick={() => navigate('/view-all', { state: { title: 'Trendy songs' } })}
+          />
+        </div>
 
-  <div className="horizontal-scroll">
-    {trendySongs.map((song) => (
-      <MusicCard
-        key={song.id}
-        title={song.title}
-        creator={song.user_details?.username || "Unknown"}
-        contributersNbr={song.tracks?.length || 1}
-        imageUrl={song.cover_image}
-        audio={song.compiled_path}
-        onPlay={() =>
-          setCurrentSong({
-            title: song.title,
-            artist: song.user_details?.username || "Unknown",
-            audio: song.compiled_path,
-            cover: song.cover_image,
-          })
-        }
-      />
-    ))}
-  </div>
-</div>
+        <div className="horizontal-scroll">
+          {trendySongs.map((song) => (
+            <MusicCard
+              key={song.id}
+              title={song.title}
+              creator={song.user_details?.username || "Unknown"}
+              contributersNbr={song.tracks?.length || 1}
+              imageUrl={song.cover_image}
+              audio={song.compiled_path}
+              onPlay={() =>
+                setCurrentSong({
+                  title: song.title,
+                  artist: song.user_details?.username || "Unknown",
+                  audio: song.compiled_path,
+                  cover: song.cover_image,
+                })
+              }
+            />
+          ))}
+        </div>
+      </div>
 
 
       {currentSong && (
@@ -170,11 +171,11 @@ useEffect(() => {
         </div>
       )}
 
-      {isPopupOpen && (
+      {/* {isPopupOpen && (
         <div className="popups1">
           <PopUp type={"upload-track"} onClose={handleClosePopup} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
