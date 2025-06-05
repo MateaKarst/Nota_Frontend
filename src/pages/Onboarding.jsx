@@ -3,15 +3,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import "../styles/variables.css";
 import NotaLogo from "../components/Logos/NotaLogo";
-import "../styles/pages/onboarding.css";
 import BasicBtn from "../components/Buttons/BasicBtn";
 import { useNavigate } from 'react-router-dom';
 import funImage from "../assets/backgrounds/onboarding/fun-image.jpg";
 import communityImage from "../assets/backgrounds/onboarding/community-image.jpg";
 import recognitionImage from "../assets/backgrounds/onboarding/recognition-image.jpg";
 import growthImage from "../assets/backgrounds/onboarding/growth-image.jpg";
+
+import "../styles/variables.css";
+import "../styles/pages/onboarding.css";
 
 function Onboarding() {
   const [activeIndex, setActiveIndex] = useState(0);
