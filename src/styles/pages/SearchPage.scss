@@ -1,10 +1,22 @@
 @import "../variables.css";
 
+body {
+  background-color: var(--color-black);
+}
 
 .container{
     background-color: var(--color-black);
     height: 100vh;
     color: var(--color-white);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.search-bar {
+  display: block;
 }
 
 .genre-box {
@@ -12,20 +24,24 @@
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-32);
     align-items: center;
-    margin-left: 10px;
   }
   
   .search-bar-container {
     display:flex;
     align-items: center;
-    gap: var(--spacing-10);
-    margin-top: var(--spacing-10);
-    margin-bottom: var(--spacing-32);
     justify-content: center;
+    width: 100%;
   }
 
-  .container{
-    margin: 0;
-    padding: 0;
-    justify-content: flex-start;
-  }
+  .search-bar-variant-2 {
+  display: block !important;
+  margin: 0 auto; // center horizontally
+}
+ 
+.genre-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px;
+}

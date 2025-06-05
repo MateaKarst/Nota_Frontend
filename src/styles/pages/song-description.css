@@ -1,5 +1,9 @@
 @import '../variables.css';
 
+.song-description-page {
+  background-color: var(--color-black);
+}
+
 .top-part{
 padding-top:20px;
 }
