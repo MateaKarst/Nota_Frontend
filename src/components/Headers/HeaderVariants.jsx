@@ -52,8 +52,8 @@ const headers = [
 const HeaderVariants = ({ mode, title }) => {
   const headerConfig = headers.find((h) => h.mode === mode);
 
-  const [showPopup, setShowPopup] = useState(false); // ✅ на верху
-  const menuBtnRef = useRef(null);                   // ✅
+  const [showPopup, setShowPopup] = useState(false);
+  const menuBtnRef = useRef(null);                   
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -10,12 +10,12 @@ import '../styles/pages/song-description.css';
 const SongDescription = () => {
   return (
   <div className="song-description-page">
-      {/*header section */}
+      
       <div className="header-section">
         <HeaderVariants mode="edit" />
       </div>
 
-      {/*image + dropdown */}
+      
       <div className="top-part">
         <SectionHeadImage />
 
@@ -25,12 +25,12 @@ const SongDescription = () => {
         </div>
       </div>
 
-    {/* NavBar */}
+    
       <div className="navbar-bottom">
         <NavBar />
       </div> 
 
-    {/* Collaborate Button*/}
+    
       <div className="collaborate">
         <BasicBtn type="main" text="Collaborate" />
       </div>
