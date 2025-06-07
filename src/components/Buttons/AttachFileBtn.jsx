@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import "../../styles/variables.css";
 
-import { ReactComponent as ClipIcon } from '../../icons/clip.svg'; // Imports SVG file as React component
+import { ReactComponent as ClipIcon } from '../../icons/clip.svg';
 
-function AttachFileBtn({ text, variant = 0, onClick }) {
+function AttachFileBtn({ text, variant = 0, onClick, type }) {
+    const fileInputRef = useRef(null);
+
     const styles = [
         {
             width: "103px",
@@ -35,11 +37,29 @@ function AttachFileBtn({ text, variant = 0, onClick }) {
         }
     ];
 
+    const handleClick = (e) => {
+        if (type === "file") {
+            fileInputRef.current?.click();
+        } else if (onClick) {
+            onClick(e);
+        }
+    };
+
     return (
-        <button style={styles[variant]} onClick={onClick}>
-            <ClipIcon style={{ width: "13px", height: "17px", marginRight: "5px" }} />
-            {text}
-        </button>
+        <>
+            <button style={styles[variant]} onClick={handleClick}>
+                <ClipIcon style={{ width: "13px", height: "17px", marginRight: "5px" }} />
+                {text}
+            </button>
+            {type === "file" && (
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    onChange={onClick}
+                />
+            )}
+        </>
     );
 }
 

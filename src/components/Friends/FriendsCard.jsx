@@ -111,7 +111,7 @@ const FriendsCard = () => {
             <Link key={userId || index} to={`/profilefriend/${userId}`}>
               <Friend
                 id={userId}
-                name={`${connection.user_details.name} ${connection.user_details.last_name}`}
+                name={connection.user_details.name}
                 ProfilePicture={() =>
                   connection.user_details.avatar ? (
                     <img src={connection.user_details.avatar} alt={connection.user_details.name} className="avatar-img" />

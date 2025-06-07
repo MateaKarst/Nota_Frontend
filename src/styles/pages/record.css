@@ -4,7 +4,6 @@
   color: white !important;
 }
 
-
 .recording-page  .song-info {
   display: flex;
   justify-content: center;   
@@ -130,19 +129,21 @@
 
 .recording-page .overlay {
   position: fixed;
-  top: 55%;
+  top: 50%;
   left: 50%;
-  width: 37dvh;
-  height: 23.6dvh;
+  width: 80vw;
+  max-width: 300px;
+  height: 150px;
   background-color: var(--color-black);
   opacity: 0.7;
   z-index: 999;
   border-radius: 12px;
   transform: translate(-50%, -50%);
-  display: flex;               
-  justify-content: center;     
-  align-items: center;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 .recording-page .overlay-backdrop {
   position: fixed;
@@ -159,4 +160,11 @@
   font-family: var(--font-family-primary);
   text-align: center;
   font-weight: var(--font-weight-bold);
+}
+
+.waveform {
+  width: 100%;
+  max-width: 600px;
+  height: 60px;
+  margin: 10px 0;
 }

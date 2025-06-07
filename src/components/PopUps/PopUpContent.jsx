@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import AttachFileBtn from '../Buttons/AttachFileBtn';
 import BasicBtn from '../Buttons/BasicBtn';
 import ProBtn from '../Buttons/ProBtn';
+import Record from '../../pages/Record';
+
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ReportIcon } from '../../assets/icons/report-icon.svg';
 
 const PopUpContent = ({ type, data, onClose }) => {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState('');
 
   // const isReport = type === 'report';
+
+  const handleUploadTrack = () => {
+    //
+  };
 
   switch (type) {
     case 'upload-picture':
@@ -32,8 +40,8 @@ const PopUpContent = ({ type, data, onClose }) => {
             <p className="hint pink">Explore premium plans to get better quality for your tracks!</p>
           </div>
           <div className="btn-group">
-            <AttachFileBtn variant={1} text={'Upload'} />
-            <AttachFileBtn variant={1} text={'Record'} />
+            <AttachFileBtn variant={1} text={'Upload'} type="file" />
+            <AttachFileBtn variant={1} text={'Record'} onClick={() => navigate('/record')} />
           </div>
         </>
       );

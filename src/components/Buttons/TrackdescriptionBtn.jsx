@@ -1,73 +1,91 @@
-import React, { useRef, useState, useEffect } from "react";
-import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid"; // icon library
-import ringtone from "../../assets/editor/iphone-ringtone.mp3"; // testing
+import React, { useState, useEffect, useRef } from "react";
+import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import "../../styles/variables.css";
 
-const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = true }) => {
-  const audioRef = useRef(null);
-  const progressRef = useRef(null);
+const TrackDescriptionBtn = ({
+  showProgress = false,
+  bordered = false,
+  showSkipButtons = true,
+  audioPlayersRef,
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0); // between 0 and 1
+  const progressBarRef = useRef(null);
 
+  // Update progress continuously
   useEffect(() => {
-    const audio = audioRef.current;
-
-    // progress bar
-    const updateProgress = () => {
-      const percent = (audio.currentTime / audio.duration) * 100; // calculate the percentage of audio played aka makes the bar move
-      setProgress(percent || 0); // set the progress and update it
-    };
-
-    audio.addEventListener("timeupdate", updateProgress); // listen for the audio to update
-    return () => {
-      audio.removeEventListener("timeupdate", updateProgress);
-    };
-  }, []);
-
-  // start and stop audio
-  const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!isPlaying) {
-      audio.play();
-    } else {
-      audio.pause();
+    let interval;
+    if (showProgress && isPlaying) {
+      interval = setInterval(() => {
+        const players = audioPlayersRef?.current || [];
+        if (players.length > 0) {
+          const player = players[0];
+          const current = player.getCurrentTime();
+          const duration = player.getDuration();
+          if (duration > 0) {
+            setProgress(current / duration);
+          }
+        }
+      }, 500);
     }
+
+    return () => clearInterval(interval);
+  }, [isPlaying, showProgress, audioPlayersRef]);
+
+  const togglePlay = () => {
+    const players = audioPlayersRef?.current || [];
+    players.forEach((player) => {
+      if (isPlaying) {
+        player?.pause?.();
+      } else {
+        player?.play?.();
+      }
+    });
     setIsPlaying(!isPlaying);
   };
 
-  // skipping through the audio in the progress bar
-  const handleSeek = (e) => {
-    const audio = audioRef.current; // find the audio
-    const rect = progressRef.current.getBoundingClientRect();
-    const clickX = e.clientX - rect.left; // find the time where you clicked
-    const width = rect.width;
-    const newTime = (clickX / width) * audio.duration; // calculate the new time the audio is on
-    audio.currentTime = newTime; // set the audio to the new time
-  };
-
-  // skip forward 10 seconds
   const skipForward = () => {
-    const audio = audioRef.current;
-    audio.currentTime = Math.min(audio.currentTime + 10, audio.duration); // skip forward by 10 seconds, but not past the audio duration
+    const players = audioPlayersRef?.current || [];
+    players.forEach((player) => {
+      const current = player.getCurrentTime();
+      const duration = player.getDuration();
+      player.seekTo(Math.min((current + 10) / duration, 1));
+    });
   };
 
-  // skip backward 10 seconds
   const skipBackward = () => {
-    const audio = audioRef.current;
-    audio.currentTime = Math.max(audio.currentTime - 10, 0); // skip backward by 10 seconds, but not before the start of the audio
+    const players = audioPlayersRef?.current || [];
+    players.forEach((player) => {
+      const current = player.getCurrentTime();
+      const duration = player.getDuration();
+      player.seekTo(Math.max((current - 10) / duration, 0));
+    });
+  };
+
+  // Seek when user clicks progress bar
+  const handleProgressClick = (e) => {
+    const bar = progressBarRef.current;
+    const rect = bar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newProgress = clickX / rect.width;
+
+    const players = audioPlayersRef?.current || [];
+    players.forEach((player) => {
+      player.seekTo(newProgress);
+    });
+
+    setProgress(newProgress);
   };
 
   return (
     <>
       <div className="player-container">
-        <audio ref={audioRef} src={ringtone} />  {/*probaly has to be changed to an api  */}
         <div className="player-ui">
           <div className="player-controls">
-            {/* skip backward button */}
             {showSkipButtons && (
-            <button onClick={skipBackward} className="skip-btn">
-              &#8634; {/* left arrow symbol for backward */}
-            </button>
+              <button onClick={skipBackward} className="skip-btn">
+                &#8634;
+              </button>
             )}
 
             <button
@@ -81,24 +99,23 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
               )}
             </button>
 
-            {/* skip forward button */}
             {showSkipButtons && (
-            <button onClick={skipForward} className="skip-btn">
-              &#8634; {/* left arrow symbol for backwards (mirrored in CSS) */}
-            </button>
+              <button onClick={skipForward} className="skip-btn">
+                &#8634;
+              </button>
             )}
           </div>
-          
+
           {showProgress && (
             <div
               className="progress-bar"
-              ref={progressRef}
-              onClick={handleSeek}
+              ref={progressBarRef}
+              onClick={handleProgressClick}
             >
               <div
-                className="progress-fill"
-                style={{ width: `${progress}%` }}
-              />
+                className="progress-bar-fill"
+                style={{ width: `${progress * 100}%` }}
+              ></div>
             </div>
           )}
         </div>
@@ -111,6 +128,25 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            width: 100%;
+          }
+
+          .progress-bar {
+            width: 300px;
+            max-width: 300px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            cursor: pointer;
+            position: relative;
+          }
+
+          .progress-bar-fill {
+            height: 100%;
+            background-color: var(--color-pink);
+            transition: width 0.2s ease;
           }
 
           .player-controls {
@@ -148,21 +184,6 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             color: white;
           }
 
-          .progress-bar {
-            width: 300px;
-            height: 7px;
-            background-color: #444;
-            border-radius: 5px;
-            overflow: hidden;
-          }
-
-          .progress-fill {
-            height: 100%;
-            background-color: var(--color-pink);
-            width: 0%;
-            transition: width 0.1s linear;
-          }
-
           .skip-btn {
             background-color: var(--color-black);
             color: white;
@@ -170,34 +191,25 @@ const PlayerBtn = ({ showProgress = true, bordered = false, showSkipButtons = tr
             font-size: 1.5rem;
             width: 50px;
             height: 50px;
-            border-radius: 50%; 
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: background-color 0.2s ease;
-            shadow: '0 20px 0px rgba(0, 0, 0, 0.1)',
           }
 
           .skip-btn:hover {
             background-color: var(--color-white-trans-50);
           }
 
-          /* mirroring the skip backward icon for skip forward */
           .skip-btn:nth-child(3) {
-            transform: scaleX(-1); /* Flipping the skip icon */
+            transform: scaleX(-1);
           }
         `}
       </style>
-
     </>
   );
 };
 
-export default PlayerBtn;
-
-/* calling the PlayerBtn example
-
-  hiding both progress bar and border 
-    <PlayerBtn showProgress={false} bordered={false} 
-*/
+export default TrackDescriptionBtn;

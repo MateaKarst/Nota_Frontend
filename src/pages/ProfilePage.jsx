@@ -9,7 +9,11 @@ import Cookies from 'js-cookie';
 import API_ENDPOINTS from '../routes/apiEndpoints';
 import { useAuth } from '../context/AuthProvider';
 
+
 const ProfilePage = () => {
+  const [ownSongs, setOwnSongs] = useState([]);
+  const [collaborations, setCollaborations] = useState([]);
+
   const [currentSong, setCurrentSong] = useState(null);
   const [activeTab, setActiveTab] = useState("own");
   const { id } = useParams();
@@ -19,7 +23,7 @@ const ProfilePage = () => {
   const [friendConnections, setFriendConnections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
 
   // Використовуємо або ID з URL, або ID поточного користувача
   const connectionId = id || user?.id;
@@ -35,7 +39,6 @@ const ProfilePage = () => {
         return;
       }
 
-      // Збереження access_token в cookies
       Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
 
       try {
@@ -62,6 +65,31 @@ const ProfilePage = () => {
 
         const connections = await connRes.json();
         setFriendConnections(connections);
+
+        console.log("Fetching songs from:", API_ENDPOINTS.SONGS.MULTIPLE + `?userId=${connectionId}`);
+
+        // Отримуємо пісні
+        const songsRes = await fetch(API_ENDPOINTS.SONGS.MULTIPLE + `?userId=${connectionId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const userSongs = await songsRes.json();
+        if (!songsRes.ok) throw new Error(userSongs.message || "Failed to fetch user songs");
+
+        const userId = user?.id;
+
+        const own = userSongs.filter(song => song.user_id === userId);
+
+        const collabs = userSongs.filter(song =>
+          song.user_id !== userId &&
+          song.tracks?.some(track => track.user_id === userId)
+        );
+
+
+        setOwnSongs(own);
+        setCollaborations(collabs);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -75,50 +103,51 @@ const ProfilePage = () => {
     }
   }, [connectionId, user]);
 
+
   if (loading) return <div>Loading user profile...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!userData) return <div>No user data found.</div>;
 
-  const ownSongs = [
-    {
-      title: "Dreamy",
-      creator: "Bestguitar123",
-      contributersNbr: 1,
-      imageUrl: "https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-    },
-    {
-      title: "Memories",
-      creator: "Jamesvoice",
-      contributersNbr: 3,
-      imageUrl: "https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-    },
-    {
-      title: "HeartBit",
-      creator: "Korin",
-      contributersNbr: 4,
-      imageUrl: "https://img.freepik.com/free-photo/dreamy-arrangement-with-decorative-dried-flowers_23-2151363285.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-    }
-  ];
+  // const ownSongs = [
+  //   {
+  //     title: "Dreamy",
+  //     creator: "Bestguitar123",
+  //     contributersNbr: 1,
+  //     imageUrl: "https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg",
+  //     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  //   },
+  //   {
+  //     title: "Memories",
+  //     creator: "Jamesvoice",
+  //     contributersNbr: 3,
+  //     imageUrl: "https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg",
+  //     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  //   },
+  //   {
+  //     title: "HeartBit",
+  //     creator: "Korin",
+  //     contributersNbr: 4,
+  //     imageUrl: "https://img.freepik.com/free-photo/dreamy-arrangement-with-decorative-dried-flowers_23-2151363285.jpg",
+  //     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  //   }
+  // ];
 
-  const collaborations = [
-    {
-      title: "Neon Pulse",
-      creator: "ElectroNina",
-      contributersNbr: 2,
-      imageUrl: "https://img.freepik.com/free-photo/futuristic-city-with-neon-lights_23-2148898573.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-    },
-    {
-      title: "Soul Echo",
-      creator: "JazzDev",
-      contributersNbr: 5,
-      imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-    }
-  ];
+  // const collaborations = [
+  //   {
+  //     title: "Neon Pulse",
+  //     creator: "ElectroNina",
+  //     contributersNbr: 2,
+  //     imageUrl: "https://img.freepik.com/free-photo/futuristic-city-with-neon-lights_23-2148898573.jpg",
+  //     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  //   },
+  //   {
+  //     title: "Soul Echo",
+  //     creator: "JazzDev",
+  //     contributersNbr: 5,
+  //     imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg",
+  //     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  //   }
+  // ];
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -150,7 +179,7 @@ const ProfilePage = () => {
             name={userData.user_details.name}
             tagline={userData.user_details.profile_description}
             connections={friendConnections.length}
-            btns={true}
+            btns={false}
           />
         </div>
       </div>
@@ -197,19 +226,24 @@ const ProfilePage = () => {
         <div style={{ display: "flex", flexDirection: "column" }}>
           {(activeTab === "own" ? ownSongs : collaborations).map((song, index) => (
             <SmallCard
-              key={index}
+              key={song.id || index}
               title={song.title}
-              creator={song.creator}
-              contributersNbr={song.contributersNbr}
-              imageUrl={song.imageUrl}
-             onPlay={() => setCurrentSong({
-              title: song.title,
-              artist: song.creator,    
-              cover: song.imageUrl,     //to match the format audio player expects
-              audio: song.audioUrl       
-            })}
+              creator={song.user_details.name}
+              contributersNbr={song.contributors?.length || 0}
+              imageUrl={song.cover_image}
+              audio={song.audio_url}
+              songData={song}
+              onPlay={() =>
+                setCurrentSong({
+                  title: song.title,
+                  artist: song.user_details.name,
+                  cover: song.cover_image,
+                  audio: song.audio_url,
+                })
+              }
             />
           ))}
+
         </div>
       </div>
 

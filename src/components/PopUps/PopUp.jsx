@@ -1,5 +1,5 @@
 import React from 'react';
-import PopupContent from './PopUpContent';
+import PopUpContent from './PopUpContent';
 
 import '../../styles/components/pop-ups.css';
 
@@ -10,7 +10,7 @@ const Popup = ({ type, onClose, data }) => {
     <div className="popup-overlay">
       <div className="popup-card">
         <button className="popup-close" onClick={onClose}><PlusIcon /></button>
-        <PopupContent type={type} data={data} onClose={onClose} />
+        <PopUpContent type={type} data={data} onClose={onClose} />
       </div>
     </div>
   );
