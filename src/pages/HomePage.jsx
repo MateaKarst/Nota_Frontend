@@ -52,7 +52,6 @@ const HomePage = () => {
     fetchNewSongs();
   }, []);
 
-
   useEffect(() => {
     const fetchCollaborationSongs = async () => {
       if (!user) return;
@@ -73,6 +72,13 @@ const HomePage = () => {
 
     fetchCollaborationSongs();
   }, [user]);
+
+  // Function to handle clicking a MusicCard and navigating
+  const handleMusicCardClick = (song) => {
+    navigate(`/song-description/${song.id}`);
+
+  };
+
 
   return (
     <div className="home-page">
@@ -102,6 +108,7 @@ const HomePage = () => {
               imageUrl={song.cover_image}
               audio={song.compiled_path}
               onPlay={() => setCurrentSong(song)}
+              onClick={() => handleMusicCardClick(song)}
             />
           ))}
         </div>
