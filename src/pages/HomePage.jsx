@@ -7,16 +7,20 @@ import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
+import { useAuth } from '../context/AuthProvider';
 // import PopUp from '../components/PopUps/PopUp';
 
 import API_ENDPOINTS from '../routes/apiEndpoints';
 
 
 const HomePage = () => {
+  const { user } = useAuth();
+
   const [currentSong, setCurrentSong] = useState(null);
   const [newSongs, setNewSongs] = useState([]);
   const navigate = useNavigate();
   const [trendySongs, setTrendySongs] = useState([]);
+  const [collaborationSongs, setCollaborationSongs] = useState([]);
 
   useEffect(() => {
     const fetchTrendySongs = async () => {
@@ -24,8 +28,7 @@ const HomePage = () => {
         const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
         const data = await res.json();
 
-        // Optional: Sort by created_at or add filter logic here
-        setTrendySongs(data.slice(0, 10)); // Limit to 10 songs for UI
+        setTrendySongs(data.slice(0, 10)); // limited to 10 songs
       } catch (err) {
         console.error("Failed to fetch trendy songs:", err);
       }
@@ -40,7 +43,7 @@ const HomePage = () => {
       try {
         const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
         const data = await res.json();
-        setNewSongs(data); // you can limit to latest if needed
+        setNewSongs(data);
       } catch (err) {
         console.error("Failed to fetch new songs", err);
       }
@@ -48,6 +51,28 @@ const HomePage = () => {
 
     fetchNewSongs();
   }, []);
+
+
+  useEffect(() => {
+    const fetchCollaborationSongs = async () => {
+      if (!user) return;
+      try {
+        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+        const data = await res.json();
+
+        const collaborations = data.filter(song => {
+          if (song.user_id === user.id) return false;
+          return song.tracks?.some(track => track.user_id === user.id);
+        });
+
+        setCollaborationSongs(collaborations);
+      } catch (err) {
+        console.error("Failed to fetch collaboration songs:", err);
+      }
+    };
+
+    fetchCollaborationSongs();
+  }, [user]);
 
   return (
     <div className="home-page">
@@ -94,36 +119,24 @@ const HomePage = () => {
           />
         </div>
         <div className="horizontal-scroll">
-          <MusicCard
-            title="Dreamy"
-            creator="Bestguitar123"
-            contributersNbr={1}
-            imageUrl={
-              "https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg?t=st=1746643614~exp=1746647214~hmac=a7e5c96486e48adbc90516fa4a6cdf0cec31c7bdb7c167ad72b00b88966a15b0&w=740"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="Memories"
-            creator="Jamesvoice"
-            contributersNbr={3}
-            imageUrl={
-              "https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg?t=st=1746643570~exp=1746647170~hmac=0ba17f92d1e2691e78daca127bd3f9857f3df09f04502382721058cd18655527&w=1380"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="HeartBit"
-            creator="Korin"
-            contributersNbr={4}
-            imageUrl={
-              "https://img.freepik.com/free-photo/dreamy-arrangement-with-decorative-dried-flowers_23-2151363285.jpg?t=st=1746643542~exp=1746647142~hmac=e4f44690d9487e446ad5d79987196dd8c292cbf324764167e18cf0f9cd4e538c&w=740"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
+          {collaborationSongs.map((song) => (
+            <MusicCard
+              key={song.id}
+              title={song.title}
+              creator={song.user_details?.username || "Collaborator"}
+              contributersNbr={song.tracks?.length || 1}
+              imageUrl={song.cover_image}
+              audio={song.compiled_path}
+              onPlay={() =>
+                setCurrentSong({
+                  title: song.title,
+                  artist: song.user_details?.username || "Collaborator",
+                  audio: song.compiled_path,
+                  cover: song.cover_image,
+                })
+              }
+            />
+          ))}
         </div>
       </div>
 
