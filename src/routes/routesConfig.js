@@ -20,6 +20,7 @@ import Record from "../pages/Record";
 import Chat from "../pages/Chat";
 import ChatOverview from "../pages/ChatOverview";
 import Editor2 from "../pages/Editor2";
+import AddTracksPage from "../pages/AddTrackPage";
 
 export const appRoutes = [
     { path: "/", element: <Onboarding />, isPublic: true },
@@ -40,6 +41,7 @@ export const appRoutes = [
     { path: "/upload-song", element: <UploadSong /> },
     { path: "/record", element: <Record /> },
     { path: "/editor2", element: <Editor2 /> },
+    { path: "/add-tracks", element: <AddTracksPage /> },
     
     { path: "/discover", element: <SearchPage /> },
     { path: "/search", element: <SearchPage /> },

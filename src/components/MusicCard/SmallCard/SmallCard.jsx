@@ -4,12 +4,13 @@ import PlayBtn from "../../Buttons/PlayBtn";
 import SmallCardSvg from "./SmallCardSvg";
 import { useNavigate } from "react-router-dom";
 
-const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => { }, audio }) => {
+const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => { }, audio, songData }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/song-description");
+    navigate("/song-description", { state: { song: songData } });
   };
+
   return (
     <div onClick={handleClick}
       style={{
