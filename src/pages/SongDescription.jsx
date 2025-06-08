@@ -1,4 +1,5 @@
 import React, {  useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
 import HeaderSongDescription from '../components/Headers/HeaderSongDescription';
@@ -7,11 +8,10 @@ import BasicBtn from "../components/Buttons/BasicBtn";
 import { API_ENDPOINTS } from "../routes/apiEndpoints";
 import { useAuth } from '../context/AuthProvider';
 import Cookies from "js-cookie";
-// import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import '../styles/pages/song-description.css';
 
-import { useNavigate } from "react-router-dom";
 
 const SongDescription = () => {
 
@@ -19,12 +19,15 @@ const SongDescription = () => {
 // const { id, title, imageUrl } = location.state || {};
 // const { id } = useParams();
   const { user } = useAuth();
+  const { id } = useParams();
 
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
 
 
-   const id = "8a97f671-2c6b-4673-a70b-57d9225d1d2c";
+  //const id = "8a97f671-2c6b-4673-a70b-57d9225d1d2c";
+  const songId = id
+  console.log ("Getting song id", songId);
 
   const [song, setSong] = useState(null);
 

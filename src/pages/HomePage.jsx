@@ -8,6 +8,7 @@ import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 // import PopUp from '../components/PopUps/PopUp';
+import { Link } from 'react-router-dom';
 
 import API_ENDPOINTS from '../routes/apiEndpoints';
 
@@ -24,8 +25,8 @@ const HomePage = () => {
         const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
         const data = await res.json();
 
-        // Optional: Sort by created_at or add filter logic here
-        setTrendySongs(data.slice(0, 10)); // Limit to 10 songs for UI
+        // Sort by created_at or add filter logic
+        setTrendySongs(data.slice(0, 10));
       } catch (err) {
         console.error("Failed to fetch trendy songs:", err);
       }
@@ -49,9 +50,12 @@ const HomePage = () => {
     fetchNewSongs();
   }, []);
 
+
   // Function to handle clicking a MusicCard and navigating
   const handleMusicCardClick = (song) => {
+    console.log ("handle navigation songId");
     navigate(`/song-description/${song.id}`);
+    
 
   };
 
@@ -74,9 +78,12 @@ const HomePage = () => {
           <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
         </div>
         <div className="horizontal-scroll">
-          {newSongs.map((song) => (
+          {newSongs.map((song, index ) => {
+            const songId = song.id
+            return(
+            <Link key={songId || index } to={`/song-description/${songId}`}>
             <MusicCard
-              key={song.id}
+              key={songId}
               title={song.title}
               creator={song.user_details?.username || "Unknown"}
               contributersNbr={song.tracks?.length || 1}
@@ -85,7 +92,9 @@ const HomePage = () => {
               onPlay={() => setCurrentSong(song)}
               onClick={() => handleMusicCardClick(song)}
             />
-          ))}
+            </Link>
+        );
+})}
         </div>
       </div>
 
@@ -100,37 +109,24 @@ const HomePage = () => {
             }
           />
         </div>
-        <div className="horizontal-scroll">
-          <MusicCard
-            title="Dreamy"
-            creator="Bestguitar123"
-            contributersNbr={1}
-            imageUrl={
-              "https://img.freepik.com/free-photo/modern-tokyo-street-background_23-2149394914.jpg?t=st=1746643614~exp=1746647214~hmac=a7e5c96486e48adbc90516fa4a6cdf0cec31c7bdb7c167ad72b00b88966a15b0&w=740"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="Memories"
-            creator="Jamesvoice"
-            contributersNbr={3}
-            imageUrl={
-              "https://img.freepik.com/free-photo/colorful-floral-background-wallpaper-trippy-aesthetic-design_53876-128684.jpg?t=st=1746643570~exp=1746647170~hmac=0ba17f92d1e2691e78daca127bd3f9857f3df09f04502382721058cd18655527&w=1380"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
-          <MusicCard
-            title="HeartBit"
-            creator="Korin"
-            contributersNbr={4}
-            imageUrl={
-              "https://img.freepik.com/free-photo/dreamy-arrangement-with-decorative-dried-flowers_23-2151363285.jpg?t=st=1746643542~exp=1746647142~hmac=e4f44690d9487e446ad5d79987196dd8c292cbf324764167e18cf0f9cd4e538c&w=740"
-            }
-            onPlay={(song) => setCurrentSong(song)}
-            audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          />
+       <div className="horizontal-scroll">
+          {newSongs.map((song, index ) => {
+            const songId = song.id
+            return(
+            <Link key={songId || index } to={`/song-description/${songId}`}>
+            <MusicCard
+              key={songId}
+              title={song.title}
+              creator={song.user_details?.username || "Unknown"}
+              contributersNbr={song.tracks?.length || 1}
+              imageUrl={song.cover_image}
+              audio={song.compiled_path}
+              onPlay={() => setCurrentSong(song)}
+              onClick={() => handleMusicCardClick(song)}
+            />
+            </Link>
+        );
+})}
         </div>
       </div>
 
@@ -150,24 +146,23 @@ const HomePage = () => {
         </div>
 
         <div className="horizontal-scroll">
-          {trendySongs.map((song) => (
+          {newSongs.map((song, index ) => {
+            const songId = song.id
+            return(
+            <Link key={songId || index } to={`/song-description/${songId}`}>
             <MusicCard
-              key={song.id}
+              key={songId}
               title={song.title}
               creator={song.user_details?.username || "Unknown"}
               contributersNbr={song.tracks?.length || 1}
               imageUrl={song.cover_image}
               audio={song.compiled_path}
-              onPlay={() =>
-                setCurrentSong({
-                  title: song.title,
-                  artist: song.user_details?.username || "Unknown",
-                  audio: song.compiled_path,
-                  cover: song.cover_image,
-                })
-              }
+              onPlay={() => setCurrentSong(song)}
+              onClick={() => handleMusicCardClick(song)}
             />
-          ))}
+            </Link>
+        );
+})}
         </div>
       </div>
 
