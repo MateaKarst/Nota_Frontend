@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/pages/home-page.css'
-import HomeCarousel from '../components/Home/HomeCarousel';
-import HeaderMain from '../components/Headers/HeaderMain';
-import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
-import BasicBtn from '../components/Buttons/BasicBtn'
-import FriendsCard from '../components/Friends/FriendsCard';
-import { useNavigate } from 'react-router-dom';
-import MusicPlayer from '../components/MusicPlayer';
-// import PopUp from '../components/PopUps/PopUp';
+import React, { useEffect, useState } from "react";
+import "../styles/pages/home-page.css";
+import HomeCarousel from "../components/Home/HomeCarousel";
+import HeaderMain from "../components/Headers/HeaderMain";
+import MusicCard from "../components/MusicCard/HomeAndMySongsCards/MusicCard";
+import BasicBtn from "../components/Buttons/BasicBtn";
+import FriendsCard from "../components/Friends/FriendsCard";
+import { useNavigate } from "react-router-dom";
+import MusicPlayer from "../components/MusicPlayer";
+import PopUp from "../components/PopUps/PopUp";
 
-import API_ENDPOINTS from '../routes/apiEndpoints';
-
+import API_ENDPOINTS from "../routes/apiEndpoints";
 
 const HomePage = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const [newSongs, setNewSongs] = useState([]);
   const navigate = useNavigate();
   const [trendySongs, setTrendySongs] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   useEffect(() => {
     const fetchTrendySongs = async () => {
       try {
         const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
         const data = await res.json();
-
-        // Optional: Sort by created_at or add filter logic here
-        setTrendySongs(data.slice(0, 10)); // Limit to 10 songs for UI
+        setTrendySongs(data.slice(0, 10)); // limit to 10 songs for UI
       } catch (err) {
         console.error("Failed to fetch trendy songs:", err);
       }
@@ -33,7 +38,6 @@ const HomePage = () => {
 
     fetchTrendySongs();
   }, []);
-
 
   useEffect(() => {
     const fetchNewSongs = async () => {
@@ -57,15 +61,21 @@ const HomePage = () => {
           <h1 className="pink-header-title">My Songs</h1>
           <HomeCarousel
             onPlay={(song) => setCurrentSong(song)}
-            // onAddClick={handleOpenPopup}
+            onAddClick={handleOpenPopup}
           />
         </div>
       </div>
 
       <div>
-        <div className='title-content'>
-          <h1 className='title'>New songs</h1>
-          <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
+        <div className="title-content">
+          <h1 className="title">New songs</h1>
+          <BasicBtn
+            type="viewAll"
+            text="View All"
+            onClick={() =>
+              navigate("/view-all", { state: { title: "New songs" } })
+            }
+          />
         </div>
         <div className="horizontal-scroll">
           {newSongs.map((song) => (
@@ -133,12 +143,14 @@ const HomePage = () => {
       </div>
 
       <div>
-        <div className='title-content'>
-          <h1 className='title'>Trendy songs</h1>
+        <div className="title-content">
+          <h1 className="title">Trendy songs</h1>
           <BasicBtn
             type="viewAll"
             text="View All"
-            onClick={() => navigate('/view-all', { state: { title: 'Trendy songs' } })}
+            onClick={() =>
+              navigate("/view-all", { state: { title: "Trendy songs" } })
+            }
           />
         </div>
 
@@ -164,18 +176,17 @@ const HomePage = () => {
         </div>
       </div>
 
-
       {currentSong && (
         <div className="music-player-container">
           <MusicPlayer song={currentSong} />
         </div>
       )}
 
-      {/* {isPopupOpen && (
+      {isPopupOpen && (
         <div className="popups1">
           <PopUp type={"upload-track"} onClose={handleClosePopup} />
         </div>
-      )} */}
+      )}
     </div>
   );
 };
