@@ -19,7 +19,8 @@ const TrackDropdown = ({ tracks: propTracks }) => {
     { isOwnTrack: false },
   ];
 
-  const tracks = propTracks.length ? propTracks : defaultTracks;
+  const tracks = Array.isArray(propTracks) ? (propTracks.length ? propTracks : defaultTracks) : defaultTracks;
+
 
   const [showMore, setShowMore] = useState(false);
 
