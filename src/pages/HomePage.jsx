@@ -8,7 +8,7 @@ import FriendsCard from '../components/Friends/FriendsCard';
 import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
 import { useAuth } from '../context/AuthProvider';
-// import PopUp from '../components/PopUps/PopUp';
+import PopUp from '../components/PopUps/PopUp';
 import { Link } from 'react-router-dom';
 
 import API_ENDPOINTS from '../routes/apiEndpoints';
@@ -17,9 +17,15 @@ import API_ENDPOINTS from '../routes/apiEndpoints';
 const HomePage = () => {
   const { user } = useAuth();
 
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupType, setPopupType] = useState('');
+  const [popupData, setPopupData] = useState(null);
+
   const [currentSong, setCurrentSong] = useState(null);
   const [newSongs, setNewSongs] = useState([]);
+
   const navigate = useNavigate();
+
   const [trendySongs, setTrendySongs] = useState([]);
   const [collaborationSongs, setCollaborationSongs] = useState([]);
 
@@ -55,24 +61,65 @@ const HomePage = () => {
 
 
   const handleMusicCardClick = (song) => {
-    console.log ("handle navigation songId");
+    console.log("handle navigation songId");
     navigate(`/song-description/${song.id}`);
-    
+
 
   };
 
+  const handleOpenPopup = async () => {
+    try {
+      const userId = user.id; // Replace with actual user ID from auth context/store
+      console.log("home + userId", userId)
+      
+      const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: userId,
+          title: 'Untitled Song',
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error('Server error:', errorData);
+        return;
+      }
+
+      console.log("response", res)
+
+      const newSong = await res.json();
+
+      setPopupType('upload-track');
+      setPopupData(newSong);
+      setShowPopup(true);
+    } catch (error) {
+      console.error('Failed to create empty song:', error);
+    }
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
 
   return (
     <div className="home-page">
-      <div className="hero-wrapper">
-        <HeaderMain className="header" />
-        <div className="home-carousel-overlay">
-          <h1 className="pink-header-title">My Songs</h1>
-          <HomeCarousel
-            onPlay={(song) => setCurrentSong(song)}
-            // onAddClick={handleOpenPopup}
-          />
+      <div className="home-page">
+        <div className="hero-wrapper">
+          <HeaderMain className="header" />
+          <div className="home-carousel-overlay">
+            <h1 className="pink-header-title">My Songs</h1>
+            <HomeCarousel
+              onPlay={(song) => setCurrentSong(song)}
+              onAddClick={handleOpenPopup} // opens popup
+            />
+          </div>
         </div>
+
+        {showPopup && (
+          <PopUp type={popupType} data={popupData} onClose={handleClosePopup} />
+        )}
       </div>
 
       <div>
@@ -81,23 +128,23 @@ const HomePage = () => {
           <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
         </div>
         <div className="horizontal-scroll">
-          {newSongs.map((song, index ) => {
+          {newSongs.map((song, index) => {
             const songId = song.id
-            return(
-            <Link key={songId || index } to={`/song-description/${songId}`}>
-            <MusicCard
-              key={songId}
-              title={song.title}
-              creator={song.user_details?.username || "Unknown"}
-              contributersNbr={song.tracks?.length || 1}
-              imageUrl={song.cover_image}
-              audio={song.compiled_path}
-              onPlay={() => setCurrentSong(song)}
-              onClick={() => handleMusicCardClick(song)}
-            />
-            </Link>
-        );
-})}
+            return (
+              <Link key={songId || index} to={`/song-description/${songId}`}>
+                <MusicCard
+                  key={songId}
+                  title={song.title}
+                  creator={song.user_details?.username || "Unknown"}
+                  contributersNbr={song.tracks?.length || 1}
+                  imageUrl={song.cover_image}
+                  audio={song.compiled_path}
+                  onPlay={() => setCurrentSong(song)}
+                  onClick={() => handleMusicCardClick(song)}
+                />
+              </Link>
+            );
+          })}
         </div>
       </div>
 
@@ -112,24 +159,24 @@ const HomePage = () => {
             }
           />
         </div>
-       <div className="horizontal-scroll">
-          {newSongs.map((song, index ) => {
+        <div className="horizontal-scroll">
+          {newSongs.map((song, index) => {
             const songId = song.id
-            return(
-            <Link key={songId || index } to={`/song-description/${songId}`}>
-            <MusicCard
-              key={songId}
-              title={song.title}
-              creator={song.user_details?.username || "Unknown"}
-              contributersNbr={song.tracks?.length || 1}
-              imageUrl={song.cover_image}
-              audio={song.compiled_path}
-              onPlay={() => setCurrentSong(song)}
-              onClick={() => handleMusicCardClick(song)}
-            />
-            </Link>
-        );
-})}
+            return (
+              <Link key={songId || index} to={`/song-description/${songId}`}>
+                <MusicCard
+                  key={songId}
+                  title={song.title}
+                  creator={song.user_details?.username || "Unknown"}
+                  contributersNbr={song.tracks?.length || 1}
+                  imageUrl={song.cover_image}
+                  audio={song.compiled_path}
+                  onPlay={() => setCurrentSong(song)}
+                  onClick={() => handleMusicCardClick(song)}
+                />
+              </Link>
+            );
+          })}
         </div>
       </div>
 
@@ -149,23 +196,23 @@ const HomePage = () => {
         </div>
 
         <div className="horizontal-scroll">
-          {newSongs.map((song, index ) => {
+          {newSongs.map((song, index) => {
             const songId = song.id
-            return(
-            <Link key={songId || index } to={`/song-description/${songId}`}>
-            <MusicCard
-              key={songId}
-              title={song.title}
-              creator={song.user_details?.username || "Unknown"}
-              contributersNbr={song.tracks?.length || 1}
-              imageUrl={song.cover_image}
-              audio={song.compiled_path}
-              onPlay={() => setCurrentSong(song)}
-              onClick={() => handleMusicCardClick(song)}
-            />
-            </Link>
-        );
-})}
+            return (
+              <Link key={songId || index} to={`/song-description/${songId}`}>
+                <MusicCard
+                  key={songId}
+                  title={song.title}
+                  creator={song.user_details?.username || "Unknown"}
+                  contributersNbr={song.tracks?.length || 1}
+                  imageUrl={song.cover_image}
+                  audio={song.compiled_path}
+                  onPlay={() => setCurrentSong(song)}
+                  onClick={() => handleMusicCardClick(song)}
+                />
+              </Link>
+            );
+          })}
         </div>
       </div>
 

@@ -3,6 +3,8 @@ import AttachFileBtn from '../Buttons/AttachFileBtn';
 import BasicBtn from '../Buttons/BasicBtn';
 import ProBtn from '../Buttons/ProBtn';
 import Record from '../../pages/Record';
+import API_ENDPOINTS from '../../routes/apiEndpoints';
+import { useAuth } from '../../context/AuthProvider';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +13,9 @@ import { ReactComponent as ReportIcon } from '../../assets/icons/report-icon.svg
 const PopUpContent = ({ type, data, onClose }) => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState('');
+  const [file, setFile] = useState(null);
+
+  const { user } = useAuth()
 
   // const isReport = type === 'report';
 
@@ -31,20 +36,54 @@ const PopUpContent = ({ type, data, onClose }) => {
         </>
       );
 
-    case 'upload-track':
+    case 'upload-track': {
+      const handleFileChange = (e) => {
+        const uploadedFile = e.target.files[0];
+        setFile(uploadedFile);
+      };
+      
+
+      const handleUpload = async () => {
+        if (!file) return alert('Please choose a file');
+
+        const formData = new FormData();
+        formData.append('file', file); // must be "file" to match the backend
+        formData.append('song_id', data.id); // pass the song ID
+        
+        console.log("userid", user.id)
+        formData.append('user_id', user.id); // pass the user ID
+
+        try {
+          const res = await fetch(API_ENDPOINTS.TRACKS.MULTIPLE, {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (res.ok) {
+            const result = await res.json();
+            navigate(`/editor?songId=${result.song.id}`);
+            onClose();
+          } else {
+            const error = await res.json();
+            console.error('Upload failed:', error);
+          }
+        } catch (err) {
+          console.error('Error uploading file:', err);
+        }
+      };
+
       return (
         <>
-          <h2>Add your track</h2>
-          <div className="text-box">
-            <p className="hint">The audio file must be MP3 format, up to 50 MB and 128 kbps.</p>
-            <p className="hint pink">Explore premium plans to get better quality for your tracks!</p>
-          </div>
+          <h2>Upload track to your song</h2>
+          <p className="hint">Only MP3 files, up to 50 MB</p>
+          <input type="file" accept="audio/mp3" onChange={handleFileChange} />
           <div className="btn-group">
-            <AttachFileBtn variant={1} text={'Upload'} type="file" />
-            <AttachFileBtn variant={1} text={'Record'} onClick={() => navigate('/record')} />
+            <BasicBtn text="Upload" onClick={handleUpload} />
           </div>
         </>
       );
+    }
+
 
     case 'upload-to-editor':
       return (
