@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import AttachFileBtn from '../Buttons/AttachFileBtn';
 import BasicBtn from '../Buttons/BasicBtn';
 import ProBtn from '../Buttons/ProBtn';
-import Record from '../../pages/Record';
 import API_ENDPOINTS from '../../routes/apiEndpoints';
 import { useAuth } from '../../context/AuthProvider';
 
@@ -16,12 +15,6 @@ const PopUpContent = ({ type, data, onClose }) => {
   const [file, setFile] = useState(null);
 
   const { user } = useAuth()
-
-  // const isReport = type === 'report';
-
-  const handleUploadTrack = () => {
-    //
-  };
 
   switch (type) {
     case 'upload-picture':

@@ -26,24 +26,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-  const [trendySongs, setTrendySongs] = useState([]);
-  const [collaborationSongs, setCollaborationSongs] = useState([]);
-
-  useEffect(() => {
-    const fetchTrendySongs = async () => {
-      try {
-        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
-        const data = await res.json();
-
-        setTrendySongs(data.slice(0, 10));
-      } catch (err) {
-        console.error("Failed to fetch trendy songs:", err);
-      }
-    };
-
-    fetchTrendySongs();
-  }, []);
-
 
   useEffect(() => {
     const fetchNewSongs = async () => {

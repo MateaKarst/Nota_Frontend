@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import HeaderVariants from "../components/Headers/HeaderVariants";
-import Timer from '../components/Editor/Timer'
 import MultiTrackMixer from '../components/WorkingEditor/MultitrackMixer'
 import Button from '../components/Buttons/BasicBtn'
 import LoadingProgress from "../components/progressbar";

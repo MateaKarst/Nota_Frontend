@@ -2,7 +2,6 @@ import React, {  useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
-import HeaderSongDescription from '../components/Headers/HeaderSongDescription';
 import BasicBtn from "../components/Buttons/BasicBtn";
 //import Popup from '../components/PopUps/PopUp';
 import { API_ENDPOINTS } from "../routes/apiEndpoints";
