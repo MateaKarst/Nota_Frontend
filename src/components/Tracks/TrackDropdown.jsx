@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserTrack from "./UserTrack";
 
 const TrackDropdown = ({ tracks: propTracks }) => {
-  // Use dummy data if no props are passed
+  // use dummy data if no props are passed
   const defaultTracks = [
     {
       isOwnTrack: true,
@@ -26,7 +26,7 @@ const TrackDropdown = ({ tracks: propTracks }) => {
 
   const hasMoreThanFive = tracks.length > 5;
 
-  // If showMore is false, show first 5, else show all
+  // if showMore is false, show first 5, else show all
   const displayedTracks = hasMoreThanFive && !showMore ? tracks.slice(0, 5) : tracks;
 
   const toggleShowMore = () => setShowMore((prev) => !prev);

@@ -24,6 +24,7 @@ function AppWrapper() {
     "/chat",
     "/splash",
     "/record",
+    "/editor2/:id",
   ];
 
   const shouldHideNavBar = hiddenNavPaths.includes(location.pathname);

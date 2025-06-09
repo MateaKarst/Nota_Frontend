@@ -1,6 +1,7 @@
 @import "../variables.css";
 
-body{
+body
+{
     background-color: var(--color-black);
 }
 
@@ -8,6 +9,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center; 
+    background-color: var(--color-black);
 }
 
 .header-block,

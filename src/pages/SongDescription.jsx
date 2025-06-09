@@ -1,43 +1,43 @@
-import React, {  useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
-import TrackDropdown from '../components/Tracks/TrackDropdown';
-import HeaderSongDescription from '../components/Headers/HeaderSongDescription';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import SectionHeadImage from "../components/SongDescription/SectionHeadImage";
+import TrackDropdown from "../components/Tracks/TrackDropdown";
+import HeaderSongDescription from "../components/Headers/HeaderSongDescription";
 import BasicBtn from "../components/Buttons/BasicBtn";
-//import Popup from '../components/PopUps/PopUp';
+import Popup from '../components/PopUps/PopUp';
 import { API_ENDPOINTS } from "../routes/apiEndpoints";
-import { useAuth } from '../context/AuthProvider';
+import { useAuth } from "../context/AuthProvider";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-import '../styles/pages/song-description.css';
-
+import "../styles/pages/song-description.css";
 
 const SongDescription = () => {
-
   const navigate = useNavigate();
-// const { id, title, imageUrl } = location.state || {};
-// const { id } = useParams();
+  // const { id, title, imageUrl } = location.state || {};
+  // const { id } = useParams();
   const { user } = useAuth();
   const { id } = useParams();
 
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [showPopup, setShowPopup] = useState(false);
 
   //const id = "8a97f671-2c6b-4673-a70b-57d9225d1d2c";
-  const songId = id
-  console.log ("Getting song id", songId);
+  const songId = id;
+  console.log("Getting song id", songId); 
 
   const [song, setSong] = useState(null);
-
 
   useEffect(() => {
     const fetchSongData = async () => {
       if (!user) return;
 
       if (user.access_token) {
-        Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
+        Cookies.set("access_token", user.access_token, {
+          expires: 7,
+          sameSite: "lax",
+        });
       }
 
       const accessToken = Cookies.get("access_token") || user.access_token;
@@ -88,10 +88,12 @@ const SongDescription = () => {
 
       {/*image + dropdown */}
       <div className="top-part">
-        <SectionHeadImage title={song?.title}
-  imageUrl={song?.cover_image}
-  description={song?.description}
-  genres={song?.genres || []}/>
+        <SectionHeadImage
+          title={song?.title}
+          imageUrl={song?.cover_image}
+          description={song?.description}
+          genres={song?.genres || []}
+        />
 
         <div className="dropdown">
           <h1 className="tracks">Tracks ({tracks.length})</h1>
@@ -105,15 +107,19 @@ const SongDescription = () => {
 
       {/* Collaborate Button*/}
       <div className="collaborate">
-        <BasicBtn type="main" text="Collaborate" onClick={() => navigate("/add-tracks")} />
+        <BasicBtn
+          type="main"
+          text="Collaborate"
+          onClick={() => navigate("/editor2/:id")}
+        />
       </div>
 
-      {/* {showPopup && (
+       {showPopup && (
         <Popup
           type="upload-track"
           onClose={() => setShowPopup(false)}
         />
-      )} */}
+      )} 
     </div>
   );
 };

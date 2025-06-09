@@ -1,20 +1,90 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import HeaderVariants from "../components/Headers/HeaderVariants";
 import Buttons from "../components/Buttons/BasicBtn";
-import HeadImage from "../components/SongDescription/HeadImage";
 import SectionHeadImage from "../components/SongDescription/SectionHeadImage";
 import TrackDropdown from "../components/Tracks/TrackDropdown";
 import TagInput from "../components/Tags/TagInput";
+import { useAuth } from "../context/AuthProvider";
+import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
+import API_ENDPOINTS from "../routes/apiEndpoints";
 
 import "../styles/pages/add-tracks-page.css";
 
 const AddTracksPage = () => {
-const audioPlayersRef = useRef([]);
-
+  const audioPlayersRef = useRef([]);
   const fileInputRef = useRef();
+
   const [imagePreview, setImagePreview] = useState(null);
   const [description, setDescription] = useState("");
+  const [song, setSong] = useState(null);
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const maxDescriptionLength = 150;
+
+  const { user } = useAuth();
+  const { id: paramId } = useParams();
+
+  // TEMP: fallback if paramId is undefined (for testing)
+  const id = paramId || "8a97f671-2c6b-4673-a70b-57d9225d1d2c";
+
+
+  const genres = [
+    "Rock", "Hip Hop", "Jazz", "Electronic", "Pop", "Blues", "Reggae", "Classical"
+  ];
+  const instruments = [
+    "Guitar", "Piano", "Drums", "Violin", "Bass", "Synth", "Trumpet", "Flute"
+  ];
+
+  useEffect(() => {
+    if (!user || !id) return;
+
+    const fetchSongData = async () => {
+      try {
+        if (user.access_token) {
+          Cookies.set("access_token", user.access_token, {
+            expires: 7,
+            sameSite: "lax",
+          });
+        }
+
+        const accessToken = Cookies.get("access_token") || user.access_token;
+        if (!accessToken) {
+          console.error("No access token available");
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(API_ENDPOINTS.SONGS.SINGLE(id), {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          credentials: "include",
+        });
+
+        const data = await response.json();
+        console.log("Fetched song data:", data);
+        console.log("Tracks array:", data.tracks);
+
+        if (response.ok) {
+          setTracks(data.tracks || []);
+          setSong(data);
+        } else {
+          console.error("Error fetching song tracks:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching song:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSongData();
+  }, [user, id]);
+
+  if (!user) return null;
 
   const handleClick = () => {
     fileInputRef.current.click();
@@ -39,28 +109,6 @@ const audioPlayersRef = useRef([]);
     }
   };
 
-  const genres = [
-    "Rock",
-    "Hip Hop",
-    "Jazz",
-    "Electronic",
-    "Pop",
-    "Blues",
-    "Reggae",
-    "Classical",
-  ];
-
-  const instruments = [
-    "Guitar",
-    "Piano",
-    "Drums",
-    "Violin",
-    "Bass",
-    "Synth",
-    "Trumpet",
-    "Flute",
-  ];
-
   const wordCount =
     description.trim() === "" ? 0 : description.trim().split(/\s+/).length;
 
@@ -71,52 +119,45 @@ const audioPlayersRef = useRef([]);
       </header>
 
       <div className="add-picture-container">
-       <SectionHeadImage
-       title="Paris 2012"
-       description="Future top track with musical harmony that brings new fresh electro vibes."
-       showDescription={false}
-       showTags={false}
-       audioPlayersRef={audioPlayersRef}
-       showInteractions={false}/>
+        <SectionHeadImage
+          title={song?.title || "Unknown Title"}
+          description={song?.description || "No description available."}
+          genres={song?.genres || genres}
+          showDescription={true}
+          showTags={true}
+          audioPlayersRef={audioPlayersRef}
+          showInteractions={false}
+        />
       </div>
 
       <div className="criteria-container">
         <div>
           <p className="section-title">Tracks</p>
-          <TrackDropdown audioPlayersRef={audioPlayersRef} />
+          {loading ? <p>Loading tracks...</p> : <TrackDropdown tracks={tracks} audioPlayersRef={audioPlayersRef} />}
+
+          <div className="taginput-container">
+            <p className="section-title">Genre tag</p>
+            <TagInput
+              suggestions={genres}
+              placeholder="Add genres..."
+              colorIndex={4}
+            />
+
+            <p className="section-title">Instrument tag</p>
+            <TagInput
+              suggestions={instruments}
+              placeholder="Add instruments..."
+              colorIndex={5}
+            />
+          </div>
         </div>
 
         <div className="song-info">
 
-          <p className="section-title">Song description</p>
-          <div className="textarea-wrapper">
-            <textarea
-              className="song-input"
-              value={description}
-              onChange={handleDescriptionChange}
-              placeholder="Describe your song..."
-              rows={4}
-            />
-            <span className="word-counter">{wordCount} / 150</span>
-          </div>
-
-          <p className="section-title">Genre tag</p>
-          <TagInput
-            suggestions={genres}
-            placeholder="Add genres..."
-            colorIndex={4}
-          />
-
-          <p className="section-title">Instrument tag</p>
-          <TagInput
-            suggestions={instruments}
-            placeholder="Add instruments..."
-            colorIndex={5}
-          />
         </div>
 
         <div className="upload-song-btn">
-          <Buttons type="main" text="Post" />
+          <Buttons type="main" text="Post" onClick={() => console.log("Post clicked")} />
         </div>
       </div>
     </div>

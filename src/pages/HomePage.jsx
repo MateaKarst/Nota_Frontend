@@ -65,10 +65,7 @@ const HomePage = () => {
   const handleMusicCardClick = (song) => {
     console.log ("handle navigation songId");
     navigate(`/song-description/${song.id}`);
-    
-
   };
-
 
   return (
     <div className="home-page">

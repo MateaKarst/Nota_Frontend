@@ -40,7 +40,7 @@ export const appRoutes = [
     { path: "/song-description/:id", element: <SongDescription />},
     { path: "/upload-song", element: <UploadSong /> },
     { path: "/record", element: <Record /> },
-    { path: "/editor2", element: <Editor2 /> },
+    { path: "/editor2/:id", element: <Editor2 /> },
     { path: "/add-tracks", element: <AddTracksPage /> },
     
     { path: "/discover", element: <SearchPage /> },

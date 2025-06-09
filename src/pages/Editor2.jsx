@@ -5,12 +5,13 @@ import Timer from '../components/Editor/Timer'
 import MultiTrackMixer from '../components/WorkingEditor/MultitrackMixer'
 import Button from '../components/Buttons/BasicBtn' 
 import LoadingProgress from "../components/progressbar";
-
+import { useNavigate } from "react-router-dom";
 import '../styles/editor/editor2.css'
-
 
 const Editor = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+
 
   const handlePreviewClick = () => {
     setIsLoading(true);
@@ -28,7 +29,7 @@ const Editor = () => {
           
            <LoadingProgress label="Loading Preview..." isLoading={isLoading} />
            <div onClick={handlePreviewClick}>
-            <Button text="Go to Preview" type="medium" />
+            <Button text="Go to Preview" type="medium" onClick={()=>navigate('/add-tracks')} />
         </div>
         </div>
     )

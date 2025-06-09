@@ -4,6 +4,10 @@ import Guitar from '../../assets/instrument-samples/13_ElecGtr1.wav';
 import Bass from '../../assets/instrument-samples/11_Bass.wav';
 import Button from '../Buttons/BasicBtn';
 import EditorInstrument from '../Editor/EditorInstrument';
+import API_ENDPOINTS from '../../routes/apiEndpoints';
+import Cookies from "js-cookie";
+import { useAuth } from '../../context/AuthProvider';
+import { useParams } from 'react-router-dom';
 
 import { ReactComponent as GuitarIcon } from '../../assets/instruments/guitar.svg';
 import { ReactComponent as DrumIcon } from '../../assets/instruments/drum.svg';
@@ -25,6 +29,15 @@ const MultitrackMixer = () => {
   const backwardButtonRef = useRef();
   const zoomRef = useRef();
   const animationFrameRef = useRef();
+
+  const { user } = useAuth();
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+
+  const songId = id;
+  console.log("Getting song id", songId); 
+  
+  const [song, setSong] = useState(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -187,6 +200,57 @@ const MultitrackMixer = () => {
   const handleDeleteTrack = (id) => {
     setTracks((prev) => prev.filter((track) => track.id !== id));
   };
+
+  useEffect(() => {
+      const fetchSongData = async () => {
+        if (!user) return;
+  
+        if (user.access_token) {
+          Cookies.set("access_token", user.access_token, {
+            expires: 7,
+            sameSite: "lax",
+          });
+        }
+  
+        const accessToken = Cookies.get("access_token") || user.access_token;
+        if (!accessToken) {
+          console.error("No access token available");
+          setLoading(false);
+          return;
+        }
+  
+        try {
+          const response = await fetch(API_ENDPOINTS.SONGS.SINGLE(id), {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+            credentials: "include",
+          });
+  
+          const data = await response.json();
+          console.log("Fetched song data:", data);
+          console.log("Tracks array:", data.tracks);
+  
+          if (response.ok) {
+            setTracks(data.tracks || []);
+            setSong(data);
+          } else {
+            console.error("Error fetching song tracks:", data.message);
+          }
+        } catch (error) {
+          console.error("Error fetching song:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchSongData();
+    }, [user, id]);
+  
+    if (!user) return null;
+  
 
   return (
     <div className="multitrack-container">
