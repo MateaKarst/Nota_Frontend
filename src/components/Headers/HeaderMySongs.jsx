@@ -12,7 +12,7 @@ const HeaderMySongs = ({ activeTab, onTabChange }) => {
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`tab-button ${activeTab === tab.id ? "active no-underline" : ""}`}
+          className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
           onClick={() => onTabChange(tab.id)}
         >
           {tab.label}

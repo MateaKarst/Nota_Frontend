@@ -87,10 +87,6 @@ const handleMenuClick = () => {
     navigate(-1);
   };
 
-
-
-
-
   return (
     <header
       className={`header ${isUserHeader ? "user-header" : ""}`}

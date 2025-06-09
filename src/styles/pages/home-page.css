@@ -1,7 +1,7 @@
 @import '../variables.css';
 
 .home-page {
-  background-color: #1e1e1e;
+  background-color: var(--color-black);
   color: white;
   font-family: 'Segoe UI', sans-serif;
   position: relative;
@@ -34,17 +34,13 @@
   width: 100%;
   background-color: var(--color-pink);
   padding-top: var(--spacing-8);
-  /* Відступ згори, щоб контент не "плавав" */
   padding-top: var(--spacing-8);
-  /* Відступ згори, щоб контент не "плавав" */
   font-family: var(--font-family-secondary);
   border-bottom-left-radius: var(--border-radius-24);
   border-bottom-right-radius: var(--border-radius-24);
   display: flex;
   align-items: flex-start;
-  /* Контент прикріплено до верху контейнера */
   align-items: flex-start;
-  /* Контент прикріплено до верху контейнера */
   justify-content: space-between;
 }
 
@@ -60,11 +56,9 @@
 .horizontal-scroll {
   display: flex;
   overflow-x: auto;
-  /* padding: 12px 24px; */
   gap: 12px;
   scrollbar-width: none;
   -ms-overflow-style: none;
-
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -89,9 +83,9 @@
   font-style: normal;
   font-weight: 400;
   text-align: left;
-  padding-left: 24px;
   line-height: 15px;
   justify-content: center;
+  align-items: center;
 }
 
 .title-my-songs{
@@ -99,6 +93,7 @@
   font-family: var(--font-family-secondary);
   font-size: var(--Size-head-text-h5-h6, 34px);
   padding-left: 24px;
+  align-items: center;
 }
 
 .title-content {
@@ -107,9 +102,8 @@
   align-items: center;
   justify-content: space-between;
   padding-right: 12px;
-  padding-left: 0px;
+  padding-left: 20px;
 }
-
 
 .friends-section {
   width: 100%;

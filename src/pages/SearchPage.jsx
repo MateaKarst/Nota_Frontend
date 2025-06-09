@@ -56,7 +56,7 @@ const SearchPage = () => {
     };
 
     const handleResultsUpdate = (filtered) => {
-        console.log("Filtered results:", filtered); // ✅ log filtered results
+        console.log("Filtered results:", filtered); 
         setFilteredSongs(filtered);
     };
 
@@ -76,7 +76,7 @@ const SearchPage = () => {
             {error && <div className="error">Error: {error}</div>}
 
             {filteredSongs.length > 0 ? (
-                <div style={{ marginTop: "16px" }}>
+                  <div className="songs-list">
                     {filteredSongs.map((song) => (
                         <SmallCard
                             key={song.id}
@@ -101,7 +101,7 @@ const SearchPage = () => {
                     ))}
                 </div>
             ) : !loading && !error ? (
-                <div>No matching songs found.</div> // ← new fallback
+                <div>No matching songs found.</div> // fallback
             ) : null}
 
         </div>

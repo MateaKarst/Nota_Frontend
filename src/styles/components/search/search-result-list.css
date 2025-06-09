@@ -1,51 +1,49 @@
 @import '../../variables.css';
 
-/* Styling for the results list container */
+
 .results-list {
     position: absolute;
-    top: 100%; /* Position results below the search bar */
+    top: 100%; 
     left: 0;
     width: 100%;
-    max-height: 200px; /* Smaller height for now */
-    overflow-y: auto; /* Scrollable if there are many results */
-    background-color: #333; /* Dark background */
-    border: 1px solid #444; /* Slightly lighter border for contrast */
+    max-height: 200px; 
+    overflow-y: auto; 
+    background-color: #333; 
+    border: 1px solid #444; 
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     z-index: 10;
     margin-top: 8px;
     padding: 8px;
     box-sizing: border-box;
-    color: #f0f0f0; /* Light text color */
+    color: #f0f0f0; 
 }
 
-/* Individual search result item styling */
 .search-result {
-    padding: 6px 10px; /* Smaller padding */
+    padding: 6px 10px; 
     cursor: pointer;
-    font-size: 14px; /* Slightly smaller font */
-    color: #f0f0f0; /* Light text color */
-    border-bottom: 1px solid #444; /* Subtle divider between items */
+    font-size: 14px; 
+    color: #f0f0f0; 
+    border-bottom: 1px solid #444; 
     transition: background-color 0.2s ease;
 }
 
-/* Hover effect for individual search result */
+
 .search-result:hover {
-    background-color: #555; /* Slightly lighter gray on hover */
-    color: #fff; /* Keep the text light */
+    background-color: #555; 
+    color: #fff; 
 }
 
-/* Remove the last border on the last search result */
+
 .search-result:last-child {
     border-bottom: none;
 }
 
-/* Styling for anchor tag inside search result (optional if you use links) */
 .search-result a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit the color */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 .search-result a:hover {
-    color: #ffcc00; /* Highlight color for links */
+    color: #ffcc00; 
 }

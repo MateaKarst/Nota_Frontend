@@ -8,7 +8,7 @@ const SmallCard = ({ imageUrl, title, creator, contributersNbr, onPlay = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/song-description", { state: { song: songData } });
+    navigate("/song-description/:id", { state: { song: songData } });
   };
 
   return (

@@ -23,8 +23,6 @@
   justify-content: space-between;
 }
 
-
-
 .header .nav {
   display: flex;
   align-items: center;
@@ -46,7 +44,7 @@
   opacity: 0.75;
   transition: all 0.3s ease;
   white-space: nowrap;
-  
+  text-decoration: none;
 }
 
 .back-btn {
@@ -61,17 +59,18 @@
 }
 
 .tab-button.active {
+  border-bottom-color: pink;
   font-weight: var(--font-weight-bold);
   opacity: 1;
-  border-bottom: 2px solid white;
+  text-decoration: none !important; 
+  border-bottom: 2px solid;
   box-sizing: border-box;
   min-width: max-content;
-  text-decoration: underline;
+  text-decoration: none;
   margin: 0 10px;
 }
 
 .tab-button.no-underline{
-  
   text-decoration: none;
 }
 

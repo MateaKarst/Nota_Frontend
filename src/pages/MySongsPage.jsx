@@ -84,6 +84,7 @@ function MySongsPage() {
   return (
     <div className="my-songs-wrapper">
       <HeaderMySongs activeTab={activeTab} onTabChange={handleTabChange} />
+      <div className='my-songs'>
       <SearchBar
         filterData={activeTab === "my-songs" ? createdSongs : collaborationSongs}
         onFilterChange={handleFilterChange}
@@ -107,6 +108,7 @@ function MySongsPage() {
       {currentSong && (
         <MusicPlayer song={currentSong} />
       )}
+      </div>
     </div>
   );
 }

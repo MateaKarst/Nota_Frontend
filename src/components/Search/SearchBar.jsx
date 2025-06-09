@@ -76,7 +76,6 @@ const SearchBar = ({ filterData = [], onFilterChange, onResultsUpdate, variant =
         }
     };
 
-    // Updated useEffect
     useEffect(() => {
         filterResults(query, activeTags);
     }, [query, activeTags]);

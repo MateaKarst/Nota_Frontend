@@ -8,6 +8,10 @@
     background-color: var(--color-black);
 }
 
+.my-songs{
+    margin-left: 20px;
+}
+
 .music-cards-mapping {
     flex-grow: 1;
     overflow-y: auto;
