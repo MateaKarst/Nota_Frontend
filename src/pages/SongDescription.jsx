@@ -7,6 +7,8 @@ import BasicBtn from "../components/Buttons/BasicBtn";
 import { API_ENDPOINTS } from "../routes/apiEndpoints";
 import { useAuth } from '../context/AuthProvider';
 import Cookies from "js-cookie";
+import HeaderVariants from '../components/Headers/HeaderVariants';
+import NavBar from "../components/Navigation/NavBar"
 // import { useParams } from 'react-router-dom';
 
 import '../styles/pages/song-description.css';
@@ -80,7 +82,7 @@ const SongDescription = () => {
   <div className="song-description-page">
       
       <div className="header-section">
-        <HeaderSongDescription />
+        <HeaderVariants mode="menu"/>
       </div>
 
       

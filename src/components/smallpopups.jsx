@@ -5,8 +5,21 @@ import { ReactComponent as DownloadIcon } from '../assets/icons/download-icon.sv
 import { ReactComponent as ShareIcon } from '../assets/icons/share-icon.svg';
 import { ReactComponent as ReportIcon } from '../assets/icons/report-icon.svg';
 
-const PopupMenu = ({ type = "report" }) => {
+const PopupMenu = ({ type = "report" , storage_path }) => {
   const [showShareToast, setShowShareToast] = useState(false);
+  const handleDownload = () => {
+    if (!storage_path) {
+      console.error("No audio URL provided");
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = storage_path;
+    link.download = ""; // Можна задати назву, якщо хочеш
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const handleShare = async () => {
     try {
@@ -20,7 +33,7 @@ const PopupMenu = ({ type = "report" }) => {
 
   const menuVariants = {
     delete: [
-      { label: "Download", icon: <DownloadIcon />, onClick: () => console.log("Downloading...") },
+      { label: "Download", icon: <DownloadIcon />, onClick: handleDownload  },
       { label: "Share", icon: <ShareIcon />, onClick: handleShare },
       { label: "Delete song", icon: <DeleteIcon />, onClick: () => console.log("Deleting...") },
     ],

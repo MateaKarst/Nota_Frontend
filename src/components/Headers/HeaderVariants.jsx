@@ -50,6 +50,7 @@ const headers = [
 ];
 
 const HeaderVariants = ({ mode, title }) => {
+
   const headerConfig = headers.find((h) => h.mode === mode);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -132,7 +133,7 @@ const handleMenuClick = () => {
   )}
   {showPopup && (
     <div style={{ position: "absolute", top: "40px", right: 0, zIndex: 999 }}>
-      <PopupMenu type="delete" />
+      <PopupMenu type="delete" storage_path={tracks[0]?.storage_path}/>
     </div>
   )}
 </div>
