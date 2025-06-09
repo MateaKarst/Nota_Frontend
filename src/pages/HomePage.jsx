@@ -29,7 +29,6 @@ const HomePage = () => {
         const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
         const data = await res.json();
 
-        // Sort by created_at or add filter logic
         setTrendySongs(data.slice(0, 10));
       } catch (err) {
         console.error("Failed to fetch trendy songs:", err);
@@ -55,7 +54,6 @@ const HomePage = () => {
   }, []);
 
 
-  // Function to handle clicking a MusicCard and navigating
   const handleMusicCardClick = (song) => {
     console.log ("handle navigation songId");
     navigate(`/song-description/${song.id}`);
@@ -79,7 +77,7 @@ const HomePage = () => {
 
       <div>
         <div className='title-content'>
-          <h1 className='title'>New songs</h1>
+          <h1 className='title-home'>New songs</h1>
           <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
         </div>
         <div className="horizontal-scroll">
@@ -135,14 +133,14 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* FRIENDS */}
+
       <div className="friends-section">
         <FriendsCard />
       </div>
 
       <div>
         <div className='title-content'>
-          <h1 className='title'>Trendy songs</h1>
+          <h1 className='title-home'>Trendy songs</h1>
           <BasicBtn
             type="viewAll"
             text="View All"

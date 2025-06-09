@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import NavBar from "../components/Navigation/NavBar"
 // import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import '../styles/pages/song-description.css';
 
