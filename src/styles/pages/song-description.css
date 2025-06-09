@@ -22,7 +22,7 @@ font-size:  var( --font-size-28);
 
 .collaborate {
   position: fixed;
-  bottom: 150px;
+  bottom: 10dvh;
   left: 50%;  
   transform: translateX(-50%);
   z-index: 9;

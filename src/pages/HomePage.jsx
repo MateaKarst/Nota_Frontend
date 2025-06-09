@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import MusicPlayer from "../components/MusicPlayer";
 import PopUp from "../components/PopUps/PopUp";
 import { useAuth } from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 import API_ENDPOINTS from "../routes/apiEndpoints";
 
@@ -37,7 +38,6 @@ const HomePage = () => {
         const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
         const data = await res.json();
         setTrendySongs(data.slice(0, 10)); // limited to 10 songs
-
       } catch (err) {
         console.error("Failed to fetch trendy songs:", err);
       }
@@ -61,26 +61,14 @@ const HomePage = () => {
   }, []);
 
 
-  useEffect(() => {
-    const fetchCollaborationSongs = async () => {
-      if (!user) return;
-      try {
-        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
-        const data = await res.json();
+  // Function to handle clicking a MusicCard and navigating
+  const handleMusicCardClick = (song) => {
+    console.log ("handle navigation songId");
+    navigate(`/song-description/${song.id}`);
+    
 
-        const collaborations = data.filter(song => {
-          if (song.user_id === user.id) return false;
-          return song.tracks?.some(track => track.user_id === user.id);
-        });
+  };
 
-        setCollaborationSongs(collaborations);
-      } catch (err) {
-        console.error("Failed to fetch collaboration songs:", err);
-      }
-    };
-
-    fetchCollaborationSongs();
-  }, [user]);
 
   return (
     <div className="home-page">
@@ -107,17 +95,23 @@ const HomePage = () => {
           />
         </div>
         <div className="horizontal-scroll">
-          {newSongs.map((song) => (
+          {newSongs.map((song, index ) => {
+            const songId = song.id
+            return(
+            <Link key={songId || index } to={`/song-description/${songId}`}>
             <MusicCard
-              key={song.id}
+              key={songId}
               title={song.title}
               creator={song.user_details?.username || "Unknown"}
               contributersNbr={song.tracks?.length || 1}
               imageUrl={song.cover_image}
               audio={song.compiled_path}
               onPlay={() => setCurrentSong(song)}
+              onClick={() => handleMusicCardClick(song)}
             />
-          ))}
+            </Link>
+        );
+})}
         </div>
       </div>
 
@@ -132,25 +126,24 @@ const HomePage = () => {
             }
           />
         </div>
-        <div className="horizontal-scroll">
-          {collaborationSongs.map((song) => (
+       <div className="horizontal-scroll">
+          {newSongs.map((song, index ) => {
+            const songId = song.id
+            return(
+            <Link key={songId || index } to={`/song-description/${songId}`}>
             <MusicCard
-              key={song.id}
+              key={songId}
               title={song.title}
-              creator={song.user_details?.username || "Collaborator"}
+              creator={song.user_details?.username || "Unknown"}
               contributersNbr={song.tracks?.length || 1}
               imageUrl={song.cover_image}
               audio={song.compiled_path}
-              onPlay={() =>
-                setCurrentSong({
-                  title: song.title,
-                  artist: song.user_details?.username || "Collaborator",
-                  audio: song.compiled_path,
-                  cover: song.cover_image,
-                })
-              }
+              onPlay={() => setCurrentSong(song)}
+              onClick={() => handleMusicCardClick(song)}
             />
-          ))}
+            </Link>
+        );
+})}
         </div>
       </div>
 
@@ -172,24 +165,23 @@ const HomePage = () => {
         </div>
 
         <div className="horizontal-scroll">
-          {trendySongs.map((song) => (
+          {newSongs.map((song, index ) => {
+            const songId = song.id
+            return(
+            <Link key={songId || index } to={`/song-description/${songId}`}>
             <MusicCard
-              key={song.id}
+              key={songId}
               title={song.title}
               creator={song.user_details?.username || "Unknown"}
               contributersNbr={song.tracks?.length || 1}
               imageUrl={song.cover_image}
               audio={song.compiled_path}
-              onPlay={() =>
-                setCurrentSong({
-                  title: song.title,
-                  artist: song.user_details?.username || "Unknown",
-                  audio: song.compiled_path,
-                  cover: song.cover_image,
-                })
-              }
+              onPlay={() => setCurrentSong(song)}
+              onClick={() => handleMusicCardClick(song)}
             />
-          ))}
+            </Link>
+        );
+})}
         </div>
       </div>
 
