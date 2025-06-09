@@ -4,9 +4,10 @@ import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
 import HeaderSongDescription from '../components/Headers/HeaderSongDescription';
 import BasicBtn from "../components/Buttons/BasicBtn";
-//import Popup from '../components/PopUps/PopUp';
+import Popup from '../components/PopUps/PopUp';
 import { API_ENDPOINTS } from "../routes/apiEndpoints";
 import { useAuth } from '../context/AuthProvider';
+import NavBar from "../components/Navigation/NavBar"
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
@@ -16,23 +17,20 @@ import '../styles/pages/song-description.css';
 const SongDescription = () => {
 
   const navigate = useNavigate();
-// const { id, title, imageUrl } = location.state || {};
-// const { id } = useParams();
+
   const { user } = useAuth();
   const { id } = useParams();
 
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
-  //const id = "8a97f671-2c6b-4673-a70b-57d9225d1d2c";
   const songId = id
   console.log ("Getting song id", songId);
 
   const [song, setSong] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
-
-  useEffect(() => {
+    useEffect(() => {
     const fetchSongData = async () => {
       if (!user) return;
 
@@ -81,17 +79,16 @@ const SongDescription = () => {
 
   return (
     <div className="song-description-page">
-      {/*header section */}
+
       <div className="header-section">
         <HeaderSongDescription />
       </div>
 
-      {/*image + dropdown */}
       <div className="top-part">
         <SectionHeadImage title={song?.title}
-  imageUrl={song?.cover_image}
-  description={song?.description}
-  genres={song?.genres || []}/>
+          imageUrl={song?.cover_image}
+          description={song?.description}
+          genres={song?.genres || []}/>
 
         <div className="dropdown">
           <h1 className="tracks">Tracks ({tracks.length})</h1>
@@ -103,17 +100,20 @@ const SongDescription = () => {
         </div>
       </div>
 
-      {/* Collaborate Button*/}
-      <div className="collaborate">
-        <BasicBtn type="main" text="Collaborate" onClick={() => navigate("/add-tracks")} />
+       <div className="navbar-bottom">
+        <NavBar />
       </div>
 
-      {/* {showPopup && (
+      <div className="collaborate">
+        <BasicBtn type="main" text="Collaborate" onClick={() => setShowPopup(true)} />
+      </div>
+
+      {showPopup && (
         <Popup
           type="upload-track"
           onClose={() => setShowPopup(false)}
         />
-      )} */}
+      )}
     </div>
   );
 };
