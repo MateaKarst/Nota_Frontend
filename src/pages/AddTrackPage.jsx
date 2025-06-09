@@ -13,14 +13,10 @@ import "../styles/pages/add-tracks-page.css";
 
 const AddTracksPage = () => {
   const audioPlayersRef = useRef([]);
-  const fileInputRef = useRef();
-
-  const [imagePreview, setImagePreview] = useState(null);
-  const [description, setDescription] = useState("");
   const [song, setSong] = useState(null);
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const maxDescriptionLength = 150;
+
 
   const { user } = useAuth();
   const { id: paramId } = useParams();
@@ -85,32 +81,6 @@ const AddTracksPage = () => {
   }, [user, id]);
 
   if (!user) return null;
-
-  const handleClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
-      console.log("Selected file:", file);
-    }
-  };
-
-  const handleDescriptionChange = (event) => {
-    const input = event.target.value;
-    const words = input.trim().split(/\s+/);
-    if (words.length <= maxDescriptionLength) {
-      setDescription(input);
-    } else {
-      setDescription(words.slice(0, maxDescriptionLength).join(" "));
-    }
-  };
-
-  const wordCount =
-    description.trim() === "" ? 0 : description.trim().split(/\s+/).length;
 
   return (
     <div className="upload-song-container">

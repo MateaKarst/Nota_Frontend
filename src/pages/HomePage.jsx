@@ -8,18 +8,18 @@ import FriendsCard from "../components/Friends/FriendsCard";
 import { useNavigate } from "react-router-dom";
 import MusicPlayer from "../components/MusicPlayer";
 import PopUp from "../components/PopUps/PopUp";
-import { useAuth } from "../context/AuthProvider";
+// import { useAuth } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 
 import API_ENDPOINTS from "../routes/apiEndpoints";
 
 const HomePage = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const [currentSong, setCurrentSong] = useState(null);
   const [newSongs, setNewSongs] = useState([]);
   const navigate = useNavigate();
-  const [trendySongs, setTrendySongs] = useState([]);
+  const [setTrendySongs] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const handleOpenPopup = () => {
     setIsPopupOpen(true);
@@ -29,7 +29,7 @@ const HomePage = () => {
     setIsPopupOpen(false);
   };
 
-  const [collaborationSongs, setCollaborationSongs] = useState([]);
+  // const [collaborationSongs, setCollaborationSongs] = useState([]);
 
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const HomePage = () => {
     };
 
     fetchTrendySongs();
-  }, []);
+  }, );
 
   useEffect(() => {
     const fetchNewSongs = async () => {
