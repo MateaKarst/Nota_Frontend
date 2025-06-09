@@ -3,25 +3,36 @@ import PlayBtn from "../../Buttons/PlayBtn";
 import CoverImg from "./CoverImg";
 import { useNavigate } from "react-router-dom";
 
-const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNbr, onPlay, audio }) => {
+const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNbr, onPlay, audio, songId }) => {
   const isRow = layout === "row";
-
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/song-description", {
-     state: {
-      title,
-      imageUrl,
-      creator,
-      contributersNbr,
-      audio
-    }, 
+  const handleCardClick = () => {
+    // Navigate to song description when clicking outside play button
+    navigate(`/song-description/${songId}`, {
+      state: { title, imageUrl, creator, contributersNbr, audio }
     });
   };
 
+const handlePlayClick = async (e) => {
+  e.stopPropagation();
+
+  try {
+    await onPlay({
+      title,
+      artist: creator,
+      cover: imageUrl,
+      audio,  // this will be ElecGuitar now
+    });
+  } catch (err) {
+    console.warn("Play interrupted or failed:", err);
+  }
+};
+
+
   return (
-    <div onClick={handleClick}
+    <div
+      onClick={handleCardClick}
       style={{
         width: isRow ? "auto" : "165px",
         height: isRow ? "auto" : "200px",
@@ -34,10 +45,11 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
         alignItems: "center",
         paddingBottom: "20px",
         paddingTop: "10px",
+        cursor: "pointer",  // show pointer for clickable card
       }}
     >
       <div style={{ width: "150px", position: "relative" }}>
-        <CoverImg SVGImg={imageUrl} /> 
+        <CoverImg SVGImg={imageUrl} />
 
         {/* music btn */}
         <div
@@ -54,12 +66,7 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
             circleColor="var(--color-purple)"
             iconColor="white"
             size={40}
-            onClick={() => onPlay({
-  title,
-  artist: creator,
-  cover: imageUrl,
-  audio
-})}
+            onClick={handlePlayClick}
           />
         </div>
       </div>
@@ -77,24 +84,22 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
           marginTop: isRow ? "0" : "8px",
         }}
       >
-  <h2
-    style={{
-      fontSize: "18px",
-      fontWeight: "600",
-      margin: "0px 0 4px 0",
-      color: "var(--color-white)",
-      textAlign: "left",       
-      width: "100%",            
-    }}
-  >
-    {title}
-  </h2>
+        <h2
+          style={{
+            fontSize: "18px",
+            fontWeight: "600",
+            margin: "0px 0 4px 0",
+            color: "var(--color-white)",
+            textAlign: "left",
+            width: "100%",
+          }}
+        >
+          {title}
+        </h2>
         <p
           style={{
             fontSize: "12px",
             color: "var(--color-white-trans-50)",
-            // whiteSpace: isRow ? "" : "nowrap",
-            // overflow: isRow ? "" : "hidden",
             paddingLeft: "2px",
           }}
         >
@@ -106,6 +111,7 @@ const MusicCard = ({ imageUrl, title, creator, layout = "column", contributersNb
 };
 
 export default MusicCard;
+
 
 
 /*

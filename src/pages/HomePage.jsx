@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/pages/home-page.css'
-import HomeCarousel from '../components/Home/HomeCarousel';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import API_ENDPOINTS from '../routes/apiEndpoints';
+import { useAuth } from '../context/AuthProvider';
+
 import HeaderMain from '../components/Headers/HeaderMain';
 import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
 import BasicBtn from '../components/Buttons/BasicBtn'
 import FriendsCard from '../components/Friends/FriendsCard';
-import { useNavigate } from 'react-router-dom';
 import MusicPlayer from '../components/MusicPlayer';
-import { useAuth } from '../context/AuthProvider';
 import PopUp from '../components/PopUps/PopUp';
-import { Link } from 'react-router-dom';
+import HomeCarousel from '../components/Home/HomeCarousel';
 
-import API_ENDPOINTS from '../routes/apiEndpoints';
+import ElecGuitar from "../assets/instrument-samples/ElecGuitar.mp3"
 
+import '../styles/pages/home-page.css'
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -51,9 +54,9 @@ const HomePage = () => {
 
   const handleOpenPopup = async () => {
     try {
-      const userId = user.id; // Replace with actual user ID from auth context/store
+      const userId = user.id;
       console.log("home + userId", userId)
-      
+
       const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -85,6 +88,20 @@ const HomePage = () => {
     setShowPopup(false);
   };
 
+  const [audioPlayer, setAudioPlayer] = useState(null);
+
+  const handlePlaySong = (song) => {
+    if (audioPlayer) {
+      audioPlayer.pause();
+    }
+
+    const audio = new Audio(song.audio); // song.audio will be ElecGuitar mp3 URL
+    audio.play();
+    setAudioPlayer(audio);
+    setCurrentSong(song);
+  };
+
+
   return (
     <div className="home-page">
       <div className="home-page">
@@ -109,25 +126,22 @@ const HomePage = () => {
           <h1 className='title-home'>New songs</h1>
           <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
         </div>
+
         <div className="horizontal-scroll">
-          {newSongs.map((song, index) => {
-            const songId = song.id
-            return (
-              <Link key={songId || index} to={`/song-description/${songId}`}>
-                <MusicCard
-                  key={songId}
-                  title={song.title}
-                  creator={song.user_details?.username || "Unknown"}
-                  contributersNbr={song.tracks?.length || 1}
-                  imageUrl={song.cover_image}
-                  audio={song.compiled_path}
-                  onPlay={() => setCurrentSong(song)}
-                  onClick={() => handleMusicCardClick(song)}
-                />
-              </Link>
-            );
-          })}
+          {newSongs.map((song, index) => (
+            <MusicCard
+              key={song.id || index}
+              title={song.title}
+              creator={song.user_details?.username || "Unknown"}
+              contributersNbr={song.tracks?.length || 1}
+              imageUrl={song.cover_image}
+              audio={ElecGuitar}
+              onPlay={handlePlaySong}
+              songId={song.id}
+            />
+          ))}
         </div>
+
       </div>
 
       <div>
