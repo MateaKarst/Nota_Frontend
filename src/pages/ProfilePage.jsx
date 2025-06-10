@@ -25,7 +25,7 @@ const ProfilePage = () => {
   const [error, setError] = useState(null);
 
 
-  // Використовуємо або ID з URL, або ID поточного користувача
+
   const connectionId = id || user?.id;
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const ProfilePage = () => {
         const accessToken = user?.access_token || Cookies.get("access_token");
         if (!accessToken) throw new Error("No access token");
 
-        // Отримуємо дані користувача
+  
         const res = await fetch(API_ENDPOINTS.USER(connectionId), {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -56,7 +56,7 @@ const ProfilePage = () => {
         if (!res.ok) throw new Error(fetchedUser.message || "Failed to fetch user data");
         setUserData(fetchedUser);
 
-        // Отримуємо підключення
+
         const connRes = await fetch(API_ENDPOINTS.CONNECTIONS(connectionId), {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -68,7 +68,7 @@ const ProfilePage = () => {
 
         console.log("Fetching songs from:", API_ENDPOINTS.SONGS.MULTIPLE + `?userId=${connectionId}`);
 
-        // Отримуємо пісні
+
         const songsRes = await fetch(API_ENDPOINTS.SONGS.MULTIPLE + `?userId=${connectionId}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,

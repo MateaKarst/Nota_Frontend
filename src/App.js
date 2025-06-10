@@ -12,7 +12,7 @@ import "./App.css";
 function AppWrapper() {
   const location = useLocation();
 
-  // list of paths where NavBar should be hidden
+
   const hiddenNavPaths = [
     "/",
     "/onboarding",

@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Cookies from 'js-cookie'; 
-import '../styles/pages/profile-friend-page.css';
+import Cookies from 'js-cookie';
+
 import ProfileCard from '../components/profile-container';
 import HeaderVariants from '../components/Headers/HeaderVariants';
 import SmallCard from '../components/MusicCard/SmallCard/SmallCard';
 import MusicPlayer from '../components/MusicPlayer';
+
 import API_ENDPOINTS from '../routes/apiEndpoints';
-// import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 
+import '../styles/pages/profile-friend-page.css';
 
 const ProfileFriendPage = () => {
-  // const navigate = useNavigate();
-
   const { id } = useParams();
   const { user } = useAuth();
+
   const [userData, setUserData] = useState(null);
   const [friendConnections, setFriendConnections] = useState([]);
+  const [ownSongs, setOwnSongs] = useState([]);
+  const [collaborations, setCollaborations] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
   const [activeTab, setActiveTab] = useState("own");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const connectionId = id
+  const connectionId = id;
 
-  // Fetch user info
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -37,36 +38,39 @@ const ProfileFriendPage = () => {
         return;
       }
 
-      if (user?.access_token) {
-        Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
-      }
-
-      console.log("connectionID on profile friend page", connectionId)
+      Cookies.set("access_token", user.access_token, { expires: 7, sameSite: "lax" });
 
       try {
         const accessToken = user?.access_token || Cookies.get("access_token");
         if (!accessToken) throw new Error("No access token");
 
-        // Fetch user data
         const res = await fetch(API_ENDPOINTS.USER(connectionId), {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+          headers: { Authorization: `Bearer ${accessToken}` },
         });
-
         const friend = await res.json();
         if (!res.ok) throw new Error("Failed to fetch friend");
-        setUserData(friend); // ✅ Save to state
+        setUserData(friend);
 
-        // Fetch connections
         const connRes = await fetch(API_ENDPOINTS.CONNECTIONS(connectionId), {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+          headers: { Authorization: `Bearer ${accessToken}` },
         });
-
         const friendConnections = await connRes.json();
-        setFriendConnections(friendConnections); // ✅ Save to state
+        setFriendConnections(friendConnections);
+
+        const songsRes = await fetch(`${API_ENDPOINTS.SONGS.MULTIPLE}?userId=${connectionId}`, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        const songs = await songsRes.json();
+        if (!songsRes.ok) throw new Error("Failed to fetch songs");
+
+        const own = songs.filter(song => song.user_id === connectionId);
+        const collab = songs.filter(song =>
+          song.user_id !== connectionId &&
+          song.tracks?.some(track => track.user_id === connectionId)
+        );
+
+        setOwnSongs(own);
+        setCollaborations(collab);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -78,72 +82,14 @@ const ProfileFriendPage = () => {
     fetchData();
   }, [connectionId, user]);
 
-
-  if (loading) return <div>Loading user profile...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!userData) return <div>No user data found.</div>;
-
   const handleTabClick = (tab) => setActiveTab(tab);
 
-  if (!userData) return <div>Loading user profile...</div>;
-
-
-  const ownSongs = [
-    {
-      title: "Ou va le monde",
-      creator: "Emily Star",
-      contributersNbr: 4,
-      imageUrl: "https://img.freepik.com/free-vector/flat-too-gay-too-good-vertical-illustration_23-2150572875.jpg?t=st=1747582791~exp=1747586391~hmac=de2c6b4e3a7ad10d46402a0d94b9fa88c0777a316137a0df66c6c538fa2c0812&w=1380",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-
-    },
-    {
-      title: "Oui Oui Marie",
-      creator: "Emily Star",
-      contributersNbr: 3,
-      imageUrl: "https://img.freepik.com/free-photo/fantasy-marine-landscape-with-bioluminescent-nature_23-2151206853.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-
-    },
-    {
-      title: "Sun Sea Tone",
-      creator: "Emily Star",
-      contributersNbr: 2,
-      imageUrl: "https://img.freepik.com/free-photo/high-angle-shot-beautiful-beach-breathtaking-sunset-sky_181624-26026.jpg?t=st=1747585524~exp=1747589124~hmac=ab1a1f521cbdd65aede4b1606dca436482ba3820d485dce65c3b33a3ec3def7f&w=1380",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-
-    }
-  ];
-
-  const collaborations = [
-    {
-      title: "She is a Devil",
-      creator: "Janne",
-      contributersNbr: 2,
-      imageUrl: "https://img.freepik.com/free-photo/abstract-portrait-with-light-effects_23-2151118133.jpg?t=st=1747585683~exp=1747589283~hmac=f8048ad1e28620fe327eae5bdc7ed7d811afd35ec9d1b2490e1f465ad8dd8b72&w=1380",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-
-    },
-    {
-      title: "Soul Echo",
-      creator: "JazzDev",
-      contributersNbr: 5,
-      imageUrl: "https://img.freepik.com/free-photo/jazz-stage-lights-singer_23-2148879442.jpg",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-
-    }
-  ];
-
-  // Стилі для кнопок, можна винести в css
   const switcherBtnStyle = {
     width: "fit-content",
     height: "23px",
     backgroundColor: "transparent",
     color: "var(--color-white)",
     borderRadius: "var(--border-radius-20)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     fontSize: "var(--font-size-14)",
     fontFamily: "var(--font-family-primary)",
     paddingLeft: "20px",
@@ -151,6 +97,9 @@ const ProfileFriendPage = () => {
     border: "1px solid var(--color-purple)",
   };
 
+  if (loading) return <div>Loading user profile...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!userData) return <div>No user data found.</div>;
 
   return (
     <div className="home-page">
@@ -159,51 +108,38 @@ const ProfileFriendPage = () => {
         <div style={{ paddingRight: 20, paddingLeft: 20 }}>
           <ProfileCard
             image={userData.user_details.avatar}
-            name={`${userData.user_details.name} ${userData.user_details.last_name}`}
-            tagline="Music is the path of my life and heart🖤"
+            name={userData.user_details.name}
+            tagline={userData.user_details.profile_description || "Music is the path of my life and heart🖤"}
             connections={friendConnections.length}
             btns={true}
           />
         </div>
       </div>
 
-      <div style={{ paddingRight: 20, paddingLeft: 20, paddingBottom: 20 }}>
-        <div>
-          <div><h1 className='title1'>Top Songs</h1></div>
-          <div style={{ display: "flex", flexDirection: "column", alignContent: "left" }}>
-            <SmallCard title="My favourite game" creator="Emily StarShine" contributersNbr={4} imageUrl="https://img.freepik.com/free-photo/portrait-woman-posing-with-plastic-foil_23-2148864885.jpg?t=st=1747582494~exp=1747586094~hmac=00f6875f2997120fa41c044c603945afd43a48b9ef16e624344cccdaeffa938e&w=1380" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
-            <SmallCard title="Mon dream" creator="Lily Vermeer" contributersNbr={4} imageUrl="https://img.freepik.com/free-vector/hand-drawn-streetwear-illustration_52683-159204.jpg?t=st=1747583383~exp=1747586983~hmac=49226085c9de1c3bb0374ee1d92c9f81571edb43d4d37ffbef8b03fa27953e63&w=1380" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
-            <SmallCard title="My Little Star" creator="Emily StarShine" contributersNbr={3} imageUrl="https://img.freepik.com/free-photo/colorful-red-drop-falling-water_23-2147786700.jpg?t=st=1747585599~exp=1747589199~hmac=6ca9e774e3393834b607a4c96e4a3a51c67327f48f32a593f16e1ee5ae679e00&w=1380" onPlay={(song) => setCurrentSong(song)} audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
-          </div>
-        </div>
+      <div style={{ padding: "0 20px 20px" }}>
+        <h1 className='title1'>Songs</h1>
+        <div style={{ display: "flex", flexDirection: "row", gap: "10px", paddingBottom: 14 }}>
+          <button
+            style={{
+              ...switcherBtnStyle,
+              backgroundColor: activeTab === "own" ? "var(--color-purple)" : "transparent",
+              border: activeTab === "own" ? "none" : "1px solid var(--color-purple)"
+            }}
+            onClick={() => handleTabClick("own")}
+          >
+            Own Songs
+          </button>
 
-        <div style={{ display: "flex", flexDirection: "column", padding: 0, paddingBottom: 14 }}>
-          <h1 className='title1'>Songs</h1>
-          <div style={{ display: "flex", flexDirection: "row", width: "auto", gap: "10px" }}>
-            <button
-              style={{
-                ...switcherBtnStyle,
-                backgroundColor: activeTab === "own" ? "var(--color-purple)" : "transparent",
-                color: activeTab === "own" ? "var(--color-white)" : "var(--color-white)",
-                border: activeTab === "own" ? "none" : "1px solid var(--color-purple)",
-              }}
-              onClick={() => handleTabClick("own")}
-            >
-              Own Songs
-            </button>
-
-            <button
-              style={{
-                ...switcherBtnStyle,
-                backgroundColor: activeTab === "collab" ? "var(--color-purple)" : "transparent",
-                color: activeTab === "collab" ? "var(--color-white)" : "var(--color-white)",
-                border: activeTab === "collab" ? "none" : "1px solid var(--color-purple)",
-              }}
-              onClick={() => handleTabClick("collab")}
-            >
-              Collaborations
-            </button>
-          </div>
+          <button
+            style={{
+              ...switcherBtnStyle,
+              backgroundColor: activeTab === "collab" ? "var(--color-purple)" : "transparent",
+              border: activeTab === "collab" ? "none" : "1px solid var(--color-purple)"
+            }}
+            onClick={() => handleTabClick("collab")}
+          >
+            Collaborations
+          </button>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -211,15 +147,17 @@ const ProfileFriendPage = () => {
             <SmallCard
               key={index}
               title={song.title}
-              creator={song.creator}
-              contributersNbr={song.contributersNbr}
-              imageUrl={song.imageUrl}
-              onPlay={() => setCurrentSong({
-                title: song.title,
-                artist: song.creator,
-                cover: song.imageUrl,     //to match the format audio player expects
-                audio: song.audioUrl
-              })}
+              creator={song.user?.name || song.creator || "Unknown"}
+              contributersNbr={song.tracks?.length || 1}
+              imageUrl={song.cover_image || "https://via.placeholder.com/150"}
+              onPlay={() =>
+                setCurrentSong({
+                  title: song.title,
+                  artist: song.user?.name || song.creator,
+                  cover: song.cover_image,
+                  audio: song.audio_url,
+                })
+              }
             />
           ))}
         </div>

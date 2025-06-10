@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'; // Додаємо useNavigate
+import { useNavigate } from 'react-router-dom';
 import PopupMenu from '../smallpopups'; 
 import '../../styles/components/header.css';
 
@@ -49,11 +49,12 @@ const headers = [
   },
 ];
 
-const HeaderVariants = ({ mode, title }) => {
+const HeaderVariants = ({ mode, title, storage_path }) => {
+
   const headerConfig = headers.find((h) => h.mode === mode);
 
-  const [showPopup, setShowPopup] = useState(false); // ✅ на верху
-  const menuBtnRef = useRef(null);                   // ✅
+  const [showPopup, setShowPopup] = useState(false);
+  const menuBtnRef = useRef(null);                   
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,10 +85,12 @@ const handleMenuClick = () => {
   const isLeftAlignedHeader = mode === "text" || mode === "black text";
 
   const handleBackClick = () => {
-    navigate(-1);
+    if (window.history.length > 2) {
+      navigate("/home"); 
+    } else {
+      navigate("/home");
+    }
   };
-
-
 
 
 
@@ -132,7 +135,8 @@ const handleMenuClick = () => {
   )}
   {showPopup && (
     <div style={{ position: "absolute", top: "40px", right: 0, zIndex: 999 }}>
-      <PopupMenu type="delete" />
+     <PopupMenu type="delete" storage_path="/public/audio/track.mp3" />
+
     </div>
   )}
 </div>

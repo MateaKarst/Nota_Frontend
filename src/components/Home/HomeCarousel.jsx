@@ -4,7 +4,6 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { EffectCoverflow } from 'swiper/modules'
 import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
-import PlusImage from '../../assets/plus-img.png';
 import "../../styles/pages/home-page.css";
 import "../../styles/variables.css";
 
@@ -101,17 +100,19 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
         {/* Regular Cards */}
         {cards.map((card) => (
           <SwiperSlide key={card.id} style={{ width: '250px' }}
-         onClick={() => navigate('/song-description', { replace: true, //avoids stackinig another history entry (double nav issue)
-         state: { title: card.title, imageUrl: card.imageUrl } })}>
+            onClick={() => navigate('/song-description', {
+              replace: true, //avoids stackinig another history entry (double nav issue)
+              state: { title: card.title, imageUrl: card.imageUrl }
+            })}>
             <CaroselCard {...card}
-            onPlay={() =>
-                    onPlay({
-                      title: card.title,
-                      artist: card.creator,
-                      cover: card.imageUrl,
-                      audio: card.audio,
-              })
-            }
+              onPlay={() =>
+                onPlay({
+                  title: card.title,
+                  artist: card.creator,
+                  cover: card.imageUrl,
+                  audio: card.audio,
+                })
+              }
             />
           </SwiperSlide>
         ))}

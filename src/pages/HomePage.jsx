@@ -176,7 +176,6 @@ const HomePage = () => {
         </div>
       </div>
 
-
       <div className="friends-section">
         <FriendsCard />
       </div>
@@ -211,7 +210,6 @@ const HomePage = () => {
           })}
         </div>
       </div>
-
 
       {currentSong && (
         <div className="music-player-container">

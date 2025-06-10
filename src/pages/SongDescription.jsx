@@ -1,15 +1,17 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
+
 import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
-import HeaderSongDescription from '../components/Headers/HeaderSongDescription';
 import BasicBtn from "../components/Buttons/BasicBtn";
+import NavBar from "../components/Navigation/NavBar"
+import HeaderVariants from '../components/Headers/HeaderVariants';
 import Popup from '../components/PopUps/PopUp';
+
 import { API_ENDPOINTS } from "../routes/apiEndpoints";
 import { useAuth } from '../context/AuthProvider';
-import NavBar from "../components/Navigation/NavBar"
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 import '../styles/pages/song-description.css';
 
@@ -25,7 +27,7 @@ const SongDescription = () => {
   const [loading, setLoading] = useState(true);
 
   const songId = id
-  console.log ("Getting song id", songId);
+  console.log("Getting song id", songId);
 
   const [song, setSong] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -81,14 +83,14 @@ const SongDescription = () => {
     <div className="song-description-page">
 
       <div className="header-section">
-        <HeaderSongDescription />
+        <HeaderVariants mode="menu" />
       </div>
 
       <div className="top-part">
         <SectionHeadImage title={song?.title}
           imageUrl={song?.cover_image}
           description={song?.description}
-          genres={song?.genres || []}/>
+          genres={song?.genres || []} />
 
         <div className="dropdown">
           <h1 className="tracks">Tracks ({tracks.length})</h1>
@@ -100,7 +102,7 @@ const SongDescription = () => {
         </div>
       </div>
 
-       <div className="navbar-bottom">
+      <div className="navbar-bottom">
         <NavBar />
       </div>
 
