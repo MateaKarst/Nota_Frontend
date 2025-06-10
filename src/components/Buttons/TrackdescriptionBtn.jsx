@@ -32,17 +32,26 @@ const TrackDescriptionBtn = ({
     return () => clearInterval(interval);
   }, [isPlaying, showProgress, audioPlayersRef]);
 
-  const togglePlay = () => {
-    const players = audioPlayersRef?.current || [];
+const togglePlay = () => {
+  const players = audioPlayersRef?.current || [];
+
+  if (isPlaying) {
     players.forEach((player) => {
-      if (isPlaying) {
-        player?.pause?.();
-      } else {
-        player?.play?.();
+      if (player && typeof player.pause === "function") {
+        player.pause();
       }
     });
-    setIsPlaying(!isPlaying);
-  };
+  } else {
+    players.forEach((player) => {
+      if (player && typeof player.play === "function") {
+        player.play();
+      }
+    });
+  }
+
+  setIsPlaying(!isPlaying);
+};
+
 
   const skipForward = () => {
     const players = audioPlayersRef?.current || [];

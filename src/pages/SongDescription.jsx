@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
 import TrackDropdown from '../components/Tracks/TrackDropdown';
@@ -17,6 +18,12 @@ import "../styles/pages/song-description.css";
 
 const SongDescription = () => {
   const navigate = useNavigate();
+  const audioPlayersRef = useRef([]);
+
+  const setAudioPlayers = (players) => {
+    audioPlayersRef.current = players;
+  };
+
 
   const { user } = useAuth();
   const { id } = useParams();
@@ -100,7 +107,8 @@ const SongDescription = () => {
           {loading ? (
             <p>Loading tracks...</p>
           ) : (
-            <TrackDropdown tracks={tracks} />
+             <TrackDropdown tracks={tracks} registerPlayerRef={setAudioPlayers} />
+        
           )}
         </div>
       </div >

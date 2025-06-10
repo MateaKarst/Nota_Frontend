@@ -38,12 +38,12 @@ const Personalization1 = () => {
     };
     return (
         <div className="container">
-            <div>
                 <HeaderVariants className="header" mode="default" />
 
+            <div className="personalization-1">
                 <h2 className="question1">What music genre do you like to create or work on?</h2>
 
-                <SearchBar
+                <SearchBar 
                     variant={1}
                     onFilterChange={() => { }}
                     onResultsUpdate={() => { }}

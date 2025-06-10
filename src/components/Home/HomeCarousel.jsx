@@ -19,11 +19,11 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
 
     const fetchUserSongs = async () => {
       try {
-        // Assuming your API supports filtering songs by user_id via query params or POST body
+        // assuming your API supports filtering songs by user_id via query params or POST body
         const res = await fetch(`${API_ENDPOINTS.SONGS.MULTIPLE}?user_id=${user.id}`);
         const data = await res.json();
 
-        // Transform data if necessary to match your card format
+        // transform data if necessary to match your card format
         const userSongs = data.map(song => ({
           id: song.id,
           imageUrl: song.cover_image || 'default-image-url.jpg',

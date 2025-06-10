@@ -2,7 +2,7 @@
 
 .onboarding {
   background-size: cover;
-  background-position: center;
+   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -49,6 +49,7 @@
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-48);
   color: var(--color-white-trans-surface-45);
+  font-weight: 400;
   letter-spacing: 2.5px;
   margin: 0;
 }

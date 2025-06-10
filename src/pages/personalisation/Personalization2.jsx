@@ -39,8 +39,8 @@ const Personalization2 = () => {
     };
     return (
         <div className="container">
-            <div>
                 <HeaderVariants className="header" mode="default" />
+            <div className="personalization-1">
 
                 <h2 className="question1">What instruments do you play?</h2>
 

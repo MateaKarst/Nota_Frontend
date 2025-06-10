@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import NotaLogo from "../components/Logos/NotaLogo";
 import BasicBtn from "../components/Buttons/BasicBtn";
 import { useNavigate } from 'react-router-dom';
+
 import funImage from "../assets/backgrounds/onboarding/fun-image.jpg";
 import communityImage from "../assets/backgrounds/onboarding/community-image.jpg";
 import recognitionImage from "../assets/backgrounds/onboarding/recognition-image.jpg";
