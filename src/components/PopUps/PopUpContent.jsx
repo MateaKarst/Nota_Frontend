@@ -15,6 +15,7 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
   const [file, setFile] = useState(null);
   const [uploadedTrack, setUploadedTrack] = useState(null);
   const [currentType, setCurrentType] = useState(type);
+  const [audioLength, setAudioLength] = useState(null);
 
   const { user } = useAuth();
 
@@ -39,8 +40,21 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
   if (currentType === 'upload-track') {
     const handleFileChange = (e) => {
       const uploadedFile = e.target.files[0];
-      setFile(uploadedFile);
+      if (!uploadedFile) return;
+
+      const audio = new Audio();
+      audio.src = URL.createObjectURL(uploadedFile);
+      audio.addEventListener('loadedmetadata', () => {
+        const durationSeconds = audio.duration;
+        const minutes = Math.floor(durationSeconds / 60);
+        const seconds = Math.floor(durationSeconds % 60);
+        const lengthFormatted = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        setFile(uploadedFile);
+        setAudioLength(lengthFormatted);
+      });
     };
+
 
     const handleUpload = async () => {
       if (!file) return alert('Please choose a file');
@@ -61,10 +75,10 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
 
           setUploadedTrack({
             songId,
-            trackId: result.id,  // backend returns track id here
+            trackId: result.id,
             name: file.name,
             size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
-            length: result.length || '4:24',
+            length: audioLength || result.length || '0:00',
           });
 
           if (directToEditor) {
