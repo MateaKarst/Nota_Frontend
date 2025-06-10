@@ -117,6 +117,8 @@ const SongDescription = () => {
         <Popup
           type="upload-track"
           onClose={() => setShowPopup(false)}
+          data={song}
+          directToEditor={true}  
         />
       )}
     </div >

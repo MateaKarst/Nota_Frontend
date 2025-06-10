@@ -9,7 +9,7 @@ import { ReactComponent as ReportIcon } from '../../assets/icons/report-icon.svg
 import API_ENDPOINTS from '../../routes/apiEndpoints';
 import { useAuth } from '../../context/AuthProvider';
 
-const PopUpContent = ({ type, data, onClose }) => {
+const PopUpContent = ({ type, data, onClose, directToEditor }) => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState('');
   const [file, setFile] = useState(null);
@@ -67,6 +67,12 @@ const PopUpContent = ({ type, data, onClose }) => {
             length: result.length || '4:24',
           });
 
+          if (directToEditor) {
+            navigate(`/music-editor/${songId}`);
+            onClose();
+            return;
+          }
+
           setCurrentType('upload-to-editor');
         } else {
           const error = await res.json();
@@ -79,7 +85,7 @@ const PopUpContent = ({ type, data, onClose }) => {
 
     return (
       <>
-      
+
         <h2>Upload track to your song</h2>
         <p className="hint">Only MP3 files, up to 50 MB</p>
         <input type="file" accept="audio/mp3" onChange={handleFileChange} />
