@@ -19,7 +19,7 @@ import Settings from "../pages/Settings";
 import Record from "../pages/Record";
 import Chat from "../pages/Chat";
 import ChatOverview from "../pages/ChatOverview";
-import Editor2 from "../pages/Editor2";
+import MusicEditor from "../pages/MusicEditor";
 import AddTracksPage from "../pages/AddTrackPage";
 
 export const appRoutes = [
@@ -40,7 +40,7 @@ export const appRoutes = [
     { path: "/song-description/:id", element: <SongDescription />},
     { path: "/upload-song/:id", element: <UploadSong /> },
     { path: "/record", element: <Record /> },
-    { path: "/editor2/:id", element: <Editor2 /> },
+    { path: "/music-editor/:id", element: <MusicEditor /> },
     { path: "/add-tracks", element: <AddTracksPage /> },
     
     { path: "/discover", element: <SearchPage /> },

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import HeaderVariants from "../components/Headers/HeaderVariants";
 import Buttons from "../components/Buttons/BasicBtn";
@@ -7,7 +7,6 @@ import UserTrack from "../components/Tracks/UserTrack";
 import TagInput from "../components/Tags/TagInput";
 
 import API_ENDPOINTS from "../routes/apiEndpoints";
-import { useAuth } from "../context/AuthProvider";
 
 import "../styles/pages/upload-song.css";
 
@@ -16,7 +15,6 @@ const UploadSong = () => {
   const location = useLocation();
   const fileInputRef = useRef();
 
-  const { user } = useAuth();
   const trackId = location.state?.trackId;
   const songId = location.state?.songId;
 
@@ -167,7 +165,7 @@ const UploadSong = () => {
     if (!trackUpdated) return;
 
     alert("Song and track updated successfully!");
-    navigate(`/editor2`); // or wherever you want to redirect
+    navigate(`/music-editor/${songId}`);
   };
 
   return (

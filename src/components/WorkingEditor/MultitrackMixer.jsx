@@ -1,13 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Drum from '../../assets/instrument-samples/01_DrumLoop.wav';
-import Guitar from '../../assets/instrument-samples/13_ElecGtr1.wav';
-import Bass from '../../assets/instrument-samples/11_Bass.wav';
 import Button from '../Buttons/BasicBtn';
-import EditorInstrument from '../Editor/EditorInstrument';
+import EditorInstrument from '../Editor-Useless/EditorInstrument';
 import API_ENDPOINTS from '../../routes/apiEndpoints';
-import Cookies from "js-cookie";
 import { useAuth } from '../../context/AuthProvider';
-import { useParams } from 'react-router-dom';
 
 import { ReactComponent as GuitarIcon } from '../../assets/instruments/guitar.svg';
 import { ReactComponent as DrumIcon } from '../../assets/instruments/drum.svg';
@@ -21,7 +16,7 @@ import BackwardIcon from '../../assets/icons/5secondsBack-icon.svg';
 import '../../styles/editor/editor.css';
 import '../../styles/variables.css';
 
-const MultitrackMixer = () => {
+const MultitrackMixer = ({ songId }) => {
   const containerRef = useRef();
   const scrollContainerRef = useRef();
   const playButtonRef = useRef();
@@ -31,82 +26,23 @@ const MultitrackMixer = () => {
   const animationFrameRef = useRef();
 
   const { user } = useAuth();
-  const { id } = useParams();
-  const [loading, setLoading] = useState(true);
 
-  const songId = id;
-  console.log("Getting song id", songId); 
-  
-  const [song, setSong] = useState(null);
+  // You need the tracks state here!
+  const [tracks, setTracks] = useState([]);
+  const [, setSong] = useState([]);
+  const [, setLoading] = useState([]);
 
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const [tracks, setTracks] = useState([
-    {
-      id: 1,
-      draggable: true,
-      label: 'Drum',
-      url: Drum,
-      startPosition: 4,
-      envelope: [
-        { time: 2, volume: 0.2 },
-        { time: 10, volume: 0.2 },
-        { time: 22, volume: 0.2 },
-      ],
-      volume: 0.95,
-      options: {
-        waveColor: 'hsl(341, 100%, 48%, 1)',
-        progressColor: 'rgba(163, 19, 50, 1)',
-      },
-      icon: DrumIcon,
-    },
-    {
-      id: 2,
-      draggable: true,
-      label: 'Guitar',
-      url: Guitar,
-      startPosition: 1,
-      envelope: [
-        { time: 2, volume: 0.5 },
-        { time: 20, volume: 0.5 },
-        { time: 40, volume: 0.5 },
-      ],
-      volume: 0.8,
-      options: {
-        waveColor: 'hsl(41, 100%, 50%)',
-        progressColor: 'hsl(32, 96%, 37%)',
-      },
-      icon: GuitarIcon,
-    },
-    {
-      id: 3,
-      draggable: true,
-      label: 'Bass',
-      url: Bass,
-      startPosition: 3,
-      envelope: [
-        { time: 2, volume: 0.5 },
-        { time: 10, volume: 0.5 },
-        { time: 22, volume: 0.5 },
-      ],
-      volume: 0.8,
-      options: {
-        waveColor: 'hsl(269, 100%, 50%)',
-        progressColor: 'hsl(269, 96%, 36%)',
-      },
-      icon: OtherInstrumentIcon,
-    },
-  ]);
-
   const multitrackRef = useRef(null);
 
+  // Initialize or update multitrack player when tracks change
   useEffect(() => {
     if (!tracks.length) {
       if (multitrackRef.current) {
         multitrackRef.current.destroy();
         multitrackRef.current = null;
       }
-      containerRef.current.innerHTML = '';
+      if (containerRef.current) containerRef.current.innerHTML = '';
       return;
     }
 
@@ -129,6 +65,7 @@ const MultitrackMixer = () => {
     }
 
     function initMultitrack() {
+      if (!containerRef.current) return;
       containerRef.current.innerHTML = '';
       const Multitrack = window.Multitrack;
 
@@ -197,60 +134,54 @@ const MultitrackMixer = () => {
     };
   }, [tracks]);
 
+  // Delete track handler
   const handleDeleteTrack = (id) => {
     setTracks((prev) => prev.filter((track) => track.id !== id));
   };
 
+  // Fetch song data on mount and when user or id changes
   useEffect(() => {
-      const fetchSongData = async () => {
-        if (!user) return;
-  
-        if (user.access_token) {
-          Cookies.set("access_token", user.access_token, {
-            expires: 7,
-            sameSite: "lax",
-          });
+    const fetchSongData = async () => {
+      if (!user || !songId) return;
+
+      // Your fetch code
+      try {
+        const response = await fetch(API_ENDPOINTS.SONGS.SINGLE(songId), {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.access_token}`,
+          },
+          credentials: "include",
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          const tracksWithIcons = (data.tracks || []).map(track => ({
+            ...track,
+            icon:
+              track.label === 'Drum' ? DrumIcon :
+                track.label === 'Guitar' ? GuitarIcon :
+                  OtherInstrumentIcon
+          }));
+
+          setTracks(tracksWithIcons);
+          setSong(data);
+        } else {
+          console.error("Error fetching song tracks:", data.message);
         }
-  
-        const accessToken = Cookies.get("access_token") || user.access_token;
-        if (!accessToken) {
-          console.error("No access token available");
-          setLoading(false);
-          return;
-        }
-  
-        try {
-          const response = await fetch(API_ENDPOINTS.SONGS.SINGLE(id), {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            credentials: "include",
-          });
-  
-          const data = await response.json();
-          console.log("Fetched song data:", data);
-          console.log("Tracks array:", data.tracks);
-  
-          if (response.ok) {
-            setTracks(data.tracks || []);
-            setSong(data);
-          } else {
-            console.error("Error fetching song tracks:", data.message);
-          }
-        } catch (error) {
-          console.error("Error fetching song:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchSongData();
-    }, [user, id]);
-  
-    if (!user) return null;
-  
+      } catch (error) {
+        console.error("Error fetching song:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSongData();
+  }, [user, songId]);
+
+  if (!user) return null;
 
   return (
     <div className="multitrack-container">
@@ -294,13 +225,21 @@ const MultitrackMixer = () => {
       </div>
 
       <div className="button-wrapper">
-        <button id="backward" ref={backwardButtonRef} onClick={() => multitrackRef.current?.setTime(multitrackRef.current.getCurrentTime() - 5)}>
+        <button
+          id="backward"
+          ref={backwardButtonRef}
+          onClick={() => multitrackRef.current?.setTime(multitrackRef.current.getCurrentTime() - 5)}
+        >
           <img src={BackwardIcon} alt="Back 5s" />
         </button>
         <button id="play" ref={playButtonRef} disabled>
           <img src={isPlaying ? PauseIcon : PlayIcon} alt="Play/Pause" />
         </button>
-        <button id="forward" ref={forwardButtonRef} onClick={() => multitrackRef.current?.setTime(multitrackRef.current.getCurrentTime() + 5)}>
+        <button
+          id="forward"
+          ref={forwardButtonRef}
+          onClick={() => multitrackRef.current?.setTime(multitrackRef.current.getCurrentTime() + 5)}
+        >
           <img src={ForwardIcon} alt="Forward 5s" />
         </button>
       </div>
