@@ -1,33 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
-import API_ENDPOINTS from '../routes/apiEndpoints';
-import { useAuth } from '../context/AuthProvider';
+import API_ENDPOINTS from "../routes/apiEndpoints";
+import { useAuth } from "../context/AuthProvider";
 
-import HeaderMain from '../components/Headers/HeaderMain';
-import MusicCard from '../components/MusicCard/HomeAndMySongsCards/MusicCard';
-import BasicBtn from '../components/Buttons/BasicBtn'
-import FriendsCard from '../components/Friends/FriendsCard';
-import MusicPlayer from '../components/MusicPlayer';
-import PopUp from '../components/PopUps/PopUp';
-import HomeCarousel from '../components/Home/HomeCarousel';
+import HeaderMain from "../components/Headers/HeaderMain";
+import MusicCard from "../components/MusicCard/HomeAndMySongsCards/MusicCard";
+import BasicBtn from "../components/Buttons/BasicBtn";
+import FriendsCard from "../components/Friends/FriendsCard";
+import MusicPlayer from "../components/MusicPlayer";
+import PopUp from "../components/PopUps/PopUp";
+import HomeCarousel from "../components/Home/HomeCarousel";
 
-import ElecGuitar from "../assets/instrument-samples/ElecGuitar.mp3"
+import ElecGuitar from "../assets/instrument-samples/ElecGuitar.mp3";
 
-import '../styles/pages/home-page.css'
+import "../styles/pages/home-page.css";
 
 const HomePage = () => {
   const { user } = useAuth();
 
   const [showPopup, setShowPopup] = useState(false);
-  const [popupType, setPopupType] = useState('');
+  const [popupType, setPopupType] = useState("");
   const [popupData, setPopupData] = useState(null);
 
   const [currentSong, setCurrentSong] = useState(null);
   const [newSongs, setNewSongs] = useState([]);
 
   const navigate = useNavigate();
+  const playerRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (playerRef.current && !playerRef.current.contains(e.target)) {
+        setCurrentSong(null); // close player
+      }
+    };
+
+    if (currentSong) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [currentSong]);
 
   useEffect(() => {
     const fetchNewSongs = async () => {
@@ -43,43 +61,40 @@ const HomePage = () => {
     fetchNewSongs();
   }, []);
 
-
   const handleMusicCardClick = (song) => {
     console.log("handle navigation songId");
     navigate(`/song-description/${song.id}`);
-
-
   };
 
   const handleOpenPopup = async () => {
     try {
       const userId = user.id;
-      console.log("home + userId", userId)
+      console.log("home + userId", userId);
 
       const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: userId,
-          title: 'Untitled Song',
+          title: "Untitled Song",
         }),
       });
 
       if (!res.ok) {
         const errorData = await res.json();
-        console.error('Server error:', errorData);
+        console.error("Server error:", errorData);
         return;
       }
 
-      console.log("response", res)
+      console.log("response", res);
 
       const newSong = await res.json();
 
-      setPopupType('upload-track');
+      setPopupType("upload-track");
       setPopupData(newSong);
       setShowPopup(true);
     } catch (error) {
-      console.error('Failed to create empty song:', error);
+      console.error("Failed to create empty song:", error);
     }
   };
 
@@ -90,30 +105,25 @@ const HomePage = () => {
   const [audioPlayer, setAudioPlayer] = useState(null);
 
   const handlePlaySong = (song) => {
-    if (audioPlayer) {
-      audioPlayer.pause();
-    }
-
-    const audio = new Audio(song.audio); // song.audio will be ElecGuitar mp3 URL
-    audio.play();
-    setAudioPlayer(audio);
-    setCurrentSong(song);
+    setCurrentSong({
+      title: song.title,
+      artist: song.user_details?.username || "Unknown",
+      cover: song.cover_image,
+      audio: song.compiled_path || song.audio || ElecGuitar,
+    });
   };
 
   useEffect(() => {
     if (showPopup) {
-      document.body.classList.add('no-scroll');
+      document.body.classList.add("no-scroll");
     } else {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove("no-scroll");
     }
 
     return () => {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove("no-scroll");
     };
   }, [showPopup]);
-
-
-
 
   return (
     <div className="home-page">
@@ -126,7 +136,6 @@ const HomePage = () => {
               onPlay={(song) => setCurrentSong(song)}
               onAddClick={handleOpenPopup}
             />
-
           </div>
         </div>
 
@@ -136,9 +145,15 @@ const HomePage = () => {
       </div>
 
       <div>
-        <div className='title-content'>
-          <h1 className='title-home'>New songs</h1>
-          <BasicBtn type="viewAll" text="View All" onClick={() => navigate('/view-all', { state: { title: 'New songs' } })} />
+        <div className="title-content">
+          <h1 className="title-home">New songs</h1>
+          <BasicBtn
+            type="viewAll"
+            text="View All"
+            onClick={() =>
+              navigate("/view-all", { state: { title: "New songs" } })
+            }
+          />
         </div>
 
         <div className="horizontal-scroll">
@@ -155,7 +170,6 @@ const HomePage = () => {
             />
           ))}
         </div>
-
       </div>
 
       <div>
@@ -171,7 +185,7 @@ const HomePage = () => {
         </div>
         <div className="horizontal-scroll">
           {newSongs.map((song, index) => {
-            const songId = song.id
+            const songId = song.id;
             return (
               <Link key={songId || index} to={`/song-description/${songId}`}>
                 <MusicCard
@@ -195,8 +209,8 @@ const HomePage = () => {
       </div>
 
       <div>
-        <div className='title-content'>
-          <h1 className='title-home'>Trendy songs</h1>
+        <div className="title-content">
+          <h1 className="title-home">Trendy songs</h1>
           <BasicBtn
             type="viewAll"
             text="View All"
@@ -208,7 +222,7 @@ const HomePage = () => {
 
         <div className="horizontal-scroll">
           {newSongs.map((song, index) => {
-            const songId = song.id
+            const songId = song.id;
             return (
               <Link key={songId || index} to={`/song-description/${songId}`}>
                 <MusicCard
@@ -228,7 +242,7 @@ const HomePage = () => {
       </div>
 
       {currentSong && (
-        <div className="music-player-container">
+        <div ref={playerRef} className="music-player-container">
           <MusicPlayer song={currentSong} />
         </div>
       )}

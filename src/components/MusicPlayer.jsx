@@ -26,42 +26,47 @@ const MusicPlayer = ({ song }) => {
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
 
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
+const togglePlay = () => {
+  if (!audioRef.current) return;
+  if (isPlaying) {
+    audioRef.current.pause();
+  } else {
+    audioRef.current.play();
+  }
+};
+
+useEffect(() => {
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  const updateProgress = () => setProgress(audio.currentTime);
+  const handleEnded = () => setIsPlaying(false);
+  const setAudioDuration = () => setDuration(audio.duration);
+
+  audio.addEventListener("loadedmetadata", setAudioDuration);
+  audio.addEventListener("timeupdate", updateProgress);
+  audio.addEventListener("ended", handleEnded);
+
+  return () => {
+    audio.removeEventListener("loadedmetadata", setAudioDuration);
+    audio.removeEventListener("timeupdate", updateProgress);
+    audio.removeEventListener("ended", handleEnded);
   };
+}, []);
 
-  // Handle song change
-  useEffect(() => {
-    if (song && audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.load();
-      audioRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => {
-          console.log("Autoplay prevented:", err);
-          setIsPlaying(false);
-        });
-    }
-  }, [song]);
+useEffect(() => {
+  if (song && audioRef.current) {
+    audioRef.current.pause();
+    audioRef.current.load();
+    audioRef.current.play()
+      .then(() => setIsPlaying(true))
+      .catch((err) => {
+        console.log("Autoplay prevented:", err);
+        setIsPlaying(false);
+      });
+  }
+}, [song]);
 
-  // Track time updates and duration
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const setAudioDuration = () => setDuration(audio.duration);
-
-    audio.addEventListener("loadedmetadata", setAudioDuration);
-
-    return () => {
-      audio.removeEventListener("loadedmetadata", setAudioDuration);
-    };
-  }, []);
 
   // click to seek
   const handleSeek = (e) => {
