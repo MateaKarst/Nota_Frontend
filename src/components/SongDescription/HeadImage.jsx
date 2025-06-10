@@ -10,7 +10,6 @@ const HeadImage = ({ imageUrl }) => {
   return (
     <div className="image-wrapper">
       <img src={imageUrl} alt="song cover" className="song-img" />
-
       <img src={profile} alt="profile image" className="profile-img" />
 
       <div className="overlay">
