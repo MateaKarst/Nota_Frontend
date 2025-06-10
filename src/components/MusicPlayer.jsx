@@ -28,12 +28,19 @@ const MusicPlayer = ({ song }) => {
 
 const togglePlay = () => {
   if (!audioRef.current) return;
+
   if (isPlaying) {
     audioRef.current.pause();
+    setIsPlaying(false);
   } else {
-    audioRef.current.play();
+    audioRef.current.play()
+      .then(() => setIsPlaying(true))
+      .catch((err) => {
+        console.log("Play error:", err);
+      });
   }
 };
+
 
 useEffect(() => {
   const audio = audioRef.current;
