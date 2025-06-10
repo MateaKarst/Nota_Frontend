@@ -21,6 +21,8 @@ import Chat from "../pages/Chat";
 import ChatOverview from "../pages/ChatOverview";
 import MusicEditor from "../pages/MusicEditor";
 import AddTracksPage from "../pages/AddTrackPage";
+import ProPage from "../pages/ProPage";
+import PlansPage from "../pages/PlansPage";
 
 export const appRoutes = [
     { path: "/", element: <Onboarding />, isPublic: true },
@@ -49,6 +51,8 @@ export const appRoutes = [
     { path: "/settings", element: <Settings /> },
     { path: "/account-settings", element: <AccountSettings /> },
     { path: "/notifications", element: <NotificationsPage /> },
+    { path: "/pro-page", element: <ProPage /> },
+    { path: "/plans", element: <PlansPage /> },
 
     { path: "/chat", element: <Chat /> },
     { path: "/chat-overview", element: <ChatOverview /> ,isPublic:true},

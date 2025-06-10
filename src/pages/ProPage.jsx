@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/pro-page.css';
 import '../assets/backgrounds/pro-page-back.jpeg'
 import NotaLogo from '../components/Logos/NotaLogo';
 import { ReactComponent as DevIcon } from '../assets/icons/dev-icon.svg';
@@ -8,15 +7,16 @@ import { ReactComponent as MusicLineIcon } from '../assets/icons/musicline-icon.
 import { ReactComponent as HeadphonesIcon } from '../assets/icons/headphones-icon.svg';
 import BasicBtn from '../components/Buttons/BasicBtn';
 
+import '../styles/pages/pro-page.css';
 const ProPage = () => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    navigate('/home'); // Повернення на попередню сторінку
+    navigate('/home'); 
   };
 
   const handleDiscover = () => {
-    navigate('/plans'); // Заміни "/plans" на свою цільову сторінку
+    navigate('/plans'); 
   };
 
   return (

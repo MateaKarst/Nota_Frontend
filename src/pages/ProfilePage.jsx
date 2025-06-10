@@ -9,7 +9,6 @@ import Cookies from 'js-cookie';
 import API_ENDPOINTS from '../routes/apiEndpoints';
 import { useAuth } from '../context/AuthProvider';
 
-
 const ProfilePage = () => {
   const [ownSongs, setOwnSongs] = useState([]);
   const [collaborations, setCollaborations] = useState([]);
@@ -23,8 +22,6 @@ const ProfilePage = () => {
   const [friendConnections, setFriendConnections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-
 
   const connectionId = id || user?.id;
 

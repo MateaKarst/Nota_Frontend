@@ -11,7 +11,6 @@ import { ReactComponent as Delete } from '../assets/settings/delete.svg';
 import { ReactComponent as Logout } from '../assets/settings/logout.svg';
 import { useNavigate } from 'react-router-dom'; 
 
-
 import "../styles/pages/settings.css";
 
 
@@ -19,7 +18,7 @@ const Settings = () => {
     const navigate = useNavigate();
 
 return (
-    <div> 
+    <div className='settings-container'> 
     <HeaderVariants mode="text" title="Settings" />
 
  <div className="settings-icon-text">
@@ -54,7 +53,7 @@ return (
       </div>
     </div>
 
-      <div className="settings-icon-text">
+      <div className="settings-icon-text" onClick={() => navigate("/pro-page")}>
       <Subscriptions className="settings-icon" />
       <div className="settings-text-column">
         <p className="settings-text">Subscriptions</p>

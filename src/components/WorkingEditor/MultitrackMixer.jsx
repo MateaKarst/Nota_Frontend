@@ -134,17 +134,15 @@ const MultitrackMixer = ({ songId }) => {
     };
   }, [tracks]);
 
-  // Delete track handler
+  // delete track handler
   const handleDeleteTrack = (id) => {
     setTracks((prev) => prev.filter((track) => track.id !== id));
   };
 
-  // Fetch song data on mount and when user or id changes
+  // fetch song data on mount and when user or id changes
   useEffect(() => {
     const fetchSongData = async () => {
       if (!user || !songId) return;
-
-      // Your fetch code
       try {
         const response = await fetch(API_ENDPOINTS.SONGS.SINGLE(songId), {
           method: "GET",

@@ -1,5 +1,11 @@
 @import '../variables.css';
 
+
+.settings-container{
+  margin-bottom: 50px;
+}
+
+
 .settings-icon-text {
   display: flex;
   align-items: center;

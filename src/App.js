@@ -25,6 +25,7 @@ function AppWrapper() {
     "/splash",
     "/record",
     "/music-editor/:id",
+    "/pro-page",
   ];
 
   const shouldHideNavBar = hiddenNavPaths.includes(location.pathname);
