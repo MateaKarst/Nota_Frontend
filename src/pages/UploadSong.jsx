@@ -27,6 +27,7 @@ const UploadSong = () => {
   const [selectedInstruments, setSelectedInstruments] = useState([]);
   const maxDescriptionLength = 150;
 
+
   // Fetch current song and track data when component mounts (optional, if you want to prefill)
   useEffect(() => {
     const fetchSongAndTrack = async () => {
@@ -41,7 +42,7 @@ const UploadSong = () => {
         setSongName(songData.name || '');
         setDescription(songData.description || '');
         setSelectedGenres(songData.genres || []);
-        if (songData.image_url) setImagePreview(songData.image_url);
+        if (songData.cover_image) setImagePreview(songData.cover_image);
 
         if (songData.track) {
           setSelectedInstruments(songData.track.instruments || []);
@@ -103,12 +104,11 @@ const UploadSong = () => {
   // PATCH request to update song details
   const updateSong = async () => {
     const formData = new FormData();
-    formData.append('title', songName); // ✅ use 'title'
-    formData.append('description', description); // ✅
-    formData.append('genres', JSON.stringify(selectedGenres)); // ⚠️ assumes backend parses JSON
-    if (imageFile) {
-      formData.append('cover_image', imageFile); // ✅ use 'cover_image'
-    }
+    formData.append('title', songName);
+    formData.append('description', description);
+    formData.append('genres', JSON.stringify(selectedGenres));
+    formData.append('cover_image', imageFile); 
+
 
     try {
       const res = await fetch(API_ENDPOINTS.SONGS.SINGLE(songId), {
