@@ -100,17 +100,17 @@ const HomePage = () => {
     setCurrentSong(song);
   };
 
-useEffect(() => {
-  if (showPopup) {
-    document.body.classList.add('no-scroll');
-  } else {
-    document.body.classList.remove('no-scroll');
-  }
+  useEffect(() => {
+    if (showPopup) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
 
-  return () => {
-    document.body.classList.remove('no-scroll');
-  };
-}, [showPopup]);
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [showPopup]);
 
 
 
@@ -124,8 +124,9 @@ useEffect(() => {
             <h1 className="pink-header-title">My Songs</h1>
             <HomeCarousel
               onPlay={(song) => setCurrentSong(song)}
-              onAddClick={handleOpenPopup} // opens popup
+              onAddClick={handleOpenPopup}
             />
+
           </div>
         </div>
 

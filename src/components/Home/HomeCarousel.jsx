@@ -1,51 +1,46 @@
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import { EffectCoverflow } from 'swiper/modules'
 import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
-import "../../styles/pages/home-page.css";
-import "../../styles/variables.css";
-
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthProvider';
+import API_ENDPOINTS from '../../routes/apiEndpoints';
 
 const HomeCarousel = ({ onPlay, onAddClick }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [cards, setCards] = useState([]);
 
-  const cards = [
-    {
-      id: 1,
-      imageUrl: "https://i1.sndcdn.com/artworks-f1i9IqHYWtvDYyEx-W6gCAQ-t240x240.jpg",
-      title: "Paris 2012",
-      creator: "Lily Vermeer",
-      contributersNbr: 6,
-      audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    },
-    {
-      id: 2,
-      imageUrl: "https://images.pexels.com/photos/3007347/pexels-photo-3007347.jpeg",
-      title: "Ressort",
-      creator: "Emily StarShine",
-      contributersNbr: 4,
-      audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    },
-    {
-      id: 3,
-      imageUrl: "https://i.pinimg.com/originals/8a/b8/7b/8ab87bd6999d659eb282fbed00895d86.jpg",
-      title: "Midnight echo",
-      creator: "Nutella",
-      contributersNbr: 2,
-      audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    },
-    {
-      id: 4,
-      imageUrl: "https://edmwaves.org/wp-content/uploads/2024/01/mario-piu-housewerk-ducamp-the-phone-riot174-2-500x471.jpeg",
-      title: "Rain of tears",
-      creator: "Lily Vermeer",
-      contributersNbr: 5,
-      audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    },
-  ];
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchUserSongs = async () => {
+      try {
+        // Assuming your API supports filtering songs by user_id via query params or POST body
+        const res = await fetch(`${API_ENDPOINTS.SONGS.MULTIPLE}?user_id=${user.id}`);
+        const data = await res.json();
+
+        // Transform data if necessary to match your card format
+        const userSongs = data.map(song => ({
+          id: song.id,
+          imageUrl: song.cover_image || 'default-image-url.jpg',
+          title: song.title,
+          creator: song.user_details?.username || user.username,
+          contributersNbr: song.tracks?.length || 1,
+          audio: song.compiled_path || 'default-audio-url.mp3',
+        }));
+
+        setCards(userSongs);
+      } catch (error) {
+        console.error("Failed to fetch user's songs", error);
+      }
+    };
+
+    fetchUserSongs();
+  }, [user]);
 
   return (
     <div style={{ width: "100%", padding: "20px 0" }}>
@@ -64,8 +59,6 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
         modules={[EffectCoverflow]}
         style={{ paddingBottom: "0px" }}
       >
-
-
         {/* Special + Card */}
         <SwiperSlide style={{ width: '250px' }}>
           <div
@@ -74,7 +67,7 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
               margin: "0 auto",
               padding: '3px',
               borderRadius: 'var(--border-radius-56)',
-              background: 'linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-orange), var(--color-yellow))', // gradient border
+              background: 'linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-orange), var(--color-yellow))',
             }}
           >
             <div
@@ -97,14 +90,18 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
           </div>
         </SwiperSlide>
 
-        {/* Regular Cards */}
+        {/* User's Songs */}
         {cards.map((card) => (
-          <SwiperSlide key={card.id} style={{ width: '250px' }}
-            onClick={() => navigate('/song-description', {
-              replace: true, //avoids stackinig another history entry (double nav issue)
+          <SwiperSlide
+            key={card.id}
+            style={{ width: '250px' }}
+            onClick={() => navigate(`/song-description/${card.id}`, {
+              replace: true,
               state: { title: card.title, imageUrl: card.imageUrl }
-            })}>
-            <CaroselCard {...card}
+            })}
+          >
+            <CaroselCard
+              {...card}
               onPlay={() =>
                 onPlay({
                   title: card.title,
@@ -120,7 +117,5 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
     </div>
   );
 };
-
-
 
 export default HomeCarousel;
