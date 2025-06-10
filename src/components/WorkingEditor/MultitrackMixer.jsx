@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Button from '../Buttons/BasicBtn';
 import EditorInstrument from '../Editor-Useless/EditorInstrument';
 import API_ENDPOINTS from '../../routes/apiEndpoints';
-import Cookies from "js-cookie";
 import { useAuth } from '../../context/AuthProvider';
-import { useParams } from 'react-router-dom';
 
 import { ReactComponent as GuitarIcon } from '../../assets/instruments/guitar.svg';
 import { ReactComponent as DrumIcon } from '../../assets/instruments/drum.svg';
@@ -28,12 +26,11 @@ const MultitrackMixer = ({ songId }) => {
   const animationFrameRef = useRef();
 
   const { user } = useAuth();
-  const [loading, setLoading] = useState(true);
-
-  const [song, setSong] = useState(null);
 
   // You need the tracks state here!
   const [tracks, setTracks] = useState([]);
+  const [, setSong] = useState([]);
+  const [, setLoading] = useState([]);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const multitrackRef = useRef(null);
