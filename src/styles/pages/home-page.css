@@ -129,3 +129,8 @@
   align-items: center;
   padding-top: 285px;
 }
+
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}

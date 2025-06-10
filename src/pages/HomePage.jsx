@@ -100,6 +100,20 @@ const HomePage = () => {
     setCurrentSong(song);
   };
 
+useEffect(() => {
+  if (showPopup) {
+    document.body.classList.add('no-scroll');
+  } else {
+    document.body.classList.remove('no-scroll');
+  }
+
+  return () => {
+    document.body.classList.remove('no-scroll');
+  };
+}, [showPopup]);
+
+
+
 
   return (
     <div className="home-page">

@@ -18,7 +18,7 @@ const PopUpContent = ({ type, data, onClose }) => {
 
   const { user } = useAuth();
 
-  // Extract songId once for clarity
+  // extract songId once for clarity
   const songId = data?.id;
 
   // --- CASE: upload-picture ---
@@ -61,7 +61,7 @@ const PopUpContent = ({ type, data, onClose }) => {
 
           setUploadedTrack({
             songId,
-            trackId: result.id,  // assuming backend returns track id here
+            trackId: result.id,  // backend returns track id here
             name: file.name,
             size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
             length: result.length || '4:24',
@@ -79,6 +79,7 @@ const PopUpContent = ({ type, data, onClose }) => {
 
     return (
       <>
+      
         <h2>Upload track to your song</h2>
         <p className="hint">Only MP3 files, up to 50 MB</p>
         <input type="file" accept="audio/mp3" onChange={handleFileChange} />
