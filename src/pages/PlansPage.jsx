@@ -1,3 +1,4 @@
+// src/pages/PlansPage.jsx
 import React, { useState } from "react";
 import "../styles/pages/plans-page.css";
 import NotaLogo from '../components/Logos/NotaLogo';
@@ -5,8 +6,10 @@ import BasicBtn from '../components/Buttons/BasicBtn';
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from 'react-router-dom';
 
+// Stripe public key
 const stripePromise = loadStripe("pk_test_51RTQK2CWh9wpzDVIFTkfAN10Tu2dYpHHyiPGLRC2w7rArvKFIXIsXLzjrDafSA8PlBXiwWHaqp8jhwLh2WMRTJyk00iKEWjtw7");
 
+// Feature list
 const features = [
   "Upload more than 1 track to collaboration",
   "Better import quality",
@@ -15,6 +18,7 @@ const features = [
   "No advertisements",
 ];
 
+// Plan options
 const plans = [
   {
     name: "Hobbyist",
@@ -39,52 +43,52 @@ const plans = [
   },
 ];
 
-const PlansPage = ({ onClose }) => {
+const PlansPage = () => {
   const navigate = useNavigate();
-  const handleClose = () => {
-    navigate('/home'); 
-  };
   const [selectedPlan, setSelectedPlan] = useState(null);
-  // Функція оплати:
-const handleCheckout = async () => {
-  if (selectedPlan === null) {
-    alert("Please select a plan first");
-    return;
-  }
 
+  const handleClose = () => {
+    navigate('/home');
+  };
 
-  const plan = plans[selectedPlan];
-
-  try {
-    const response = await fetch("http://localhost:5000/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ plan }),
-    });
-
-    const data = await response.json();
-
-    if (!data.id) {
-      alert("Payment session could not be created.");
+  const handleCheckout = async () => {
+    if (selectedPlan === null) {
+      alert("Please select a plan first");
       return;
     }
 
-    const stripe = await stripePromise;
-    await stripe.redirectToCheckout({ sessionId: data.id });
+    const plan = plans[selectedPlan];
 
-  } catch (error) {
-    console.error("Checkout error:", error);
-    alert("An error occurred during checkout. Please try again.");
-  }
-};
+    try {
+      // calling API
+      const response = await fetch("http://localhost:3000/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ plan }),
+      });
+
+      const data = await response.json();
+
+      if (!data.id) {
+        alert("Payment session could not be created.");
+        return;
+      }
+
+      const stripe = await stripePromise;
+      await stripe.redirectToCheckout({ sessionId: data.id });
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("An error occurred during checkout. Please try again.");
+    }
+  };
 
   return (
     <div className="plans-page">
       <div className="top">
-      <NotaLogo colorIndex={3} width="110px" height="30px" />
-      <button className="close-button" onClick={handleClose}>×</button>
+        <NotaLogo colorIndex={3} width="110px" height="30px" />
+        <button className="close-button" onClick={handleClose}>×</button>
       </div>
 
       <h2 className="title-plans">
@@ -92,7 +96,6 @@ const handleCheckout = async () => {
       </h2>
 
       <div className="grid-table">
-        {/* Заголовок таблиці */}
         <div className="feature-label empty-cell" />
         {plans.map((plan, i) => (
           <div key={i} className={`plan-header-section ${plan.color}`}>
@@ -101,7 +104,6 @@ const handleCheckout = async () => {
           </div>
         ))}
 
-        {/* Рядок з кількістю треків */}
         <div className="feature-label">Tracks in collaboration</div>
         {plans.map((plan, i) => (
           <div key={i} className={`track-count ${plan.color}`}>
@@ -109,7 +111,6 @@ const handleCheckout = async () => {
           </div>
         ))}
 
-        {/* Рядки з фічами */}
         {features.map((feature, featureIndex) => (
           <React.Fragment key={featureIndex}>
             <div className="feature-label">{feature}</div>
@@ -121,25 +122,23 @@ const handleCheckout = async () => {
           </React.Fragment>
         ))}
 
-        {/* Радіо-кнопки */}
         <div />
         {plans.map((plan, i) => (
-         <div key={i} className="radio-select">
-         <label className={`custom-radio ${plan.color}`}>
-           <input
-             type="radio"
-             name="plan"
-             checked={selectedPlan === i}
-             onChange={() => setSelectedPlan(i)}
-           />
-           <span className="radio-indicator"></span>
-         </label>
-       </div>
+          <div key={i} className="radio-select">
+            <label className={`custom-radio ${plan.color}`}>
+              <input
+                type="radio"
+                name="plan"
+                checked={selectedPlan === i}
+                onChange={() => setSelectedPlan(i)}
+              />
+              <span className="radio-indicator"></span>
+            </label>
+          </div>
         ))}
       </div>
 
       <BasicBtn type="main" text="Try now" onClick={handleCheckout} />
-
     </div>
   );
 };
