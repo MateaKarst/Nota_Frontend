@@ -12,16 +12,16 @@ body{
         align-items: center;
         gap: 12px;
         width: 100%;
-        margin-top: 20px;
-        margin-bottom:20px;
+        margin-top: 2dvh;
+        padding: 0 var(--spacing-32);
       }
-      
 
   .icon-button {
-    width: 34px;
-    height: 32px;
+    width: 29px;
+    height: 27px;
     cursor: pointer;
     fill: white; /* or any color you like */
+    transform: translateY(-30px);
   }
 
   .overview{

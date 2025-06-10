@@ -1,4 +1,4 @@
-/* PopupMenu.css */
+
 .popup-menu {
     background-color: #333;
     color: white;
@@ -10,6 +10,7 @@
     flex-direction: column;
     gap: 4px;
     font-family: sans-serif;
+    
   }
   
   .popup-item {
@@ -19,6 +20,11 @@
     cursor: pointer;
     transition: background-color 0.2s;
     border-bottom: 1px solid #555;
+    text-decoration: none;  
+    color: inherit;       
+    background: none;     
+    gap:6px;
+
   }
   
   .popup-item:last-child {

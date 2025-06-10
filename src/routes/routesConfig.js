@@ -38,7 +38,7 @@ export const appRoutes = [
     
     { path: "/songs", element: <MySongsPage />},
     { path: "/song-description/:id", element: <SongDescription />},
-    { path: "/upload-song", element: <UploadSong /> },
+    { path: "/upload-song/:id", element: <UploadSong /> },
     { path: "/record", element: <Record /> },
     { path: "/editor2/:id", element: <Editor2 /> },
     { path: "/add-tracks", element: <AddTracksPage /> },
@@ -51,7 +51,7 @@ export const appRoutes = [
     { path: "/notifications", element: <NotificationsPage /> },
 
     { path: "/chat", element: <Chat /> },
-    { path: "/chat-overview", element: <ChatOverview /> },
+    { path: "/chat-overview", element: <ChatOverview /> ,isPublic:true},
 
     { path: "/view-all", element: <ViewAllPage /> },
     { path: "/filter", element: <FilterPage /> },

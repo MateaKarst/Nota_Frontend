@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import SectionHeadImage from "../components/SongDescription/SectionHeadImage";
-import TrackDropdown from "../components/Tracks/TrackDropdown";
-import HeaderSongDescription from "../components/Headers/HeaderSongDescription";
-import BasicBtn from "../components/Buttons/BasicBtn";
-import Popup from '../components/PopUps/PopUp';
-import { API_ENDPOINTS } from "../routes/apiEndpoints";
-import { useAuth } from "../context/AuthProvider";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+import SectionHeadImage from '../components/SongDescription/SectionHeadImage';
+import TrackDropdown from '../components/Tracks/TrackDropdown';
+import BasicBtn from "../components/Buttons/BasicBtn";
+import NavBar from "../components/Navigation/NavBar"
+import HeaderVariants from '../components/Headers/HeaderVariants';
+import Popup from '../components/PopUps/PopUp';
+
+import { API_ENDPOINTS } from "../routes/apiEndpoints";
+import { useAuth } from '../context/AuthProvider';
 
 import "../styles/pages/song-description.css";
 
 const SongDescription = () => {
   const navigate = useNavigate();
-  // const { id, title, imageUrl } = location.state || {};
-  // const { id } = useParams();
+
   const { user } = useAuth();
   const { id } = useParams();
 
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showPopup, setShowPopup] = useState(false);
 
-  //const id = "8a97f671-2c6b-4673-a70b-57d9225d1d2c";
-  const songId = id;
-  console.log("Getting song id", songId); 
+  const songId = id
+  console.log("Getting song id", songId);
 
   const [song, setSong] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchSongData = async () => {
@@ -81,12 +82,11 @@ const SongDescription = () => {
 
   return (
     <div className="song-description-page">
-      {/*header section */}
+
       <div className="header-section">
-        <HeaderSongDescription />
+        <HeaderVariants mode="menu" />
       </div>
 
-      {/*image + dropdown */}
       <div className="top-part">
         <SectionHeadImage
           title={song?.title}
@@ -103,24 +103,23 @@ const SongDescription = () => {
             <TrackDropdown tracks={tracks} />
           )}
         </div>
+      </div >
+
+      <div className="navbar-bottom">
+        <NavBar />
       </div>
 
-      {/* Collaborate Button*/}
       <div className="collaborate">
-        <BasicBtn
-          type="main"
-          text="Collaborate"
-          onClick={() => navigate("/editor2/:id")}
-        />
+        <BasicBtn type="main" text="Collaborate" onClick={() => setShowPopup(true)} />
       </div>
 
-       {showPopup && (
+      {showPopup && (
         <Popup
           type="upload-track"
           onClose={() => setShowPopup(false)}
         />
-      )} 
-    </div>
+      )}
+    </div >
   );
 };
 

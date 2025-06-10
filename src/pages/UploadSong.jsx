@@ -1,17 +1,60 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+
 import HeaderVariants from "../components/Headers/HeaderVariants";
 import Buttons from "../components/Buttons/BasicBtn";
 import UserTrack from "../components/Tracks/UserTrack";
 import TagInput from "../components/Tags/TagInput";
-import { useNavigate } from "react-router-dom";
+
+import API_ENDPOINTS from "../routes/apiEndpoints";
+import { useAuth } from "../context/AuthProvider";
+
 import "../styles/pages/upload-song.css";
 
 const UploadSong = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const fileInputRef = useRef();
+
+  const { user } = useAuth();
+  const trackId = location.state?.trackId;
+  const songId = location.state?.songId;
+
+  // Local states
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [songName, setSongName] = useState('');
   const [description, setDescription] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedInstruments, setSelectedInstruments] = useState([]);
   const maxDescriptionLength = 150;
+
+  // Fetch current song and track data when component mounts (optional, if you want to prefill)
+  useEffect(() => {
+    const fetchSongAndTrack = async () => {
+      if (!songId) return;
+
+      try {
+        const res = await fetch(API_ENDPOINTS.SONGS.SINGLE(songId));
+        if (!res.ok) throw new Error("Failed to fetch song");
+
+        const songData = await res.json();
+
+        setSongName(songData.name || '');
+        setDescription(songData.description || '');
+        setSelectedGenres(songData.genres || []);
+        if (songData.image_url) setImagePreview(songData.image_url);
+
+        if (songData.track) {
+          setSelectedInstruments(songData.track.instruments || []);
+        }
+      } catch (error) {
+        console.error("Error fetching song/track data", error);
+      }
+    };
+
+    fetchSongAndTrack();
+  }, [songId]);
 
   const handleClick = () => {
     fileInputRef.current.click();
@@ -22,7 +65,7 @@ const UploadSong = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setImagePreview(imageUrl);
-      console.log("Selected file:", file);
+      setImageFile(file); // save actual file for upload
     }
   };
 
@@ -37,29 +80,95 @@ const UploadSong = () => {
   };
 
   const genres = [
-    "Rock",
-    "Hip Hop",
-    "Jazz",
-    "Electronic",
-    "Pop",
-    "Blues",
-    "Reggae",
-    "Classical",
+    "rock",
+    "pop",
+    "jazz",
+    "classical",
+    "hiphop",
+    "electronic",
+    "country",
+    "other",
   ];
 
   const instruments = [
-    "Guitar",
-    "Piano",
-    "Drums",
-    "Violin",
-    "Bass",
-    "Synth",
-    "Trumpet",
-    "Flute",
+    "guitar",
+    "bass",
+    "drums",
+    "keyboard",
+    "vocals",
+    "other",
   ];
 
   const wordCount =
     description.trim() === "" ? 0 : description.trim().split(/\s+/).length;
+
+  // PATCH request to update song details
+  const updateSong = async () => {
+    const formData = new FormData();
+    formData.append('title', songName); // ✅ use 'title'
+    formData.append('description', description); // ✅
+    formData.append('genres', JSON.stringify(selectedGenres)); // ⚠️ assumes backend parses JSON
+    if (imageFile) {
+      formData.append('cover_image', imageFile); // ✅ use 'cover_image'
+    }
+
+    try {
+      const res = await fetch(API_ENDPOINTS.SONGS.SINGLE(songId), {
+        method: 'PATCH',
+        body: formData,
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || "Failed to update song");
+      }
+      return true;
+    } catch (err) {
+      console.error("Error updating song:", err);
+      alert("Failed to update song");
+      return false;
+    }
+  };
+
+
+  // PATCH request to update track instruments
+  const updateTrack = async () => {
+    if (!trackId) return true; // no track to update, skip
+
+    try {
+      const res = await fetch(API_ENDPOINTS.TRACKS.SINGLE(trackId), {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ instruments: selectedInstruments }),
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || "Failed to update track");
+      }
+      return true;
+    } catch (err) {
+      console.error("Error updating track:", err);
+      alert("Failed to update track");
+      return false;
+    }
+  };
+
+  const handlePost = async () => {
+    if (!songId) {
+      alert("Song ID is missing.");
+      return;
+    }
+
+    const songUpdated = await updateSong();
+    if (!songUpdated) return;
+
+    const trackUpdated = await updateTrack();
+    if (!trackUpdated) return;
+
+    alert("Song and track updated successfully!");
+    navigate(`/editor2`); // or wherever you want to redirect
+  };
 
   return (
     <div className="upload-song-container">
@@ -94,8 +203,8 @@ const UploadSong = () => {
           <p className="section-title">Song name</p>
           <input
             type="text"
-            name="Name"
-            id="name"
+            value={songName}
+            onChange={(e) => setSongName(e.target.value)}
             className="song-input"
             placeholder="Name"
           />
@@ -109,7 +218,7 @@ const UploadSong = () => {
               placeholder="Describe your song..."
               rows={4}
             />
-            <span className="word-counter">{wordCount} / 150</span>
+            <span className="word-counter">{wordCount} / {maxDescriptionLength}</span>
           </div>
 
           <p className="section-title">Genre tag</p>
@@ -118,6 +227,8 @@ const UploadSong = () => {
             placeholder="Add genres..."
             colorIndex={4}
             type="genres"
+            selectedTags={selectedGenres}
+            setSelectedTags={setSelectedGenres}
           />
 
           <p className="section-title">Instrument tag</p>
@@ -125,11 +236,13 @@ const UploadSong = () => {
             suggestions={instruments}
             placeholder="Add instruments..."
             colorIndex={5}
+            selectedTags={selectedInstruments}
+            setSelectedTags={setSelectedInstruments}
           />
         </div>
 
         <div className="upload-song-btn">
-          <Buttons type="main" text="Post" onClick={() => navigate("/editor2")} />
+          <Buttons type="main" text="Post" onClick={handlePost} />
         </div>
       </div>
     </div>
