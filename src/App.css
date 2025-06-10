@@ -16,23 +16,23 @@ body,
   height: 100%;
 }
 
-/* Mobile phone frame */
+/* mobile phone frame */
 .mobile-frame {
   position: relative;
   width: 100%;
   max-width: 400px;
   max-height: 800px;
   height: 100vh;
-  /* For responsiveness */
+  /* for responsiveness */
   border: 1px solid #555;
   border-radius: 24px;
   overflow: hidden;
-  background: #1e1e1e;
+  background: #343331;;
   display: flex;
   flex-direction: column;
 }
 
-/* Scrollable page content inside frame */
+/* scrollable page content inside frame */
 .page-content {
   flex: 1;
   overflow-y: auto;
@@ -42,7 +42,7 @@ body,
   padding-bottom: 50px;
 }
 
-/* When NavBar is hidden */
+/* when NavBar is hidden */
 .page-content.no-navbar {
   padding-bottom: 0;
 }
@@ -83,7 +83,7 @@ body,
   }
 }
 
-/* Hide scrollbars in a cross-browser way */
+/* hide scrollbars in a cross-browser way */
 .page-content {
   scrollbar-width: none;
   /* Firefox */

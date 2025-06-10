@@ -86,13 +86,13 @@ const UserTrack = ({
       }`}
     >
       <div className="user-info">
-        <img src={profileImage} alt={name} className="avatar" />
+        <img src={profileImage} alt={name} className="track-avatar" />
         <div className="user-info-txt">
           <p className="name">{name}</p>
           <p className="tag">{tag}</p>
         </div>
       </div>
-      <div ref={waveformRef} className="waveform"></div>
+      <div ref={waveformRef} className="waveform-track"></div>
       <div className="toggle">
         <label className="switch">
           <input type="checkbox" checked={isActive} onChange={handleToggle} />

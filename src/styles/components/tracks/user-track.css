@@ -3,13 +3,16 @@
 .voice-card {
     display: flex;
     padding: 6px var(--spacing-4);
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 16px;
     align-items: center;
     align-self: stretch;
     background-color: var(--color-black);
     font-family: var(--font-family-primary);
     width: 95%;
     border-radius: var(--border-radius-8);
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .own-track {
@@ -23,16 +26,15 @@
 .user-info {
     display: flex;
     align-items: flex-start;
-    gap: var(--spacing-8);
-    
+    gap: var(--spacing-12);
+
 }
 
-.avatar {
+.track-avatar {
     width: 40px;
     height: 40px;
     border-radius: var(--border-radius-56);
     object-fit: cover;
-     margin-right: 12px; 
 }
 
 
@@ -50,31 +52,31 @@
     color: var(--color-white);
     font-size: var(--font-size-14);
     font-weight: var(--font-weight-regular);
-   margin-block-start: 0;
-   margin-block-end: 0;
-   margin-inline-start: 0px;
-   margin-inline-end: 0px;
-   unicode-bidi: isolate;
-   display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    display: block;
 }
 
 .tag {
     color: var(--color-yellow);
     font-size: var(--font-size-12);
     font-weight: var(--font-weight-regular);
-     margin-block-start: 0;
-   margin-block-end: 0;
-   margin-inline-start: 0px;
-   margin-inline-end: 0px;
-   unicode-bidi: isolate;
-   display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    display: block;
 }
 
-.waveform {
+.waveform-track {
     flex-grow: 0;
     flex-shrink: 1;
-    min-width: 150px;
-    
+    min-width: 160px;
+
 }
 
 /*.toggle {
@@ -137,12 +139,12 @@
     transition: .4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: var(--color-pink);
 }
 
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(17px);
     -ms-transform: translateX(17px);
     transform: translateX(17px);
