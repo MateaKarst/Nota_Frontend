@@ -51,7 +51,7 @@ export const appRoutes = [
     { path: "/notifications", element: <NotificationsPage /> },
 
     { path: "/chat", element: <Chat /> },
-    { path: "/chat-overview", element: <ChatOverview /> },
+    { path: "/chat-overview", element: <ChatOverview /> ,isPublic:true},
 
     { path: "/view-all", element: <ViewAllPage /> },
     { path: "/filter", element: <FilterPage /> },
