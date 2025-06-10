@@ -167,7 +167,7 @@ const UploadSong = () => {
     if (!trackUpdated) return;
 
     alert("Song and track updated successfully!");
-    navigate(`/editor2`); // or wherever you want to redirect
+    navigate(`/music-editor/${songId}`);
   };
 
   return (
