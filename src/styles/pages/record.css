@@ -110,16 +110,26 @@
 
 .recording-snippet {
   margin-top: 8dvh;
-    align-items: center;
-    display: flex;
-  justify-content: center; 
+  display: flex;
+  align-items: center;
 }
 
 .snippet-row {
   display: flex;
   align-items: center;
   gap: 5dvh;
+  flex-wrap: nowrap;
 }
+
+.waveform {
+  width: 100%;
+  max-width: 300px;
+  min-width: 300px;
+  height: 60px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
 
 .recording-page  .play-icon {
   width: 3dvh;

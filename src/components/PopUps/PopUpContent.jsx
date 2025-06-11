@@ -108,6 +108,7 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
         <div className="btn-group">
           <BasicBtn text="Upload" onClick={handleUpload} />
         </div>
+          <AttachFileBtn variant={1} text={'Record'} onClick={() => navigate('/record')} />
       </>
     );
   }
@@ -121,7 +122,8 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
           <span className="icon">🔴</span> {uploadedTrack?.name || 'MoonshineTry521.mp3'}<br />
           <small>{uploadedTrack?.length || '4:24'} | {uploadedTrack?.size || '4.1 MB'}</small>
         </div>
-        <BasicBtn
+        <div className="up-btn">
+        <BasicBtn 
           type="tiny"
           text="Upload to editor"
           onClick={() => {
@@ -138,6 +140,7 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
             onClose();
           }}
         />
+        </div>
       </>
     );
   }
