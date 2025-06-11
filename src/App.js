@@ -27,6 +27,7 @@ function AppWrapper() {
     "/music-editor/:id",
     "/pro-page",
     "/plans",
+    "/select-top-songs"
 
   ];
 

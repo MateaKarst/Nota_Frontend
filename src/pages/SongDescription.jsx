@@ -109,7 +109,6 @@ const SongDescription = () => {
             <p>Loading tracks...</p>
           ) : (
              <TrackDropdown tracks={tracks} registerPlayerRef={setAudioPlayers} />
-        
           )}
         </div>
       </div >

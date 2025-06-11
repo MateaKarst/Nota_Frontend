@@ -75,16 +75,6 @@ return (
             </label>
 
             <label>
-                <span>Email</span>
-            <input 
-            type="email"
-            value={email}
-            placeholder='you@example.com'
-            onChange={e => setEmail(e.target.value)}
-            required />
-            </label>
-
-            <label>
                 <span>Bio</span>
                 <textarea
                 value={bio}
