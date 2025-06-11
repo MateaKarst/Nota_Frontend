@@ -108,7 +108,17 @@ const SongDescription = () => {
           {loading ? (
             <p>Loading tracks...</p>
           ) : (
-             <TrackDropdown tracks={tracks} registerPlayerRef={setAudioPlayers} />
+            Array.isArray(tracks) && tracks.length > 0 ? (
+              <TrackDropdown
+                tracks={tracks.map(track => ({
+                  ...track,
+                  isOwnTrack: track.user_id === user.id,
+                }))}
+                registerPlayerRef={setAudioPlayers}
+              />
+            ) : (
+              <p>No tracks available</p>
+            )
           )}
         </div>
       </div >
@@ -126,7 +136,7 @@ const SongDescription = () => {
           type="upload-track"
           onClose={() => setShowPopup(false)}
           data={song}
-          directToEditor={true}  
+          directToEditor={true}
         />
       )}
     </div >

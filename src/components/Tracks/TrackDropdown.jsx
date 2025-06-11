@@ -44,13 +44,18 @@ const TrackDropdown = ({ tracks: propTracks, registerPlayerRef }) => {
     //     // <UserTrack key={index} {...track} />
     //     <UserTrack key={track.id || index} {...track} />
     //   ))}
-        <div className="track-dropdown">
+    <div className="track-dropdown">
       {displayedTracks.map((track, index) => (
         <UserTrack
           key={track.id || index}
-          {...track}
-          registerAudio={registerAudio} // <-- this line
+          isOwnTrack={track.isOwnTrack}
+          name={track.user_details?.name || "Unknown"}
+          profileImage={track.user_details?.avatar}
+          audioSrc={track.url}
+          tag={`#${track.instruments?.[0] || "Instrument"}`}
+          registerAudio={registerAudio}
         />
+
       ))}
 
       {hasMoreThanFive && (

@@ -4,14 +4,13 @@ import WaveSurfer from "wavesurfer.js";
 import "../../styles/components/tracks/user-track.css";
 import "../../styles/variables.css";
 
-import profImg from "../../assets/avatars/violeta.svg";
 import Track from "../../assets/instrument-samples/Drum.mp3";
 
 const UserTrack = ({
   isOwnTrack = false,
-  name = "Samantha",
+  name,
   tag = "#Vocal",
-  profileImage = profImg,
+  profileImage,
   audioSrc = Track,
   registerAudio,
 }) => {
@@ -81,9 +80,8 @@ const UserTrack = ({
 
   return (
     <div
-      className={`voice-card ${isOwnTrack ? "own-track" : "other-track"} ${
-        !isActive ? "inactive" : ""
-      }`}
+      className={`voice-card ${isOwnTrack ? "own-track" : "other-track"} ${!isActive ? "inactive" : ""
+        }`}
     >
       <div className="user-info">
         <img src={profileImage} alt={name} className="track-avatar" />

@@ -53,6 +53,7 @@ useEffect(() => {
     try {
       const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
       const data = await res.json();
+      console.log("songs data", data)
 
       // Sort songs by created_at (newest first)
       const sortedSongs = data.sort((a, b) => {

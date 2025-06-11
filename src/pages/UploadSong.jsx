@@ -25,6 +25,7 @@ const UploadSong = () => {
   const [description, setDescription] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedInstruments, setSelectedInstruments] = useState([]);
+  const [songData, setSongData] = useState(null);
   const maxDescriptionLength = 150;
 
 
@@ -38,14 +39,15 @@ const UploadSong = () => {
         if (!res.ok) throw new Error("Failed to fetch song");
 
         const songData = await res.json();
-
+        console.log("Fetched songData:", songData);
+        setSongData(songData)
         setSongName(songData.name || '');
         setDescription(songData.description || '');
         setSelectedGenres(songData.genres || []);
         if (songData.cover_image) setImagePreview(songData.cover_image);
 
-        if (songData.track) {
-          setSelectedInstruments(songData.track.instruments || []);
+        if (songData.tracks && songData.tracks[0]) {
+          setSelectedInstruments(songData.tracks[0].instruments || []);
         }
       } catch (error) {
         console.error("Error fetching song/track data", error);
@@ -107,7 +109,7 @@ const UploadSong = () => {
     formData.append('title', songName);
     formData.append('description', description);
     formData.append('genres', JSON.stringify(selectedGenres));
-    formData.append('cover_image', imageFile); 
+    formData.append('cover_image', imageFile);
 
 
     try {
@@ -193,8 +195,21 @@ const UploadSong = () => {
 
       <div className="criteria-container">
         <div>
-          <p className="section-title">Your track</p>
-          <UserTrack isOwnTrack={false} />
+          <p className="section-title">Tracks in this song</p>
+          {Array.isArray(songData?.tracks) && songData.tracks.length > 0 ? (
+            songData.tracks.map((track, index) => (
+              <UserTrack
+                key={track.id || index}
+                isOwnTrack={track.id === trackId}
+                name={track.user_details?.name}
+                profileImage={track.user_details?.avatar}
+                audioSrc={track.url}
+                tag={`#${track.instruments?.[0]}`}
+              />
+            ))
+          ) : (
+            <p>No tracks available.</p>
+          )}
         </div>
 
         <div className="song-info">
