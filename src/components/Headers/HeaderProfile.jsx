@@ -16,7 +16,7 @@ const navigate = useNavigate();
     < PinkLogo colorIndex={0} width="55px" height="55px" ></PinkLogo>
     <div className='nav'>
       <SettingsIcon className="icon-style" onClick={() => navigate('/settings')}/>
-      <PencilIcon className="icon-style" />
+      <PencilIcon className="icon-style" onClick={() => navigate('/account-settings')} />
     </div>
     </div>
   </header>

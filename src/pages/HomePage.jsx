@@ -31,6 +31,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const playerRef = useRef(null);
 
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (playerRef.current && !playerRef.current.contains(e.target)) {
@@ -47,19 +48,26 @@ const HomePage = () => {
     };
   }, [currentSong]);
 
-  useEffect(() => {
-    const fetchNewSongs = async () => {
-      try {
-        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
-        const data = await res.json();
-        setNewSongs(data);
-      } catch (err) {
-        console.error("Failed to fetch new songs", err);
-      }
-    };
+useEffect(() => {
+  const fetchNewSongs = async () => {
+    try {
+      const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+      const data = await res.json();
 
-    fetchNewSongs();
-  }, []);
+      // Sort songs by created_at (newest first)
+      const sortedSongs = data.sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+
+      setNewSongs(sortedSongs);
+    } catch (err) {
+      console.error("Failed to fetch new songs", err);
+    }
+  };
+
+  fetchNewSongs();
+}, []);
+
 
   const handleMusicCardClick = (song) => {
     console.log("handle navigation songId");

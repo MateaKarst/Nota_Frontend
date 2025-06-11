@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css'
-import 'swiper/css/effect-coverflow'
-import 'swiper/css/pagination'
-import { EffectCoverflow } from 'swiper/modules'
-import CaroselCard from '../MusicCard/CaroselCard/CaroselCard'
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthProvider';
-import API_ENDPOINTS from '../../routes/apiEndpoints';
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow } from "swiper/modules";
+import CaroselCard from "../MusicCard/CaroselCard/CaroselCard";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
+import API_ENDPOINTS from "../../routes/apiEndpoints";
 
 const HomeCarousel = ({ onPlay, onAddClick }) => {
   const navigate = useNavigate();
@@ -20,17 +20,22 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
     const fetchUserSongs = async () => {
       try {
         // assuming your API supports filtering songs by user_id via query params or POST body
-        const res = await fetch(`${API_ENDPOINTS.SONGS.MULTIPLE}?user_id=${user.id}`);
+        const res = await fetch(
+          `${API_ENDPOINTS.SONGS.MULTIPLE}?user_id=${user.id}`
+        );
         const data = await res.json();
+        // sort by created_at in descending order (newest first)
+        const sortedData = data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
 
-        // transform data if necessary to match your card format
-        const userSongs = data.map(song => ({
+        const userSongs = sortedData.map((song) => ({
           id: song.id,
-          imageUrl: song.cover_image || 'default-image-url.jpg',
+          imageUrl: song.cover_image || "default-image-url.jpg",
           title: song.title,
           creator: song.user_details?.username || user.username,
           contributersNbr: song.tracks?.length || 1,
-          audio: song.compiled_path || 'default-audio-url.mp3',
+          audio: song.compiled_path || "default-audio-url.mp3",
         }));
 
         setCards(userSongs);
@@ -60,29 +65,30 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
         style={{ paddingBottom: "0px" }}
       >
         {/* Special + Card */}
-        <SwiperSlide style={{ width: '250px' }}>
+        <SwiperSlide style={{ width: "250px" }}>
           <div
             style={{
-              width: '200px',
+              width: "200px",
               margin: "0 auto",
-              padding: '3px',
-              borderRadius: 'var(--border-radius-56)',
-              background: 'linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-orange), var(--color-yellow))',
+              padding: "3px",
+              borderRadius: "var(--border-radius-56)",
+              background:
+                "linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-orange), var(--color-yellow))",
             }}
           >
             <div
               onClick={onAddClick}
               style={{
-                borderRadius: 'var(--border-radius-56)',
-                backgroundColor: '#2c2c2c',
-                height: '200px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: 'white',
-                fontSize: '40px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
+                borderRadius: "var(--border-radius-56)",
+                backgroundColor: "#2c2c2c",
+                height: "200px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
+                fontSize: "40px",
+                fontWeight: "bold",
+                cursor: "pointer",
               }}
             >
               +
@@ -94,11 +100,13 @@ const HomeCarousel = ({ onPlay, onAddClick }) => {
         {cards.map((card) => (
           <SwiperSlide
             key={card.id}
-            style={{ width: '250px' }}
-            onClick={() => navigate(`/song-description/${card.id}`, {
-              replace: true,
-              state: { title: card.title, imageUrl: card.imageUrl }
-            })}
+            style={{ width: "250px" }}
+            onClick={() =>
+              navigate(`/song-description/${card.id}`, {
+                replace: true,
+                state: { title: card.title, imageUrl: card.imageUrl },
+              })
+            }
           >
             <CaroselCard
               {...card}

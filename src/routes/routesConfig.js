@@ -23,6 +23,7 @@ import MusicEditor from "../pages/MusicEditor";
 import AddTracksPage from "../pages/AddTrackPage";
 import ProPage from "../pages/ProPage";
 import PlansPage from "../pages/PlansPage";
+import SelectTopSongs from "../pages/account-settings/SelectTopSongs";
 
 export const appRoutes = [
     { path: "/", element: <Onboarding />, isPublic: true },
@@ -53,6 +54,7 @@ export const appRoutes = [
     { path: "/notifications", element: <NotificationsPage /> },
     { path: "/pro-page", element: <ProPage /> },
     { path: "/plans", element: <PlansPage /> },
+    { path: "/select-top-songs", element: <SelectTopSongs /> },
 
     { path: "/chat", element: <Chat /> },
     { path: "/chat-overview", element: <ChatOverview /> ,isPublic:true},

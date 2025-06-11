@@ -41,8 +41,6 @@ const AccountSettings = () => {
         }
     ]);
 
-    
-
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate('/profile');
