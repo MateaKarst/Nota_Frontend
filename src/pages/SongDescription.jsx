@@ -112,7 +112,7 @@ const SongDescription = () => {
               <TrackDropdown
                 tracks={tracks.map(track => ({
                   ...track,
-                  isOwnTrack: track.user_id === user.id,
+                  isOwnTrack: track.user_details.id === user.id || track.user_id === user.id,
                 }))}
                 registerPlayerRef={setAudioPlayers}
               />

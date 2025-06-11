@@ -55,7 +55,6 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
       });
     };
 
-
     const handleUpload = async () => {
       if (!file) return alert('Please choose a file');
 
@@ -68,32 +67,35 @@ const PopUpContent = ({ type, data, onClose, directToEditor }) => {
         const res = await fetch(API_ENDPOINTS.TRACKS.MULTIPLE, {
           method: 'POST',
           body: formData,
+          // DO NOT set 'Content-Type' header here!
         });
 
-        if (res.ok) {
-          const result = await res.json();
-
-          setUploadedTrack({
-            songId,
-            trackId: result.id,
-            name: file.name,
-            size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
-            length: audioLength || result.length || '0:00',
-          });
-
-          if (directToEditor) {
-            navigate(`/music-editor/${songId}`);
-            onClose();
-            return;
-          }
-
-          setCurrentType('upload-to-editor');
-        } else {
-          const error = await res.json();
-          console.error('Upload failed:', error);
+        if (!res.ok) {
+          const errorData = await res.json();
+          console.error('Upload failed:', errorData.message || errorData);
+          alert(`Upload failed: ${errorData.message || 'Unknown error'}`);
+          return;
         }
+
+        const result = await res.json();
+        setUploadedTrack({
+          songId,
+          trackId: result.track.id,
+          name: file.name,
+          size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
+          length: audioLength || '0:00',
+        });
+
+        if (directToEditor) {
+          navigate(`/music-editor/${songId}`);
+          onClose();
+          return;
+        }
+
+        setCurrentType('upload-to-editor');
       } catch (err) {
         console.error('Error uploading file:', err);
+        alert('Error uploading file. See console for details.');
       }
     };
 
