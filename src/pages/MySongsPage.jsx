@@ -18,35 +18,37 @@ function MySongsPage() {
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
 
-  useEffect(() => {
-    const fetchSongs = async () => {
-      if (!user) return;
-      try {
-        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
-        const data = await res.json();
+ useEffect(() => {
+  const fetchSongs = async () => {
+    if (!user) return;
+    try {
+      const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+      const data = await res.json();
 
-        console.log("All song objects:", data);
-        console.log("Current user ID:", user.id);
+      console.log("All song objects:", data);
+      console.log("Current user ID:", user.id);
 
-        const mySongs = data.filter(song => song.user_id === user.id);
+      // Sort all songs by created_at descending (newest first)
+      const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-        const collaborations = data.filter(song => {
-          if (song.user_id === user.id) return false;
-          return song.tracks?.some(track => track.user_id === user.id);
-        });
+      const mySongs = sortedData.filter(song => song.user_id === user.id);
+      const collaborations = sortedData.filter(song => {
+        if (song.user_id === user.id) return false;
+        return song.tracks?.some(track => track.user_id === user.id);
+      });
 
-        setAllSongs(data);
-        setCreatedSongs(mySongs);
-        setCollaborationSongs(collaborations);
-        setFilteredSongs(mySongs); // default to my songs
+      setAllSongs(sortedData);
+      setCreatedSongs(mySongs);
+      setCollaborationSongs(collaborations);
+      setFilteredSongs(mySongs); // default to my songs
+    } catch (err) {
+      console.error("Error fetching songs:", err);
+    }
+  };
 
-      } catch (err) {
-        console.error("Error fetching songs:", err);
-      }
-    };
+  fetchSongs();
+}, [user]);
 
-    fetchSongs();
-  }, [user]);
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
