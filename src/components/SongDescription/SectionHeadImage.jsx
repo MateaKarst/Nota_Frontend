@@ -15,6 +15,7 @@ const SectionHeadImage = ({
   showDescription = true,
   showTags = true,
   showInteractions = true,
+  audioPlayersRef,
 }) => {
   console.log("SectionHeadImage imageUrl:", imageUrl);
  
@@ -28,7 +29,7 @@ const SectionHeadImage = ({
  
 return (
     <div>
-      <HeadImage imageUrl={imageUrl} />
+      <HeadImage imageUrl={imageUrl} audioPlayersRef={audioPlayersRef} />
       <div className="song-info">
         <h1 className="song-title">{title || "Unknown Title"}</h1>
 

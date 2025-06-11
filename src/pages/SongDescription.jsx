@@ -17,13 +17,13 @@ import { useAuth } from '../context/AuthProvider';
 import "../styles/pages/song-description.css";
 
 const SongDescription = () => {
+
   const navigate = useNavigate();
   const audioPlayersRef = useRef([]);
 
   const setAudioPlayers = (players) => {
     audioPlayersRef.current = players;
   };
-
 
   const { user } = useAuth();
   const { id } = useParams();
@@ -100,6 +100,7 @@ const SongDescription = () => {
           imageUrl={song?.cover_image}
           description={song?.description}
           genres={song?.genres || []}
+          audioPlayersRef={audioPlayersRef}
         />
 
         <div className="dropdown">
@@ -125,6 +126,8 @@ const SongDescription = () => {
         <Popup
           type="upload-track"
           onClose={() => setShowPopup(false)}
+          data={song}
+          directToEditor={true}  
         />
       )}
     </div >

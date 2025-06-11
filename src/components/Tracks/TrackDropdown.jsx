@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import UserTrack from "./UserTrack";
+import { useRef } from "react";
 
-const TrackDropdown = ({ tracks: propTracks }) => {
+const TrackDropdown = ({ tracks: propTracks, registerPlayerRef }) => {
+  const audioPlayers = useRef([]);
   // use dummy data if no props are passed
   const defaultTracks = [
     {
@@ -31,11 +33,24 @@ const TrackDropdown = ({ tracks: propTracks }) => {
 
   const toggleShowMore = () => setShowMore((prev) => !prev);
 
+  const registerAudio = (player) => {
+    audioPlayers.current.push(player);
+    registerPlayerRef(audioPlayers.current);
+  };
+
   return (
-    <div className="track-dropdown">
+    // <div className="track-dropdown">
+    //   {displayedTracks.map((track, index) => (
+    //     // <UserTrack key={index} {...track} />
+    //     <UserTrack key={track.id || index} {...track} />
+    //   ))}
+        <div className="track-dropdown">
       {displayedTracks.map((track, index) => (
-        // <UserTrack key={index} {...track} />
-        <UserTrack key={track.id || index} {...track} />
+        <UserTrack
+          key={track.id || index}
+          {...track}
+          registerAudio={registerAudio} // <-- this line
+        />
       ))}
 
       {hasMoreThanFive && (
