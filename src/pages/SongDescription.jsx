@@ -127,7 +127,7 @@ const SongDescription = () => {
         <NavBar />
       </div>
 
-      <div className="collaborate">
+      <div className="collaborateBtn">
         <BasicBtn type="main" text="Collaborate" onClick={() => setShowPopup(true)} />
       </div>
 

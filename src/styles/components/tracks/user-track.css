@@ -158,10 +158,15 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+.voice-card.inactive {
+    filter: grayscale(100%) brightness(60%);
+    opacity: 0.6;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
 
-.voice-card.inactive .avatar,
+.voice-card.inactive .track-avatar,
 .voice-card.inactive .user-info-txt,
-.voice-card.inactive .waveform {
+.voice-card.inactive .waveform-track {
     filter: grayscale(100%) brightness(60%);
     opacity: 0.6;
     transition: filter 0.3s ease, opacity 0.3s ease;

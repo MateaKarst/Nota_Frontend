@@ -20,9 +20,9 @@ font-size:  var( --font-size-28);
 }
 
 
-.collaborate {
+.collaborateBtn {
   position: fixed;
-  bottom: 10dvh;
+  bottom: 15dvh;
   left: 50%;  
   transform: translateX(-50%);
   z-index: 9;

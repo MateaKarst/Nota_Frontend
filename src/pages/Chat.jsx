@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatText from "../components/Chat/ChatText";
 import Cookies from "js-cookie";
@@ -17,6 +17,7 @@ const Chat = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [textInput, setTextInput] = useState("");
+  const messagesEndRef = useRef(null);
 
   const otherUserId = "917e9d31-cd06-4a25-96ce-52cfe759e822"; //dummy usern from db
 
@@ -81,7 +82,7 @@ const Chat = () => {
           Authorization: `Bearer ${accessToken}`,
           "x-user-id": user.id,
         },
-        body: JSON.stringify({ text: textInput }), 
+        body: JSON.stringify({ text: textInput }),
       });
 
       if (!res.ok) throw new Error("Failed to send message");
@@ -94,7 +95,16 @@ const Chat = () => {
       setError(err.message || "Error sending message");
     }
   };
-  
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+
   if (loading) return <div className="chat-app">Loading...</div>;
   if (error) return <div className="chat-app">Error: {error}</div>;
 
@@ -117,7 +127,9 @@ const Chat = () => {
             variant={msg.sender_id === user.id ? "sender" : "receiver"}
           />
         ))}
+        <div ref={messagesEndRef} />
       </div>
+
 
       <div className="chat-input">
         <input
