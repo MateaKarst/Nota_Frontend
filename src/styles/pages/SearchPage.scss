@@ -4,15 +4,16 @@ body {
   background-color: var(--color-black);
 }
 
-.container{
-    background-color: var(--color-black);
-    height: 100vh;
-    color: var(--color-white);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.container {
+  background-color: var(--color-black);
+  height: 100vh;
+  color: var(--color-white);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start; /* merged from second .container block */
 }
 
 .search-bar {
@@ -20,29 +21,25 @@ body {
 }
 
 .genre-box {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-32);
-    align-items: center;
-  }
-  
-  .search-bar-container {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-32);
+  align-items: center;
+  width: 340px; /* optional: to limit width for better layout */
+  margin-bottom: 20px;
+}
 
-  .container{
-    margin: 0;
-    padding: 0;
-    justify-content: flex-start;
-  }
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
-  .songs-list {
+.songs-list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
   width: 100%;
   margin-left: 20px;
 }

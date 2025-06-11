@@ -18,6 +18,18 @@ const SearchPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [currentSong, setCurrentSong] = useState(null);
+    const [selectedGenre, setSelectedGenre] = useState(null);
+    const genres = ["jazz", "rock", "country", "metal", "pop", "indie"];
+
+
+    const filteredByGenreSongs = selectedGenre
+        ? songs.filter(song =>
+            (song.genres || []).some(genre => genre.toLowerCase() === selectedGenre.toLowerCase())
+        )
+        : filteredSongs.length > 0
+            ? filteredSongs
+            : songs;
+
 
     useEffect(() => {
         const fetchSongs = async () => {
@@ -56,7 +68,7 @@ const SearchPage = () => {
     };
 
     const handleResultsUpdate = (filtered) => {
-        console.log("Filtered results:", filtered); 
+        console.log("Filtered results:", filtered);
         setFilteredSongs(filtered);
     };
 
@@ -75,8 +87,51 @@ const SearchPage = () => {
             {loading && <div>Loading songs...</div>}
             {error && <div className="error">Error: {error}</div>}
 
+            {!selectedGenre && (
+                <div className="genre-box">
+                    {genres.map((genre) => (
+                        <GenreCard
+                            key={genre}
+                            mode={genre}
+                            onClick={() => setSelectedGenre(genre)}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {(selectedGenre || filteredSongs.length > 0) ? (
+                <div className="songs-list">
+                    {filteredByGenreSongs.map((song) => (
+                        <SmallCard
+                            key={song.id}
+                            title={song.title}
+                            creator={song.user_details.name}
+                            contributersNbr={
+                                (() => {
+                                    const contributorsCount = new Set(song.tracks?.map(track => track.user_id).filter(Boolean)).size;
+                                    return contributorsCount > 0 ? contributorsCount : "";
+                                })()
+                            }
+                            imageUrl={song.cover_image}
+                            onPlay={() =>
+                                setCurrentSong({
+                                    title: song.title,
+                                    artist: song.user_details.name,
+                                    cover: song.user_id,
+                                    audio: song,
+                                })
+                            }
+                        />
+                    ))}
+                </div>
+            ) : !loading && !error ? (
+                <div>No matching songs found.</div>
+            ) : null}
+
+
+
             {filteredSongs.length > 0 ? (
-                  <div className="songs-list">
+                <div className="songs-list">
                     {filteredSongs.map((song) => (
                         <SmallCard
                             key={song.id}
