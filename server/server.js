@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -7,7 +6,21 @@ const app = express();
 
 // Enhanced CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: [
+    // localhost browser
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+
+    // vio n mk network?
+    'http://192.168.1.38:3000',
+    'http://192.168.1.38:3001',
+    'http://192.168.1.38:3002',
+
+    // app sites
+    'https://nota-community.netlify.app',
+    'https://nota-backend-delta.vercel.app'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
