@@ -5,21 +5,63 @@ import { useRef } from "react";
 const TrackDropdown = ({ tracks: propTracks, registerPlayerRef }) => {
   const audioPlayers = useRef([]);
   // use dummy data if no props are passed
-  const defaultTracks = [
-    {
-      isOwnTrack: true,
-      profileImage:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png",
-    },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-    { isOwnTrack: false },
-  ];
+ const defaultTracks = [
+  {
+    isOwnTrack: true,
+    name: "Alice",
+    tag: "#Guitar",
+    profileImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/800px-Google_Chrome_icon_%28February_2022%29.svg.png",
+  },
+  {
+    isOwnTrack: false,
+    name: "Bob",
+    tag: "#Drums",
+    profileImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Portrait_Placeholder.png/600px-Portrait_Placeholder.png",
+  },
+  {
+    isOwnTrack: false,
+    name: "Carla",
+    tag: "#Vocal",
+    profileImage: "https://images.unsplash.com/photo-1603415526960-f7e0328abcee?crop=faces&fit=crop&h=200&w=200",
+  },
+  {
+    isOwnTrack: false,
+    name: "Dave",
+    tag: "#Bass",
+    profileImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/600px-User-avatar.svg.png",
+  },
+  {
+    isOwnTrack: false,
+    name: "Ella",
+    tag: "#Synth",
+    profileImage: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?crop=faces&fit=crop&h=200&w=200",
+  },
+  {
+    isOwnTrack: false,
+    name: "Frank",
+    tag: "#FX",
+    profileImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=faces&fit=crop&h=200&w=200",
+  },
+  {
+    isOwnTrack: false,
+    name: "Gina",
+    tag: "#Harmony",
+    profileImage: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?crop=faces&fit=crop&h=200&w=200",
+  },
+  {
+    isOwnTrack: false,
+    name: "Hank",
+    tag: "#Piano",
+    profileImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/User_icon_BLACK-01.png/600px-User_icon_BLACK-01.png",
+  },
+  {
+    isOwnTrack: false,
+    name: "Ivy",
+    tag: "#Strings",
+    profileImage: "https://images.unsplash.com/photo-1502767089025-6572583495b0?crop=faces&fit=crop&h=200&w=200",
+  },
+];
+
 
   const tracks = Array.isArray(propTracks) ? (propTracks.length ? propTracks : defaultTracks) : defaultTracks;
 
