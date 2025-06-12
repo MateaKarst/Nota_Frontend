@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://vercel.com/matea-karsts-projects/nota-backend";
+const API_BASE_URL = "https://nota-backend-delta.vercel.app";
 
 export const API_ENDPOINTS = {
     AUTH: {
