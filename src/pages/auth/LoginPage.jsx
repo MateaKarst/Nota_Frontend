@@ -39,7 +39,6 @@ const LoginPage = () => {
             const response = await fetch(API_ENDPOINTS.AUTH.LOGIN, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: "include",
                 body: JSON.stringify({ email, password }),
             });
 
