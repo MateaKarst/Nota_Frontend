@@ -31,6 +31,36 @@ const HomePage = () => {
   const navigate = useNavigate();
   const playerRef = useRef(null);
 
+  // Filter and sort for New songs (exclude user's own, sorted earliest created)
+  const newSongsFiltered = newSongs
+    .filter(song => song.user_id !== user.id)
+    .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
+  // Filter and sort for Collaborations (songs user contributed to, excluding own songs)
+  // Sort by earliest contributed track's created_at
+  const collaborationsFiltered = newSongs
+    .filter(song => {
+      // song is NOT created by user
+      if (song.user_id === user.id) return false;
+
+      // user contributed a track to this song
+      return song.tracks.some(track => track.user_id === user.id);
+    })
+    .sort((a, b) => {
+      // Get earliest contribution time of user to song a and b
+      const aUserTracks = a.tracks.filter(track => track.user_id === user.id);
+      const bUserTracks = b.tracks.filter(track => track.user_id === user.id);
+
+      const aEarliest = aUserTracks.length ? new Date(Math.min(...aUserTracks.map(t => new Date(t.created_at)))) : new Date();
+      const bEarliest = bUserTracks.length ? new Date(Math.min(...bUserTracks.map(t => new Date(t.created_at)))) : new Date();
+
+      return aEarliest - bEarliest;
+    });
+
+  // Sort songs by number of tracks descending for Trendy songs
+  const trendySongsSorted = [...newSongs].sort(
+    (a, b) => (b.tracks?.length || 0) - (a.tracks?.length || 0)
+  );
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -48,26 +78,26 @@ const HomePage = () => {
     };
   }, [currentSong]);
 
-useEffect(() => {
-  const fetchNewSongs = async () => {
-    try {
-      const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
-      const data = await res.json();
-      console.log("songs data", data)
+  useEffect(() => {
+    const fetchNewSongs = async () => {
+      try {
+        const res = await fetch(API_ENDPOINTS.SONGS.MULTIPLE);
+        const data = await res.json();
+        console.log("songs data", data)
 
-      // Sort songs by created_at (newest first)
-      const sortedSongs = data.sort((a, b) => {
-        return new Date(b.created_at) - new Date(a.created_at);
-      });
+        // Sort songs by created_at (newest first)
+        const sortedSongs = data.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
 
-      setNewSongs(sortedSongs);
-    } catch (err) {
-      console.error("Failed to fetch new songs", err);
-    }
-  };
+        setNewSongs(sortedSongs);
+      } catch (err) {
+        console.error("Failed to fetch new songs", err);
+      }
+    };
 
-  fetchNewSongs();
-}, []);
+    fetchNewSongs();
+  }, []);
 
 
   const handleMusicCardClick = (song) => {
@@ -166,18 +196,24 @@ useEffect(() => {
         </div>
 
         <div className="horizontal-scroll">
-          {newSongs.map((song, index) => (
-            <MusicCard
-              key={song.id || index}
-              title={song.title}
-              creator={song.user_details?.username || "Unknown"}
-              contributersNbr={song.tracks?.length || 1}
-              imageUrl={song.cover_image}
-              audio={ElecGuitar}
-              onPlay={handlePlaySong}
-              songId={song.id}
-            />
-          ))}
+          {newSongsFiltered.length > 0 ? (
+            newSongsFiltered.map((song, index) => (
+              <MusicCard
+                key={song.id || index}
+                title={song.title}
+                creator={song.user_details?.username || "Unknown"}
+                contributersNbr={song.tracks?.length || 1}
+                imageUrl={song.cover_image}
+                audio={ElecGuitar}
+                onPlay={handlePlaySong}
+                songId={song.id}
+              />
+            ))
+          ) : (
+            <div className="empty-state-message">
+              No new songs available. Check back later!
+            </div>
+          )}
         </div>
       </div>
 
@@ -193,23 +229,29 @@ useEffect(() => {
           />
         </div>
         <div className="horizontal-scroll">
-          {newSongs.map((song, index) => {
-            const songId = song.id;
-            return (
-              <Link key={songId || index} to={`/song-description/${songId}`}>
-                <MusicCard
-                  key={songId}
-                  title={song.title}
-                  creator={song.user_details?.username || "Unknown"}
-                  contributersNbr={song.tracks?.length || 1}
-                  imageUrl={song.cover_image}
-                  audio={song.compiled_path}
-                  onPlay={() => setCurrentSong(song)}
-                  onClick={() => handleMusicCardClick(song)}
-                />
-              </Link>
-            );
-          })}
+          {collaborationsFiltered.length > 0 ? (
+            collaborationsFiltered.map((song, index) => {
+              const songId = song.id;
+              return (
+                <Link key={songId || index} to={`/song-description/${songId}`}>
+                  <MusicCard
+                    key={songId}
+                    title={song.title}
+                    creator={song.user_details?.username || "Unknown"}
+                    contributersNbr={song.tracks?.length || 1}
+                    imageUrl={song.cover_image}
+                    audio={song.compiled_path}
+                    onPlay={() => setCurrentSong(song)}
+                    onClick={() => handleMusicCardClick(song)}
+                  />
+                </Link>
+              );
+            })
+          ) : (
+            <div className="empty-state-message">
+              No collaborations yet. Collaborate to see songs here!
+            </div>
+          )}
         </div>
       </div>
 
@@ -230,23 +272,29 @@ useEffect(() => {
         </div>
 
         <div className="horizontal-scroll">
-          {newSongs.map((song, index) => {
-            const songId = song.id;
-            return (
-              <Link key={songId || index} to={`/song-description/${songId}`}>
-                <MusicCard
-                  key={songId}
-                  title={song.title}
-                  creator={song.user_details?.username || "Unknown"}
-                  contributersNbr={song.tracks?.length || 1}
-                  imageUrl={song.cover_image}
-                  audio={song.compiled_path}
-                  onPlay={() => setCurrentSong(song)}
-                  onClick={() => handleMusicCardClick(song)}
-                />
-              </Link>
-            );
-          })}
+          {trendySongsSorted.length > 0 ? (
+            trendySongsSorted.map((song, index) => {
+              const songId = song.id;
+              return (
+                <Link key={songId || index} to={`/song-description/${songId}`}>
+                  <MusicCard
+                    key={songId}
+                    title={song.title}
+                    creator={song.user_details?.username || "Unknown"}
+                    contributersNbr={song.tracks?.length || 1}
+                    imageUrl={song.cover_image}
+                    audio={song.compiled_path}
+                    onPlay={() => setCurrentSong(song)}
+                    onClick={() => handleMusicCardClick(song)}
+                  />
+                </Link>
+              );
+            })
+          ) : (
+            <div className="empty-state-message">
+              No trendy songs right now. Start creating to get featured!
+            </div>
+          )}
         </div>
       </div>
 

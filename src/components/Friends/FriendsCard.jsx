@@ -92,8 +92,12 @@ const FriendsCard = () => {
 
   if (loading) return <div className="friends-section">Loading...</div>;
   if (error) return <div className="friends-section error">Error: {error}</div>;
-  if (!connections.length) return <div className="friends-section">No friends found.</div>;
-
+  if (!connections.length) return (
+    <div className="friends-section no-friends-message">
+      Make some friends to see friends!
+    </div>
+  );
+  
   return (
     <div className="friends-section">
       <h2 className="friends-heading">Connections</h2>
@@ -132,16 +136,3 @@ const FriendsCard = () => {
 
 
 export default FriendsCard;
-
-
-// import { ReactComponent as Violeta } from "../../assets/avatars/violeta.svg";
-// import { ReactComponent as Sofiia } from "../../assets/avatars/sofiia.svg";
-// import { ReactComponent as Petra } from "../../assets/avatars/petra.svg";
-// import { ReactComponent as Matea } from "../../assets/avatars/matea.svg";
-
-// const friendsData = [
-//   { name: "Violeta", ProfilePicture: Violeta, hasNewPosts: true, newPostsCount: 1 },
-//   { name: "Sofiia", ProfilePicture: Sofiia, hasNewPosts: true, newPostsCount: 3 },
-//   { name: "Petra", ProfilePicture: Petra, hasNewPosts: false, newPostsCount: 0 },
-//   { name: "Matea", ProfilePicture: Matea, hasNewPosts: false, newPostsCount: 0 },
-// ];
