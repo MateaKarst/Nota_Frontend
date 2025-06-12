@@ -156,11 +156,12 @@
 
 
 .recording-page .overlay-backdrop {
-  position: fixed;
+  position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
-  width: 100dvh;
-  height: 100dvh;
+  height: 100%;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 998;
 }

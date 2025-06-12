@@ -44,11 +44,11 @@ const RecordingPage = () => {
     }
   };
 
-  const handlePostClick = () => {
+const handlePostClick = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setShowPopup(true);
+      navigate("/home");  // navigate after loading finishes
     }, 4000);
   };
 
@@ -228,18 +228,6 @@ const RecordingPage = () => {
             {countdown && <p className="overlay-count">{countdown}</p>}
           </div>
         </>
-      )}
-
-      {showPopup && (
-        <div className="popup-overlay">
-          <div className="popup-container">
-            <Popup
-              type="upload-to-editor"
-              onClose={() => setShowPopup(false)}
-              onNavigate={() => navigate("/editor2")}
-            />
-          </div>
-        </div>
       )}
 
       {/* loading */}
