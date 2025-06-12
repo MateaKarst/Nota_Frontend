@@ -225,7 +225,7 @@ const ProfilePage = () => {
             <SmallCard
               key={song.id || index}
               title={song.title}
-              creator={song.user_details.name}
+              creator={song.user_details?.name || "Unknown"}
               contributersNbr={song.contributors?.length || 0}
               imageUrl={song.cover_image}
               audio={song.audio_url}
