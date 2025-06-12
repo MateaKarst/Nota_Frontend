@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import "../styles/pages/plans-page.css";
 import NotaLogo from '../components/Logos/NotaLogo';
 import BasicBtn from '../components/Buttons/BasicBtn';
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from 'react-router-dom';
 
 // Stripe public key
-const stripePromise = loadStripe("pk_test_51RTQK2CWh9wpzDVIFTkfAN10Tu2dYpHHyiPGLRC2w7rArvKFIXIsXLzjrDafSA8PlBXiwWHaqp8jhwLh2WMRTJyk00iKEWjtw7");
+// const stripePromise = loadStripe("pk_test_51RTQK2CWh9wpzDVIFTkfAN10Tu2dYpHHyiPGLRC2w7rArvKFIXIsXLzjrDafSA8PlBXiwWHaqp8jhwLh2WMRTJyk00iKEWjtw7");
 
 // Feature list
 const features = [
@@ -76,8 +76,8 @@ const PlansPage = () => {
         return;
       }
 
-      const stripe = await stripePromise;
-      await stripe.redirectToCheckout({ sessionId: data.id });
+      // const stripe = await stripePromise;
+      // await stripe.redirectToCheckout({ sessionId: data.id });
     } catch (error) {
       console.error("Checkout error:", error);
       alert("An error occurred during checkout. Please try again.");
